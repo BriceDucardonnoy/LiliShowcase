@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <!-- Inherit our applications main module.                      -->
+  <inherits name='com.brice.lili.showcase.liliShowcase' />
+
+  <!-- Specify the path to any remote services.                   -->
+  <servlet path="/liliShowcase/greet" class="com.brice.lili.showcase.server.GreetingServiceImpl" />
+
+</module>

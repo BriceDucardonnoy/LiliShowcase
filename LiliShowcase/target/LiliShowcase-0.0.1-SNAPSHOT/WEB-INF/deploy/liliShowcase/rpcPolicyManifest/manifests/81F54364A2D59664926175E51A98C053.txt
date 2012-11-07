@@ -1,0 +1,2 @@
+serviceClass: com.brice.lili.showcase.client.GreetingService
+path: 0E1490CD294C5E22E8E91BBA97A99259.gwt.rpc
