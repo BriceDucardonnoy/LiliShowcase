@@ -23,20 +23,27 @@
   <inherits name='com.google.gwt.resources.Resources'/>
   <inherits name='com.gwtplatform.mvp.Mvp'/>
   
-    <!-- Add gwt-log support, default level OFF / TRACE / FATAL -->
+  <!-- Add gwt-log support, default level OFF / TRACE / FATAL -->
   <inherits name="com.allen_sauer.gwt.log.gwt-log-DEBUG"/>
   
   <!-- Add the 'TRACE' and 'DEBUG' compile time log level 		-->
-  <extend-property name="log_level" values="TRACE,INFO"/>
+  <!-- <extend-property name="log_level" values="TRACE,INFO"/> -->
   
   <!-- inner HTML debugger DISABLED / ENABLED                     -->
   <set-property name="log_DivLogger" value="DISABLED" />
 
   <!-- Specify the app entry point class.                         -->
   <entry-point class='com.brice.lili.showcase.client.liliShowcase' />
+  
+  <!-- Activate the RemoteLogger 
+  <inherits name="com.allen_sauer.gwt.log.gwt-log-RemoteLogger"/>
+  -->
 
   <!-- Specify the paths for translatable code                    -->
   <source path='client' />
   <source path='shared' />
+  
+  <define-configuration-property name='gin.ginjector' is-multi-valued='false' />
+  <set-configuration-property name='gin.ginjector' value='com.wcs.clouddiagnostic.client.gin.ClientGinjector' />
 
 </module>
