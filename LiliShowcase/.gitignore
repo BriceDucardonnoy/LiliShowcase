@@ -1,2 +1,4 @@
-/target
-/.gwt
+target
+.gwt
+target/
+.gwt/
