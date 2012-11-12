@@ -23,9 +23,9 @@
 
 	<repositories>
 		<repository>
-			<id>support-commercial-release</id>
-			<name>Sencha Support Commercial Repository</name>
-			<url>https://maven.sencha.com/repo/support-commercial-release/</url>
+			<id>support-gpl-release</id>
+			<name>Sencha Support GPL Repository</name>
+			<url>https://maven.sencha.com/repo/support-gpl-release/</url>
 		</repository>
 	</repositories>
 
@@ -45,7 +45,7 @@
 		<dependency>
 			<groupId>com.sencha.gxt</groupId>
 			<artifactId>gxt</artifactId>
-			<version>3.0.2b</version>
+			<version>3.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

@@ -24,7 +24,7 @@ public class liliShowcase implements EntryPoint/*, IsWidget*/ {
 	public void onModuleLoad() {
 		Log.setCurrentLogLevel(Log.LOG_LEVEL_INFO);
 		// This is required for Gwt-Platform proxy's generator
-		DelayedBindRegistry.bind(ginjector);	
+		DelayedBindRegistry.bind(ginjector);
 
 		ginjector.getPlaceManager().revealCurrentPlace();
 //		RootPanel.get().add(asWidget());
@@ -32,8 +32,8 @@ public class liliShowcase implements EntryPoint/*, IsWidget*/ {
 
 //	@Override
 //	public Widget asWidget() {
-////		HorizontalLayoutContainer hlc = new HorizontalLayoutContainer();
-////		return hlc;
+////	HorizontalLayoutContainer hlc = new HorizontalLayoutContainer();
+////	return hlc;
 //		return uiBinder.createAndBindUi(this);
 //	}
 
