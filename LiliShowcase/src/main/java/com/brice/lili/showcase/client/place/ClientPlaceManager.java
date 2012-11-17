@@ -1,6 +1,5 @@
 package com.brice.lili.showcase.client.place;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManagerImpl;
@@ -19,16 +18,16 @@ public class ClientPlaceManager extends PlaceManagerImpl {
 		this.defaultPlaceRequest = new PlaceRequest(defaultPlaceNameToken);
 	}
 
+	@Override
 	public void revealDefaultPlace() {
 		revealPlace(defaultPlaceRequest, false);
 	}
 	
-	@Override
-	  public void revealErrorPlace(String invalidHistoryToken) {
-		Log.error("Error place requested (invalid token=["+invalidHistoryToken+"])");
-		
-		revealPlace(defaultPlaceRequest, false);
-	  }
-
+//	@Override
+//	public void revealErrorPlace(String invalidHistoryToken) {
+//		Log.error("Error place requested (invalid token=["+invalidHistoryToken+"])");
+//
+//		revealPlace(defaultPlaceRequest, false);
+//	}
 	
 }

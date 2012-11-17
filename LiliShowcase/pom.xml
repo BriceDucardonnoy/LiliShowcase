@@ -64,7 +64,7 @@
 			<artifactId>validation-api</artifactId>
 			<version>1.0.0.GA</version>
 			<classifier>sources</classifier>
-			<scope>test</scope>
+			<!-- <scope>test</scope> -->
 		</dependency>
 		<!-- GWTP dependencies -->
 		<dependency>
@@ -126,11 +126,11 @@
 		<!-- <dependency> <groupId>gwt-utils</groupId> <artifactId>gwt-utils</artifactId> 
 			<version>22032012</version> <classifier>gwt2.4.0</classifier> </dependency> -->
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.sencha.gxt</groupId>
 			<artifactId>uibinder-bridge</artifactId>
-			<version>2.4.0</version>
-		</dependency>
+			<version>2.5.0</version>
+		</dependency> -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -146,6 +146,7 @@
 			<artifactId>gwt-log</artifactId>
 			<version>3.1.6</version>
 		</dependency>
+		<!-- Dependency for the slideshow -->
 		<dependency>
             <groupId>org.gwt</groupId>
             <artifactId>contentflow4gwt</artifactId>
@@ -181,10 +182,11 @@
 					<runTarget>index.html</runTarget>
 					<hostedWebapp>${webappDirectory}</hostedWebapp>
 					<i18nMessagesBundle>com.brice.lili.showcase.client.lang.Translate</i18nMessagesBundle>
-					<noServer>false</noServer>
+					<!-- <noServer>false</noServer> -->
 					<debugPort>5050</debugPort>
 					<port>4040</port>
-					<bindAddress>0.0.0.0</bindAddress>
+					<!-- <bindAddress>0.0.0.0</bindAddress> -->
+					<bindAddress>192.168.1.11</bindAddress>
 				</configuration>
 			</plugin>
 
