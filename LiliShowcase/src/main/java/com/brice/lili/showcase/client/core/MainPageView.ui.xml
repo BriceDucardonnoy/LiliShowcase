@@ -4,8 +4,114 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'
 	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
 	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
-	ui:generateLocales='default'>
+	ui:generateLocales='default'
+	xmlns:gxt="urn:import:com.sencha.gxt.widget.core.client"
+	xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
+	xmlns:form="urn:import:com.sencha.gxt.widget.core.client.form"
+	xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button"
+	xmlns:c="urn:import:com.sencha.gxt.widget.core.client">
 
-	<g:HTMLPanel>Hello World!</g:HTMLPanel>
-	<g:Label ui:field="footer">Footer</g:Label>
+	<ui:style>
+		
+		.pretty {
+			background-color: #EEE;
+		}
+		
+		.clean {
+			background-color: transparent;
+		}
+		
+		.title {
+			font-size: 25px !important;
+			color: black !important;
+			background-color: transparent;
+			font-family: Arial Rounded MT Bold !important;
+			text-align: center !important;
+		}
+		.checkbox {
+			font-size: 12px !important;
+			color: black !important;
+			background-color: transparent;
+			font-family: Arial !important;
+		}
+		.link {
+			font-size: 12px !important;
+			color: black !important;
+			background-color: transparent;
+			font-family: Arial !important;
+			font-style: italic;
+			text-align: right !important;
+		}
+		
+		.signin {
+			font-size: 14px !important;
+			color: black !important;
+			background-color: transparent;
+			font-family: Arial Rounded MT Bold !important;
+		}
+		
+		.signout {
+			font-size: 14px !important;
+			color: black !important;
+			background-color: transparent;
+			font-family: Arial Rounded MT Bold !important;
+		}
+		
+		.login-box-top {
+	 		border-top-left-radius: 8px !important;
+    		border-top-right-radius: 8px !important;
+    		background-color: #F1F1F1;
+    		font-size: 16px;
+    		padding: 14px;
+    		-moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+    		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+		}
+    	.login-box-bottom {
+	 		border-bottom-left-radius: 8px !important;
+    		border-bottom-right-radius: 8px !important;
+    		background-color: #F1F1F1;
+    		font-size: 16px;
+    		padding: 14px 10px;
+			-moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+    		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+		}
+		.pad {
+			background-color: #FFF1F1;
+			margin: 8px;
+		}
+		.login-box {
+			background: none repeat scroll 0 0 #FFF;
+			border-radius: 15px 15px 15px 15px;
+			border-width: 3px !important;
+			border-color: #AAA;
+			margin: 0px;
+			padding: 20px;
+			position: relative;
+		}
+		
+		.round-box {
+			background: #FFFFFF repeat scroll 0 0;
+			border-radius: 15px 15px 15px 15px;
+			border-width: 3px !important;
+			border-color: #EB933C;
+			margin: 15px;
+			padding: 15px;
+			width: 350px;
+			/*padding-right: 30px;*/
+		}
+		.innerContainer {
+			border: none;
+
+		}
+
+	</ui:style>
+	<!-- <g:HTMLPanel>Hello World!</g:HTMLPanel> -->
+	<container:Viewport addStyleNames="{style.pretty}">
+		<container:CenterLayoutContainer>
+			<gxt:ContentPanel headerVisible="true" title="Hello" bodyBorder="false"	addStyleNames="{style.round-box}">
+				<g:Label text="Text Label" />
+			</gxt:ContentPanel>
+		</container:CenterLayoutContainer>
+	</container:Viewport>
+	
 </ui:UiBinder>
