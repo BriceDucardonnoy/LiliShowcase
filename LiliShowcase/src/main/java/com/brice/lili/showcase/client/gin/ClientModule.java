@@ -8,6 +8,9 @@ import com.brice.lili.showcase.client.core.MainPagePresenter;
 import com.brice.lili.showcase.client.core.MainPageView;
 import com.brice.lili.showcase.client.place.DefaultPlace;
 import com.brice.lili.showcase.client.place.NameTokens;
+import com.brice.lili.showcase.client.core.ErrorPresenter;
+import com.brice.lili.showcase.client.core.ErrorView;
+import com.brice.lili.showcase.client.place.ErrorPlace;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -21,6 +24,11 @@ public class ClientModule extends AbstractPresenterModule {
 
 		bindConstant().annotatedWith(DefaultPlace.class)
 				.to(NameTokens.mainpage);
+
+		bindPresenter(ErrorPresenter.class, ErrorPresenter.MyView.class,
+				ErrorView.class, ErrorPresenter.MyProxy.class);
+
+		bindConstant().annotatedWith(ErrorPlace.class).to(NameTokens.error);
 	}
 	
 }

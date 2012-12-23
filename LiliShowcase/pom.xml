@@ -184,9 +184,9 @@
 					<i18nMessagesBundle>com.brice.lili.showcase.client.lang.Translate</i18nMessagesBundle>
 					<!-- <noServer>false</noServer> -->
 					<debugPort>5050</debugPort>
-					<port>4040</port>
-					<!-- <bindAddress>0.0.0.0</bindAddress> -->
-					<bindAddress>192.168.1.11</bindAddress>
+					<!-- <port>4040</port> -->
+					<bindAddress>0.0.0.0</bindAddress>
+					<!-- <bindAddress>192.168.1.11</bindAddress> -->
 				</configuration>
 			</plugin>
 
