@@ -22,6 +22,10 @@
   <inherits name='com.gwtplatform.dispatch.Dispatch'/>
   <inherits name='com.sencha.gxt.ui.GXT'/>
   <inherits name='com.sencha.gxt.theme.gray.Gray'/>
+  <inherits name="javax.validation.Validation"/>
+  <inherits name="com.google.gwt.inject.Inject"/>
+  <!-- ContentFlow module -->
+  <inherits name='org.gwt.contentflow4gwt.contentflow4gwt'/>
   <!-- <inherits name="com.sencha.gwt.uibinder.UiBinder" /> -->
   <inherits name="com.google.gwt.uibinder.UiBinder"/>
   
