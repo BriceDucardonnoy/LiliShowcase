@@ -5,6 +5,7 @@ import org.gwt.contentflow4gwt.client.ContentFlowItemClickListener;
 import org.gwt.contentflow4gwt.client.PhotoView;
 
 import com.brice.lili.showcase.shared.model.Person;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
@@ -34,8 +35,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		widget = binder.createAndBindUi(this);
 		
 		PEOPLE = new Person[]{
-				new Person("Steve Jobs", "photos/jobs.jpg"),
-				new Person("Bill Gates", "photos/gates.jpg"),
+				new Person("Steve Jobs", GWT.getModuleBaseURL() + "images/photos/jobs.jpg"),
+				new Person("Bill Gates", GWT.getModuleName() + "/images/photos/gates.jpg"),
 				new Person("Sergey Brin", "photos/brin.jpg"),
 				new Person("Larry Page", "photos/page.jpg"),
 				new Person("John Doerr", "photos/doerr.jpg"),
