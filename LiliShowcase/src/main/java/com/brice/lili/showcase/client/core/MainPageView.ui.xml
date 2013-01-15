@@ -110,8 +110,8 @@
 	<!-- <g:HTMLPanel>Hello World!</g:HTMLPanel> -->
 	<container:Viewport addStyleNames="{style.pretty}">
 		<container:CenterLayoutContainer>
-			<gxt:ContentPanel ui:field="mainPane" headerVisible="true" title="Hello" bodyBorder="false"	addStyleNames="{style.round-box}">
-				<g:Label text="Text Label" />
+			<gxt:ContentPanel ui:field="mainPane" headerVisible="true" title="Showcase" bodyBorder="false"	addStyleNames="{style.round-box}">
+				<!-- <g:Label text="Text Label" /> -->
 			</gxt:ContentPanel>
 		</container:CenterLayoutContainer>
 	</container:Viewport>
