@@ -13,7 +13,11 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.reveregroup.gwt.imagepreloader.client.FitImage;
+import com.sencha.gxt.core.client.util.Margins;
 import com.sencha.gxt.widget.core.client.ContentPanel;
+import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer;
+import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData;
+import com.sencha.gxt.widget.core.client.container.MarginData;
 
 public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 
@@ -22,6 +26,21 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	
 	private Person[] PEOPLE;
     
+	@UiField(provided = true)
+	MarginData outerData = new MarginData(20);
+	@UiField(provided = true)
+	BorderLayoutData northData = new BorderLayoutData(100);
+	@UiField(provided = true)
+	BorderLayoutData westData = new BorderLayoutData(150);
+	@UiField(provided = true)
+	MarginData centerData = new MarginData();
+	@UiField(provided = true)
+	BorderLayoutData eastData = new BorderLayoutData(150);
+	@UiField(provided = true)
+	BorderLayoutData southData = new BorderLayoutData(100);
+
+	@UiField
+	BorderLayoutContainer con;
     @UiField ContentPanel mainPane;
 
 	public interface Binder extends UiBinder<Widget, MainPageView> {
@@ -29,6 +48,13 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 
 	@Inject
 	public MainPageView(final Binder binder) {
+		// Provided true => create them before createAndBindUi
+		northData.setMargins(new Margins(5));
+		westData.setMargins(new Margins(0, 5, 0, 5));
+		westData.setCollapsible(true);
+		westData.setSplit(true);
+		eastData.setMargins(new Margins(0, 5, 0, 5));
+		southData.setMargins(new Margins(5));
 		widget = binder.createAndBindUi(this);
 		
 		PEOPLE = new Person[]{

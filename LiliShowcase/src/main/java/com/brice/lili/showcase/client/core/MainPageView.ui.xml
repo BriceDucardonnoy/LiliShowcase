@@ -12,15 +12,12 @@
 	xmlns:c="urn:import:com.sencha.gxt.widget.core.client">
 
 	<ui:style>
-		
 		.pretty {
 			background-color: #EEE;
 		}
-		
 		.clean {
 			background-color: transparent;
 		}
-		
 		.title {
 			font-size: 25px !important;
 			color: black !important;
@@ -42,21 +39,18 @@
 			font-style: italic;
 			text-align: right !important;
 		}
-		
 		.signin {
 			font-size: 14px !important;
 			color: black !important;
 			background-color: transparent;
 			font-family: Arial Rounded MT Bold !important;
 		}
-		
 		.signout {
 			font-size: 14px !important;
 			color: black !important;
 			background-color: transparent;
 			font-family: Arial Rounded MT Bold !important;
 		}
-		
 		.login-box-top {
 	 		border-top-left-radius: 8px !important;
     		border-top-right-radius: 8px !important;
@@ -88,14 +82,13 @@
 			padding: 20px;
 			position: relative;
 		}
-		
 		.round-box {
 			background: #FFFFFF repeat scroll 0 0;
 			border-radius: 15px 15px 15px 15px;
 			border-width: 3px !important;
 			border-color: #EB933C;
-			margin: 15px;
-			padding: 15px;
+			/*margin: 15px;
+			padding: 15px;*/
 			/*width: 350px;*/
 			width: 70%;
 			height: 50%;
@@ -105,15 +98,50 @@
 			border: none;
 
 		}
-
+		.centerMargin {
+	        margin: 10px;
+	    }
 	</ui:style>
+	
+	<ui:with type="com.sencha.gxt.widget.core.client.container.MarginData" field="outerData" />
+	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="northData" />
+	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="westData" />
+	<ui:with type="com.sencha.gxt.widget.core.client.container.MarginData" field="centerData" />
+	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="eastData" />
+	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="southData" />
+	
 	<!-- <g:HTMLPanel>Hello World!</g:HTMLPanel> -->
 	<container:Viewport addStyleNames="{style.pretty}">
-		<container:CenterLayoutContainer>
+		<!-- <container:CenterLayoutContainer>
 			<gxt:ContentPanel ui:field="mainPane" headerVisible="true" title="Showcase" bodyBorder="false"	addStyleNames="{style.round-box}">
-				<!-- <g:Label text="Text Label" /> -->
+				<g:Label text="Text Label" />
 			</gxt:ContentPanel>
-		</container:CenterLayoutContainer>
+		</container:CenterLayoutContainer> -->
+		<container:SimpleContainer>
+			<container:child layoutData="{outerData}">
+				<container:BorderLayoutContainer ui:field="con" borders="true">
+					<container:north layoutData="{northData}">
+						<gxt:ContentPanel />
+					</container:north>
+					<container:west layoutData="{westData}">
+						<gxt:ContentPanel />
+					</container:west>
+					<container:center layoutData="{centerData}">
+						<gxt:ContentPanel ui:field="mainPane" headerVisible="true" title="Showcase" bodyBorder="false" addStyleNames="{style.round-box}">
+						</gxt:ContentPanel>
+						<!-- <gxt:ContentPanel headingText="BorderLayout UiBinder Example" resize="false">
+							<g:FlexTable ui:field="table" addStyleNames="{style.centerMargin}" cellSpacing="8" cellPadding="4" />
+						</gxt:ContentPanel> -->
+					</container:center>
+					<container:east layoutData="{eastData}">
+						<gxt:ContentPanel />
+					</container:east>
+					<container:south layoutData="{southData}">
+						<gxt:ContentPanel />
+					</container:south>
+				</container:BorderLayoutContainer>
+			</container:child>
+		</container:SimpleContainer>
 	</container:Viewport>
 	
 </ui:UiBinder>
