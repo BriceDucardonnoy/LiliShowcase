@@ -9,7 +9,8 @@
 	xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
 	xmlns:form="urn:import:com.sencha.gxt.widget.core.client.form"
 	xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button"
-	xmlns:c="urn:import:com.sencha.gxt.widget.core.client">
+	xmlns:c="urn:import:com.sencha.gxt.widget.core.client"
+	xmlns:contentflow4gwt="urn:import:org.gwt.contentflow4gwt.client">
 
 	<ui:style>
 		.pretty {
@@ -84,13 +85,13 @@
 		}
 		.round-box {
 			background: #FFFFFF repeat scroll 0 0;
-			border-radius: 15px 15px 15px 15px;
+			/*border-radius: 15px 15px 15px 15px;
 			border-width: 3px !important;
-			border-color: #EB933C;
+			border-color: #EB933C;*/
 			/*margin: 15px;
 			padding: 15px;*/
 			/*width: 350px;*/
-			width: 70%;
+			width: 100%;
 			height: 50%;
 			/*padding-right: 30px;*/
 		}
@@ -106,7 +107,8 @@
 	<ui:with type="com.sencha.gxt.widget.core.client.container.MarginData" field="outerData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="northData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="westData" />
-	<ui:with type="com.sencha.gxt.widget.core.client.container.MarginData" field="centerData" />
+	<!-- <ui:with type="com.sencha.gxt.widget.core.client.container.MarginData" field="centerData" /> -->
+	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="centerData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="eastData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="southData" />
 	
@@ -128,6 +130,7 @@
 					</container:west>
 					<container:center layoutData="{centerData}">
 						<gxt:ContentPanel ui:field="mainPane" headerVisible="true" title="Showcase" bodyBorder="false" addStyleNames="{style.round-box}">
+							<contentflow4gwt:ContentFlow ui:field="contentFlow" />
 						</gxt:ContentPanel>
 						<!-- <gxt:ContentPanel headingText="BorderLayout UiBinder Example" resize="false">
 							<g:FlexTable ui:field="table" addStyleNames="{style.centerMargin}" cellSpacing="8" cellPadding="4" />

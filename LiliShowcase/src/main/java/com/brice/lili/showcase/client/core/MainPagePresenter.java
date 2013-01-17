@@ -40,6 +40,6 @@ public class MainPagePresenter extends
 	@Override
 	protected void onReveal() {
 		super.onReveal();
-		getView().getMainPane().add(getView().getContentFlow());
+//		getView().getMainPane().add(getView().getContentFlow());
 	}
 }

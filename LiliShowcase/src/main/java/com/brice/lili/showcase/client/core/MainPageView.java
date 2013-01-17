@@ -7,6 +7,7 @@ import org.gwt.contentflow4gwt.client.PhotoView;
 import com.brice.lili.showcase.shared.model.Person;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
@@ -22,7 +23,7 @@ import com.sencha.gxt.widget.core.client.container.MarginData;
 public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 
 	private final Widget widget;
-	private ContentFlow<Person> contentFlow;
+	@UiField ContentFlow<Person> contentFlow;
 	
 	private Person[] PEOPLE;
     
@@ -33,7 +34,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@UiField(provided = true)
 	BorderLayoutData westData = new BorderLayoutData(150);
 	@UiField(provided = true)
-	MarginData centerData = new MarginData();
+	BorderLayoutData centerData = new BorderLayoutData();
+//	MarginData centerData = new MarginData();
 	@UiField(provided = true)
 	BorderLayoutData eastData = new BorderLayoutData(150);
 	@UiField(provided = true)
@@ -55,6 +57,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		westData.setSplit(true);
 		eastData.setMargins(new Margins(0, 5, 0, 5));
 		southData.setMargins(new Margins(5));
+		centerData.setMinSize(200);
+		
 		widget = binder.createAndBindUi(this);
 		
 		PEOPLE = new Person[]{
@@ -68,7 +72,10 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 				new Person("Steve Wozniak", GWT.getModuleName() + "/images/photos/wozniak.jpg"),
 				new Person("John Cook", GWT.getModuleName() + "/images/photos/cook.jpg")
 		};
-		contentFlow = new ContentFlow<Person>(true, true);
+//		contentFlow = new ContentFlow<Person>(true, true);
+		
+//		contentFlow.setHeight("100%");
+//		contentFlow.setWidth("100%");
 		addItems(contentFlow, PEOPLE.length);
         contentFlow.addItemClickListener(new ContentFlowItemClickListener() {
             public void onItemClicked(Widget widget) {
@@ -110,5 +117,9 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@Override
 	public ContentPanel getMainPane() {
 		return mainPane;
+	}
+	
+	@UiFactory ContentFlow<Person> createContentFlow() {
+		return new ContentFlow<Person>(true, true);
 	}
 }
