@@ -1,15 +1,17 @@
 package com.brice.lili.showcase.client.core;
 
+import java.util.Vector;
+
 import org.gwt.contentflow4gwt.client.ContentFlow;
 import org.gwt.contentflow4gwt.client.ContentFlowItemClickListener;
 import org.gwt.contentflow4gwt.client.PhotoView;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.shared.model.Person;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -44,6 +46,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@UiField
 	BorderLayoutContainer con;
     @UiField ContentPanel mainPane;
+    
+    private Vector<PhotoView> testRemove = null;
 
 	public interface Binder extends UiBinder<Widget, MainPageView> {
 	}
@@ -60,7 +64,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		centerData.setMinSize(200);
 		
 		widget = binder.createAndBindUi(this);
-		
+		// TODO BDY: get data from presenter
 		PEOPLE = new Person[]{
 				new Person("Steve Jobs", GWT.getModuleBaseURL() + "images/photos/jobs.jpg"),
 				new Person("Bill Gates", GWT.getModuleName() + "/images/photos/gates.jpg"),
@@ -76,12 +80,19 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		
 //		contentFlow.setHeight("100%");
 //		contentFlow.setWidth("100%");
+		testRemove = new Vector<PhotoView>();
 		addItems(contentFlow, PEOPLE.length);
         contentFlow.addItemClickListener(new ContentFlowItemClickListener() {
             public void onItemClicked(Widget widget) {
-                Window.alert("Clicked: ");
+//            	Window.alert("Clicked: ");
+            	Log.warn("Clicked!");
+                contentFlow.remove();
             }
         });
+// TODO BDY: group by category
+//        CategoryProperties props = GWT.create(CategoryProperties.class);
+//        ListStore<Category> store = new ListStore<Category>(props.key());
+//        store.addAll(null);
 	}
 
 	@Override
@@ -96,7 +107,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
     }
 	
 	private PhotoView createImageView(Person person) {
-        return new PhotoView(new FitImage(person.getImageUrl()), person.getName());
+		testRemove.add(new PhotoView(new FitImage(person.getImageUrl()), person.getName()));
+        return testRemove.get(testRemove.size() - 1);
     }
 	
 	private Person[] generatePeople(int number) {
