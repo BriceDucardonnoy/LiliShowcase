@@ -84,7 +84,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		addItems(contentFlow, PEOPLE.length);
         contentFlow.addItemClickListener(new ContentFlowItemClickListener() {
             public void onItemClicked(Widget widget) {
-//            	Window.alert("Clicked: ");
             	Log.warn("Clicked!");
                 contentFlow.remove();
             }
