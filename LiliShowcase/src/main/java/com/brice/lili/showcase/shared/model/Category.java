@@ -13,6 +13,13 @@ public class Category implements Serializable {
 	public Category() {
 		
 	}
+	
+	public Category(Integer id, String name, String misc) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.misc = misc;
+	}
 
 	public Integer getId() {
 		return id;

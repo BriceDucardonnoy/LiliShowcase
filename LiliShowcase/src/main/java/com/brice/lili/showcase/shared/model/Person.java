@@ -29,10 +29,12 @@ public class Person implements Serializable {
 	private static final long serialVersionUID = 4818208598134665653L;
 	private final String fName;
     private final String fImageUrl;
+    private int[] categoryIds;
 
-    public Person(String name, String imageUrl) {
+    public Person(String name, String imageUrl, int[] categoryIds) {
         fName = name;
         fImageUrl = imageUrl;
+        this.categoryIds = categoryIds;
     }
 
     public String getName() {
@@ -41,5 +43,9 @@ public class Person implements Serializable {
 
     public String getImageUrl() {
         return fImageUrl;
+    }
+    
+    public int[] getCategoryIds() {
+    	return categoryIds;
     }
 }

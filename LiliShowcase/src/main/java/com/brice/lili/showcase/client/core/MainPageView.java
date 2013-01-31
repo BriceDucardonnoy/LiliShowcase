@@ -3,12 +3,10 @@ package com.brice.lili.showcase.client.core;
 import java.util.Vector;
 
 import org.gwt.contentflow4gwt.client.ContentFlow;
-import org.gwt.contentflow4gwt.client.ContentFlowItemClickListener;
 import org.gwt.contentflow4gwt.client.PhotoView;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.shared.model.Person;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
@@ -27,8 +25,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	private final Widget widget;
 	@UiField ContentFlow<Person> contentFlow;
 	
-	private Person[] PEOPLE;
-    
 	@UiField(provided = true)
 	MarginData outerData = new MarginData(20);
 	@UiField(provided = true)
@@ -64,30 +60,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		centerData.setMinSize(200);
 		
 		widget = binder.createAndBindUi(this);
-		// TODO BDY: get data from presenter
-		PEOPLE = new Person[]{
-				new Person("Steve Jobs", GWT.getModuleBaseURL() + "images/photos/jobs.jpg"),
-				new Person("Bill Gates", GWT.getModuleName() + "/images/photos/gates.jpg"),
-				new Person("Sergey Brin", GWT.getModuleName() + "/images/photos/brin.jpg"),
-				new Person("Larry Page", GWT.getModuleName() + "/images/photos/page.jpg"),
-				new Person("John Doerr", GWT.getModuleName() + "/images/photos/doerr.jpg"),
-				new Person("Eric Schmidt", GWT.getModuleName() + "/images/photos/schmidt.jpg"),
-				new Person("Larry Wayne", GWT.getModuleName() + "/images/photos/wayne.jpg"),
-				new Person("Steve Wozniak", GWT.getModuleName() + "/images/photos/wozniak.jpg"),
-				new Person("John Cook", GWT.getModuleName() + "/images/photos/cook.jpg")
-		};
-//		contentFlow = new ContentFlow<Person>(true, true);
 		
-//		contentFlow.setHeight("100%");
-//		contentFlow.setWidth("100%");
 		testRemove = new Vector<PhotoView>();
-		addItems(contentFlow, PEOPLE.length);
-        contentFlow.addItemClickListener(new ContentFlowItemClickListener() {
-            public void onItemClicked(Widget widget) {
-            	Log.warn("Clicked!");
-                contentFlow.remove();
-            }
-        });
 // TODO BDY: group by category
 //        CategoryProperties props = GWT.create(CategoryProperties.class);
 //        ListStore<Category> store = new ListStore<Category>(props.key());
@@ -98,9 +72,12 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	public Widget asWidget() {
 		return widget;
 	}
-	
-	private void addItems(ContentFlow<Person> contentFlow, int number) {
-        for (final Person person : generatePeople(number)) {
+
+	@Override
+	public void addItems(Vector<Person> people) {
+		Log.info("Add items");
+		int number = people.size();
+        for (final Person person : generatePeople(people, number)) {
             contentFlow.addItems(createImageView(person));
         }
     }
@@ -110,11 +87,11 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
         return testRemove.get(testRemove.size() - 1);
     }
 	
-	private Person[] generatePeople(int number) {
+	private Person[] generatePeople(Vector<Person> people, int number) {
         Person[] result = new Person[number];
 
         for (int i = 0; i < number; i++) {
-            result[i] = PEOPLE[i % PEOPLE.length];
+            result[i] = people.get(i % number);
         }
 
         return result;
