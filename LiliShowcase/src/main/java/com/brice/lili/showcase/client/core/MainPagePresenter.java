@@ -5,7 +5,6 @@ import java.util.Vector;
 import org.gwt.contentflow4gwt.client.ContentFlow;
 import org.gwt.contentflow4gwt.client.ContentFlowItemClickListener;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.place.NameTokens;
 import com.brice.lili.showcase.shared.model.Category;
 import com.brice.lili.showcase.shared.model.Person;
@@ -28,6 +27,7 @@ public class MainPagePresenter extends
 		public ContentFlow<Person> getContentFlow();
 		public ContentPanel getMainPane();
 		public void addItems(Vector<Person> people);
+		public void addCategories(Vector<Category> categories);
 	}
 	
 	private Vector<Person> people;
@@ -54,11 +54,12 @@ public class MainPagePresenter extends
 	protected void onBind() {
 		super.onBind();
 		initPictures();
+		getView().addCategories(categories);// Add handler on cb and consequences
 		getView().addItems(people);
 		getView().getContentFlow().addItemClickListener(new ContentFlowItemClickListener() {
             public void onItemClicked(Widget widget) {
-            	Log.warn("Clicked!");
-            	getView().getContentFlow().remove();
+//            	getView().getContentFlow().remove();
+            	getView().getContentFlow().removeItems(widget);
             }
         });
 	}

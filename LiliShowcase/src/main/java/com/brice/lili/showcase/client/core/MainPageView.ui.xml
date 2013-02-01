@@ -111,6 +111,7 @@
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="centerData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="eastData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="southData" />
+	<ui:with type="com.sencha.gxt.data.shared.ListStore" field="store" />
 	
 	<!-- <g:HTMLPanel>Hello World!</g:HTMLPanel> -->
 	<container:Viewport addStyleNames="{style.pretty}">
@@ -123,7 +124,7 @@
 			<container:child layoutData="{outerData}">
 				<container:BorderLayoutContainer ui:field="con" borders="true">
 					<container:north layoutData="{northData}">
-						<gxt:ContentPanel />
+						<form:ComboBox ui:field="categoriesCB" store="{store}"/>
 					</container:north>
 					<container:west layoutData="{westData}">
 						<gxt:ContentPanel />
@@ -132,9 +133,6 @@
 						<gxt:ContentPanel ui:field="mainPane" headerVisible="true" title="Showcase" bodyBorder="false" addStyleNames="{style.round-box}">
 							<contentflow4gwt:ContentFlow ui:field="contentFlow" />
 						</gxt:ContentPanel>
-						<!-- <gxt:ContentPanel headingText="BorderLayout UiBinder Example" resize="false">
-							<g:FlexTable ui:field="table" addStyleNames="{style.centerMargin}" cellSpacing="8" cellPadding="4" />
-						</gxt:ContentPanel> -->
 					</container:center>
 					<container:east layoutData="{eastData}">
 						<gxt:ContentPanel />

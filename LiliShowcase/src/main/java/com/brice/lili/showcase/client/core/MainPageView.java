@@ -6,7 +6,10 @@ import org.gwt.contentflow4gwt.client.ContentFlow;
 import org.gwt.contentflow4gwt.client.PhotoView;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.brice.lili.showcase.client.properties.CategoryProperties;
+import com.brice.lili.showcase.shared.model.Category;
 import com.brice.lili.showcase.shared.model.Person;
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
@@ -15,10 +18,11 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.reveregroup.gwt.imagepreloader.client.FitImage;
 import com.sencha.gxt.core.client.util.Margins;
+import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.widget.core.client.ContentPanel;
-import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData;
 import com.sencha.gxt.widget.core.client.container.MarginData;
+import com.sencha.gxt.widget.core.client.form.ComboBox;
 
 public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 
@@ -39,10 +43,12 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@UiField(provided = true)
 	BorderLayoutData southData = new BorderLayoutData(100);
 
-	@UiField
-	BorderLayoutContainer con;
+//	@UiField BorderLayoutContainer con;
+	@UiField ComboBox<Category> categoriesCB;
     @UiField ContentPanel mainPane;
+    @UiField(provided = true) ListStore<Category> store;
     
+    private CategoryProperties props = GWT.create(CategoryProperties.class);
     private Vector<PhotoView> testRemove = null;
 
 	public interface Binder extends UiBinder<Widget, MainPageView> {
@@ -59,13 +65,11 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		southData.setMargins(new Margins(5));
 		centerData.setMinSize(200);
 		
+		store = new ListStore<Category>(props.key());
+		
 		widget = binder.createAndBindUi(this);
 		
 		testRemove = new Vector<PhotoView>();
-// TODO BDY: group by category
-//        CategoryProperties props = GWT.create(CategoryProperties.class);
-//        ListStore<Category> store = new ListStore<Category>(props.key());
-//        store.addAll(null);
 	}
 
 	@Override
@@ -109,5 +113,14 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	
 	@UiFactory ContentFlow<Person> createContentFlow() {
 		return new ContentFlow<Person>(true, true);
+	}
+	
+	@UiFactory ComboBox<Category> createCategoryComboBox() {
+		return new ComboBox<Category>(store, props.name());
+	}
+
+	@Override
+	public void addCategories(Vector<Category> categories) {
+		store.addAll(categories);
 	}
 }
