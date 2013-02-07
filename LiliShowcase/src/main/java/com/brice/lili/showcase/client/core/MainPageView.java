@@ -26,7 +26,6 @@ import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData;
 import com.sencha.gxt.widget.core.client.container.MarginData;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
-import com.sencha.gxt.widget.core.client.info.Info;
 
 public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 
@@ -94,7 +93,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
     }
 	
 	private PhotoView createImageView(Person person) {
-		testRemove.add(new PhotoView(new FitImage(person.getImageUrl()), person.getName()));
+		testRemove.add(new PhotoView(new FitImage(person.getImageUrl()), person.getName(), person));
         return testRemove.get(testRemove.size() - 1);
     }
 	
@@ -137,6 +136,26 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		return categoriesCB;
 	}
 	
+	public void categoryChanged(Integer catId) {
+		if(catId == null) return;
+		int nb = contentFlow.getNumberOfItems();
+		int j;
+		for(int i = nb-1 ; i >= 0 ; i--) {
+			Person p = (Person) ((PhotoView)contentFlow.getItem(i)).getPojo();
+			if(p == null) continue;
+			int[] ids = p.getCategoryIds();
+			for(j = 0 ; j < ids.length ; j++) {
+				if(catId.equals(ids[j])) break;
+			}
+			if(j == ids.length) {
+				contentFlow.removeItems(contentFlow.getItem(i));
+			}
+			else {
+				Log.info("Keep " + p.getName());
+			}
+		}
+	}
+	
 	/*
 	 * As for UiFactory, method name has no importance, it's the parameter type...
 	 */
@@ -153,20 +172,10 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		* onSelection gives a SelectionEvent
 		*/
 //		Window.alert("Hello, AJAX");
-		Info.display("New Category", "You have selected category " + e.getSelectedItem().getId() + " " + 
-				e.getSelectedItem().getName());
+//		Info.display("New Category", "You have selected category " + e.getSelectedItem().getId() + " " + 
+//				e.getSelectedItem().getName());
 		Integer id = e.getSelectedItem().getId();
-		if(id == null) return;
-		int nb = contentFlow.getNumberOfItems();
-		for(int i = 0 ; i < nb ; i++) {
-			((PhotoView)contentFlow.getItem(i)).getTitle();// TODO BDY: add fields in PhotoView
-		}
-//		if(id.equals(1)) {
-//			contentFlow.removeItems(contentFlow.getItem(1));
-//		}
-//		else if(id.equals(2)) {
-//			contentFlow.getItem(1).setVisible(true);
-//		}
+		categoryChanged(id);
 	}
 
 }
