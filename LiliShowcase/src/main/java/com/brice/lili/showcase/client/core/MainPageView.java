@@ -10,19 +10,23 @@ import com.brice.lili.showcase.client.properties.CategoryProperties;
 import com.brice.lili.showcase.shared.model.Category;
 import com.brice.lili.showcase.shared.model.Person;
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.reveregroup.gwt.imagepreloader.client.FitImage;
+import com.sencha.gxt.cell.core.client.form.ComboBoxCell.TriggerAction;
 import com.sencha.gxt.core.client.util.Margins;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData;
 import com.sencha.gxt.widget.core.client.container.MarginData;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
+import com.sencha.gxt.widget.core.client.info.Info;
 
 public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 
@@ -70,6 +74,9 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		widget = binder.createAndBindUi(this);
 		
 		testRemove = new Vector<PhotoView>();
+		categoriesCB.setForceSelection(true);
+		categoriesCB.setTriggerAction(TriggerAction.ALL);
+		categoriesCB.setEditable(false);
 	}
 
 	@Override
@@ -122,5 +129,44 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@Override
 	public void addCategories(Vector<Category> categories) {
 		store.addAll(categories);
+		categoriesCB.setValue(categories.get(0));
 	}
+
+	@Override
+	public ComboBox<Category> getCategoriesSelecteur() {
+		return categoriesCB;
+	}
+	
+	/*
+	 * As for UiFactory, method name has no importance, it's the parameter type...
+	 */
+	@UiHandler("categoriesCB")
+	void handleSelection(SelectionEvent<Category> e) {
+		/*
+		 * Why "handleSelection(SelectionEvent<Category>"? because adding selection handler manually require this code:
+		categoriesCB.addSelectionHandler(new SelectionHandler<Category>() {
+			@Override
+			public void onSelection(SelectionEvent<Category> arg0) {
+				blabla
+			}
+		});
+		* onSelection gives a SelectionEvent
+		*/
+//		Window.alert("Hello, AJAX");
+		Info.display("New Category", "You have selected category " + e.getSelectedItem().getId() + " " + 
+				e.getSelectedItem().getName());
+		Integer id = e.getSelectedItem().getId();
+		if(id == null) return;
+		int nb = contentFlow.getNumberOfItems();
+		for(int i = 0 ; i < nb ; i++) {
+			((PhotoView)contentFlow.getItem(i)).getTitle();// TODO BDY: add fields in PhotoView
+		}
+//		if(id.equals(1)) {
+//			contentFlow.removeItems(contentFlow.getItem(1));
+//		}
+//		else if(id.equals(2)) {
+//			contentFlow.getItem(1).setVisible(true);
+//		}
+	}
+
 }

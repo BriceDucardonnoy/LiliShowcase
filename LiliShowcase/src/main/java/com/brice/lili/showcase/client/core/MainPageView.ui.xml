@@ -9,7 +9,6 @@
 	xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
 	xmlns:form="urn:import:com.sencha.gxt.widget.core.client.form"
 	xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button"
-	xmlns:c="urn:import:com.sencha.gxt.widget.core.client"
 	xmlns:contentflow4gwt="urn:import:org.gwt.contentflow4gwt.client">
 
 	<ui:style>

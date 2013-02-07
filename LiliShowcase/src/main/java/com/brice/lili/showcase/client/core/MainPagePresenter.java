@@ -19,6 +19,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.sencha.gxt.widget.core.client.ContentPanel;
+import com.sencha.gxt.widget.core.client.form.ComboBox;
 
 public class MainPagePresenter extends
 		Presenter<MainPagePresenter.MyView, MainPagePresenter.MyProxy> {
@@ -28,6 +29,7 @@ public class MainPagePresenter extends
 		public ContentPanel getMainPane();
 		public void addItems(Vector<Person> people);
 		public void addCategories(Vector<Category> categories);
+		public ComboBox<Category> getCategoriesSelecteur();
 	}
 	
 	private Vector<Person> people;
@@ -59,7 +61,8 @@ public class MainPagePresenter extends
 		getView().getContentFlow().addItemClickListener(new ContentFlowItemClickListener() {
             public void onItemClicked(Widget widget) {
 //            	getView().getContentFlow().remove();
-            	getView().getContentFlow().removeItems(widget);
+//            	getView().getContentFlow().removeItems(widget);
+            	// TODO BDY: display info on picture
             }
         });
 	}
@@ -71,11 +74,12 @@ public class MainPagePresenter extends
 	}
 	
 	private void initPictures() {
-		categories.add(new Category(0, "Category 1", "Bla 1"));
-		categories.add(new Category(1, "Category 2", "Bla 2"));
-		int[] c0 = {0};
-		int[] c1 = {1};
-		int[] c2 = {0, 1};
+		categories.add(new Category(0, "Category 0: All", "Bla 0"));
+		categories.add(new Category(1, "Category 1", "Bla 1"));
+		categories.add(new Category(2, "Category 2", "Bla 2"));
+		int[] c0 = {0, 1};
+		int[] c1 = {0};
+		int[] c2 = {1};
 		
 		people.add(new Person("Steve Jobs", GWT.getModuleBaseURL() + "images/photos/jobs.jpg", c0));
 		people.add(new Person("Bill Gates", GWT.getModuleName() + "/images/photos/gates.jpg", c1));
