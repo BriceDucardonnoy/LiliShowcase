@@ -85,7 +85,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 
 	@Override
 	public void addItems(Vector<Person> people) {
-		Log.info("Add items");
 		int number = people.size();
         for (final Person person : generatePeople(people, number)) {
             contentFlow.addItems(createImageView(person));
@@ -117,6 +116,9 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		return mainPane;
 	}
 	
+	/*
+	 * As for UiHandler, method name has no importance, it's the parameter type of the return...
+	 */
 	@UiFactory ContentFlow<Person> createContentFlow() {
 		return new ContentFlow<Person>(true, true);
 	}
@@ -137,6 +139,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	}
 	
 	public void categoryChanged(Integer catId) {
+		Log.info("-------------------------------");
 		if(catId == null) return;
 		int nb = contentFlow.getNumberOfItems();
 		int j;
@@ -148,15 +151,22 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 				if(catId.equals(ids[j])) break;
 			}
 			if(j == ids.length) {
+				if(!p.isVisible()) continue;
+				Log.info("Remove " + p.getName());
+				p.setVisible(false);
 				contentFlow.removeItems(contentFlow.getItem(i));
 			}
 			else {
+				if(p.isVisible()) continue;
 				Log.info("Keep " + p.getName());
+				p.setVisible(true);
+				contentFlow.addItem(contentFlow.getItem(i), i);
 			}
 		}
 	}
 	
 	/*
+	 * This action has only consequences in the view representation => can be managed in the view
 	 * As for UiFactory, method name has no importance, it's the parameter type...
 	 */
 	@UiHandler("categoriesCB")
@@ -174,8 +184,9 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 //		Window.alert("Hello, AJAX");
 //		Info.display("New Category", "You have selected category " + e.getSelectedItem().getId() + " " + 
 //				e.getSelectedItem().getName());
-		Integer id = e.getSelectedItem().getId();
-		categoryChanged(id);
+		if(e.getSelectedItem() != null) {
+			categoryChanged(e.getSelectedItem().getId());
+		}
 	}
 
 }

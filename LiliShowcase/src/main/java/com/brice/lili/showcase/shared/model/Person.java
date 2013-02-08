@@ -30,11 +30,13 @@ public class Person implements Serializable {
 	private final String fName;
     private final String fImageUrl;
     private int[] categoryIds;
+    private boolean isVisible;
 
-    public Person(String name, String imageUrl, int[] categoryIds) {
+    public Person(String name, String imageUrl, int[] categoryIds, boolean isVisible) {
         fName = name;
         fImageUrl = imageUrl;
         this.categoryIds = categoryIds;
+        this.isVisible = isVisible;
     }
 
     public String getName() {
@@ -48,4 +50,12 @@ public class Person implements Serializable {
     public int[] getCategoryIds() {
     	return categoryIds;
     }
+
+	public boolean isVisible() {
+		return isVisible;
+	}
+
+	public void setVisible(boolean isVisible) {
+		this.isVisible = isVisible;
+	}
 }
