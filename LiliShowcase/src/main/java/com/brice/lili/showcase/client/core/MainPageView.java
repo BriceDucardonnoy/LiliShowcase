@@ -143,26 +143,41 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		if(catId == null) return;
 		int nb = contentFlow.getNumberOfItems();
 		int j;
-		for(int i = nb-1 ; i >= 0 ; i--) {
+		for(int i = nb-1 ; i >= 0 ; i--) {// This order is good to remove, not add
 			Person p = (Person) ((PhotoView)contentFlow.getItem(i)).getPojo();
 			if(p == null) continue;
 			int[] ids = p.getCategoryIds();
 			for(j = 0 ; j < ids.length ; j++) {
 				if(catId.equals(ids[j])) break;
 			}
-			if(j == ids.length) {
+			if(j == ids.length) {// Remove it
 				if(!p.isVisible()) continue;
 				Log.info("Remove " + p.getName());
 				p.setVisible(false);
 				contentFlow.removeItems(contentFlow.getItem(i));
 			}
-			else {
+//			else {// i may be not existent, make a loop in other order
+//				if(p.isVisible()) continue;
+//				Log.info("Add " + p.getName());
+//				p.setVisible(true);
+//				contentFlow.addItem(contentFlow.getItem(i), i);
+//			}
+		}
+		for(int i = 0 ; i < nb ; i++) {
+			Person p = (Person) ((PhotoView)contentFlow.getItem(i)).getPojo();
+			if(p == null) continue;
+			int[] ids = p.getCategoryIds();
+			for(j = 0 ; j < ids.length ; j++) {
+				if(catId.equals(ids[j])) break;
+			}
+			if(j != ids.length) {// Add it
 				if(p.isVisible()) continue;
-				Log.info("Keep " + p.getName());
+				Log.info("Add " + p.getName());
 				p.setVisible(true);
 				contentFlow.addItem(contentFlow.getItem(i), i);
 			}
 		}
+//		contentFlow.moveTo(contentFlow.getItem(0));
 	}
 	
 	/*
