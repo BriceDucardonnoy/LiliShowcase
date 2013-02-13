@@ -143,6 +143,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		if(catId == null) return;
 		int nb = contentFlow.getNumberOfItems();
 		int j;
+		int firstOfSameCategory = -1;
+		// Remove not required pictures
 		for(int i = nb-1 ; i >= 0 ; i--) {// This order is good to remove, not add
 			Person p = (Person) ((PhotoView)contentFlow.getItem(i)).getPojo();
 			if(p == null) continue;
@@ -151,7 +153,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 				if(catId.equals(ids[j])) break;
 			}
 			if(j == ids.length) {// Remove it
-				if(!p.isVisible()) continue;
+				if(firstOfSameCategory == -1) firstOfSameCategory = j;
+				if(!p.isVisible()) continue;// If already removed do nothing
 				Log.info("Remove " + p.getName());
 				p.setVisible(false);
 				contentFlow.removeItems(contentFlow.getItem(i));
@@ -163,6 +166,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 //				contentFlow.addItem(contentFlow.getItem(i), i);
 //			}
 		}
+		// Add required pictures
 		for(int i = 0 ; i < nb ; i++) {
 			Person p = (Person) ((PhotoView)contentFlow.getItem(i)).getPojo();
 			if(p == null) continue;
@@ -171,13 +175,26 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 				if(catId.equals(ids[j])) break;
 			}
 			if(j != ids.length) {// Add it
-				if(p.isVisible()) continue;
+				if(firstOfSameCategory == -1) firstOfSameCategory = j;
+				if(p.isVisible()) continue;// If already visible do nothing
 				Log.info("Add " + p.getName());
 				p.setVisible(true);
 				contentFlow.addItem(contentFlow.getItem(i), i);
 			}
 		}
-//		contentFlow.moveTo(contentFlow.getItem(0));
+		// Set cursor on first of the category if one is retrieved
+		if(firstOfSameCategory == -1) return;
+//		if(Log.isInfoEnabled()) {
+//			Log.info("Focus on " + firstOfSameCategory + " " + 
+//					((Person) ((PhotoView)contentFlow.getItem(firstOfSameCategory)).getPojo()).getName());
+//		}
+//		contentFlow.moveTo(contentFlow.getItem(firstOfSameCategory));
+		/*
+		 *  Problem when switch to a category with no intersection with previous category
+		 *  Don't switch every time on 0 index
+		 *  Can keep old name
+		 */
+//		contentFlow.moveTo(0);
 	}
 	
 	/*
