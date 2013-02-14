@@ -9,6 +9,8 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.properties.CategoryProperties;
 import com.brice.lili.showcase.shared.model.Category;
 import com.brice.lili.showcase.shared.model.Person;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -139,33 +141,23 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	}
 	
 	public void categoryChanged(Integer catId) {
+		/*
+		 * FIXME BDY
+		 *  Problem when switch to a category with no intersection with previous category: 
+		 *  	add to index n but n-1 may not exists in this case
+		 *  Don't switch every time on 0 index: 
+		 *  	items aren't already added at 'moveTo' moment => imbricate ScheduledCommand for add, remove, and move (not good?)
+		 *  Can keep old name
+		 *  TODO BDY
+		 *  Redo all the system.
+		 *  Make possible sort on different critters (date, price, period, color...)
+		 *  With real pictures, display miniatures instead of true pictures
+		 */
 		Log.info("-------------------------------");
 		if(catId == null) return;
 		int nb = contentFlow.getNumberOfItems();
 		int j;
-		int firstOfSameCategory = -1;
-		// Remove not required pictures
-		for(int i = nb-1 ; i >= 0 ; i--) {// This order is good to remove, not add
-			Person p = (Person) ((PhotoView)contentFlow.getItem(i)).getPojo();
-			if(p == null) continue;
-			int[] ids = p.getCategoryIds();
-			for(j = 0 ; j < ids.length ; j++) {
-				if(catId.equals(ids[j])) break;
-			}
-			if(j == ids.length) {// Remove it
-				if(firstOfSameCategory == -1) firstOfSameCategory = j;
-				if(!p.isVisible()) continue;// If already removed do nothing
-				Log.info("Remove " + p.getName());
-				p.setVisible(false);
-				contentFlow.removeItems(contentFlow.getItem(i));
-			}
-//			else {// i may be not existent, make a loop in other order
-//				if(p.isVisible()) continue;
-//				Log.info("Add " + p.getName());
-//				p.setVisible(true);
-//				contentFlow.addItem(contentFlow.getItem(i), i);
-//			}
-		}
+		int firstOfSameCategory = -1;// TESTME BDY: add before remove
 		// Add required pictures
 		for(int i = 0 ; i < nb ; i++) {
 			Person p = (Person) ((PhotoView)contentFlow.getItem(i)).getPojo();
@@ -182,19 +174,35 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 				contentFlow.addItem(contentFlow.getItem(i), i);
 			}
 		}
+		// Remove not required pictures
+		for(int i = nb-1 ; i >= 0 ; i--) {// This order is good to remove, not add
+			Person p = (Person) ((PhotoView)contentFlow.getItem(i)).getPojo();
+			if(p == null) continue;
+			int[] ids = p.getCategoryIds();
+			for(j = 0 ; j < ids.length ; j++) {
+				if(catId.equals(ids[j])) break;
+			}
+			if(j == ids.length) {// Remove it
+				if(firstOfSameCategory == -1) firstOfSameCategory = j;
+				if(!p.isVisible()) continue;// If already removed do nothing
+				Log.info("Remove " + p.getName());
+				p.setVisible(false);
+				contentFlow.removeItems(contentFlow.getItem(i));
+			}
+		}
 		// Set cursor on first of the category if one is retrieved
-		if(firstOfSameCategory == -1) return;
+//		if(firstOfSameCategory == -1) return;
 //		if(Log.isInfoEnabled()) {
 //			Log.info("Focus on " + firstOfSameCategory + " " + 
 //					((Person) ((PhotoView)contentFlow.getItem(firstOfSameCategory)).getPojo()).getName());
 //		}
 //		contentFlow.moveTo(contentFlow.getItem(firstOfSameCategory));
-		/*
-		 *  Problem when switch to a category with no intersection with previous category
-		 *  Don't switch every time on 0 index
-		 *  Can keep old name
-		 */
-//		contentFlow.moveTo(0);
+		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+			@Override
+			public void execute() {
+				contentFlow.moveTo(0);
+			}
+		});
 	}
 	
 	/*

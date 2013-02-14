@@ -63,6 +63,7 @@ public class MainPagePresenter extends
 //            	getView().getContentFlow().remove();
 //            	getView().getContentFlow().removeItems(widget);
             	// TODO BDY: display info on picture
+            	getView().getContentFlow().moveTo(0);
             }
         });
 	}
