@@ -137,7 +137,9 @@
 						<gxt:ContentPanel />
 					</container:east>
 					<container:south layoutData="{southData}">
-						<gxt:ContentPanel />
+						<gxt:ContentPanel>
+							<button:TextButton ui:field="testBtn" text="Button" />
+						</gxt:ContentPanel>
 					</container:south>
 				</container:BorderLayoutContainer>
 			</container:child>
