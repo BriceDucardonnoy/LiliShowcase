@@ -60,9 +60,7 @@ public class MainPagePresenter extends
 		getView().addItems(people);
 		getView().getContentFlow().addItemClickListener(new ContentFlowItemClickListener() {
             public void onItemClicked(Widget widget) {
-//            	getView().getContentFlow().remove();
-//            	getView().getContentFlow().removeItems(widget);
-            	// TODO BDY: display info on picture
+            	// TODO BDY: display info on picture which should be miniature (not big pictures)
             	getView().getContentFlow().moveTo(0);
             }
         });

@@ -150,70 +150,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		return categoriesCB;
 	}
 	
-	/*
-	 * FIXME BDY
-	 * Problem when switch to a category with no intersection with previous category: 
-	 * add to index n but n-1 may not exists in this case
-	 * Don't switch every time on 0 index: 
-	 * 		items aren't already added at 'moveTo' moment => imbricate ScheduledCommand for add, remove, and move (not good?)
-	 * Can keep old name
-	 * TODO BDY
-	 * Redo all the system.
-	 * Make possible sort on different critters (date, price, period, color...)
-	 * With real pictures, display miniatures instead of true pictures
-	 */
-//	public void categoryChanged(Integer catId) {
-//		Log.info("-------------------------------");
-//		if(catId == null) return;
-//		int nb = contentFlow.getNumberOfItems();
-//		int j;
-//		int firstOfSameCategory = -1;// TESTME BDY: add before remove
-//		// Add required pictures
-//		for(int i = 0 ; i < nb ; i++) {
-//			Person p = (Person) ((PhotoView)contentFlow.getItem(i)).getPojo();
-//			if(p == null) continue;
-//			int[] ids = p.getCategoryIds();
-//			for(j = 0 ; j < ids.length ; j++) {
-//				if(catId.equals(ids[j])) break;
-//			}
-//			if(j != ids.length) {// Add it
-//				if(firstOfSameCategory == -1) firstOfSameCategory = j;
-//				if(p.isVisible()) continue;// If already visible do nothing
-//				Log.info("Add " + p.getName());
-//				p.setVisible(true);
-//				contentFlow.addItem(contentFlow.getItem(i), i);
-//			}
-//		}
-//		// Remove not required pictures
-//		for(int i = nb-1 ; i >= 0 ; i--) {// This order is good to remove, not add
-//			Person p = (Person) ((PhotoView)contentFlow.getItem(i)).getPojo();
-//			if(p == null) continue;
-//			int[] ids = p.getCategoryIds();
-//			for(j = 0 ; j < ids.length ; j++) {
-//				if(catId.equals(ids[j])) break;
-//			}
-//			if(j == ids.length) {// Remove it
-//				if(firstOfSameCategory == -1) firstOfSameCategory = j;
-//				if(!p.isVisible()) continue;// If already removed do nothing
-//				Log.info("Remove " + p.getName());
-//				p.setVisible(false);
-//				contentFlow.removeItems(contentFlow.getItem(i));
-//			}
-//		}
-//		// Set cursor on first of the category if one is retrieved
-////		if(firstOfSameCategory == -1) return;
-////		if(Log.isInfoEnabled()) {
-////			Log.info("Focus on " + firstOfSameCategory + " " + 
-////					((Person) ((PhotoView)contentFlow.getItem(firstOfSameCategory)).getPojo()).getName());
-////		}
-//		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-//			@Override
-//			public void execute() {
-//				contentFlow.moveTo(0);
-//			}
-//		});
-//	}
-	
 	private boolean containsCategorie(int[] cats, Integer cat) {
 		for(int c : cats) {
 			if(cat.equals(c)) return true;
@@ -251,20 +187,14 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 				for(Integer i : orderedPictures) {
 					contentFlow.addItem(allPictures.get(i));
 				}
-//				int idx;
-//				for(idx = 0 ; idx < orderedPictures.size() ; idx++) {
-//					Log.info("add i = " + orderedPictures.get(idx) + " " + 
-//							((Person)allPictures.get(orderedPictures.get(idx)).getPojo()).getName());
-//					contentFlow.addItem(allPictures.get(orderedPictures.get(idx)), idx);
-//				}
-//				while(idx < contentFlow.getNumberOfItems()) {
-//					contentFlow.removeItem(idx);
-//				}
 				
 				Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 					@Override
 					public void execute() {
+						Log.info("Refresh DOM");
+						// TODO BDY: look for a listener in JS
 						contentFlow.refreshActiveItem();
+						contentFlow.step();
 						contentFlow.moveTo(0);
 					}
 				});
