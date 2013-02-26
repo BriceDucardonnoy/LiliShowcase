@@ -179,28 +179,20 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 			}
 		}
 		// Update contentFlow
-//		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-//			@Override
-//			public void execute() {
-				contentFlow.removeAll();
-//				Log.info("Back from removeAll");
-				for(Integer i : orderedPictures) {
-					contentFlow.addItem(allPictures.get(i));
-				}
-				
-				Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-					@Override
-					public void execute() {
-						Log.info("Refresh DOM");
-						// TODO BDY: look for a listener in JS
-						contentFlow.refreshActiveItem();
-						contentFlow.step();
-						contentFlow.moveTo(0);
-					}
-				});
-//			}
-//		});
+		contentFlow.removeAll();
+		for(Integer i : orderedPictures) {
+			contentFlow.addItem(allPictures.get(i));
+		}
 		
+		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+			@Override
+			public void execute() {
+				Log.info("Refresh DOM");
+				contentFlow.refreshActiveItem();
+//				contentFlow.moveTo(0);
+			}
+		});
+
 	}
 	
 	public void sortChanged() {
