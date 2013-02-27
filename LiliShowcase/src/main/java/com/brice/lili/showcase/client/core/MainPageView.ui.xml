@@ -110,6 +110,9 @@
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="centerData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="eastData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="southData" />
+	<ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="verticalLayoutData">
+    	<ui:attributes width="300" height="30" />
+ 	</ui:with>
 	<ui:with type="com.sencha.gxt.data.shared.ListStore" field="store" />
 	
 	<!-- <g:HTMLPanel>Hello World!</g:HTMLPanel> -->
@@ -123,7 +126,28 @@
 			<container:child layoutData="{outerData}">
 				<container:BorderLayoutContainer ui:field="con" borders="true">
 					<container:north layoutData="{northData}">
-						<form:ComboBox ui:field="categoriesCB" store="{store}"/>
+						<container:VerticalLayoutContainer>
+							<container:child layoutData="{verticalLayoutData}">
+								<form:FieldLabel text="Category">
+						            <form:widget>
+										<form:ComboBox ui:field="categoriesCB" store="{store}"/>
+									 </form:widget>
+					         	</form:FieldLabel>	
+							</container:child>
+							<container:child layoutData="{verticalLayoutData}">
+								<form:FieldLabel text="Sort">
+						            <form:widget>
+						              <g:HorizontalPanel>
+						                <form:Radio ui:field="name" boxLabel="Name" value="true" />
+						                <form:Radio ui:field="date" boxLabel="Date" />
+						                <form:Radio ui:field="size" boxLabel="Size" />
+						                <form:Radio ui:field="color" boxLabel="Color" />
+						                <form:Radio ui:field="price" boxLabel="Price" />
+						              </g:HorizontalPanel>
+						            </form:widget>
+					          </form:FieldLabel>
+					    	</container:child>
+						</container:VerticalLayoutContainer>
 					</container:north>
 					<container:west layoutData="{westData}">
 						<gxt:ContentPanel />

@@ -14,16 +14,20 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.reveregroup.gwt.imagepreloader.client.FitImage;
 import com.sencha.gxt.cell.core.client.form.ComboBoxCell.TriggerAction;
 import com.sencha.gxt.core.client.util.Margins;
+import com.sencha.gxt.core.client.util.ToggleGroup;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.button.TextButton;
@@ -31,11 +35,23 @@ import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderL
 import com.sencha.gxt.widget.core.client.container.MarginData;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
+import com.sencha.gxt.widget.core.client.form.Radio;
+import com.sencha.gxt.widget.core.client.info.Info;
 
 public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 
 	private final Widget widget;
 	@UiField ContentFlow<Person> contentFlow;
+//	@UiField BorderLayoutContainer con;
+	@UiField TextButton testBtn;
+	@UiField ComboBox<Category> categoriesCB;
+	@UiField ContentPanel mainPane;
+	@UiField(provided = true) ListStore<Category> store;
+	@UiField Radio name;
+	@UiField Radio date;
+	@UiField Radio size;
+	@UiField Radio color;
+	@UiField Radio price;
 	
 	@UiField(provided = true)
 	MarginData outerData = new MarginData(20);
@@ -51,12 +67,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@UiField(provided = true)
 	BorderLayoutData southData = new BorderLayoutData(100);
 
-//	@UiField BorderLayoutContainer con;
-	@UiField TextButton testBtn;
-	@UiField ComboBox<Category> categoriesCB;
-    @UiField ContentPanel mainPane;
-    @UiField(provided = true) ListStore<Category> store;
-    
     private CategoryProperties props = GWT.create(CategoryProperties.class);
     private ArrayList<PhotoView> allPictures = null;
     private ArrayList<Integer> orderedPictures = null;
@@ -86,6 +96,23 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		categoriesCB.setForceSelection(true);
 		categoriesCB.setTriggerAction(TriggerAction.ALL);
 		categoriesCB.setEditable(false);
+		
+		ToggleGroup sortToggle = new ToggleGroup();
+		sortToggle.add(name);
+		sortToggle.add(date);
+		sortToggle.add(size);
+		sortToggle.add(color);
+		sortToggle.add(price);
+		// SortToggle only infer on view representation => configure it in view
+		sortToggle.addValueChangeHandler(new ValueChangeHandler<HasValue<Boolean>>() {
+			@Override
+			public void onValueChange(ValueChangeEvent<HasValue<Boolean>> event) {
+				ToggleGroup group = (ToggleGroup)event.getSource();
+				Radio radio = (Radio)group.getValue();
+				Info.display("Sort Changed", "You selected " + radio.getBoxLabel());
+				sortChanged(radio.getName());
+			}
+		});
 	}
 
 	@Override
@@ -189,13 +216,12 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 			public void execute() {
 				Log.info("Refresh DOM");
 				contentFlow.refreshActiveItem();
-//				contentFlow.moveTo(0);
 			}
 		});
 
 	}
 	
-	public void sortChanged() {
+	public void sortChanged(String name) {
 		// TODO BDY: add radio button to select order: Period, date, price, size (always sub-ordered with name)		
 	}
 	
@@ -228,8 +254,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	
 	@UiHandler("testBtn")
 	void handleClick(SelectEvent e) {
-		contentFlow.refreshActiveItem();
-		contentFlow.moveTo(0);
+//		contentFlow.refreshActiveItem();
+//		contentFlow.moveTo(0);
 	}
 
 }
