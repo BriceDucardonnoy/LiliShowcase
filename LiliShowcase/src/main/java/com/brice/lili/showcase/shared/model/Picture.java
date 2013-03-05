@@ -23,28 +23,29 @@
 package com.brice.lili.showcase.shared.model;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
-public class Person implements Serializable {
+public class Picture implements Serializable {
 
 	private static final long serialVersionUID = 4818208598134665653L;
-	private final String fName;
-    private final String fImageUrl;
     private int[] categoryIds;
     private boolean isVisible;
+    private HashMap<String, Object> properties;
 
-    public Person(String name, String imageUrl, int[] categoryIds, boolean isVisible) {
-        fName = name;
-        fImageUrl = imageUrl;
+    public Picture(String name, String imageUrl, int[] categoryIds, boolean isVisible) {
+    	properties = new HashMap<String, Object>();
+    	properties.put("name", name);
+    	properties.put("imageUrl", imageUrl);
         this.categoryIds = categoryIds;
         this.isVisible = isVisible;
     }
 
     public String getName() {
-        return fName;
+    	return properties.containsKey("name") ? (String) properties.get("name") : "";
     }
 
     public String getImageUrl() {
-        return fImageUrl;
+    	return properties.containsKey("imageUrl") ? (String) properties.get("imageUrl") : "";
     }
     
     public int[] getCategoryIds() {
@@ -57,5 +58,25 @@ public class Person implements Serializable {
 
 	public void setVisible(boolean isVisible) {
 		this.isVisible = isVisible;
+	}
+
+	public HashMap<String, Object> getProperties() {
+		return properties;
+	}
+
+	public void setProperties(HashMap<String, Object> properties) {
+		this.properties = properties;
+	}
+	
+	public Object getProperty(String property) {
+		return properties.get(property);
+	}
+	
+	public Object addProperty(String property, Object value) {
+		return properties.put(property, value);
+	}
+	
+	public Object removeProperty(String property) {
+		return properties.remove(property);
 	}
 }

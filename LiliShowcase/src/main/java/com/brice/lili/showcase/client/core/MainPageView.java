@@ -9,7 +9,7 @@ import org.gwt.contentflow4gwt.client.PhotoView;
 import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.properties.CategoryProperties;
 import com.brice.lili.showcase.shared.model.Category;
-import com.brice.lili.showcase.shared.model.Person;
+import com.brice.lili.showcase.shared.model.Picture;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.core.shared.GWT;
@@ -41,7 +41,7 @@ import com.sencha.gxt.widget.core.client.info.Info;
 public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 
 	private final Widget widget;
-	@UiField ContentFlow<Person> contentFlow;
+	@UiField ContentFlow<Picture> contentFlow;
 //	@UiField BorderLayoutContainer con;
 	@UiField TextButton testBtn;
 	@UiField ComboBox<Category> categoriesCB;
@@ -121,20 +121,20 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	}
 
 	@Override
-	public void addItems(Vector<Person> people) {
+	public void addItems(Vector<Picture> people) {
 		int number = people.size();
-        for (final Person person : generatePeople(people, number)) {
+        for (final Picture person : generatePeople(people, number)) {
             contentFlow.addItems(createImageView(person));
         }
     }
 	
-	private PhotoView createImageView(Person person) {
+	private PhotoView createImageView(Picture person) {
 		allPictures.add(new PhotoView(new FitImage(person.getImageUrl()), person.getName(), person));
         return allPictures.get(allPictures.size() - 1);
     }
 	
-	private Person[] generatePeople(Vector<Person> people, int number) {
-        Person[] result = new Person[number];
+	private Picture[] generatePeople(Vector<Picture> people, int number) {
+        Picture[] result = new Picture[number];
 
         for (int i = 0; i < number; i++) {
             result[i] = people.get(i % number);
@@ -144,7 +144,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
     }
 	
 	@Override
-	public ContentFlow<Person> getContentFlow() {
+	public ContentFlow<Picture> getContentFlow() {
 		return contentFlow;
 	}
 
@@ -156,8 +156,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	/*
 	 * As for UiHandler, method name has no importance, it's the parameter type of the return...
 	 */
-	@UiFactory ContentFlow<Person> createContentFlow() {
-		return new ContentFlow<Person>(true, true);
+	@UiFactory ContentFlow<Picture> createContentFlow() {
+		return new ContentFlow<Picture>(true, true);
 	}
 	
 	@UiFactory ComboBox<Category> createCategoryComboBox() {
@@ -184,7 +184,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		return false;
 	}
 	
-	private void addInOrderedData(Person pojo, Integer refIdx) {
+	private void addInOrderedData(Picture pojo, Integer refIdx) {
 		// TODO BDY: order data
 		orderedPictures.add(refIdx);
 	}
@@ -200,7 +200,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		orderedPictures.clear();
 		int sz = allPictures.size();
 		for(int i = 0 ; i < sz ; i++) {
-			Person p = (Person) allPictures.get(i).getPojo();
+			Picture p = (Picture) allPictures.get(i).getPojo();
 			if(containsCategorie(p.getCategoryIds(), currentCategoryId)) {
 				addInOrderedData(p, i);
 			}

@@ -7,7 +7,7 @@ import org.gwt.contentflow4gwt.client.ContentFlowItemClickListener;
 
 import com.brice.lili.showcase.client.place.NameTokens;
 import com.brice.lili.showcase.shared.model.Category;
-import com.brice.lili.showcase.shared.model.Person;
+import com.brice.lili.showcase.shared.model.Picture;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -25,14 +25,14 @@ public class MainPagePresenter extends
 		Presenter<MainPagePresenter.MyView, MainPagePresenter.MyProxy> {
 
 	public interface MyView extends View {
-		public ContentFlow<Person> getContentFlow();
+		public ContentFlow<Picture> getContentFlow();
 		public ContentPanel getMainPane();
-		public void addItems(Vector<Person> people);
+		public void addItems(Vector<Picture> people);
 		public void addCategories(Vector<Category> categories);
 		public ComboBox<Category> getCategoriesSelecteur();
 	}
 	
-	private Vector<Person> people;
+	private Vector<Picture> people;
 	private Vector<Category> categories;
 
 	@ProxyStandard
@@ -44,7 +44,7 @@ public class MainPagePresenter extends
 	public MainPagePresenter(final EventBus eventBus, final MyView view, final MyProxy proxy) {
 		super(eventBus, view, proxy);
 		categories = new Vector<Category>();
-		people = new Vector<Person>();
+		people = new Vector<Picture>();
 	}
 
 	@Override
@@ -80,14 +80,14 @@ public class MainPagePresenter extends
 		int[] c1 = {0, 1};
 		int[] c2 = {0, 2};
 		// TODO BDY: get this list from request on server disk
-		people.add(new Person("Steve Jobs", GWT.getModuleBaseURL() + "images/photos/jobs.jpg", c0, true));
-		people.add(new Person("Bill Gates", GWT.getModuleName() + "/images/photos/gates.jpg", c1, true));
-		people.add(new Person("Sergey Brin", GWT.getModuleName() + "/images/photos/brin.jpg", c2, true));
-		people.add(new Person("Larry Page", GWT.getModuleName() + "/images/photos/page.jpg", c0, true));
-		people.add(new Person("John Doerr", GWT.getModuleName() + "/images/photos/doerr.jpg", c0, true));
-		people.add(new Person("Eric Schmidt", GWT.getModuleName() + "/images/photos/schmidt.jpg", c2, true));
-		people.add(new Person("Larry Wayne", GWT.getModuleName() + "/images/photos/wayne.jpg", c1, true));
-		people.add(new Person("Steve Wozniak", GWT.getModuleName() + "/images/photos/wozniak.jpg", c1, true));
-		people.add(new Person("John Cook", GWT.getModuleName() + "/images/photos/cook.jpg", c1, true));
+		people.add(new Picture("Steve Jobs", GWT.getModuleBaseURL() + "images/photos/jobs.jpg", c0, true));
+		people.add(new Picture("Bill Gates", GWT.getModuleName() + "/images/photos/gates.jpg", c1, true));
+		people.add(new Picture("Sergey Brin", GWT.getModuleName() + "/images/photos/brin.jpg", c2, true));
+		people.add(new Picture("Larry Page", GWT.getModuleName() + "/images/photos/page.jpg", c0, true));
+		people.add(new Picture("John Doerr", GWT.getModuleName() + "/images/photos/doerr.jpg", c0, true));
+		people.add(new Picture("Eric Schmidt", GWT.getModuleName() + "/images/photos/schmidt.jpg", c2, true));
+		people.add(new Picture("Larry Wayne", GWT.getModuleName() + "/images/photos/wayne.jpg", c1, true));
+		people.add(new Picture("Steve Wozniak", GWT.getModuleName() + "/images/photos/wozniak.jpg", c1, true));
+		people.add(new Picture("John Cook", GWT.getModuleName() + "/images/photos/cook.jpg", c1, true));
 	}
 }
