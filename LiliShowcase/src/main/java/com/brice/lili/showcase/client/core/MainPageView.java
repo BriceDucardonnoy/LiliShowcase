@@ -125,9 +125,13 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@Override
 	public void addItems(Vector<Picture> people) {
 		int number = people.size();
-        for (final Picture person : generatePeople(people, number)) {
-            contentFlow.addItems(createImageView(person));
+        for (final Picture picture : generatePictures(people, number)) {
+        	createImageView(picture);
+        	addInOrderedData(picture, allPictures.size() - 1);
         }
+        for(Integer i : orderedPictures) {
+			contentFlow.addItems(allPictures.get(i));
+		}
     }
 	
 	private PhotoView createImageView(Picture person) {
@@ -135,11 +139,11 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
         return allPictures.get(allPictures.size() - 1);
     }
 	
-	private Picture[] generatePeople(Vector<Picture> people, int number) {
+	private Picture[] generatePictures(Vector<Picture> pictures, int number) {
         Picture[] result = new Picture[number];
 
         for (int i = 0; i < number; i++) {
-            result[i] = people.get(i % number);
+            result[i] = pictures.get(i % number);
         }
 
         return result;
@@ -188,13 +192,14 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	
 	@SuppressWarnings("unchecked")
 	private void addInOrderedData(Picture pojo, Integer refIdx) {
-		// If pojo doesn't contain sortName property, add it at the end
+		// If POJO doesn't contain sortName property, add it at the end
 		if(pojo.getProperty(sortName) == null) {
 			orderedPictures.add(refIdx);
 			return;
 		}
 		for(int i = 0 ; i < orderedPictures.size() ; i++) {
 			Picture pict = (Picture) allPictures.get(orderedPictures.get(i)).getPojo();
+			if(pojo == pict) continue;// Doesn't test with itself
 			if(((Comparable<Object>)pict.getProperty(sortName)).compareTo(pojo.getProperty(sortName)) > 0
 					|| pict.getProperty(sortName) == null) {
 				orderedPictures.add(i, refIdx);
@@ -211,6 +216,11 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	 * @param catId the category to display
 	 */
 	public void categoryChanged() {
+		/*
+		 *  TODO BDY: remove click listener: if click on picture to Info.display, info displays one "Info.display" more
+		 *  each time category is switched.
+		 *  Also test to switch category with another field than name chosen for sorting
+		 */
 		// Update data
 		orderedPictures.clear();
 		int sz = allPictures.size();
@@ -261,8 +271,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		* onSelection gives a SelectionEvent
 		*/
 //		Window.alert("Hello, AJAX");
-//		Info.display("New Category", "You have selected category " + e.getSelectedItem().getId() + " " + 
-//				e.getSelectedItem().getName());
 		if(e.getSelectedItem() != null) {
 			if(e.getSelectedItem().getId().equals(currentCategoryId)) return;
 			currentCategoryId = e.getSelectedItem().getId();

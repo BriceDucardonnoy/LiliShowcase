@@ -34,7 +34,7 @@ public class MainPagePresenter extends
 		public Picture getCurrentPicture();
 	}
 	
-	private Vector<Picture> people;
+	private Vector<Picture> pictures;
 	private Vector<Category> categories;
 
 	@ProxyStandard
@@ -46,7 +46,7 @@ public class MainPagePresenter extends
 	public MainPagePresenter(final EventBus eventBus, final MyView view, final MyProxy proxy) {
 		super(eventBus, view, proxy);
 		categories = new Vector<Category>();
-		people = new Vector<Picture>();
+		pictures = new Vector<Picture>();
 	}
 
 	@Override
@@ -59,10 +59,9 @@ public class MainPagePresenter extends
 		super.onBind();
 		initPictures();
 		getView().addCategories(categories);// Add handler on cb and consequences
-		getView().addItems(people);
+		getView().addItems(pictures);
 		getView().getContentFlow().addItemClickListener(new ContentFlowItemClickListener() {
             public void onItemClicked(Widget widget) {
-            	// TODO BDY: display info on picture which should be miniature (not big pictures)
             	Info.display("Selection", "You click on " + getView().getCurrentPicture().getName());
             }
         });
@@ -82,14 +81,14 @@ public class MainPagePresenter extends
 		int[] c1 = {0, 1};
 		int[] c2 = {0, 2};
 		// TODO BDY: get this list from request on server disk
-		people.add(new Picture("Steve Jobs", GWT.getModuleBaseURL() + "images/photos/jobs.jpg", c0, true));
-		people.add(new Picture("Bill Gates", GWT.getModuleName() + "/images/photos/gates.jpg", c1, true));
-		people.add(new Picture("Sergey Brin", GWT.getModuleName() + "/images/photos/brin.jpg", c2, true));
-		people.add(new Picture("Larry Page", GWT.getModuleName() + "/images/photos/page.jpg", c0, true));
-		people.add(new Picture("John Doerr", GWT.getModuleName() + "/images/photos/doerr.jpg", c0, true));
-		people.add(new Picture("Eric Schmidt", GWT.getModuleName() + "/images/photos/schmidt.jpg", c2, true));
-		people.add(new Picture("Larry Wayne", GWT.getModuleName() + "/images/photos/wayne.jpg", c1, true));
-		people.add(new Picture("Steve Wozniak", GWT.getModuleName() + "/images/photos/wozniak.jpg", c1, true));
-		people.add(new Picture("John Cook", GWT.getModuleName() + "/images/photos/cook.jpg", c1, true));
+		pictures.add(new Picture("Steve Jobs", GWT.getModuleBaseURL() + "images/photos/jobs.jpg", c0, true));
+		pictures.add(new Picture("Bill Gates", GWT.getModuleName() + "/images/photos/gates.jpg", c1, true));
+		pictures.add(new Picture("Sergey Brin", GWT.getModuleName() + "/images/photos/brin.jpg", c2, true));
+		pictures.add(new Picture("Larry Page", GWT.getModuleName() + "/images/photos/page.jpg", c0, true));
+		pictures.add(new Picture("John Doerr", GWT.getModuleName() + "/images/photos/doerr.jpg", c0, true));
+		pictures.add(new Picture("Eric Schmidt", GWT.getModuleName() + "/images/photos/schmidt.jpg", c2, true));
+		pictures.add(new Picture("Larry Wayne", GWT.getModuleName() + "/images/photos/wayne.jpg", c1, true));
+		pictures.add(new Picture("Steve Wozniak", GWT.getModuleName() + "/images/photos/wozniak.jpg", c1, true));
+		pictures.add(new Picture("John Cook", GWT.getModuleName() + "/images/photos/cook.jpg", c1, true));
 	}
 }
