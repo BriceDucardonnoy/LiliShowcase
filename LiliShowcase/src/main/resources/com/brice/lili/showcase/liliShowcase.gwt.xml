@@ -33,7 +33,7 @@
   <inherits name="com.allen_sauer.gwt.log.gwt-log-DEBUG"/>
   
   <!-- Add the 'TRACE' and 'DEBUG' compile time log level 		-->
-  <!-- <extend-property name="log_level" values="TRACE,INFO"/> -->
+  <extend-property name="log_level" values="TRACE,INFO"/>
   
   <!-- inner HTML debugger DISABLED / ENABLED                     -->
   <set-property name="log_DivLogger" value="DISABLED" />

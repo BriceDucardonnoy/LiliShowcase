@@ -20,6 +20,7 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
+import com.sencha.gxt.widget.core.client.info.Info;
 
 public class MainPagePresenter extends
 		Presenter<MainPagePresenter.MyView, MainPagePresenter.MyProxy> {
@@ -30,6 +31,7 @@ public class MainPagePresenter extends
 		public void addItems(Vector<Picture> people);
 		public void addCategories(Vector<Category> categories);
 		public ComboBox<Category> getCategoriesSelecteur();
+		public Picture getCurrentPicture();
 	}
 	
 	private Vector<Picture> people;
@@ -61,7 +63,7 @@ public class MainPagePresenter extends
 		getView().getContentFlow().addItemClickListener(new ContentFlowItemClickListener() {
             public void onItemClicked(Widget widget) {
             	// TODO BDY: display info on picture which should be miniature (not big pictures)
-            	getView().getContentFlow().moveTo(0);
+            	Info.display("Selection", "You click on " + getView().getCurrentPicture().getName());
             }
         });
 	}

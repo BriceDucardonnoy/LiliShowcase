@@ -72,6 +72,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
     private ArrayList<Integer> orderedPictures = null;
     
     private Integer currentCategoryId = null;
+    private String sortName;
 
 	public interface Binder extends UiBinder<Widget, MainPageView> {
 	}
@@ -103,6 +104,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		sortToggle.add(size);
 		sortToggle.add(color);
 		sortToggle.add(price);
+		sortName = name.getName();
 		// SortToggle only infer on view representation => configure it in view
 		sortToggle.addValueChangeHandler(new ValueChangeHandler<HasValue<Boolean>>() {
 			@Override
@@ -184,8 +186,21 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		return false;
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void addInOrderedData(Picture pojo, Integer refIdx) {
-		// TODO BDY: order data
+		// If pojo doesn't contain sortName property, add it at the end
+		if(pojo.getProperty(sortName) == null) {
+			orderedPictures.add(refIdx);
+			return;
+		}
+		for(int i = 0 ; i < orderedPictures.size() ; i++) {
+			Picture pict = (Picture) allPictures.get(orderedPictures.get(i)).getPojo();
+			if(((Comparable<Object>)pict.getProperty(sortName)).compareTo(pojo.getProperty(sortName)) > 0
+					|| pict.getProperty(sortName) == null) {
+				orderedPictures.add(i, refIdx);
+				return;
+			}
+		}
 		orderedPictures.add(refIdx);
 	}
 	
@@ -210,11 +225,12 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		for(Integer i : orderedPictures) {
 			contentFlow.addItem(allPictures.get(i));
 		}
-		
 		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 			@Override
 			public void execute() {
-				Log.info("Refresh DOM");
+				if(Log.isTraceEnabled()) {
+					Log.trace("Refresh DOM");
+				}
 				contentFlow.refreshActiveItem();
 			}
 		});
@@ -222,6 +238,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	}
 	
 	public void sortChanged(String name) {
+		Log.info("Sorte field changed: " + name);
+		sortName = name;
 		// TODO BDY: add radio button to select order: Period, date, price, size (always sub-ordered with name)		
 	}
 	
@@ -256,6 +274,11 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	void handleClick(SelectEvent e) {
 //		contentFlow.refreshActiveItem();
 //		contentFlow.moveTo(0);
+	}
+
+	@Override
+	public Picture getCurrentPicture() {
+		return (Picture) ((PhotoView)contentFlow.getActiveItem()).getPojo();
 	}
 
 }
