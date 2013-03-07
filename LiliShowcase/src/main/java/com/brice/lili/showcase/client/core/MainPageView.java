@@ -219,7 +219,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		/*
 		 *  TODO BDY: remove click listener: if click on picture to Info.display, info displays one "Info.display" more
 		 *  each time category is switched.
-		 *  Also test to switch category with another field than name chosen for sorting
+		 *  Remove objects pushed twice in target (objects from contentflow project in public)
 		 */
 		// Update data
 		orderedPictures.clear();

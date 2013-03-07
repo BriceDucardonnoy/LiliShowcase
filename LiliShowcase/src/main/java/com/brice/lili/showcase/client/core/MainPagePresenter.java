@@ -9,6 +9,7 @@ import com.brice.lili.showcase.client.place.NameTokens;
 import com.brice.lili.showcase.shared.model.Category;
 import com.brice.lili.showcase.shared.model.Picture;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -36,7 +37,14 @@ public class MainPagePresenter extends
 	
 	private Vector<Picture> pictures;
 	private Vector<Category> categories;
-
+	private HandlerRegistration clickHandler;
+	private ContentFlowItemClickListener contentFlowClickListener = new ContentFlowItemClickListener() {
+        public void onItemClicked(Widget widget) {
+        	Info.display("Selection", "You click on " + getView().getCurrentPicture().getName());
+        	// To go on a page, set attribute target and href at same level than src (cf. contentflow_src.js line 731)
+        }
+    };
+	
 	@ProxyStandard
 	@NameToken(NameTokens.mainpage)
 	public interface MyProxy extends ProxyPlace<MainPagePresenter> {
@@ -58,13 +66,15 @@ public class MainPagePresenter extends
 	protected void onBind() {
 		super.onBind();
 		initPictures();
-		getView().addCategories(categories);// Add handler on cb and consequences
+		getView().addCategories(categories);
 		getView().addItems(pictures);
-		getView().getContentFlow().addItemClickListener(new ContentFlowItemClickListener() {
-            public void onItemClicked(Widget widget) {
-            	Info.display("Selection", "You click on " + getView().getCurrentPicture().getName());
-            }
-        });
+		clickHandler = getView().getContentFlow().addItemClickListener(contentFlowClickListener);
+	}
+	
+	@Override
+	protected void onUnbind() {
+		super.onUnbind();
+		clickHandler.removeHandler();
 	}
 
 	@Override
