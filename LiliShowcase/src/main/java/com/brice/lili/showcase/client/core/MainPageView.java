@@ -217,8 +217,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	 */
 	public void categoryChanged() {
 		/*
-		 *  TODO BDY: remove click listener: if click on picture to Info.display, info displays one "Info.display" more
-		 *  each time category is switched.
 		 *  Remove objects pushed twice in target (objects from contentflow project in public)
 		 */
 		// Update data
