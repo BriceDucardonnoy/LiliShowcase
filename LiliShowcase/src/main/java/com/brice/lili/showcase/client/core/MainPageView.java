@@ -213,9 +213,18 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	 * Display pictures for given category
 	 * Clear ordered pictures and add new ones in specific order
 	 * Then add it in DOM
-	 * @param catId the category to display
 	 */
 	public void categoryChanged() {
+		categoryChanged(100);
+	}
+	
+	/**
+	 * Display pictures for given category
+	 * Clear ordered pictures and add new ones in specific order
+	 * Then add it in DOM
+	 * @param timeout the time to wait before refreshing DOM in ms
+	 */
+	public void categoryChanged(final int timeout) {
 		/*
 		 *  Remove objects pushed twice in target (objects from contentflow project in public)
 		 */
@@ -239,19 +248,23 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 				if(Log.isTraceEnabled()) {
 					Log.trace("Refresh DOM");
 				}
-				contentFlow.refreshActiveItem();
+				contentFlow.refreshActiveItem(timeout);
 			}
 		});
 
 	}
 	
 	public void sortChanged(String name) {
-		Log.info("Sorte field changed: " + name);
 		sortName = name;
-		// TODO BDY: add radio button to select order: Period, date, price, size (always sub-ordered with name)		
+		/* 
+		 * TODO BDY: see why a different timeout is needed: trouble happens only for category 0 which is the biggest => timeout
+		 * should probably be adapted to the number of item to display
+		 */
+		categoryChanged(250);// 250: arbitrary optimistic timeout
 	}
 	
 	/*
+	 * ComboBox change selection event
 	 * This action has only consequences in the view representation => can be managed in the view
 	 * As for UiFactory, method name has no importance, it's the parameter type...
 	 */
