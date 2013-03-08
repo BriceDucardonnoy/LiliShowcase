@@ -125,6 +125,7 @@
 		<container:SimpleContainer>
 			<container:child layoutData="{outerData}">
 				<container:BorderLayoutContainer ui:field="con" borders="true">
+					<!-- NORTH -->
 					<container:north layoutData="{northData}">
 						<container:VerticalLayoutContainer>
 							<container:child layoutData="{verticalLayoutData}">
@@ -149,17 +150,21 @@
 					    	</container:child>
 						</container:VerticalLayoutContainer>
 					</container:north>
+					<!-- WEST -->
 					<container:west layoutData="{westData}">
 						<gxt:ContentPanel />
 					</container:west>
+					<!-- CENTER -->
 					<container:center layoutData="{centerData}">
 						<gxt:ContentPanel ui:field="mainPane" headerVisible="true" title="Showcase" bodyBorder="false" addStyleNames="{style.round-box}">
 							<contentflow4gwt:ContentFlow ui:field="contentFlow" />
 						</gxt:ContentPanel>
 					</container:center>
+					<!-- EAST -->
 					<container:east layoutData="{eastData}">
 						<gxt:ContentPanel />
 					</container:east>
+					<!-- SOUTH -->
 					<container:south layoutData="{southData}">
 						<gxt:ContentPanel>
 							<button:TextButton ui:field="testBtn" text="Button" />
