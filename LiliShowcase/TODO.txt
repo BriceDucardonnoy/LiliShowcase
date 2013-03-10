@@ -2,13 +2,15 @@ X Taille / Layout / Scroll 		cf. FitImage
 V Mise dans UiBinder
 V Donnees dans presenter
 V ComboBox de selection
-0 Icone onglet
+V Icone onglet
 0 Ressources externes
 	Cf. common: serialization DataModelInternal: loadFile
 0 Composants autour
 0 ?? Numero sous scroller avec effet circulaire ??
 0 Barre de chargement des images cf. TestGXT
 V Tri (info sous Scroller en depend ?)
-V Images petites taille pour chargement
-V Theme Black (sencha + CoverFlow)
+O Images petites taille pour chargement
+O Theme Black (sencha + CoverFlow)
+O Enlever scrollbar
+O Enlever les infos redondantes (remove des fichiers dans le webapp ?)
 	 
