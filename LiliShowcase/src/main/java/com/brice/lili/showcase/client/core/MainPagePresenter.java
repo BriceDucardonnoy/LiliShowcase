@@ -5,11 +5,18 @@ import java.util.Vector;
 import org.gwt.contentflow4gwt.client.ContentFlow;
 import org.gwt.contentflow4gwt.client.ContentFlowItemClickListener;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.place.NameTokens;
 import com.brice.lili.showcase.shared.model.Category;
 import com.brice.lili.showcase.shared.model.Picture;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.http.client.Request;
+import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestCallback;
+import com.google.gwt.http.client.RequestException;
+import com.google.gwt.http.client.Response;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -38,6 +45,12 @@ public class MainPagePresenter extends
 	private Vector<Picture> pictures;
 	private Vector<Category> categories;
 	private HandlerRegistration clickHandler;
+	
+	// TODO BDY: get it from disk
+	int[] c0 = {0};
+	int[] c1 = {0, 1};
+	int[] c2 = {0, 2};
+	
 	private ContentFlowItemClickListener contentFlowClickListener = new ContentFlowItemClickListener() {
         public void onItemClicked(Widget widget) {
         	Info.display("Selection", "You click on " + getView().getCurrentPicture().getName());
@@ -65,9 +78,17 @@ public class MainPagePresenter extends
 	@Override
 	protected void onBind() {
 		super.onBind();
-		initPictures();
+		// TODO BDY: get pictures and categories list from request on server disk
+		categories.add(new Category(0, "Category 0: All", "Bla 0"));
+		categories.add(new Category(1, "Category 1", "Bla 1"));
+		categories.add(new Category(2, "Category 2", "Bla 2"));
+//		Log.info("getHostPageBaseURL: " + GWT.getHostPageBaseURL());// http://127.0.1.1:8888/
+//		Log.info("getModuleName: " + GWT.getModuleName());// liliShowcase
+//		Log.info("getModuleBaseForStaticFiles: " + GWT.getModuleBaseForStaticFiles());// http://127.0.1.1:8888/liliShowcase/ 
+//		Log.info("getModuleBaseURL: " + GWT.getModuleBaseURL());// http://127.0.1.1:8888/liliShowcase/
+		loadFile(null, GWT.getModuleName() + "/List.txt");
 		getView().addCategories(categories);
-		getView().addItems(pictures);
+//		getView().addItems(pictures);
 		clickHandler = getView().getContentFlow().addItemClickListener(contentFlowClickListener);
 	}
 	
@@ -83,14 +104,7 @@ public class MainPagePresenter extends
 //		getView().getMainPane().add(getView().getContentFlow());// Done now in UiBinder file
 	}
 	
-	private void initPictures() {
-		categories.add(new Category(0, "Category 0: All", "Bla 0"));
-		categories.add(new Category(1, "Category 1", "Bla 1"));
-		categories.add(new Category(2, "Category 2", "Bla 2"));
-		int[] c0 = {0};
-		int[] c1 = {0, 1};
-		int[] c2 = {0, 2};
-		// TODO BDY: get this list from request on server disk
+	private void initPictures(String list) {
 		pictures.add(new Picture("Steve Jobs", GWT.getModuleBaseURL() + "images/photos/jobs.jpg", c0, true));
 		pictures.add(new Picture("Bill Gates", GWT.getModuleName() + "/images/photos/gates.jpg", c1, true));
 		pictures.add(new Picture("Sergey Brin", GWT.getModuleName() + "/images/photos/brin.jpg", c2, true));
@@ -100,5 +114,36 @@ public class MainPagePresenter extends
 		pictures.add(new Picture("Larry Wayne", GWT.getModuleName() + "/images/photos/wayne.jpg", c1, true));
 		pictures.add(new Picture("Steve Wozniak", GWT.getModuleName() + "/images/photos/wozniak.jpg", c1, true));
 		pictures.add(new Picture("John Cook", GWT.getModuleName() + "/images/photos/cook.jpg", c1, true));
+		list = list.replaceAll("\r", "");
+		list = list.replaceAll("\n", "");
+		String []picts = list.split(";");
+		for(String pict: picts) {
+			Log.info("Picture " + pict);
+		}
+		getView().addItems(pictures);// Initialize cover flow
 	}
+	
+	public void loadFile(final AsyncCallback<Boolean> callback, final String filename) {
+        RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.GET, filename);
+        try {
+            requestBuilder.sendRequest(null, new RequestCallback() {
+                public void onError(Request request, Throwable exception) {
+                	Log.error("failed file reading: " + exception.getMessage());
+                    if(callback != null) callback.onFailure(exception);
+                }
+
+                @Override
+                public void onResponseReceived(Request request, Response response) {
+                    String serialized = response.getText();
+                    if(Log.isTraceEnabled()) {
+                    	Log.trace("result: \n" + serialized);
+                    }
+                    if(callback != null) callback.onSuccess(true);
+                    initPictures(serialized);
+                }
+            });
+        } catch (RequestException e) {
+            Log.error("failed file reading: " + e.getMessage());
+        }
+    }
 }
