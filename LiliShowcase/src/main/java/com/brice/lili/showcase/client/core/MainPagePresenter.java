@@ -1,5 +1,6 @@
 package com.brice.lili.showcase.client.core;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import org.gwt.contentflow4gwt.client.ContentFlow;
@@ -46,6 +47,7 @@ public class MainPagePresenter extends
 	private Vector<Picture> pictures;
 	private Vector<Category> categories;
 	private HandlerRegistration clickHandler;
+	private String[] picts;
 	
 	// TODO BDY: get it from disk
 	int[] c0 = {0};
@@ -83,9 +85,10 @@ public class MainPagePresenter extends
 		categories.add(new Category(0, "Category 0: All", "Bla 0"));
 		categories.add(new Category(1, "Category 1", "Bla 1"));
 		categories.add(new Category(2, "Category 2", "Bla 2"));
-		loadFile(null, GWT.getHostPageBaseURL() + "List.txt");
+		loadFile(loadListAC, GWT.getHostPageBaseURL() + "List.txt");
 		getView().addCategories(categories);
 //		getView().addItems(pictures);
+		// TODO BDY: add waiting cursor
 		clickHandler = getView().getContentFlow().addItemClickListener(contentFlowClickListener);
 	}
 	
@@ -100,6 +103,26 @@ public class MainPagePresenter extends
 		super.onReveal();
 //		getView().getMainPane().add(getView().getContentFlow());// Done now in UiBinder file
 	}
+	
+	private void loadFile(final AsyncCallback<String> callback, final String filename) {
+		if(filename == null || filename.isEmpty()) {
+			return;
+		}
+        RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.GET, filename);
+        try {
+            requestBuilder.sendRequest(null, new RequestCallback() {
+                public void onError(Request request, Throwable exception) {
+                    if(callback != null) callback.onFailure(exception);
+                }
+                @Override
+                public void onResponseReceived(Request request, Response response) {
+                    if(callback != null) callback.onSuccess(response.getText());
+                }
+            });
+        } catch (RequestException e) {
+            Log.error("failed file reading: " + e.getMessage());
+        }
+    }
 	
 //	Log.info("getHostPageBaseURL: " + GWT.getHostPageBaseURL());// http://127.0.1.1:8888/
 //	Log.info("getModuleName: " + GWT.getModuleName());// liliShowcase
@@ -118,37 +141,80 @@ public class MainPagePresenter extends
 		pictures.add(new Picture("John Cook", GWT.getHostPageBaseURL() + "photos/cook.jpg", c1, true));
 		list = list.replaceAll("\r", "");
 		list = list.replaceAll("\n", "");
-		String []picts = list.split(";");
-		// TODO BDY: manage categories here, not in onBind, and strip them
-		for(String pict: picts) {
-			if(pict.isEmpty()) continue;
-			Log.info("Picture " + pict);
-		}
-		getView().addItems(pictures);// Initialize cover flow
-		getView().init();
+		picts = list.split(";");
+//		for(int i = 0 ; i < picts.length ; i++) {
+//			if(picts[i].isEmpty()) continue;
+			Log.info("Picture " + picts[0]);
+			loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photo/" + picts[0] + "/Details.txt");
+//			break;
+//		}
+		
+//		getView().addItems(pictures);// Initialize cover flow
+//		getView().init();
 	}
 	
-	public void loadFile(final AsyncCallback<Boolean> callback, final String filename) {
-        RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.GET, filename);
-        try {
-            requestBuilder.sendRequest(null, new RequestCallback() {
-                public void onError(Request request, Throwable exception) {
-                	Log.error("failed file reading: " + exception.getMessage());
-                    if(callback != null) callback.onFailure(exception);
-                }
-
-                @Override
-                public void onResponseReceived(Request request, Response response) {
-                    String serialized = response.getText();
-                    if(Log.isTraceEnabled()) {
-                    	Log.trace("result: \n" + serialized);
-                    }
-                    if(callback != null) callback.onSuccess(true);
-                    initPictures(serialized);
-                }
-            });
-        } catch (RequestException e) {
-            Log.error("failed file reading: " + e.getMessage());
-        }
-    }
+	private void loadPictureInfo(String infos, int nextInd) {
+		// Store info
+		if(!infos.isEmpty()) {
+			//pictures.add, categories etc.
+		}
+		// Browse next picture
+		for(int i = nextInd ; i < picts.length ; i++) {
+			if(picts[i].isEmpty()) continue;
+			Log.info("Picture " + picts[i]);
+			loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photo/" + picts[i] + "/Details.txt");
+			break;
+		}
+		// Launch view initialization
+		if(nextInd == picts.length){
+			getView().addItems(pictures);// Initialize cover flow
+			getView().init();
+			// close waiting cursor
+			return;
+		}
+	}
+	
+	/*
+	 * AsyncCallbacks
+	 */
+	private AsyncCallback<String> loadListAC = new AsyncCallback<String>() {
+		@Override
+		public void onFailure(Throwable caught) {
+			Log.error("Loading list failed: " + caught.getMessage());
+			caught.printStackTrace();
+		}
+		@Override
+		public void onSuccess(String result) {
+			if(Log.isTraceEnabled()) {
+            	Log.trace("List: \n" + result);
+            }
+			if(result.isEmpty()) {
+				Log.error("List of pictures is empty");
+			}
+			else {
+				initPictures(result);
+			}
+		}
+	};
+	
+	private AsyncCallback<String> loadInfoAC = new AsyncCallback<String>() {
+		private int ind = 0;
+		@Override
+		public void onFailure(Throwable caught) {
+			Log.error("Loading details failed: " + caught.getMessage());
+			caught.printStackTrace();
+			loadPictureInfo("", ++ind);
+		}
+		@Override
+		public void onSuccess(String result) {
+			if(Log.isTraceEnabled()) {
+            	Log.trace("Info: \n" + result);
+            }
+			if(result.isEmpty()) {
+				Log.warn("List of pictures is empty");
+			}
+			loadPictureInfo(result, ++ind);
+		}
+	};
+	
 }

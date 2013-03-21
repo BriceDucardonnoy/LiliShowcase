@@ -1,0 +1,7 @@
+Title: Steve Jobs;
+Show: jobs.jpg;
+Price:;
+Description:;
+Dimension:;
+Colors:;
+Categories:All,Thiefs;
