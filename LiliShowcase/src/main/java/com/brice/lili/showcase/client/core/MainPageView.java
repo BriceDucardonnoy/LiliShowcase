@@ -300,7 +300,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		if(e.getSelectedItem() != null) {
 			if(e.getSelectedItem().getId().equals(currentCategoryId)) return;
 			currentCategoryId = e.getSelectedItem().getId();
-			categoryChanged();
+			categoryChanged(150);
 		}
 	}
 	

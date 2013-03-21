@@ -83,10 +83,6 @@ public class MainPagePresenter extends
 		categories.add(new Category(0, "Category 0: All", "Bla 0"));
 		categories.add(new Category(1, "Category 1", "Bla 1"));
 		categories.add(new Category(2, "Category 2", "Bla 2"));
-//		Log.info("getHostPageBaseURL: " + GWT.getHostPageBaseURL());// http://127.0.1.1:8888/
-//		Log.info("getModuleName: " + GWT.getModuleName());// liliShowcase
-//		Log.info("getModuleBaseForStaticFiles: " + GWT.getModuleBaseForStaticFiles());// http://127.0.1.1:8888/liliShowcase/ 
-//		Log.info("getModuleBaseURL: " + GWT.getModuleBaseURL());// http://127.0.1.1:8888/liliShowcase/
 		loadFile(null, GWT.getHostPageBaseURL() + "List.txt");
 		getView().addCategories(categories);
 //		getView().addItems(pictures);
@@ -104,6 +100,11 @@ public class MainPagePresenter extends
 		super.onReveal();
 //		getView().getMainPane().add(getView().getContentFlow());// Done now in UiBinder file
 	}
+	
+//	Log.info("getHostPageBaseURL: " + GWT.getHostPageBaseURL());// http://127.0.1.1:8888/
+//	Log.info("getModuleName: " + GWT.getModuleName());// liliShowcase
+//	Log.info("getModuleBaseForStaticFiles: " + GWT.getModuleBaseForStaticFiles());// http://127.0.1.1:8888/liliShowcase/ 
+//	Log.info("getModuleBaseURL: " + GWT.getModuleBaseURL());// http://127.0.1.1:8888/liliShowcase/
 	
 	private void initPictures(String list) {
 		pictures.add(new Picture("Steve Jobs", GWT.getHostPageBaseURL() + "photos/jobs.jpg", c0, true));
