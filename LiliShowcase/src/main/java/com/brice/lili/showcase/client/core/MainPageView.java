@@ -11,6 +11,7 @@ import com.brice.lili.showcase.client.properties.CategoryProperties;
 import com.brice.lili.showcase.shared.model.Category;
 import com.brice.lili.showcase.shared.model.Picture;
 import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.logical.shared.SelectionEvent;
@@ -157,6 +158,20 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@Override
 	public ContentPanel getMainPane() {
 		return mainPane;
+	}
+	
+	@Override
+	public void init() {
+		Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
+			@Override
+			public boolean execute() {
+				if(getContentFlow().isAttached()) {
+					getContentFlow().init();
+					return false;
+				}
+				return true;
+			}
+		}, 50);
 	}
 	
 	/*

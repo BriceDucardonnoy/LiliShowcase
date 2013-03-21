@@ -8,7 +8,7 @@ V Icone onglet
 0 Composants autour
 0 Barre de chargement des images cf. TestGXT: Utiliser le loader.gif de contentflow
 V Tri (info sous Scroller en depend ?)
-O Images petites taille pour chargement
+V Images petites taille pour chargement
 V Theme Black (sencha + CoverFlow)
 O Enlever scrollbar
 O Enlever les infos redondantes (remove des fichiers dans le webapp ?)

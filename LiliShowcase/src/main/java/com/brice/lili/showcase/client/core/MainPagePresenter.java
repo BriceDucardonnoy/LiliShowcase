@@ -40,6 +40,7 @@ public class MainPagePresenter extends
 		public void addCategories(Vector<Category> categories);
 		public ComboBox<Category> getCategoriesSelecteur();
 		public Picture getCurrentPicture();
+		public void init();
 	}
 	
 	private Vector<Picture> pictures;
@@ -86,7 +87,7 @@ public class MainPagePresenter extends
 //		Log.info("getModuleName: " + GWT.getModuleName());// liliShowcase
 //		Log.info("getModuleBaseForStaticFiles: " + GWT.getModuleBaseForStaticFiles());// http://127.0.1.1:8888/liliShowcase/ 
 //		Log.info("getModuleBaseURL: " + GWT.getModuleBaseURL());// http://127.0.1.1:8888/liliShowcase/
-		loadFile(null, GWT.getModuleName() + "/List.txt");
+		loadFile(null, GWT.getHostPageBaseURL() + "List.txt");
 		getView().addCategories(categories);
 //		getView().addItems(pictures);
 		clickHandler = getView().getContentFlow().addItemClickListener(contentFlowClickListener);
@@ -105,22 +106,25 @@ public class MainPagePresenter extends
 	}
 	
 	private void initPictures(String list) {
-		pictures.add(new Picture("Steve Jobs", GWT.getModuleBaseURL() + "images/photos/jobs.jpg", c0, true));
-		pictures.add(new Picture("Bill Gates", GWT.getModuleName() + "/images/photos/gates.jpg", c1, true));
-		pictures.add(new Picture("Sergey Brin", GWT.getModuleName() + "/images/photos/brin.jpg", c2, true));
-		pictures.add(new Picture("Larry Page", GWT.getModuleName() + "/images/photos/page.jpg", c0, true));
-		pictures.add(new Picture("John Doerr", GWT.getModuleName() + "/images/photos/doerr.jpg", c0, true));
-		pictures.add(new Picture("Eric Schmidt", GWT.getModuleName() + "/images/photos/schmidt.jpg", c2, true));
-		pictures.add(new Picture("Larry Wayne", GWT.getModuleName() + "/images/photos/wayne.jpg", c1, true));
-		pictures.add(new Picture("Steve Wozniak", GWT.getModuleName() + "/images/photos/wozniak.jpg", c1, true));
-		pictures.add(new Picture("John Cook", GWT.getModuleName() + "/images/photos/cook.jpg", c1, true));
+		pictures.add(new Picture("Steve Jobs", GWT.getHostPageBaseURL() + "photos/jobs.jpg", c0, true));
+		pictures.add(new Picture("Bill Gates", GWT.getHostPageBaseURL() + "photos/gates.jpg", c1, true));
+		pictures.add(new Picture("Sergey Brin", GWT.getHostPageBaseURL() + "photos/brin.jpg", c2, true));
+		pictures.add(new Picture("Larry Page", GWT.getHostPageBaseURL() + "photos/page.jpg", c0, true));
+		pictures.add(new Picture("John Doerr", GWT.getHostPageBaseURL() + "photos/doerr.jpg", c0, true));
+		pictures.add(new Picture("Eric Schmidt", GWT.getHostPageBaseURL() + "photos/schmidt.jpg", c2, true));
+		pictures.add(new Picture("Larry Wayne", GWT.getHostPageBaseURL() + "photos/wayne.jpg", c1, true));
+		pictures.add(new Picture("Steve Wozniak", GWT.getHostPageBaseURL() + "photos/wozniak.jpg", c1, true));
+		pictures.add(new Picture("John Cook", GWT.getHostPageBaseURL() + "photos/cook.jpg", c1, true));
 		list = list.replaceAll("\r", "");
 		list = list.replaceAll("\n", "");
 		String []picts = list.split(";");
+		// TODO BDY: manage categories here, not in onBind, and strip them
 		for(String pict: picts) {
+			if(pict.isEmpty()) continue;
 			Log.info("Picture " + pict);
 		}
 		getView().addItems(pictures);// Initialize cover flow
+		getView().init();
 	}
 	
 	public void loadFile(final AsyncCallback<Boolean> callback, final String filename) {
