@@ -1,9 +1,9 @@
-jobs;
-gates;
-brin;
-page;
-doerr;
-schmidt;
-wayne;
-wozniak;
-cook;
+Steve Jobs;
+Bill Gates;
+Sergey Brin;
+Larry Page;
+John Doerr;
+Eric Schmidt;
+Larry Wayne;
+Steve Wozniak;
+John Cook;

@@ -6,28 +6,42 @@ import java.util.HashMap;
 public class Picture implements Serializable {
 
 	private static final long serialVersionUID = 4818208598134665653L;
-    private int[] categoryIds;
+    private Integer[] categoryIds;
     private boolean isVisible;
     private HashMap<String, Comparable<?>> properties;
 
-    public Picture(String name, String imageUrl, int[] categoryIds, boolean isVisible) {
+    public Picture() {
     	properties = new HashMap<String, Comparable<?>>();
-    	properties.put("name", name);
+    	this.isVisible = true;
+    }
+    
+    public Picture(String title) {
+    	this();
+    	properties.put("title", title);
+    }
+    
+    public Picture(String title, String imageUrl, Integer[] categoryIds, boolean isVisible) {
+    	this(title);
     	properties.put("imageUrl", imageUrl);
         this.categoryIds = categoryIds;
         this.isVisible = isVisible;
     }
 
-    public String getName() {
-    	return properties.containsKey("name") ? (String) properties.get("name") : "";
+    public String getTitle() {
+    	return properties.containsKey("title") ? (String) properties.get("title") : 
+    		(properties.containsKey("Title") ? (String) properties.get("Title") : "");
     }
 
     public String getImageUrl() {
     	return properties.containsKey("imageUrl") ? (String) properties.get("imageUrl") : "";
     }
     
-    public int[] getCategoryIds() {
+    public Integer[] getCategoryIds() {
     	return categoryIds;
+    }
+    
+    public void setCategoryIds(Integer []categoryIds) {
+    	this.categoryIds = categoryIds;
     }
 
 	public boolean isVisible() {

@@ -17,6 +17,7 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -48,15 +49,16 @@ public class MainPagePresenter extends
 	private Vector<Category> categories;
 	private HandlerRegistration clickHandler;
 	private String[] picts;
+	private int categoriesNumber = 0;
 	
 	// TODO BDY: get it from disk
-	int[] c0 = {0};
-	int[] c1 = {0, 1};
-	int[] c2 = {0, 2};
+	Integer[] c0 = {0};
+	Integer[] c1 = {0, 1};
+	Integer[] c2 = {0, 2};
 	
 	private ContentFlowItemClickListener contentFlowClickListener = new ContentFlowItemClickListener() {
         public void onItemClicked(Widget widget) {
-        	Info.display("Selection", "You click on " + getView().getCurrentPicture().getName());
+        	Info.display("Selection", "You click on " + getView().getCurrentPicture().getTitle());
         	// To go on a page, set attribute target and href at same level than src (cf. contentflow_src.js line 731)
         }
     };
@@ -88,9 +90,11 @@ public class MainPagePresenter extends
 		loadFile(loadListAC, GWT.getHostPageBaseURL() + "List.txt");
 		getView().addCategories(categories);
 //		getView().addItems(pictures);
-		// TODO BDY: add waiting cursor
+		showWaitCursor();
 		clickHandler = getView().getContentFlow().addItemClickListener(contentFlowClickListener);
 	}
+	
+	// TODO BDY: add monitorOnWindowResize
 	
 	@Override
 	protected void onUnbind() {
@@ -104,6 +108,91 @@ public class MainPagePresenter extends
 //		getView().getMainPane().add(getView().getContentFlow());// Done now in UiBinder file
 	}
 	
+//	Log.info("getHostPageBaseURL: " + GWT.getHostPageBaseURL());// http://127.0.1.1:8888/
+//	Log.info("getModuleName: " + GWT.getModuleName());// liliShowcase
+//	Log.info("getModuleBaseForStaticFiles: " + GWT.getModuleBaseForStaticFiles());// http://127.0.1.1:8888/liliShowcase/ 
+//	Log.info("getModuleBaseURL: " + GWT.getModuleBaseURL());// http://127.0.1.1:8888/liliShowcase/
+	
+	private void initPictures(String list) {
+		pictures.add(new Picture("Steve Jobs", GWT.getHostPageBaseURL() + "photos/jobs.jpg", c0, true));
+		pictures.add(new Picture("Bill Gates", GWT.getHostPageBaseURL() + "photos/gates.jpg", c1, true));
+		pictures.add(new Picture("Sergey Brin", GWT.getHostPageBaseURL() + "photos/brin.jpg", c2, true));
+		pictures.add(new Picture("Larry Page", GWT.getHostPageBaseURL() + "photos/page.jpg", c0, true));
+		pictures.add(new Picture("John Doerr", GWT.getHostPageBaseURL() + "photos/doerr.jpg", c0, true));
+		pictures.add(new Picture("Eric Schmidt", GWT.getHostPageBaseURL() + "photos/schmidt.jpg", c2, true));
+		pictures.add(new Picture("Larry Wayne", GWT.getHostPageBaseURL() + "photos/wayne.jpg", c1, true));
+		pictures.add(new Picture("Steve Wozniak", GWT.getHostPageBaseURL() + "photos/wozniak.jpg", c1, true));
+		pictures.add(new Picture("John Cook", GWT.getHostPageBaseURL() + "photos/cook.jpg", c1, true));
+		picts = list.replaceAll("\r", "").replaceAll("\n", "").split(";");
+		Log.info("Picture " + picts[0]);
+		loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photos/" + picts[0] + "/Details.txt");
+		
+//		getView().addItems(pictures);// Initialize cover flow
+//		getView().init();
+	}
+	
+	private void loadPictureInfo(String infos, int nextInd) {
+		// Store info
+		if(!infos.isEmpty() && !infos.contains("HTTP ERROR: 404")) {
+			System.out.println(infos);
+			//pictures.add, categories etc.
+			Picture p = new Picture();
+			// Special case for imageUrl to build from 'Show'
+			String []entries = infos.replaceAll("\r", "").replaceAll("\n", "").split(";");
+			for(String entry : entries) {
+				if(entry.startsWith("Categories")) {
+					// Add property Categories
+					String []categories = entry.substring(entry.indexOf(":") + 1).replaceAll(" ", "").split(",");
+					if(categories.length == 0) continue;
+					ArrayList<Integer> catIds = new ArrayList<Integer>();
+					for(String category : categories) {
+						boolean found = false;
+						for(Category cat : this.categories) {
+							if(cat != null && cat.getName().equals(category)) {
+								found = true;
+								catIds.add(cat.getId());
+								break;
+							}
+						}
+						if(!found) {
+							Log.info("Add category <" + category + ">");// Set in trace
+							this.categories.add(new Category(categoriesNumber, category, category));
+							catIds.add(categoriesNumber++);
+						}
+					}
+					// TODO BDY: Add cat in picture, maybe store categories in an ArrayList
+//					p.setCategoryIds(catIds.toArray());
+					continue;
+				}// End of categories process
+				String []prop = entry.split(":");
+				if(prop.length == 2) {
+					p.addProperty(prop[0], prop[1]);
+				}
+				else {
+					Log.warn("Line <" + entry + "> doesn't contain 2 properties");
+					if(prop.length == 1) p.addProperty(prop[0], null);
+				}
+			}
+		}
+		// Browse next picture
+		for(int i = nextInd ; i < picts.length ; i++) {
+			if(picts[i].isEmpty()) continue;
+			Log.info("Picture " + picts[i]);
+			loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photo/" + picts[i] + "/Details.txt");
+			break;
+		}
+		// Launch view initialization
+		if(nextInd == picts.length){
+			getView().addItems(pictures);// Initialize cover flow
+			getView().init();
+			showDefaultCursor();
+			return;
+		}
+	}
+	
+	/*
+	 * Utils
+	 */
 	private void loadFile(final AsyncCallback<String> callback, final String filename) {
 		if(filename == null || filename.isEmpty()) {
 			return;
@@ -124,54 +213,12 @@ public class MainPagePresenter extends
         }
     }
 	
-//	Log.info("getHostPageBaseURL: " + GWT.getHostPageBaseURL());// http://127.0.1.1:8888/
-//	Log.info("getModuleName: " + GWT.getModuleName());// liliShowcase
-//	Log.info("getModuleBaseForStaticFiles: " + GWT.getModuleBaseForStaticFiles());// http://127.0.1.1:8888/liliShowcase/ 
-//	Log.info("getModuleBaseURL: " + GWT.getModuleBaseURL());// http://127.0.1.1:8888/liliShowcase/
-	
-	private void initPictures(String list) {
-		pictures.add(new Picture("Steve Jobs", GWT.getHostPageBaseURL() + "photos/jobs.jpg", c0, true));
-		pictures.add(new Picture("Bill Gates", GWT.getHostPageBaseURL() + "photos/gates.jpg", c1, true));
-		pictures.add(new Picture("Sergey Brin", GWT.getHostPageBaseURL() + "photos/brin.jpg", c2, true));
-		pictures.add(new Picture("Larry Page", GWT.getHostPageBaseURL() + "photos/page.jpg", c0, true));
-		pictures.add(new Picture("John Doerr", GWT.getHostPageBaseURL() + "photos/doerr.jpg", c0, true));
-		pictures.add(new Picture("Eric Schmidt", GWT.getHostPageBaseURL() + "photos/schmidt.jpg", c2, true));
-		pictures.add(new Picture("Larry Wayne", GWT.getHostPageBaseURL() + "photos/wayne.jpg", c1, true));
-		pictures.add(new Picture("Steve Wozniak", GWT.getHostPageBaseURL() + "photos/wozniak.jpg", c1, true));
-		pictures.add(new Picture("John Cook", GWT.getHostPageBaseURL() + "photos/cook.jpg", c1, true));
-		list = list.replaceAll("\r", "");
-		list = list.replaceAll("\n", "");
-		picts = list.split(";");
-//		for(int i = 0 ; i < picts.length ; i++) {
-//			if(picts[i].isEmpty()) continue;
-			Log.info("Picture " + picts[0]);
-			loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photo/" + picts[0] + "/Details.txt");
-//			break;
-//		}
-		
-//		getView().addItems(pictures);// Initialize cover flow
-//		getView().init();
+	public void showWaitCursor() {
+		DOM.setStyleAttribute(getView().getMainPane().getBody(), "cursor", "wait");
 	}
-	
-	private void loadPictureInfo(String infos, int nextInd) {
-		// Store info
-		if(!infos.isEmpty()) {
-			//pictures.add, categories etc.
-		}
-		// Browse next picture
-		for(int i = nextInd ; i < picts.length ; i++) {
-			if(picts[i].isEmpty()) continue;
-			Log.info("Picture " + picts[i]);
-			loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photo/" + picts[i] + "/Details.txt");
-			break;
-		}
-		// Launch view initialization
-		if(nextInd == picts.length){
-			getView().addItems(pictures);// Initialize cover flow
-			getView().init();
-			// close waiting cursor
-			return;
-		}
+
+	public void showDefaultCursor() {
+		DOM.setStyleAttribute(getView().getMainPane().getBody(), "cursor", "default");
 	}
 	
 	/*
