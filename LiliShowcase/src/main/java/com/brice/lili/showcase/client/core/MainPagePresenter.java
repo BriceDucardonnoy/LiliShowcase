@@ -156,7 +156,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		for(int i = nextInd ; i < picts.length ; i++) {
 			if(picts[i].isEmpty()) continue;
 			Log.info("Picture " + picts[i]);
-			loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photo/" + picts[i] + "/Details.txt");
+			loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photos/" + picts[i] + "/Details.txt");
 			break;
 		}
 		// Launch view initialization

@@ -3,7 +3,7 @@ V Mise dans UiBinder
 V Donnees dans presenter
 V ComboBox de selection
 V Icone onglet
-0 Ressources externes
+0 Chargement des ressources externes
 0 Composants autour
 0 Barre de chargement des images cf. TestGXT: Utiliser le loader.gif de contentflow
 V Tri (info sous Scroller en depend ?)

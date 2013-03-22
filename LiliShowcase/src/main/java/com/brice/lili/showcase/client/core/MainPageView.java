@@ -248,6 +248,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		int sz = allPictures.size();
 		for(int i = 0 ; i < sz ; i++) {
 			Picture p = (Picture) allPictures.get(i).getPojo();
+			// TODO BDY: ordering is broken after updating this method header
 			if(containsCategorie(p.getCategoryIds(), currentCategoryId)) {
 				addInOrderedData(p, i);
 			}
