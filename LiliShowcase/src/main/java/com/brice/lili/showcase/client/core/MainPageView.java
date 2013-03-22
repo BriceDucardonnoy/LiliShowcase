@@ -198,7 +198,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		return categoriesCB;
 	}
 	
-	private boolean containsCategorie(Integer[] integers, Integer cat) {
+	private boolean containsCategorie(ArrayList<Integer> integers, Integer cat) {
 		for(int c : integers) {
 			if(cat.equals(c)) return true;
 		}

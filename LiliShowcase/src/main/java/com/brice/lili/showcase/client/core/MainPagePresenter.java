@@ -1,6 +1,5 @@
 package com.brice.lili.showcase.client.core;
 
-import java.util.ArrayList;
 import java.util.Vector;
 
 import org.gwt.contentflow4gwt.client.ContentFlow;
@@ -32,8 +31,7 @@ import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
 import com.sencha.gxt.widget.core.client.info.Info;
 
-public class MainPagePresenter extends
-		Presenter<MainPagePresenter.MyView, MainPagePresenter.MyProxy> {
+public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainPagePresenter.MyProxy> {
 
 	public interface MyView extends View {
 		public ContentFlow<Picture> getContentFlow();
@@ -50,11 +48,6 @@ public class MainPagePresenter extends
 	private HandlerRegistration clickHandler;
 	private String[] picts;
 	private int categoriesNumber = 0;
-	
-	// TODO BDY: get it from disk
-	Integer[] c0 = {0};
-	Integer[] c1 = {0, 1};
-	Integer[] c2 = {0, 2};
 	
 	private ContentFlowItemClickListener contentFlowClickListener = new ContentFlowItemClickListener() {
         public void onItemClicked(Widget widget) {
@@ -83,13 +76,7 @@ public class MainPagePresenter extends
 	@Override
 	protected void onBind() {
 		super.onBind();
-		// TODO BDY: get pictures and categories list from request on server disk
-		categories.add(new Category(0, "Category 0: All", "Bla 0"));
-		categories.add(new Category(1, "Category 1", "Bla 1"));
-		categories.add(new Category(2, "Category 2", "Bla 2"));
 		loadFile(loadListAC, GWT.getHostPageBaseURL() + "List.txt");
-		getView().addCategories(categories);
-//		getView().addItems(pictures);
 		showWaitCursor();
 		clickHandler = getView().getContentFlow().addItemClickListener(contentFlowClickListener);
 	}
@@ -114,21 +101,9 @@ public class MainPagePresenter extends
 //	Log.info("getModuleBaseURL: " + GWT.getModuleBaseURL());// http://127.0.1.1:8888/liliShowcase/
 	
 	private void initPictures(String list) {
-		pictures.add(new Picture("Steve Jobs", GWT.getHostPageBaseURL() + "photos/jobs.jpg", c0, true));
-		pictures.add(new Picture("Bill Gates", GWT.getHostPageBaseURL() + "photos/gates.jpg", c1, true));
-		pictures.add(new Picture("Sergey Brin", GWT.getHostPageBaseURL() + "photos/brin.jpg", c2, true));
-		pictures.add(new Picture("Larry Page", GWT.getHostPageBaseURL() + "photos/page.jpg", c0, true));
-		pictures.add(new Picture("John Doerr", GWT.getHostPageBaseURL() + "photos/doerr.jpg", c0, true));
-		pictures.add(new Picture("Eric Schmidt", GWT.getHostPageBaseURL() + "photos/schmidt.jpg", c2, true));
-		pictures.add(new Picture("Larry Wayne", GWT.getHostPageBaseURL() + "photos/wayne.jpg", c1, true));
-		pictures.add(new Picture("Steve Wozniak", GWT.getHostPageBaseURL() + "photos/wozniak.jpg", c1, true));
-		pictures.add(new Picture("John Cook", GWT.getHostPageBaseURL() + "photos/cook.jpg", c1, true));
 		picts = list.replaceAll("\r", "").replaceAll("\n", "").split(";");
 		Log.info("Picture " + picts[0]);
 		loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photos/" + picts[0] + "/Details.txt");
-		
-//		getView().addItems(pictures);// Initialize cover flow
-//		getView().init();
 	}
 	
 	private void loadPictureInfo(String infos, int nextInd) {
@@ -144,35 +119,38 @@ public class MainPagePresenter extends
 					// Add property Categories
 					String []categories = entry.substring(entry.indexOf(":") + 1).replaceAll(" ", "").split(",");
 					if(categories.length == 0) continue;
-					ArrayList<Integer> catIds = new ArrayList<Integer>();
+//					ArrayList<Integer> catIds = new ArrayList<Integer>();
 					for(String category : categories) {
 						boolean found = false;
 						for(Category cat : this.categories) {
 							if(cat != null && cat.getName().equals(category)) {
 								found = true;
-								catIds.add(cat.getId());
+//								catIds.add(cat.getId());
+								p.addCategoryId(cat.getId());
 								break;
 							}
 						}
 						if(!found) {
 							Log.info("Add category <" + category + ">");// Set in trace
 							this.categories.add(new Category(categoriesNumber, category, category));
-							catIds.add(categoriesNumber++);
+//							catIds.add(categoriesNumber++);
+							p.addCategoryId(categoriesNumber++);
 						}
 					}
-					// TODO BDY: Add cat in picture, maybe store categories in an ArrayList
+					p.addProperty("imageUrl", GWT.getHostPageBaseURL() + "photos/" + p.getTitle() + "/" + p.getProperty("Show"));
 //					p.setCategoryIds(catIds.toArray());
 					continue;
 				}// End of categories process
 				String []prop = entry.split(":");
 				if(prop.length == 2) {
-					p.addProperty(prop[0], prop[1]);
+					p.addProperty(prop[0].trim(), prop[1].trim());
 				}
 				else {
 					Log.warn("Line <" + entry + "> doesn't contain 2 properties");
 					if(prop.length == 1) p.addProperty(prop[0], null);
 				}
-			}
+			}// End of properties process
+			pictures.add(p);
 		}
 		// Browse next picture
 		for(int i = nextInd ; i < picts.length ; i++) {
@@ -183,6 +161,7 @@ public class MainPagePresenter extends
 		}
 		// Launch view initialization
 		if(nextInd == picts.length){
+			getView().addCategories(categories);
 			getView().addItems(pictures);// Initialize cover flow
 			getView().init();
 			showDefaultCursor();

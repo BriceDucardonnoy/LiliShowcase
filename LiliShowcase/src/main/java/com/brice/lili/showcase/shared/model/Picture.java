@@ -1,17 +1,19 @@
 package com.brice.lili.showcase.shared.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Picture implements Serializable {
 
 	private static final long serialVersionUID = 4818208598134665653L;
-    private Integer[] categoryIds;
+    private ArrayList<Integer> categoryIds;
     private boolean isVisible;
     private HashMap<String, Comparable<?>> properties;
 
     public Picture() {
     	properties = new HashMap<String, Comparable<?>>();
+    	categoryIds = new ArrayList<Integer>();
     	this.isVisible = true;
     }
     
@@ -20,7 +22,7 @@ public class Picture implements Serializable {
     	properties.put("title", title);
     }
     
-    public Picture(String title, String imageUrl, Integer[] categoryIds, boolean isVisible) {
+    public Picture(String title, String imageUrl, ArrayList<Integer> categoryIds, boolean isVisible) {
     	this(title);
     	properties.put("imageUrl", imageUrl);
         this.categoryIds = categoryIds;
@@ -36,12 +38,18 @@ public class Picture implements Serializable {
     	return properties.containsKey("imageUrl") ? (String) properties.get("imageUrl") : "";
     }
     
-    public Integer[] getCategoryIds() {
+    public ArrayList<Integer> getCategoryIds() {
     	return categoryIds;
     }
     
-    public void setCategoryIds(Integer []categoryIds) {
+    public void setCategoryIds(ArrayList<Integer> categoryIds) {
     	this.categoryIds = categoryIds;
+    }
+    
+    public void addCategoryId(Integer categoryId) {
+    	if(!categoryIds.contains(categoryId)) {
+    		categoryIds.add(categoryId);
+    	}
     }
 
 	public boolean isVisible() {
