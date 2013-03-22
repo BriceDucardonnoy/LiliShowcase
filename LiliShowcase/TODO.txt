@@ -4,7 +4,6 @@ V Donnees dans presenter
 V ComboBox de selection
 V Icone onglet
 0 Ressources externes
-	Cf. common: serialization DataModelInternal: loadFile
 0 Composants autour
 0 Barre de chargement des images cf. TestGXT: Utiliser le loader.gif de contentflow
 V Tri (info sous Scroller en depend ?)
@@ -13,5 +12,5 @@ V Theme Black (sencha + CoverFlow)
 O Enlever scrollbar
 O Enlever les infos redondantes (remove des fichiers dans le webapp ?)
 O Info sur le clique de l'image
-O Traduction
+O Traduction : https://developers.google.com/web-toolkit/doc/latest/DevGuideUiBinderI18n?hl=fr
 	 
