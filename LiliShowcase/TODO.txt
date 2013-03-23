@@ -1,14 +1,16 @@
-X Taille / Layout / Scroll 		cf. FitImage
 V Mise dans UiBinder
 V Donnees dans presenter
 V ComboBox de selection
 V Icone onglet
-0 Chargement des ressources externes
-0 Composants autour
-0 Barre de chargement des images cf. TestGXT: Utiliser le loader.gif de contentflow
+V Barre de chargement des images cf. TestGXT: Utiliser le loader.gif de contentflow => Sablier
 V Tri (info sous Scroller en depend ?)
 V Images petites taille pour chargement
 V Theme Black (sencha + CoverFlow)
+
+X Taille / Layout / Scroll 		cf. FitImage
+
+0 Chargement des ressources externes
+0 Composants autour
 O Enlever scrollbar
 O Enlever les infos redondantes (remove des fichiers dans le webapp ?)
 O Info sur le clique de l'image

@@ -139,11 +139,11 @@
 								<form:FieldLabel text="Sort">
 						            <form:widget>
 						              <g:HorizontalPanel>
-						                <form:Radio ui:field="title" name="title" boxLabel="Title" value="true" />
-						                <form:Radio ui:field="date" name="date" boxLabel="Date" />
-						                <form:Radio ui:field="size" name="size" boxLabel="Size" />
-						                <form:Radio ui:field="color" name="color" boxLabel="Color" />
-						                <form:Radio ui:field="price" name="price" boxLabel="Price" />
+						                <form:Radio ui:field="title" name="Title" boxLabel="Title" value="true" />
+						                <form:Radio ui:field="date" name="Date" boxLabel="Date" />
+						                <form:Radio ui:field="size" name="Size" boxLabel="Size" />
+						                <form:Radio ui:field="color" name="Color" boxLabel="Color" />
+						                <form:Radio ui:field="price" name="Price" boxLabel="Price" />
 						              </g:HorizontalPanel>
 						            </form:widget>
 					          </form:FieldLabel>

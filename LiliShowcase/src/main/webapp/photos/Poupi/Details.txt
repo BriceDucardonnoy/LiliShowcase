@@ -1,4 +1,5 @@
-Title: Bill Gates;
+Name: Poupi;
+Title:;
 Show: gates.jpg;
 Price: 120;
 Dimension: 40 x 40;

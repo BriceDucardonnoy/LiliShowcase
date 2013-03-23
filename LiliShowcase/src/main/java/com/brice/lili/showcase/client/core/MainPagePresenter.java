@@ -137,7 +137,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 							p.addCategoryId(categoriesNumber++);
 						}
 					}
-					p.addProperty("imageUrl", GWT.getHostPageBaseURL() + "photos/" + p.getTitle() + "/" + p.getProperty("Show"));
+					p.addProperty("imageUrl", GWT.getHostPageBaseURL() + "photos/" + p.getNameOrTitle() + "/" + p.getProperty("Show"));
 //					p.setCategoryIds(catIds.toArray());
 					continue;
 				}// End of categories process
