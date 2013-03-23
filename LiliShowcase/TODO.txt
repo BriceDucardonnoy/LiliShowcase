@@ -6,10 +6,9 @@ V Barre de chargement des images cf. TestGXT: Utiliser le loader.gif de contentf
 V Tri (info sous Scroller en depend ?)
 V Images petites taille pour chargement
 V Theme Black (sencha + CoverFlow)
+V Taille / Layout / Scroll 		cf. FitImage
+V Chargement des ressources externes
 
-X Taille / Layout / Scroll 		cf. FitImage
-
-0 Chargement des ressources externes
 0 Composants autour
 O Enlever scrollbar
 O Enlever les infos redondantes (remove des fichiers dans le webapp ?)
