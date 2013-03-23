@@ -1,9 +1,0 @@
-jobs;
-gates;
-brin;
-page;
-doerr;
-schmidt;
-wayne;
-wozniak;
-cook;

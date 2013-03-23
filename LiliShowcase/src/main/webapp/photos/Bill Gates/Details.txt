@@ -1,0 +1,7 @@
+Title: Bill Gates;
+Show: gates.jpg;
+Price: 120;
+Dimension: 40 x 40;
+Color: Brown;
+Categories:All,Thiefs,Evil Side;
+Description:;

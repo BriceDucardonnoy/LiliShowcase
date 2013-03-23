@@ -1,33 +1,55 @@
 package com.brice.lili.showcase.shared.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Picture implements Serializable {
 
 	private static final long serialVersionUID = 4818208598134665653L;
-    private int[] categoryIds;
+    private ArrayList<Integer> categoryIds;
     private boolean isVisible;
     private HashMap<String, Comparable<?>> properties;
 
-    public Picture(String name, String imageUrl, int[] categoryIds, boolean isVisible) {
+    public Picture() {
     	properties = new HashMap<String, Comparable<?>>();
-    	properties.put("name", name);
+    	categoryIds = new ArrayList<Integer>();
+    	this.isVisible = true;
+    }
+    
+    public Picture(String title) {
+    	this();
+    	properties.put("title", title);
+    }
+    
+    public Picture(String title, String imageUrl, ArrayList<Integer> categoryIds, boolean isVisible) {
+    	this(title);
     	properties.put("imageUrl", imageUrl);
         this.categoryIds = categoryIds;
         this.isVisible = isVisible;
     }
 
-    public String getName() {
-    	return properties.containsKey("name") ? (String) properties.get("name") : "";
+    public String getTitle() {
+    	return properties.containsKey("title") ? (String) properties.get("title") : 
+    		(properties.containsKey("Title") ? (String) properties.get("Title") : "");
     }
 
     public String getImageUrl() {
     	return properties.containsKey("imageUrl") ? (String) properties.get("imageUrl") : "";
     }
     
-    public int[] getCategoryIds() {
+    public ArrayList<Integer> getCategoryIds() {
     	return categoryIds;
+    }
+    
+    public void setCategoryIds(ArrayList<Integer> categoryIds) {
+    	this.categoryIds = categoryIds;
+    }
+    
+    public void addCategoryId(Integer categoryId) {
+    	if(!categoryIds.contains(categoryId)) {
+    		categoryIds.add(categoryId);
+    	}
     }
 
 	public boolean isVisible() {

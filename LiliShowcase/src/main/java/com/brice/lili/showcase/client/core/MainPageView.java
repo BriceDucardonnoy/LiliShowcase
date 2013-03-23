@@ -11,6 +11,7 @@ import com.brice.lili.showcase.client.properties.CategoryProperties;
 import com.brice.lili.showcase.shared.model.Category;
 import com.brice.lili.showcase.shared.model.Picture;
 import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.logical.shared.SelectionEvent;
@@ -47,7 +48,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@UiField ComboBox<Category> categoriesCB;
 	@UiField ContentPanel mainPane;
 	@UiField(provided = true) ListStore<Category> store;
-	@UiField Radio name;
+	@UiField Radio title;
 	@UiField Radio date;
 	@UiField Radio size;
 	@UiField Radio color;
@@ -99,12 +100,12 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		categoriesCB.setEditable(false);
 		
 		ToggleGroup sortToggle = new ToggleGroup();
-		sortToggle.add(name);
+		sortToggle.add(title);
 		sortToggle.add(date);
 		sortToggle.add(size);
 		sortToggle.add(color);
 		sortToggle.add(price);
-		sortName = name.getName();
+		sortName = title.getName();
 		// SortToggle only infer on view representation => configure it in view
 		sortToggle.addValueChangeHandler(new ValueChangeHandler<HasValue<Boolean>>() {
 			@Override
@@ -134,8 +135,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		}
     }
 	
-	private PhotoView createImageView(Picture person) {
-		allPictures.add(new PhotoView(new FitImage(person.getImageUrl()), person.getName(), person));
+	private PhotoView createImageView(Picture picture) {
+		allPictures.add(new PhotoView(new FitImage(picture.getImageUrl()), picture.getTitle(), picture));
         return allPictures.get(allPictures.size() - 1);
     }
 	
@@ -157,6 +158,20 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@Override
 	public ContentPanel getMainPane() {
 		return mainPane;
+	}
+	
+	@Override
+	public void init() {
+		Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
+			@Override
+			public boolean execute() {
+				if(getContentFlow().isAttached()) {
+					getContentFlow().init();
+					return false;
+				}
+				return true;
+			}
+		}, 50);
 	}
 	
 	/*
@@ -183,8 +198,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		return categoriesCB;
 	}
 	
-	private boolean containsCategorie(int[] cats, Integer cat) {
-		for(int c : cats) {
+	private boolean containsCategorie(ArrayList<Integer> integers, Integer cat) {
+		for(int c : integers) {
 			if(cat.equals(c)) return true;
 		}
 		return false;
@@ -215,7 +230,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	 * Then add it in DOM
 	 */
 	public void categoryChanged() {
-		categoryChanged(100);
+		categoryChanged(150);
 	}
 	
 	/**
@@ -233,6 +248,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		int sz = allPictures.size();
 		for(int i = 0 ; i < sz ; i++) {
 			Picture p = (Picture) allPictures.get(i).getPojo();
+			// TODO BDY: ordering is broken after updating this method header
 			if(containsCategorie(p.getCategoryIds(), currentCategoryId)) {
 				addInOrderedData(p, i);
 			}
@@ -285,7 +301,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		if(e.getSelectedItem() != null) {
 			if(e.getSelectedItem().getId().equals(currentCategoryId)) return;
 			currentCategoryId = e.getSelectedItem().getId();
-			categoryChanged();
+			categoryChanged(150);
 		}
 	}
 	
