@@ -11,15 +11,21 @@ import com.brice.lili.showcase.client.place.NameTokens;
 import com.brice.lili.showcase.shared.model.Category;
 import com.brice.lili.showcase.shared.model.Picture;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
+import com.google.gwt.http.client.UrlBuilder;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Window.Location;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -43,6 +49,8 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		public ComboBox<Category> getCategoriesSelecteur();
 		public Picture getCurrentPicture();
 		public void init();
+		public Image getFrBtn();
+		public Image getEnBtn();
 	}
 	
 	private final Translate translate = GWT.create(Translate.class);
@@ -59,6 +67,22 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
         	// To go on a page, set attribute target and href at same level than src (cf. contentflow_src.js line 731)
         }
     };
+    
+    private ClickHandler frHandler = new ClickHandler() {
+		@Override
+		public void onClick(ClickEvent arg0) {
+			Info.display("aha", "ihi");
+			 UrlBuilder builder = Location.createUrlBuilder().setParameter("locale", "fr");
+			 Window.Location.replace(builder.buildString());
+		}
+	};
+	
+	private ClickHandler enHandler = new ClickHandler() {
+		@Override
+		public void onClick(ClickEvent arg0) {
+			Info.display("aha", "ihi");
+		}
+	};
 	
 	@ProxyStandard
 	@NameToken(NameTokens.mainpage)
@@ -87,6 +111,8 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		loadFile(loadListAC, GWT.getHostPageBaseURL() + "List.txt");
 		showWaitCursor();
 		clickHandler = getView().getContentFlow().addItemClickListener(contentFlowClickListener);
+		getView().getFrBtn().addClickHandler(frHandler);
+		getView().getEnBtn().addClickHandler(enHandler);
 	}
 	
 	@Override

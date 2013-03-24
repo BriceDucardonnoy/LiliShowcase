@@ -23,6 +23,7 @@ import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.HasValue;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -55,6 +56,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@UiField Radio date;
 	@UiField Radio dimension;
 	@UiField Radio color;
+	@UiField Image tr_fr;
+	@UiField Image tr_en;
 	
 	@UiField(provided = true)
 	MarginData outerData = new MarginData(20);
@@ -319,6 +322,16 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@Override
 	public Picture getCurrentPicture() {
 		return (Picture) ((PhotoView)contentFlow.getActiveItem()).getPojo();
+	}
+
+	@Override
+	public Image getFrBtn() {
+		return tr_fr;
+	}
+
+	@Override
+	public Image getEnBtn() {
+		return tr_en;
 	}
 
 }

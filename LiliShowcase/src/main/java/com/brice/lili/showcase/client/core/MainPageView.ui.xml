@@ -115,10 +115,10 @@
 						<gxt:ContentPanel>
 						<container:HorizontalLayoutContainer>
 							<container:child layoutData="{horizontalLayoutData}">
-								<g:Image resource='{res.france}'/>
+								<g:Image resource='{res.france}' ui:field="tr_fr"/>
 							</container:child>
 							<container:child layoutData="{horizontalLayoutData}">
-								<g:Image resource='{res.uk}'/>
+								<g:Image resource='{res.uk}' ui:field="tr_en"/>
 					    	</container:child>
 						</container:HorizontalLayoutContainer>
 							<!-- <gxt:ContentPanel>
