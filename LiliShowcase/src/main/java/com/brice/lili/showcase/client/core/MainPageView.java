@@ -7,6 +7,7 @@ import org.gwt.contentflow4gwt.client.ContentFlow;
 import org.gwt.contentflow4gwt.client.PhotoView;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.brice.lili.showcase.client.lang.Translate;
 import com.brice.lili.showcase.client.properties.CategoryProperties;
 import com.brice.lili.showcase.shared.model.Category;
 import com.brice.lili.showcase.shared.model.Picture;
@@ -41,6 +42,8 @@ import com.sencha.gxt.widget.core.client.info.Info;
 
 public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 
+	private final Translate translate = GWT.create(Translate.class);
+	
 	private final Widget widget;
 	@UiField ContentFlow<Picture> contentFlow;
 //	@UiField BorderLayoutContainer con;
@@ -50,9 +53,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@UiField(provided = true) ListStore<Category> store;
 	@UiField Radio title;
 	@UiField Radio date;
-	@UiField Radio size;
+	@UiField Radio dimension;
 	@UiField Radio color;
-	@UiField Radio price;
 	
 	@UiField(provided = true)
 	MarginData outerData = new MarginData(20);
@@ -99,12 +101,16 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		categoriesCB.setTriggerAction(TriggerAction.ALL);
 		categoriesCB.setEditable(false);
 		
+		title.setBoxLabel(translate.Title());
+		date.setBoxLabel(translate.Date());
+		dimension.setBoxLabel(translate.Dimension());
+		color.setBoxLabel(translate.Color());
+		
 		ToggleGroup sortToggle = new ToggleGroup();
 		sortToggle.add(title);
 		sortToggle.add(date);
-		sortToggle.add(size);
+		sortToggle.add(dimension);
 		sortToggle.add(color);
-		sortToggle.add(price);
 		sortName = title.getName();
 		// SortToggle only infer on view representation => configure it in view
 		sortToggle.addValueChangeHandler(new ValueChangeHandler<HasValue<Boolean>>() {
@@ -248,7 +254,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		int sz = allPictures.size();
 		for(int i = 0 ; i < sz ; i++) {
 			Picture p = (Picture) allPictures.get(i).getPojo();
-			// TODO BDY: ordering is broken after updating this method header
 			if(containsCategorie(p.getCategoryIds(), currentCategoryId)) {
 				addInOrderedData(p, i);
 			}

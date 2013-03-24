@@ -6,6 +6,7 @@ import org.gwt.contentflow4gwt.client.ContentFlow;
 import org.gwt.contentflow4gwt.client.ContentFlowItemClickListener;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.brice.lili.showcase.client.lang.Translate;
 import com.brice.lili.showcase.client.place.NameTokens;
 import com.brice.lili.showcase.shared.model.Category;
 import com.brice.lili.showcase.shared.model.Picture;
@@ -16,6 +17,7 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
+import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
@@ -43,6 +45,8 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		public void init();
 	}
 	
+	private final Translate translate = GWT.create(Translate.class);
+	
 	private Vector<Picture> pictures;
 	private Vector<Category> categories;
 	private HandlerRegistration clickHandler;
@@ -51,7 +55,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 	
 	private ContentFlowItemClickListener contentFlowClickListener = new ContentFlowItemClickListener() {
         public void onItemClicked(Widget widget) {
-        	Info.display("Selection", "You click on " + getView().getCurrentPicture().getTitle());
+        	Info.display(translate.Selection(), translate.YouClickOn() + " " + getView().getCurrentPicture().getTitle());
         	// To go on a page, set attribute target and href at same level than src (cf. contentflow_src.js line 731)
         }
     };
@@ -66,6 +70,10 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		super(eventBus, view, proxy);
 		categories = new Vector<Category>();
 		pictures = new Vector<Picture>();
+		Log.info("Current local is " + LocaleInfo.getCurrentLocale().getLocaleName());
+//		 UrlBuilder builder = Location.createUrlBuilder().setParameter("locale", "fr");
+//		 Window.Location.replace(builder.buildString());
+//		Log.info("Current local 2 is " + LocaleInfo.getCurrentLocale().getLocaleName());
 	}
 
 	@Override
@@ -80,8 +88,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		showWaitCursor();
 		clickHandler = getView().getContentFlow().addItemClickListener(contentFlowClickListener);
 	}
-	
-	// TODO BDY: add monitorOnWindowResize
 	
 	@Override
 	protected void onUnbind() {
@@ -109,8 +115,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 	private void loadPictureInfo(String infos, int nextInd) {
 		// Store info
 		if(!infos.isEmpty() && !infos.contains("HTTP ERROR: 404")) {
-			System.out.println(infos);
-			//pictures.add, categories etc.
 			Picture p = new Picture();
 			// Special case for imageUrl to build from 'Show'
 			String []entries = infos.replaceAll("\r", "").replaceAll("\n", "").split(";");
@@ -131,7 +135,9 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 							}
 						}
 						if(!found) {
-							Log.info("Add category <" + category + ">");// Set in trace
+							if(Log.isTraceEnabled()) {
+								Log.info("Add category <" + category + ">");
+							}
 							this.categories.add(new Category(categoriesNumber, category, category));
 //							catIds.add(categoriesNumber++);
 							p.addCategoryId(categoriesNumber++);
@@ -146,7 +152,9 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 					p.addProperty(prop[0].trim(), prop[1].trim());
 				}
 				else {
-					Log.warn("Line <" + entry + "> doesn't contain 2 properties");
+					if(Log.isTraceEnabled()) {
+						Log.warn("Line <" + entry + "> doesn't contain 2 properties");
+					}
 					if(prop.length == 1) p.addProperty(prop[0], null);
 				}
 			}// End of properties process
