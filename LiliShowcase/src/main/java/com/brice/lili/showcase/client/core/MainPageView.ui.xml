@@ -39,49 +39,6 @@
 			font-style: italic;
 			text-align: right !important;
 		}
-		.signin {
-			font-size: 14px !important;
-			color: black !important;
-			background-color: transparent;
-			font-family: Arial Rounded MT Bold !important;
-		}
-		.signout {
-			font-size: 14px !important;
-			color: black !important;
-			background-color: transparent;
-			font-family: Arial Rounded MT Bold !important;
-		}
-		.login-box-top {
-	 		border-top-left-radius: 8px !important;
-    		border-top-right-radius: 8px !important;
-    		background-color: #F1F1F1;
-    		font-size: 16px;
-    		padding: 14px;
-    		-moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
-    		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
-		}
-    	.login-box-bottom {
-	 		border-bottom-left-radius: 8px !important;
-    		border-bottom-right-radius: 8px !important;
-    		background-color: #F1F1F1;
-    		font-size: 16px;
-    		padding: 14px 10px;
-			-moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
-    		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
-		}
-		.pad {
-			background-color: #FFF1F1;
-			margin: 8px;
-		}
-		.login-box {
-			background: none repeat scroll 0 0 #FFF;
-			border-radius: 15px 15px 15px 15px;
-			border-width: 3px !important;
-			border-color: #AAA;
-			margin: 0px;
-			padding: 20px;
-			position: relative;
-		}
 		.round-box {
 			background: #FFFFFF repeat scroll 0 0;
 			/*border-radius: 15px 15px 15px 15px;
@@ -96,7 +53,6 @@
 		}
 		.innerContainer {
 			border: none;
-
 		}
 		.centerMargin {
 	        margin: 10px;
@@ -113,7 +69,9 @@
 	<ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="verticalLayoutData">
     	<ui:attributes width="300" height="30" />
  	</ui:with>
+ 	<ui:with type="com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer.HorizontalLayoutData" field="horizontalLayoutData" />
 	<ui:with type="com.sencha.gxt.data.shared.ListStore" field="store" />
+	<ui:with field='res' type='com.brice.lili.showcase.client.images.ImagesResources'/>
 	
 	<!-- <g:HTMLPanel>Hello World!</g:HTMLPanel> -->
 	<container:Viewport addStyleNames="{style.pretty}">
@@ -127,35 +85,46 @@
 				<container:BorderLayoutContainer ui:field="con" borders="true">
 					<!-- NORTH -->
 					<container:north layoutData="{northData}">
-						<container:VerticalLayoutContainer>
-							<container:child layoutData="{verticalLayoutData}">
-								<form:FieldLabel text="Category">
-						            <form:widget>
-										<form:ComboBox ui:field="categoriesCB" store="{store}"/>
-									 </form:widget>
-					         	</form:FieldLabel>	
-							</container:child>
-							<container:child layoutData="{verticalLayoutData}">
-								<form:FieldLabel text="Sort">
-						            <form:widget>
-						              <g:HorizontalPanel>
-						                <!-- <form:Radio ui:field="title" name="Title" boxLabel="Title" value="true" /> -->
-						                <form:Radio ui:field="title" name="Title" value="true" />
-						                <form:Radio ui:field="date" name="Date" />
-						                <form:Radio ui:field="dimension" name="Dimension"  />
-						                <form:Radio ui:field="color" name="Color" />
-						              </g:HorizontalPanel>
-						            </form:widget>
-					          </form:FieldLabel>
-					    	</container:child>
-						</container:VerticalLayoutContainer>
+						<gxt:ContentPanel headerVisible="false">
+							<container:VerticalLayoutContainer>
+								<container:child layoutData="{verticalLayoutData}">
+									<form:FieldLabel text="Category">
+							            <form:widget>
+											<form:ComboBox ui:field="categoriesCB" store="{store}"/>
+										 </form:widget>
+						         	</form:FieldLabel>	
+								</container:child>
+								<container:child layoutData="{verticalLayoutData}">
+									<form:FieldLabel text="Sort">
+							            <form:widget>
+							              <g:HorizontalPanel>
+							                <!-- <form:Radio ui:field="title" name="Title" boxLabel="Title" value="true" /> -->
+							                <form:Radio ui:field="title" name="Title" value="true" />
+							                <form:Radio ui:field="date" name="Date" />
+							                <form:Radio ui:field="dimension" name="Dimension"  />
+							                <form:Radio ui:field="color" name="Color" />
+							              </g:HorizontalPanel>
+							            </form:widget>
+						          </form:FieldLabel>
+						    	</container:child>
+							</container:VerticalLayoutContainer>
+						</gxt:ContentPanel>
 					</container:north>
 					<!-- WEST -->
 					<container:west layoutData="{westData}">
-						<gxt:ContentPanel />
-						<!-- <gxt:ContentPanel>
-							<g:HTML><ui:msg description="LiliShowcaseIsHere">Lili showcase is here!</ui:msg></g:HTML>
-						</gxt:ContentPanel> -->
+						<gxt:ContentPanel>
+						<container:HorizontalLayoutContainer>
+							<container:child layoutData="{horizontalLayoutData}">
+								<g:Image resource='{res.france}'/>
+							</container:child>
+							<container:child layoutData="{horizontalLayoutData}">
+								<g:Image resource='{res.uk}'/>
+					    	</container:child>
+						</container:HorizontalLayoutContainer>
+							<!-- <gxt:ContentPanel>
+								<g:HTML><ui:msg description="LiliShowcaseIsHere">Lili showcase is here!</ui:msg></g:HTML>
+							</gxt:ContentPanel> -->
+							</gxt:ContentPanel>
 					</container:west>
 					<!-- CENTER -->
 					<container:center layoutData="{centerData}">
