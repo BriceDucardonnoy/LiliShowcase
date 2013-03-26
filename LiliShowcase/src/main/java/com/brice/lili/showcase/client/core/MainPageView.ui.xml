@@ -110,25 +110,23 @@
 							            </form:widget>
 						          </form:FieldLabel>
 						    	</container:child>
+						    	<container:child layoutData="{verticalLayoutData}">
+						    		<container:HorizontalLayoutContainer>
+										<container:child layoutData="{horizontalLayoutData}">
+											<g:Image resource='{res.france}' ui:field="tr_fr" addStyleNames="{style.cursorImageFlag}" />
+										</container:child>
+										<container:child layoutData="{horizontalLayoutData}">
+											<g:Image resource='{res.uk}' ui:field="tr_en" addStyleNames="{style.cursorImageFlag}" />
+								    	</container:child>
+									</container:HorizontalLayoutContainer>
+						    	</container:child>
 							</container:VerticalLayoutContainer>
 						</gxt:ContentPanel>
 					</container:north>
 					<!-- WEST -->
-					<container:west layoutData="{westData}">
-						<gxt:ContentPanel>
-						<container:HorizontalLayoutContainer>
-							<container:child layoutData="{horizontalLayoutData}">
-								<g:Image resource='{res.france}' ui:field="tr_fr" addStyleNames="{style.cursorImageFlag}" />
-							</container:child>
-							<container:child layoutData="{horizontalLayoutData}">
-								<g:Image resource='{res.uk}' ui:field="tr_en" addStyleNames="{style.cursorImageFlag}" />
-					    	</container:child>
-						</container:HorizontalLayoutContainer>
-							<!-- <gxt:ContentPanel>
-								<g:HTML><ui:msg description="LiliShowcaseIsHere">Lili showcase is here!</ui:msg></g:HTML>
-							</gxt:ContentPanel> -->
-							</gxt:ContentPanel>
-					</container:west>
+					<!-- <container:west layoutData="{westData}">
+						<gxt:ContentPanel />
+					</container:west> -->
 					<!-- CENTER -->
 					<container:center layoutData="{centerData}">
 						<gxt:ContentPanel ui:field="mainPane" headerVisible="true" title="Showcase" bodyBorder="false" addStyleNames="{style.round-box}">
@@ -136,9 +134,9 @@
 						</gxt:ContentPanel>
 					</container:center>
 					<!-- EAST -->
-					<container:east layoutData="{eastData}">
+					<!-- <container:east layoutData="{eastData}">
 						<gxt:ContentPanel />
-					</container:east>
+					</container:east> -->
 					<!-- SOUTH -->
 					<container:south layoutData="{southData}">
 						<gxt:ContentPanel>
