@@ -71,16 +71,26 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
     private ClickHandler frHandler = new ClickHandler() {
 		@Override
 		public void onClick(ClickEvent arg0) {
-			Info.display("aha", "ihi");
-			 UrlBuilder builder = Location.createUrlBuilder().setParameter("locale", "fr");
-			 Window.Location.replace(builder.buildString());
+			UrlBuilder builder = Location.createUrlBuilder().setParameter("locale", "fr");
+			String newUrl = builder.buildString();
+			String debugParam = Location.getParameter("gwt.codesvr");
+			if(!debugParam.isEmpty()) {
+				newUrl = newUrl.replace("gwt.codesvr=127.0.1.1%3A", "gwt.codesvr=127.0.1.1:");
+			}
+			Window.Location.replace(newUrl);
 		}
 	};
 	
 	private ClickHandler enHandler = new ClickHandler() {
 		@Override
 		public void onClick(ClickEvent arg0) {
-			Info.display("aha", "ihi");
+			UrlBuilder builder = Location.createUrlBuilder().setParameter("locale", "en");
+			String newUrl = builder.buildString();
+			String debugParam = Location.getParameter("gwt.codesvr");
+			if(!debugParam.isEmpty()) {
+				newUrl = newUrl.replace("gwt.codesvr=127.0.1.1%3A", "gwt.codesvr=127.0.1.1:");
+			}
+			Window.Location.replace(newUrl);
 		}
 	};
 	

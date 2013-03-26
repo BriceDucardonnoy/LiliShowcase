@@ -36,6 +36,7 @@ import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData;
 import com.sencha.gxt.widget.core.client.container.MarginData;
+import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
 import com.sencha.gxt.widget.core.client.form.Radio;
@@ -72,6 +73,10 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	BorderLayoutData eastData = new BorderLayoutData(150);
 	@UiField(provided = true)
 	BorderLayoutData southData = new BorderLayoutData(100);
+	@UiField(provided = true)
+	MarginData marginData = new MarginData(5);
+	@UiField(provided = true)
+	VerticalLayoutData verticalLayoutData = new VerticalLayoutData();
 
     private CategoryProperties props = GWT.create(CategoryProperties.class);
     private ArrayList<PhotoView> allPictures = null;
@@ -93,6 +98,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		eastData.setMargins(new Margins(0, 5, 0, 5));
 		southData.setMargins(new Margins(5));
 		centerData.setMinSize(200);
+		verticalLayoutData.setMargins(new Margins(5));
 		
 		store = new ListStore<Category>(props.key());
 		

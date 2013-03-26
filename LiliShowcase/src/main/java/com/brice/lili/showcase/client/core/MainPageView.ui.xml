@@ -57,17 +57,20 @@
 		.centerMargin {
 	        margin: 10px;
 	    }
+	    .cursorImageFlag {
+			cursor: pointer;
+		}
 	</ui:style>
 	
 	<ui:with type="com.sencha.gxt.widget.core.client.container.MarginData" field="outerData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="northData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="westData" />
-	<!-- <ui:with type="com.sencha.gxt.widget.core.client.container.MarginData" field="centerData" /> -->
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="centerData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="eastData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="southData" />
+	<ui:with type="com.sencha.gxt.widget.core.client.container.MarginData" field="marginData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="verticalLayoutData">
-    	<ui:attributes width="300" height="30" />
+    	<ui:attributes width="300" height="30" /><!-- Margin is set in view -->
  	</ui:with>
  	<ui:with type="com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer.HorizontalLayoutData" field="horizontalLayoutData" />
 	<ui:with type="com.sencha.gxt.data.shared.ListStore" field="store" />
@@ -115,10 +118,10 @@
 						<gxt:ContentPanel>
 						<container:HorizontalLayoutContainer>
 							<container:child layoutData="{horizontalLayoutData}">
-								<g:Image resource='{res.france}' ui:field="tr_fr"/>
+								<g:Image resource='{res.france}' ui:field="tr_fr" addStyleNames="{style.cursorImageFlag}" />
 							</container:child>
 							<container:child layoutData="{horizontalLayoutData}">
-								<g:Image resource='{res.uk}' ui:field="tr_en"/>
+								<g:Image resource='{res.uk}' ui:field="tr_en" addStyleNames="{style.cursorImageFlag}" />
 					    	</container:child>
 						</container:HorizontalLayoutContainer>
 							<!-- <gxt:ContentPanel>
