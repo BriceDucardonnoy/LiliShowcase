@@ -74,7 +74,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 			UrlBuilder builder = Location.createUrlBuilder().setParameter("locale", "fr");
 			String newUrl = builder.buildString();
 			String debugParam = Location.getParameter("gwt.codesvr");
-			if(!debugParam.isEmpty()) {
+			if(debugParam != null && !debugParam.isEmpty()) {
 				newUrl = newUrl.replace("gwt.codesvr=127.0.1.1%3A", "gwt.codesvr=127.0.1.1:");
 			}
 			Window.Location.replace(newUrl);
@@ -87,7 +87,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 			UrlBuilder builder = Location.createUrlBuilder().setParameter("locale", "en");
 			String newUrl = builder.buildString();
 			String debugParam = Location.getParameter("gwt.codesvr");
-			if(!debugParam.isEmpty()) {
+			if(debugParam != null && !debugParam.isEmpty()) {
 				newUrl = newUrl.replace("gwt.codesvr=127.0.1.1%3A", "gwt.codesvr=127.0.1.1:");
 			}
 			Window.Location.replace(newUrl);
@@ -205,6 +205,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		}
 		// Launch view initialization
 		if(nextInd == picts.length){
+			Log.info("Log picture done, now init coverflow");
 			getView().addCategories(categories);
 			getView().addItems(pictures);// Initialize cover flow
 			getView().init();
