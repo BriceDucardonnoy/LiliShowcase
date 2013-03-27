@@ -20,6 +20,7 @@
 		<!-- <gwt.extraJvmArgs>-Xmx1024m -XX:MaxPermSize=1024m</gwt.extraJvmArgs> -->
 		<gwt.extraJvmArgs>-Xmx512m -XX:MaxPermSize=1024m</gwt.extraJvmArgs>
 		<gwt.compiler.localWorkers>6</gwt.compiler.localWorkers>
+		<gwt.logLevel>INFO</gwt.logLevel>
 	</properties>
 
 	<repositories>

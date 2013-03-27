@@ -5,9 +5,9 @@
   <inherits name="com.google.gwt.inject.Inject"/>
   <inherits name='com.google.gwt.resources.Resources'/>
   <inherits name='com.google.gwt.i18n.I18N'/>
-  <extend-property name="locale" values="en, fr" />
-  <!-- Gin -->
-  <inherits name="com.google.gwt.inject.Inject"/>
+  <extend-property name="locale" values="fr, en" />
+  <!-- Gin: Already inherit in mvp.Mvp -->
+  <!-- <inherits name="com.google.gwt.inject.Inject"/> -->
 
   <!-- We need the JUnit module in the main module,               -->
   <!-- otherwise eclipse complains (Google plugin bug?)           -->
@@ -16,7 +16,7 @@
   <!-- Inherit the default GWT style sheet.  You can change       -->
   <!-- the theme of your GWT application by uncommenting          -->
   <!-- any one of the following lines.                            -->
-  <inherits name='com.google.gwt.user.theme.standard.Standard' />
+  <!-- <inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
   <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 
@@ -34,11 +34,12 @@
   <!-- <inherits name="com.sencha.gwt.uibinder.UiBinder" /> -->
   <inherits name="com.google.gwt.uibinder.UiBinder"/>
   
-  <!-- Add gwt-log support, default level OFF / TRACE / FATAL -->
-  <inherits name="com.allen_sauer.gwt.log.gwt-log-DEBUG"/>
+  <!-- Add gwt-log support, default level displayed in browser console OFF / TRACE / FATAL -->
+  <inherits name="com.allen_sauer.gwt.log.gwt-log-OFF"/>
   
   <!-- Add the 'TRACE' and 'DEBUG' compile time log level 		-->
-  <extend-property name="log_level" values="TRACE,INFO"/>
+  <!-- <extend-property name="log_level" values="TRACE, INFO"/> -->
+  <extend-property name="log_level" values="INFO"/>
   
   <!-- inner HTML debugger DISABLED / ENABLED                     -->
   <set-property name="log_DivLogger" value="DISABLED" />
@@ -54,10 +55,12 @@
   <source path='client' />
   <source path='shared' />
   
-  <define-configuration-property name='gin.ginjector' is-multi-valued='false' />
+  <!-- Find by inherited project using gin, so re-define is useless -->
+  <!-- <define-configuration-property name='gin.ginjector' is-multi-valued='false' /> -->
   <set-configuration-property name='gin.ginjector' value='com.brice.lili.showcase.client.gin.ClientGinjector' />
   
   <!-- speedup compilation, decrease application target size -->
   <!-- <set-property name="user.agent" value="ie8,ie9,gecko1_8,safari" /> -->
+  <!-- <set-property name="gxt.user.agent" value="gecko1_8" /> -->
 
 </module>
