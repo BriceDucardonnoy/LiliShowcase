@@ -8,10 +8,13 @@ V Images petites taille pour chargement
 V Theme Black (sencha + CoverFlow)
 V Taille / Layout / Scroll 		cf. FitImage
 V Chargement des ressources externes
+V Traduction : https://developers.google.com/web-toolkit/doc/latest/DevGuideUiBinderI18n?hl=fr
+V Incrementer build contentflow4gwt
+V Mettre curseur d'attente pendant init coverflow
 
+0 Dani's course 4 pour multi presenter
 0 Composants autour
 O Enlever scrollbar
 O Enlever les infos redondantes (remove des fichiers dans le webapp ?)
-O Info sur le clique de l'image
-O Traduction : https://developers.google.com/web-toolkit/doc/latest/DevGuideUiBinderI18n?hl=fr
+O Info sur le clique de l'image qui mene vers une autre page
 	 

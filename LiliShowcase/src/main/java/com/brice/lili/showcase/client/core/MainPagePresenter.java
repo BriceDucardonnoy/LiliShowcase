@@ -8,6 +8,7 @@ import org.gwt.contentflow4gwt.client.ContentFlowItemClickListener;
 import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.lang.Translate;
 import com.brice.lili.showcase.client.place.NameTokens;
+import com.brice.lili.showcase.client.utils.CursorUtil;
 import com.brice.lili.showcase.shared.model.Category;
 import com.brice.lili.showcase.shared.model.Picture;
 import com.google.gwt.core.client.GWT;
@@ -21,7 +22,6 @@ import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.UrlBuilder;
 import com.google.gwt.i18n.client.LocaleInfo;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.Location;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -119,7 +119,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 	protected void onBind() {
 		super.onBind();
 		loadFile(loadListAC, GWT.getHostPageBaseURL() + "List.txt");
-		showWaitCursor();
+		CursorUtil.showWaitCursor(getView().getMainPane().getBody());
 		clickHandler = getView().getContentFlow().addItemClickListener(contentFlowClickListener);
 		getView().getFrBtn().addClickHandler(frHandler);
 		getView().getEnBtn().addClickHandler(enHandler);
@@ -208,8 +208,8 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 			Log.info("Log picture done, now init coverflow");
 			getView().addCategories(categories);
 			getView().addItems(pictures);// Initialize cover flow
+			CursorUtil.showDefaultCursor(getView().getMainPane().getBody());
 			getView().init();
-			showDefaultCursor();
 			return;
 		}
 	}
@@ -236,14 +236,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
             Log.error("failed file reading: " + e.getMessage());
         }
     }
-	
-	public void showWaitCursor() {
-		DOM.setStyleAttribute(getView().getMainPane().getBody(), "cursor", "wait");
-	}
-
-	public void showDefaultCursor() {
-		DOM.setStyleAttribute(getView().getMainPane().getBody(), "cursor", "default");
-	}
 	
 	/*
 	 * AsyncCallbacks
