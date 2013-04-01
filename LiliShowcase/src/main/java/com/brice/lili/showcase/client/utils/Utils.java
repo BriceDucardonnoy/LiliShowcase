@@ -6,8 +6,11 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
+import com.google.gwt.http.client.UrlBuilder;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Window.Location;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class Utils {
@@ -23,9 +26,6 @@ public class Utils {
 		DOM.setStyleAttribute(e, "cursor", "default");
 	}
 
-	/**
-	 * Load
-	 */
 	public static void loadFile(final AsyncCallback<String> callback, final String filename) {
 		if(filename == null || filename.isEmpty()) {
 			return;
@@ -45,5 +45,16 @@ public class Utils {
             Log.error("failed file reading: " + e.getMessage());
         }
     }
+	
+	public static void switchLocale(String locale) {
+		UrlBuilder builder = Location.createUrlBuilder().setParameter("locale", locale);
+		String newUrl = builder.buildString();
+		// Lame hack for debug execution only
+		String debugParam = Location.getParameter("gwt.codesvr");
+		if(debugParam != null && !debugParam.isEmpty()) {
+			newUrl = newUrl.replace("gwt.codesvr=127.0.1.1%3A", "gwt.codesvr=127.0.1.1:");
+		}
+		Window.Location.replace(newUrl);
+	}
 	
 }

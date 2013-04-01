@@ -41,6 +41,14 @@ public class Picture implements Serializable {
     	if(properties.containsKey("Title")) return (String) properties.get("Title");
     	return "";
     }
+    
+    public String getTitleOrName() {
+    	if(properties.containsKey("title")) return (String) properties.get("title");
+    	if(properties.containsKey("Title")) return (String) properties.get("Title");
+    	if(properties.containsKey("name")) return (String) properties.get("name");
+    	if(properties.containsKey("Name")) return (String) properties.get("Name");
+    	return "";
+    }
 
     public String getImageUrl() {
     	return properties.containsKey("imageUrl") ? (String) properties.get("imageUrl") : "";

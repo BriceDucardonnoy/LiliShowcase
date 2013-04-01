@@ -15,10 +15,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.http.client.UrlBuilder;
 import com.google.gwt.i18n.client.LocaleInfo;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.Window.Location;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
@@ -28,6 +25,8 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.sencha.gxt.widget.core.client.ContentPanel;
@@ -48,6 +47,8 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		public Image getEnBtn();
 	}
 	
+	@Inject PlaceManager placeManager;
+	
 	private final Translate translate = GWT.create(Translate.class);
 	
 	private Vector<Picture> pictures;
@@ -60,32 +61,22 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
         public void onItemClicked(Widget widget) {
         	Info.display(translate.Selection(), translate.YouClickOn() + " " + getView().getCurrentPicture().getTitle());
         	// To go on a page, set attribute target and href at same level than src (cf. contentflow_src.js line 731)
+        	PlaceRequest request = new PlaceRequest(NameTokens.detail).with("picture", getView().getCurrentPicture().getTitleOrName());
+        	placeManager.revealPlace(request);
         }
     };
     
     private ClickHandler frHandler = new ClickHandler() {
 		@Override
 		public void onClick(ClickEvent arg0) {
-			UrlBuilder builder = Location.createUrlBuilder().setParameter("locale", "fr");
-			String newUrl = builder.buildString();
-			String debugParam = Location.getParameter("gwt.codesvr");
-			if(debugParam != null && !debugParam.isEmpty()) {
-				newUrl = newUrl.replace("gwt.codesvr=127.0.1.1%3A", "gwt.codesvr=127.0.1.1:");
-			}
-			Window.Location.replace(newUrl);
+			Utils.switchLocale("fr");
 		}
 	};
 	
 	private ClickHandler enHandler = new ClickHandler() {
 		@Override
 		public void onClick(ClickEvent arg0) {
-			UrlBuilder builder = Location.createUrlBuilder().setParameter("locale", "en");
-			String newUrl = builder.buildString();
-			String debugParam = Location.getParameter("gwt.codesvr");
-			if(debugParam != null && !debugParam.isEmpty()) {
-				newUrl = newUrl.replace("gwt.codesvr=127.0.1.1%3A", "gwt.codesvr=127.0.1.1:");
-			}
-			Window.Location.replace(newUrl);
+			Utils.switchLocale("en");
 		}
 	};
 	

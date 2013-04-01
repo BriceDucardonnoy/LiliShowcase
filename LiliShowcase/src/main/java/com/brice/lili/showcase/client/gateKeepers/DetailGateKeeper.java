@@ -6,7 +6,7 @@ public class DetailGateKeeper implements Gatekeeper {
 
 	@Override
 	public boolean canReveal() {
-		// Add several tests if needed here and return true or false
+		// Get the parameter in URL and return true if correct
 		return false;
 	}
 

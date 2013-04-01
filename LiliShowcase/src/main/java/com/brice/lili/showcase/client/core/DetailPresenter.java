@@ -5,7 +5,9 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
+import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.place.NameTokens;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -15,6 +17,8 @@ import com.brice.lili.showcase.client.gateKeepers.DetailGateKeeper;
 
 public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPresenter.MyProxy> {
 
+	private String pictureName = "";
+	
 	public interface MyView extends View {
 	}
 
@@ -25,8 +29,7 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 	}
 
 	@Inject
-	public DetailPresenter(final EventBus eventBus, final MyView view,
-			final MyProxy proxy) {
+	public DetailPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy) {
 		super(eventBus, view, proxy);
 	}
 
@@ -34,9 +37,24 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 	protected void revealInParent() {
 		RevealContentEvent.fire(this, HeaderPresenter.SLOT_mainContent, this);
 	}
+	
+	@Override
+	public void prepareFromRequest(PlaceRequest request) {
+		super.prepareFromRequest(request);
+		pictureName = request.getParameter("name", "wildCard");
+		// PictureName is now available in onReset method
+	}
 
 	@Override
 	protected void onBind() {
 		super.onBind();
+	}
+	
+	@Override
+	protected void onReset() {
+		super.onReset();
+		if(Log.isTraceEnabled()) {
+			Log.trace("Picture selected is " + pictureName);
+		}
 	}
 }

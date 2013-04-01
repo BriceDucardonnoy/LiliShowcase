@@ -128,7 +128,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 			public void onValueChange(ValueChangeEvent<HasValue<Boolean>> event) {
 				ToggleGroup group = (ToggleGroup)event.getSource();
 				Radio radio = (Radio)group.getValue();
-				Info.display("Sort Changed", "You selected " + radio.getBoxLabel());
+				Info.display("Sort Changed", "You selected " + radio.getBoxLabel());// TODO BDY: translate it!!!
 				sortChanged(radio.getName());
 			}
 		});
