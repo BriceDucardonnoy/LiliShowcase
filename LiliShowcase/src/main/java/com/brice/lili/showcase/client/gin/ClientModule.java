@@ -13,6 +13,10 @@ import com.brice.lili.showcase.client.place.NameTokens;
 import com.brice.lili.showcase.client.core.ErrorPresenter;
 import com.brice.lili.showcase.client.core.ErrorView;
 import com.brice.lili.showcase.client.place.ErrorPlace;
+import com.brice.lili.showcase.client.core.DetailPresenter;
+import com.brice.lili.showcase.client.core.DetailView;
+import com.brice.lili.showcase.client.core.UnauthorizedPresenter;
+import com.brice.lili.showcase.client.core.UnauthorizedView;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -34,6 +38,13 @@ public class ClientModule extends AbstractPresenterModule {
 
 		bindPresenter(HeaderPresenter.class, HeaderPresenter.MyView.class,
 				HeaderView.class, HeaderPresenter.MyProxy.class);
+
+		bindPresenter(DetailPresenter.class, DetailPresenter.MyView.class,
+				DetailView.class, DetailPresenter.MyProxy.class);
+
+		bindPresenter(UnauthorizedPresenter.class,
+				UnauthorizedPresenter.MyView.class, UnauthorizedView.class,
+				UnauthorizedPresenter.MyProxy.class);
 	}
 	
 }

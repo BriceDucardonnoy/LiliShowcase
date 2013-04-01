@@ -23,8 +23,7 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 	}
 
 	@Inject
-	public HeaderPresenter(final EventBus eventBus, final MyView view,
-			final MyProxy proxy) {
+	public HeaderPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy) {
 		super(eventBus, view, proxy);
 	}
 

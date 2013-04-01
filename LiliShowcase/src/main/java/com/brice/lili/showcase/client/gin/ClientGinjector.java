@@ -11,6 +11,9 @@ import com.brice.lili.showcase.client.core.HeaderPresenter;
 import com.brice.lili.showcase.client.core.MainPagePresenter;
 import com.brice.lili.showcase.client.core.ErrorPresenter;
 import com.google.gwt.inject.client.AsyncProvider;
+import com.brice.lili.showcase.client.core.DetailPresenter;
+import com.brice.lili.showcase.client.gateKeepers.DetailGateKeeper;
+import com.brice.lili.showcase.client.core.UnauthorizedPresenter;
 
 @GinModules({DispatchAsyncModule.class, ClientModule.class})
 public interface ClientGinjector extends Ginjector {
@@ -25,4 +28,9 @@ public interface ClientGinjector extends Ginjector {
 
 	AsyncProvider<HeaderPresenter> getHeaderPresenter();
 
+	AsyncProvider<DetailPresenter> getDetailPresenter();
+
+	DetailGateKeeper getDetailGateKeeper();
+
+	AsyncProvider<UnauthorizedPresenter> getUnauthorizedPresenter();
 }

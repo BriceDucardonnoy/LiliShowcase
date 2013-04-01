@@ -78,69 +78,69 @@
 	
 	<!-- <g:HTMLPanel>Hello World!</g:HTMLPanel> -->
 	<!-- <container:Viewport addStyleNames="{style.pretty}"> -->
-		<container:SimpleContainer>
-			<container:child layoutData="{outerData}">
-				<container:BorderLayoutContainer ui:field="con" borders="true">
-					<!-- NORTH -->
-					<container:north layoutData="{northData}">
-						<gxt:ContentPanel headerVisible="false">
-							<container:VerticalLayoutContainer>
-								<container:child layoutData="{verticalLayoutData}">
-									<form:FieldLabel text="Category">
-							            <form:widget>
-											<form:ComboBox ui:field="categoriesCB" store="{store}"/>
-										 </form:widget>
-						         	</form:FieldLabel>	
-								</container:child>
-								<container:child layoutData="{verticalLayoutData}">
-									<form:FieldLabel text="Sort">
-							            <form:widget>
-							              <g:HorizontalPanel>
-							                <!-- <form:Radio ui:field="title" name="Title" boxLabel="Title" value="true" /> -->
-							                <form:Radio ui:field="title" name="Title" value="true" />
-							                <form:Radio ui:field="date" name="Date" />
-							                <form:Radio ui:field="dimension" name="Dimension"  />
-							                <form:Radio ui:field="color" name="Color" />
-							              </g:HorizontalPanel>
-							            </form:widget>
-						          </form:FieldLabel>
-						    	</container:child>
-						    	<container:child layoutData="{verticalLayoutData}">
-						    		<container:HorizontalLayoutContainer>
-										<container:child layoutData="{horizontalLayoutData}">
-											<g:Image resource='{res.france}' ui:field="tr_fr" addStyleNames="{style.cursorImageFlag}" />
-										</container:child>
-										<container:child layoutData="{horizontalLayoutData}">
-											<g:Image resource='{res.uk}' ui:field="tr_en" addStyleNames="{style.cursorImageFlag}" />
-								    	</container:child>
-									</container:HorizontalLayoutContainer>
-						    	</container:child>
-							</container:VerticalLayoutContainer>
-						</gxt:ContentPanel>
-					</container:north>
-					<!-- WEST -->
-					<!-- <container:west layoutData="{westData}">
-						<gxt:ContentPanel />
-					</container:west> -->
-					<!-- CENTER -->
-					<container:center layoutData="{centerData}">
-						<gxt:ContentPanel ui:field="mainPane" headerVisible="true" title="Showcase" bodyBorder="false" addStyleNames="{style.round-box}">
-							<contentflow4gwt:ContentFlow ui:field="contentFlow" />
-						</gxt:ContentPanel>
-					</container:center>
-					<!-- EAST -->
-					<!-- <container:east layoutData="{eastData}">
-						<gxt:ContentPanel />
-					</container:east> -->
-					<!-- SOUTH -->
-					<container:south layoutData="{southData}">
-						<gxt:ContentPanel>
-							<button:TextButton ui:field="testBtn" text="Button" />
-						</gxt:ContentPanel>
-					</container:south>
-				</container:BorderLayoutContainer>
-			</container:child>
-		</container:SimpleContainer>
+	<container:SimpleContainer>
+		<container:child layoutData="{outerData}">
+			<container:BorderLayoutContainer ui:field="con" borders="true">
+				<!-- NORTH -->
+				<container:north layoutData="{northData}">
+					<gxt:ContentPanel headerVisible="false">
+						<container:VerticalLayoutContainer>
+							<container:child layoutData="{verticalLayoutData}">
+								<form:FieldLabel text="Category">
+						            <form:widget>
+										<form:ComboBox ui:field="categoriesCB" store="{store}"/>
+									 </form:widget>
+					         	</form:FieldLabel>	
+							</container:child>
+							<container:child layoutData="{verticalLayoutData}">
+								<form:FieldLabel text="Sort">
+						            <form:widget>
+						              <g:HorizontalPanel>
+						                <!-- <form:Radio ui:field="title" name="Title" boxLabel="Title" value="true" /> -->
+						                <form:Radio ui:field="title" name="Title" value="true" />
+						                <form:Radio ui:field="date" name="Date" />
+						                <form:Radio ui:field="dimension" name="Dimension"  />
+						                <form:Radio ui:field="color" name="Color" />
+						              </g:HorizontalPanel>
+						            </form:widget>
+					          </form:FieldLabel>
+					    	</container:child>
+					    	<container:child layoutData="{verticalLayoutData}">
+					    		<container:HorizontalLayoutContainer>
+									<container:child layoutData="{horizontalLayoutData}">
+										<g:Image resource='{res.france}' ui:field="tr_fr" addStyleNames="{style.cursorImageFlag}" />
+									</container:child>
+									<container:child layoutData="{horizontalLayoutData}">
+										<g:Image resource='{res.uk}' ui:field="tr_en" addStyleNames="{style.cursorImageFlag}" />
+							    	</container:child>
+								</container:HorizontalLayoutContainer>
+					    	</container:child>
+						</container:VerticalLayoutContainer>
+					</gxt:ContentPanel>
+				</container:north>
+				<!-- WEST -->
+				<!-- <container:west layoutData="{westData}">
+					<gxt:ContentPanel />
+				</container:west> -->
+				<!-- CENTER -->
+				<container:center layoutData="{centerData}">
+					<gxt:ContentPanel ui:field="mainPane" headerVisible="true" title="Showcase" bodyBorder="false" addStyleNames="{style.round-box}">
+						<contentflow4gwt:ContentFlow ui:field="contentFlow" />
+					</gxt:ContentPanel>
+				</container:center>
+				<!-- EAST -->
+				<!-- <container:east layoutData="{eastData}">
+					<gxt:ContentPanel />
+				</container:east> -->
+				<!-- SOUTH -->
+				<container:south layoutData="{southData}">
+					<gxt:ContentPanel>
+						<button:TextButton ui:field="testBtn" text="Button" />
+					</gxt:ContentPanel>
+				</container:south>
+			</container:BorderLayoutContainer>
+		</container:child>
+	</container:SimpleContainer>
 	<!-- </container:Viewport> -->
 	
 </ui:UiBinder>

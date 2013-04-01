@@ -4,6 +4,8 @@ public class NameTokens {
 
 	public static final String mainpage = "mainpage";
 	public static final String error = "error";
+	public static final String detail = "detail";
+	public static final String emptyselection = "emptyselection";
 
 	public static String getMainpage() {
 		return mainpage;
@@ -11,6 +13,14 @@ public class NameTokens {
 
 	public static String getError() {
 		return error;
+	}
+
+	public static String getDetail() {
+		return detail;
+	}
+
+	public static String getEmptyselection() {
+		return emptyselection;
 	}
 
 

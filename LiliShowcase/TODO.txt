@@ -11,11 +11,12 @@ V Chargement des ressources externes
 V Traduction : https://developers.google.com/web-toolkit/doc/latest/DevGuideUiBinderI18n?hl=fr
 V Incrementer build contentflow4gwt
 V Mettre curseur d'attente pendant init coverflow
+V Dani's course 4 pour multi presenter (nested presenter)
+V Gatekeeper sur la page detail qui renvoie vers une page "unauthorized"
 
-0 Dani's course 4 pour multi presenter
+O Clique de l'image qui mene vers une autre page
 0 Traduction UiBinder (dans le client bundle ?)
 0 Menu sur toutes les pages
-O Clique de l'image qui mene vers une autre page
 0 Composants autour 1re page
 0 Composants autour 2eme page
 O Enlever scrollbar
