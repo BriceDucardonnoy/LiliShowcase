@@ -43,6 +43,7 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 		super.prepareFromRequest(request);
 		pictureName = request.getParameter("name", "wildCard");
 		// PictureName is now available in onReset method
+		// If pictureName isn't ok, redirect to unauthorized page (URL set manually)
 	}
 
 	@Override

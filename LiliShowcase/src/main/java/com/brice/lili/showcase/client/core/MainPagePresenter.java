@@ -47,6 +47,8 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		public Image getEnBtn();
 	}
 	
+	public static final String DETAIL_KEYWORD = "picture";
+	
 	@Inject PlaceManager placeManager;
 	
 	private final Translate translate = GWT.create(Translate.class);
@@ -61,7 +63,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
         public void onItemClicked(Widget widget) {
         	Info.display(translate.Selection(), translate.YouClickOn() + " " + getView().getCurrentPicture().getTitle());
         	// To go on a page, set attribute target and href at same level than src (cf. contentflow_src.js line 731)
-        	PlaceRequest request = new PlaceRequest(NameTokens.detail).with("picture", getView().getCurrentPicture().getTitleOrName());
+        	PlaceRequest request = new PlaceRequest(NameTokens.detail).with(DETAIL_KEYWORD, getView().getCurrentPicture().getTitleOrName());
         	placeManager.revealPlace(request);
         }
     };

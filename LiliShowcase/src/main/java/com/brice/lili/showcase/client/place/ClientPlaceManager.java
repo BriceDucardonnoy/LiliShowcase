@@ -34,7 +34,7 @@ public class ClientPlaceManager extends PlaceManagerImpl {
 	@Override
 	public void revealUnauthorizedPlace(String unauthorizedHistoryToken) {
 		PlaceRequest request = new PlaceRequest(NameTokens.emptyselection);
-		revealPlace(request);
+		revealPlace(request, false);
 	}
 	
 }
