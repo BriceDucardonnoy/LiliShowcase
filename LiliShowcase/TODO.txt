@@ -23,3 +23,7 @@ V Clique de l'image mene vers une autre page
 O (Enlever scrollbar)
 O Enlever les infos redondantes (remove des fichiers dans le webapp ?)
 	 
+	 
+Idees :
+	- Pour la description, mettre dans le fichier dedie et recupere par le client (request builder) le text pour chaque langue prefixe 
+	par la locale (ou autre cle) ou alors utiliser un fichier different pour chaque langue
