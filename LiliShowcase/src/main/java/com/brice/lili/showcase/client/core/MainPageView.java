@@ -94,10 +94,10 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		// Provided true => create them before createAndBindUi
 		northData.setMargins(new Margins(5));
 		westData.setMargins(new Margins(0, 5, 0, 5));
-		westData.setCollapsible(true);
-		westData.setSplit(true);
 		eastData.setMargins(new Margins(0, 5, 0, 5));
 		southData.setMargins(new Margins(5));
+		southData.setCollapsible(true);
+		southData.setSplit(true);
 		centerData.setMinSize(200);
 		verticalLayoutData.setMargins(new Margins(5));
 		

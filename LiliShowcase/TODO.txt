@@ -13,8 +13,10 @@ V Incrementer build contentflow4gwt
 V Mettre curseur d'attente pendant init coverflow
 
 0 Dani's course 4 pour multi presenter
-0 Composants autour
+0 Menu sur toutes les pages
+O Clique de l'image qui mene vers une autre page
+0 Composants autour 1re page
+0 Composants autour 2eme page
 O Enlever scrollbar
 O Enlever les infos redondantes (remove des fichiers dans le webapp ?)
-O Info sur le clique de l'image qui mene vers une autre page
 	 
