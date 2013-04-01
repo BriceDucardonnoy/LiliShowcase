@@ -13,6 +13,7 @@ V Incrementer build contentflow4gwt
 V Mettre curseur d'attente pendant init coverflow
 
 0 Dani's course 4 pour multi presenter
+0 Traduction UiBinder (dans le client bundle ?)
 0 Menu sur toutes les pages
 O Clique de l'image qui mene vers une autre page
 0 Composants autour 1re page

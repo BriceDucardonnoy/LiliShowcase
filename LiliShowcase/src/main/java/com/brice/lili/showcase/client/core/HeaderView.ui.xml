@@ -1,0 +1,51 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
+	xmlns:gxt="urn:import:com.sencha.gxt.widget.core.client"
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
+	ui:generateLocales='default'>
+
+	<ui:with type="com.sencha.gxt.core.client.util.Margins" field="outerMargins">
+		<ui:attributes top="0" right="0" bottom="0" left="0" />
+	</ui:with>
+	
+	<ui:with type="com.sencha.gxt.widget.core.client.container.MarginData" field="outerData">
+		<ui:attributes margins="{outerMargins}" />
+	</ui:with>
+	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="northData" />
+	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="westData" />
+	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="centerData" />
+	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="eastData" />
+	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="southData" />
+
+	<container:Viewport>
+		<container:SimpleContainer borders="false">
+			<container:child layoutData="{outerData}">
+				<container:BorderLayoutContainer borders="false">
+					<!-- NORTH -->
+					<container:north layoutData="{northData}">
+						<g:HTMLPanel>
+							This is my header<hr/>
+						</g:HTMLPanel>
+					</container:north>
+					<!-- Center -->
+					<container:center layoutData="{centerData}">
+						<gxt:ContentPanel headerVisible="false" ui:field="mainCenterPane">
+						</gxt:ContentPanel>
+					</container:center>
+					<!-- SOUTH -->
+					<!-- <container:south layoutData="{southData}">
+						<g:HTMLPanel>
+							<h1>This is my footer</h1>
+							<hr/>
+						</g:HTMLPanel>
+					</container:south> -->
+				</container:BorderLayoutContainer>
+			</container:child>
+		</container:SimpleContainer>
+	</container:Viewport>
+	
+</ui:UiBinder>

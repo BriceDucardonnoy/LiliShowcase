@@ -9,7 +9,7 @@ import org.gwt.contentflow4gwt.client.PhotoView;
 import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.lang.Translate;
 import com.brice.lili.showcase.client.properties.CategoryProperties;
-import com.brice.lili.showcase.client.utils.CursorUtil;
+import com.brice.lili.showcase.client.utils.Utils;
 import com.brice.lili.showcase.shared.model.Category;
 import com.brice.lili.showcase.shared.model.Picture;
 import com.google.gwt.core.client.Scheduler;
@@ -178,13 +178,13 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	
 	@Override
 	public void init() {
-		CursorUtil.showWaitCursor(mainPane.getBody());
+		Utils.showWaitCursor(mainPane.getBody());
 		Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
 			@Override
 			public boolean execute() {
 				if(getContentFlow().isAttached()) {
 					getContentFlow().init();
-					CursorUtil.showDefaultCursor(mainPane.getBody());
+					Utils.showDefaultCursor(mainPane.getBody());
 					return false;
 				}
 				return true;

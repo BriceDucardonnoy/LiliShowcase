@@ -77,12 +77,7 @@
 	<ui:with field='res' type='com.brice.lili.showcase.client.images.ImagesResources'/>
 	
 	<!-- <g:HTMLPanel>Hello World!</g:HTMLPanel> -->
-	<container:Viewport addStyleNames="{style.pretty}">
-		<!-- <container:CenterLayoutContainer>
-			<gxt:ContentPanel ui:field="mainPane" headerVisible="true" title="Showcase" bodyBorder="false"	addStyleNames="{style.round-box}">
-				<g:Label text="Text Label" />
-			</gxt:ContentPanel>
-		</container:CenterLayoutContainer> -->
+	<!-- <container:Viewport addStyleNames="{style.pretty}"> -->
 		<container:SimpleContainer>
 			<container:child layoutData="{outerData}">
 				<container:BorderLayoutContainer ui:field="con" borders="true">
@@ -146,6 +141,6 @@
 				</container:BorderLayoutContainer>
 			</container:child>
 		</container:SimpleContainer>
-	</container:Viewport>
+	<!-- </container:Viewport> -->
 	
 </ui:UiBinder>

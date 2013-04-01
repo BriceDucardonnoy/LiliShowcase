@@ -4,6 +4,8 @@ package com.brice.lili.showcase.client.gin;
 import com.brice.lili.showcase.client.place.ClientPlaceManager;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
+import com.brice.lili.showcase.client.core.HeaderPresenter;
+import com.brice.lili.showcase.client.core.HeaderView;
 import com.brice.lili.showcase.client.core.MainPagePresenter;
 import com.brice.lili.showcase.client.core.MainPageView;
 import com.brice.lili.showcase.client.place.DefaultPlace;
@@ -29,6 +31,9 @@ public class ClientModule extends AbstractPresenterModule {
 				ErrorView.class, ErrorPresenter.MyProxy.class);
 
 		bindConstant().annotatedWith(ErrorPlace.class).to(NameTokens.error);
+
+		bindPresenter(HeaderPresenter.class, HeaderPresenter.MyView.class,
+				HeaderView.class, HeaderPresenter.MyProxy.class);
 	}
 	
 }

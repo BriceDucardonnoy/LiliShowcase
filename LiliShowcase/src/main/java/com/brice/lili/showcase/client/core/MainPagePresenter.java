@@ -8,18 +8,13 @@ import org.gwt.contentflow4gwt.client.ContentFlowItemClickListener;
 import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.lang.Translate;
 import com.brice.lili.showcase.client.place.NameTokens;
-import com.brice.lili.showcase.client.utils.CursorUtil;
+import com.brice.lili.showcase.client.utils.Utils;
 import com.brice.lili.showcase.shared.model.Category;
 import com.brice.lili.showcase.shared.model.Picture;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.http.client.Request;
-import com.google.gwt.http.client.RequestBuilder;
-import com.google.gwt.http.client.RequestCallback;
-import com.google.gwt.http.client.RequestException;
-import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.UrlBuilder;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.Window;
@@ -34,7 +29,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
+import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
 import com.sencha.gxt.widget.core.client.info.Info;
@@ -112,14 +107,14 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 
 	@Override
 	protected void revealInParent() {
-		RevealRootContentEvent.fire(this, this);
+		RevealContentEvent.fire(this, HeaderPresenter.SLOT_mainContent, this);
 	}
 	
 	@Override
 	protected void onBind() {
 		super.onBind();
-		loadFile(loadListAC, GWT.getHostPageBaseURL() + "List.txt");
-		CursorUtil.showWaitCursor(getView().getMainPane().getBody());
+		Utils.loadFile(loadListAC, GWT.getHostPageBaseURL() + "List.txt");
+		Utils.showWaitCursor(getView().getMainPane().getBody());
 		clickHandler = getView().getContentFlow().addItemClickListener(contentFlowClickListener);
 		getView().getFrBtn().addClickHandler(frHandler);
 		getView().getEnBtn().addClickHandler(enHandler);
@@ -145,7 +140,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 	private void initPictures(String list) {
 		picts = list.replaceAll("\r", "").replaceAll("\n", "").split(";");
 		Log.info("Picture " + picts[0]);
-		loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photos/" + picts[0] + "/Details.txt");
+		Utils.loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photos/" + picts[0] + "/Details.txt");
 	}
 	
 	private void loadPictureInfo(String infos, int nextInd) {
@@ -200,7 +195,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		for(int i = nextInd ; i < picts.length ; i++) {
 			if(picts[i].isEmpty()) continue;
 			Log.info("Picture " + picts[i]);
-			loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photos/" + picts[i] + "/Details.txt");
+			Utils.loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photos/" + picts[i] + "/Details.txt");
 			break;
 		}
 		// Launch view initialization
@@ -208,34 +203,11 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 			Log.info("Log picture done, now init coverflow");
 			getView().addCategories(categories);
 			getView().addItems(pictures);// Initialize cover flow
-			CursorUtil.showDefaultCursor(getView().getMainPane().getBody());
+			Utils.showDefaultCursor(getView().getMainPane().getBody());
 			getView().init();
 			return;
 		}
 	}
-	
-	/*
-	 * Utils
-	 */
-	private void loadFile(final AsyncCallback<String> callback, final String filename) {
-		if(filename == null || filename.isEmpty()) {
-			return;
-		}
-        RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.GET, filename);
-        try {
-            requestBuilder.sendRequest(null, new RequestCallback() {
-                public void onError(Request request, Throwable exception) {
-                    if(callback != null) callback.onFailure(exception);
-                }
-                @Override
-                public void onResponseReceived(Request request, Response response) {
-                    if(callback != null) callback.onSuccess(response.getText());
-                }
-            });
-        } catch (RequestException e) {
-            Log.error("failed file reading: " + e.getMessage());
-        }
-    }
 	
 	/*
 	 * AsyncCallbacks
