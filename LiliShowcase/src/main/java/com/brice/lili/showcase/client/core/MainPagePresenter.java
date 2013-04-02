@@ -45,6 +45,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		public void init();
 		public Image getFrBtn();
 		public Image getEnBtn();
+		public void setDescriptionText(String text);
 	}
 	
 	public static final String DETAIL_KEYWORD = "picture";
@@ -107,6 +108,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 	protected void onBind() {
 		super.onBind();
 		Utils.loadFile(loadListAC, GWT.getHostPageBaseURL() + "List.txt");
+		Utils.loadFile(loadDescriptionAC, "Presentation_" + LocaleInfo.getCurrentLocale().getLocaleName() + ".txt");
 		Utils.showWaitCursor(getView().getMainPane().getBody());
 		clickHandler = getView().getContentFlow().addItemClickListener(contentFlowClickListener);
 		getView().getFrBtn().addClickHandler(frHandler);
@@ -242,6 +244,20 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 				Log.warn("List of pictures is empty");
 			}
 			loadPictureInfo(result, ++ind);
+		}
+	};
+	
+	private AsyncCallback<String> loadDescriptionAC = new AsyncCallback<String>() {
+		@Override
+		public void onFailure(Throwable caught) {
+			Log.error("Failed to load description file: " + caught.getMessage());
+			caught.printStackTrace();
+		}
+		@Override
+		public void onSuccess(String result) {
+			if(!result.contains("Error 404 NOT_FOUND")) {
+				getView().setDescriptionText(result);
+			}
 		}
 	};
 	

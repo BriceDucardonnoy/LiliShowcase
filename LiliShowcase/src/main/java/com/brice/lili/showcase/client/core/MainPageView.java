@@ -34,13 +34,12 @@ import com.sencha.gxt.core.client.util.Margins;
 import com.sencha.gxt.core.client.util.ToggleGroup;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.widget.core.client.ContentPanel;
-import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData;
 import com.sencha.gxt.widget.core.client.container.MarginData;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
-import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
 import com.sencha.gxt.widget.core.client.form.Radio;
+import com.sencha.gxt.widget.core.client.form.TextArea;
 import com.sencha.gxt.widget.core.client.info.Info;
 
 public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
@@ -50,7 +49,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	private final Widget widget;
 	@UiField ContentFlow<Picture> contentFlow;
 //	@UiField BorderLayoutContainer con;
-	@UiField TextButton testBtn;
+//	@UiField TextButton testBtn;
 	@UiField ComboBox<Category> categoriesCB;
 	@UiField ContentPanel mainPane;
 	@UiField(provided = true) ListStore<Category> store;
@@ -60,9 +59,11 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@UiField Radio color;
 	@UiField Image tr_fr;
 	@UiField Image tr_en;
+	@UiField ContentPanel southCP;
+	@UiField TextArea description;
 	
 	@UiField(provided = true)
-	MarginData outerData = new MarginData(20);
+	MarginData outerData = new MarginData(10);
 	@UiField(provided = true)
 	BorderLayoutData northData = new BorderLayoutData(100);
 	@UiField(provided = true)
@@ -110,6 +111,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		categoriesCB.setForceSelection(true);
 		categoriesCB.setTriggerAction(TriggerAction.ALL);
 		categoriesCB.setEditable(false);
+		southCP.setHeadingText(translate.ArtistPresentation());
 		
 		title.setBoxLabel(translate.Title());
 		date.setBoxLabel(translate.Date());
@@ -322,11 +324,11 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		}
 	}
 	
-	@UiHandler("testBtn")
-	void handleClick(SelectEvent e) {
-//		contentFlow.refreshActiveItem();
-//		contentFlow.moveTo(0);
-	}
+//	@UiHandler("testBtn")
+//	void handleClick(SelectEvent e) {
+////		contentFlow.refreshActiveItem();
+////		contentFlow.moveTo(0);
+//	}
 
 	@Override
 	public Picture getCurrentPicture() {
@@ -341,6 +343,11 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@Override
 	public Image getEnBtn() {
 		return tr_en;
+	}
+
+	@Override
+	public void setDescriptionText(String text) {
+		description.setText(text);
 	}
 
 }
