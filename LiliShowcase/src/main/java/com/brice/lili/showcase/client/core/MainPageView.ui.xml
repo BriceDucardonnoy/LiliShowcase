@@ -135,14 +135,7 @@
 				<!-- SOUTH -->
 				<container:south layoutData="{southData}">
 					<gxt:ContentPanel collapsible="true" borders="false" ui:field="southCP">
-						<!-- <button:TextButton ui:field="testBtn" text="Button" /> -->
-						<!-- <container:child layoutData="{outerData}"> -->
-						<form:FieldLabel text="" labelSeparator="" labelWidth="0" labelPad="0" borders="false">
-					        <form:widget>
-					        	<form:TextArea ui:field="description" readOnly="true" borders="false" />
-					    	</form:widget>
-						</form:FieldLabel>
-						<!-- </container:child> -->
+						<g:RichTextArea ui:field="description" enabled="false" />
 					</gxt:ContentPanel>
 				</container:south>
 			</container:BorderLayoutContainer>

@@ -25,6 +25,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -39,7 +40,6 @@ import com.sencha.gxt.widget.core.client.container.MarginData;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
 import com.sencha.gxt.widget.core.client.form.Radio;
-import com.sencha.gxt.widget.core.client.form.TextArea;
 import com.sencha.gxt.widget.core.client.info.Info;
 
 public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
@@ -60,7 +60,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@UiField Image tr_fr;
 	@UiField Image tr_en;
 	@UiField ContentPanel southCP;
-	@UiField TextArea description;
+	@UiField RichTextArea description;
 	
 	@UiField(provided = true)
 	MarginData outerData = new MarginData(10);
@@ -98,6 +98,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		eastData.setMargins(new Margins(0, 5, 0, 5));
 		southData.setMargins(new Margins(5));
 		southData.setCollapsible(true);
+		southData.setSize(170d);
 		southData.setSplit(true);
 		centerData.setMinSize(200);
 		verticalLayoutData.setMargins(new Margins(5));
@@ -130,7 +131,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 			public void onValueChange(ValueChangeEvent<HasValue<Boolean>> event) {
 				ToggleGroup group = (ToggleGroup)event.getSource();
 				Radio radio = (Radio)group.getValue();
-				Info.display("Sort Changed", "You selected " + radio.getBoxLabel());// TODO BDY: translate it!!!
+				Info.display("Sort Changed", translate.YouveSelected() + " " + radio.getBoxLabel());
 				sortChanged(radio.getName());
 			}
 		});
@@ -295,7 +296,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		 * TODO BDY: see why a different timeout is needed: trouble happens only for category 0 which is the biggest => timeout
 		 * should probably be adapted to the number of item to display
 		 */
-		categoryChanged(250);// 250: arbitrary optimistic timeout
+		categoryChanged(allPictures.size() * 28);// 250: arbitrary optimistic timeout
 	}
 	
 	/*
@@ -347,7 +348,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 
 	@Override
 	public void setDescriptionText(String text) {
-		description.setText(text);
+		description.setEnabled(false);
+		description.setHTML(text);
 	}
 
 }

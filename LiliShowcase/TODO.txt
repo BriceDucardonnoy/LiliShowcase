@@ -15,12 +15,16 @@ V Dani's course 4 pour multi presenter (nested presenter) et les utiliser pour g
 V Gatekeeper sur la page detail qui renvoie vers une page "unauthorized" de facon conditionnelle
 V Clique de l'image mene vers une autre page
 V Lorem Ipsum "traduit" (marque pour montrer bien reconnu la locale)
+V HTMLiser le textarea -> richtextarea
 
 X Traduction UiBinder (dans le client bundle ?)
 
 0 Menu sur toutes les pages
+0 Mettre sous licence BSD
 0 Composants autour 1re page
 0 Composants 2eme page
+0 Lazy loading des images sur la 2eme page pour ne pas ralentir le chargement de la 1re
+0 Theme black
 0 Design general
 O (Enlever scrollbar)
 O Enlever les infos redondantes (remove des fichiers dans le webapp ?)
