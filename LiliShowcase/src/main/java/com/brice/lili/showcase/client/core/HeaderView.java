@@ -42,4 +42,5 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 			super.setInSlot(slot, content);
 		}
 	}
+	
 }

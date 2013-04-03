@@ -88,7 +88,7 @@
 							<container:child layoutData="{verticalLayoutData}">
 								<form:FieldLabel text="Category">
 						            <form:widget>
-										<form:ComboBox ui:field="categoriesCB" store="{store}"/>
+										<form:ComboBox ui:field="categoriesCB" store="{store}" triggerAction="ALL" />
 									 </form:widget>
 					         	</form:FieldLabel>	
 							</container:child>

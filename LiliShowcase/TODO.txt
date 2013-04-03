@@ -20,6 +20,8 @@ V HTMLiser le textarea -> richtextarea
 X Traduction UiBinder (dans le client bundle ?)
 
 0 Menu sur toutes les pages
+0 Traduire menu
+0 Peupler le menu de galeries et expo dynamiquement
 0 Mettre sous licence BSD
 0 Composants autour 1re page
 0 Composants 2eme page

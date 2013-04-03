@@ -30,7 +30,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.reveregroup.gwt.imagepreloader.client.FitImage;
-import com.sencha.gxt.cell.core.client.form.ComboBoxCell.TriggerAction;
 import com.sencha.gxt.core.client.util.Margins;
 import com.sencha.gxt.core.client.util.ToggleGroup;
 import com.sencha.gxt.data.shared.ListStore;
@@ -110,7 +109,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		allPictures = new ArrayList<PhotoView>();
 		orderedPictures = new ArrayList<Integer>();
 		categoriesCB.setForceSelection(true);
-		categoriesCB.setTriggerAction(TriggerAction.ALL);
 		categoriesCB.setEditable(false);
 		southCP.setHeadingText(translate.ArtistPresentation());
 		
