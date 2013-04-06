@@ -23,15 +23,13 @@
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="centerData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="eastData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="southData" />
-
-	<ui:style>
-	   .menuBorder {
-	       border-top: none;
-	   }
-	   .margin {
-	      margin: 10px;
-	    }
-	</ui:style>
+	<ui:with type="com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer.HorizontalLayoutData" field="horizontalLayoutData">
+		<ui:attributes width="40" height="1" />
+	</ui:with>
+	<ui:with type="com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer.HorizontalLayoutData" field="horizontalLayoutDataMain">
+		<ui:attributes width="1" height="1" />
+	</ui:with>
+	<ui:with field='res' type='com.brice.lili.showcase.client.images.ImagesResources' />
 
 	<container:Viewport>
 		<container:SimpleContainer borders="false">
@@ -42,28 +40,35 @@
 						<!-- <g:HTMLPanel>
 							This is my header<hr/>
 						</g:HTMLPanel> -->
-						<toolbar:ToolBar>
-							<button:TextButton ui:field="homeButton" />
-							<!-- <button:TextButton text="Button w/ Menu" icon="{images.menu_show}"> -->
-							<toolbar:SeparatorToolItem />
-							<button:TextButton ui:field="galleryButton">
-								<button:menu>
-	             					<menu:Menu ui:field="menuGallery" maxHeight="200">
-						            	<menu:MenuItem text="Cut" />
-						            	<menu:MenuItem text="Copy" />
-									</menu:Menu>
-								</button:menu>
-							</button:TextButton>
-							<toolbar:SeparatorToolItem />
-							<button:TextButton ui:field="expoButton" />
-							<toolbar:SeparatorToolItem />
-							<button:TextButton ui:field="contactButton" />
-							<toolbar:SeparatorToolItem />
-							<button:TextButton ui:field="legalButton" />
-							<toolbar:SeparatorToolItem />
-							<button:TextButton ui:field="linkButton" />
-				            <toolbar:FillToolItem />
-			         	</toolbar:ToolBar>
+						<container:HorizontalLayoutContainer>
+							<container:child layoutData="{horizontalLayoutData}">
+								<g:Image resource='{res.logo2Small}' />
+							</container:child>
+							<container:child layoutData="{horizontalLayoutDataMain}">
+								<toolbar:ToolBar>
+									<button:TextButton ui:field="homeButton" />
+									<!-- <button:TextButton text="Button w/ Menu" icon="{images.menu_show}"> -->
+									<toolbar:SeparatorToolItem />
+									<button:TextButton ui:field="galleryButton">
+										<button:menu>
+			             					<menu:Menu ui:field="menuGallery" maxHeight="200">
+								            	<menu:MenuItem text="Cut" />
+								            	<menu:MenuItem text="Copy" />
+											</menu:Menu>
+										</button:menu>
+									</button:TextButton>
+									<toolbar:SeparatorToolItem />
+									<button:TextButton ui:field="expoButton" />
+									<toolbar:SeparatorToolItem />
+									<button:TextButton ui:field="contactButton" />
+									<toolbar:SeparatorToolItem />
+									<button:TextButton ui:field="legalButton" />
+									<toolbar:SeparatorToolItem />
+									<button:TextButton ui:field="linkButton" />
+						            <toolbar:FillToolItem />
+					         	</toolbar:ToolBar>
+					    	</container:child>
+						</container:HorizontalLayoutContainer>
 					</container:north>
 					<!-- Center -->
 					<container:center layoutData="{centerData}">

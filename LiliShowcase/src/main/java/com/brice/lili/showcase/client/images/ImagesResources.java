@@ -19,5 +19,8 @@ public interface ImagesResources extends ClientBundle {
 
 	@Source("united_kingdom_great_britain.png")
 	ImageResource uk();
+	
+	@Source("Logo2_small.png")
+	ImageResource logo2Small();
 
 }
