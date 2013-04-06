@@ -101,7 +101,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		southData.setCollapsible(true);
 		southData.setSize(170d);
 		southData.setSplit(true);
-		centerData.setMinSize(200);
+		centerData.setMinSize(350);
 		verticalLayoutData.setMargins(new Margins(5));
 		
 		store = new ListStore<Category>(props.key());
@@ -140,6 +140,14 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 				sortChanged(radio.getName());
 			}
 		});
+		
+//		southCP.addResizeHandler(new ResizeHandler() {
+//			@Override
+//			public void onResize(ResizeEvent event) {
+////				contentFlow.
+//				fire window.resize event to refresh coverflow
+//			}
+//		});
 	}
 
 	@Override

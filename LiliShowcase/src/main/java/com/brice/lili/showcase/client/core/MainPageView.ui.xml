@@ -124,7 +124,7 @@
 				</container:west> -->
 				<!-- CENTER -->
 				<container:center layoutData="{centerData}">
-					<gxt:ContentPanel ui:field="mainPane" headerVisible="true" title="Showcase" bodyBorder="false" addStyleNames="{style.round-box}">
+					<gxt:ContentPanel ui:field="mainPane" headerVisible="true" title="Showcase" bodyBorder="false">
 						<contentflow4gwt:ContentFlow ui:field="contentFlow" />
 					</gxt:ContentPanel>
 				</container:center>

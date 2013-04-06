@@ -5,6 +5,7 @@ import java.util.Vector;
 import com.brice.lili.showcase.client.events.CategoryChangedEvent;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent.PicturesLoadedHandler;
+import com.brice.lili.showcase.client.place.NameTokens;
 import com.brice.lili.showcase.shared.model.Category;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
@@ -15,9 +16,15 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
+import com.sencha.gxt.widget.core.client.button.TextButton;
+import com.sencha.gxt.widget.core.client.event.SelectEvent;
+import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
+import com.sencha.gxt.widget.core.client.info.Info;
 import com.sencha.gxt.widget.core.client.menu.Item;
 import com.sencha.gxt.widget.core.client.menu.Menu;
 import com.sencha.gxt.widget.core.client.menu.MenuItem;
@@ -25,10 +32,17 @@ import com.sencha.gxt.widget.core.client.menu.MenuItem;
 public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPresenter.MyProxy> {
 
 	@ContentSlot public static final Type<RevealContentHandler<?>> SLOT_mainContent = new Type<RevealContentHandler<?>>();
-
+	@Inject PlaceManager placeManager;
+	
 	public interface MyView extends View {
 		public void addGalleries(Vector<Category> categories);
 		public Menu getGalleryMenu();
+		public TextButton getHomeButton();
+		public TextButton getGalleryButton();
+		public TextButton getExpoButton();
+		public TextButton getContactButton();
+		public TextButton getLegalButton();
+		public TextButton getLinkButton();
 	}
 	
 	private PicturesLoadedHandler pictureLoadedHandler = new PicturesLoadedHandler() {
@@ -68,6 +82,15 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		super.onBind();
 		registerHandler(getEventBus().addHandler(PicturesLoadedEvent.getType(), pictureLoadedHandler));
 		registerHandler(getView().getGalleryMenu().addSelectionHandler(categoryChangedHandler));
+		registerHandler(getView().getHomeButton().addSelectHandler(new SelectHandler() {
+			@Override
+			public void onSelect(SelectEvent event) {
+				if(placeManager.getCurrentPlaceRequest().getNameToken().equals(NameTokens.mainpage)) return;
+				Info.display("Go to accueil", "Go to accueil");
+				PlaceRequest request = new PlaceRequest(NameTokens.mainpage);
+	        	placeManager.revealPlace(request);
+			}
+		}));
 	}
 	
 }

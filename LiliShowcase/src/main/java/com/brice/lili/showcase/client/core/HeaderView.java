@@ -7,15 +7,12 @@ import com.brice.lili.showcase.shared.model.Category;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData;
-import com.sencha.gxt.widget.core.client.event.SelectEvent;
-import com.sencha.gxt.widget.core.client.info.Info;
 import com.sencha.gxt.widget.core.client.menu.CheckMenuItem;
 import com.sencha.gxt.widget.core.client.menu.Menu;
 
@@ -70,11 +67,11 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 		}
 	}
 	
-	@UiHandler(value = {"homeButton", "expoButton", "contactButton", "legalButton", "linkButton"})
-	void handleClick(SelectEvent e) {
-		Info.display("INFO", ((TextButton) e.getSource()).getText());
-	}
-	
+//	@UiHandler(value = {"homeButton", "expoButton", "contactButton", "legalButton", "linkButton"})
+//	void handleClick(SelectEvent e) {
+//		Info.display("INFO", ((TextButton) e.getSource()).getText());
+//	}
+//	
 //	@UiHandler("menuGallery")
 //	public void onMenuSelection(SelectionEvent<Item> event) {
 //		MenuItem item = (MenuItem) event.getSelectedItem();
@@ -97,6 +94,36 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 		}
 		((CheckMenuItem)menuGallery.getItemByItemId(categories.get(0).getId().toString())).setChecked(true);
 //		menuGallery.setActiveItem(menuGallery.getItemByItemId(categories.get(1).getId().toString()), false);
+	}
+
+	@Override
+	public TextButton getHomeButton() {
+		return homeButton;
+	}
+
+	@Override
+	public TextButton getGalleryButton() {
+		return galleryButton;
+	}
+
+	@Override
+	public TextButton getExpoButton() {
+		return expoButton;
+	}
+
+	@Override
+	public TextButton getContactButton() {
+		return contactButton;
+	}
+
+	@Override
+	public TextButton getLegalButton() {
+		return legalButton;
+	}
+
+	@Override
+	public TextButton getLinkButton() {
+		return linkButton;
 	}
 	
 }
