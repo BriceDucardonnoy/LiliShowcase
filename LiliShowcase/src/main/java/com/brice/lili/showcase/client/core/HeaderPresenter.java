@@ -1,5 +1,10 @@
 package com.brice.lili.showcase.client.core;
 
+import java.util.Vector;
+
+import com.brice.lili.showcase.client.events.PicturesLoadedEvent;
+import com.brice.lili.showcase.client.events.PicturesLoadedEvent.PicturesLoadedHandler;
+import com.brice.lili.showcase.shared.model.Category;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -14,10 +19,18 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPresenter.MyProxy> {
 
 	@ContentSlot public static final Type<RevealContentHandler<?>> SLOT_mainContent = new Type<RevealContentHandler<?>>();
-	
-	public interface MyView extends View {
-	}
 
+	public interface MyView extends View {
+		public void addGalleries(Vector<Category> categories);
+	}
+	
+	private PicturesLoadedHandler pictureLoadedHandler = new PicturesLoadedHandler() {
+		@Override
+		public void onPicturesLoaded(PicturesLoadedEvent event) {
+			HeaderPresenter.this.getView().addGalleries(event.getCategories());
+		}
+	};
+	
 	@ProxyCodeSplit
 	public interface MyProxy extends Proxy<HeaderPresenter> {
 	}
@@ -35,5 +48,7 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 	@Override
 	protected void onBind() {
 		super.onBind();
+		registerHandler(getEventBus().addHandler(PicturesLoadedEvent.getType(), pictureLoadedHandler));
 	}
+	
 }

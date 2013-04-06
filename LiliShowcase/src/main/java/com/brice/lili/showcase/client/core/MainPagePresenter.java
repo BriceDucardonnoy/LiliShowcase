@@ -6,6 +6,7 @@ import org.gwt.contentflow4gwt.client.ContentFlow;
 import org.gwt.contentflow4gwt.client.ContentFlowItemClickListener;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.brice.lili.showcase.client.events.PicturesLoadedEvent;
 import com.brice.lili.showcase.client.lang.Translate;
 import com.brice.lili.showcase.client.place.NameTokens;
 import com.brice.lili.showcase.client.utils.Utils;
@@ -14,7 +15,6 @@ import com.brice.lili.showcase.shared.model.Picture;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Image;
@@ -56,14 +56,12 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 	
 	private Vector<Picture> pictures;
 	private Vector<Category> categories;
-	private HandlerRegistration clickHandler;
 	private String[] picts;
 	private int categoriesNumber = 0;
 	
 	private ContentFlowItemClickListener contentFlowClickListener = new ContentFlowItemClickListener() {
         public void onItemClicked(Widget widget) {
         	Info.display(translate.Selection(), translate.YouClickOn() + " " + getView().getCurrentPicture().getTitle());
-        	// To go on a page, set attribute target and href at same level than src (cf. contentflow_src.js line 731)
         	PlaceRequest request = new PlaceRequest(NameTokens.detail).with(DETAIL_KEYWORD, getView().getCurrentPicture().getTitleOrName());
         	placeManager.revealPlace(request);
         }
@@ -110,15 +108,9 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		Utils.loadFile(loadListAC, GWT.getHostPageBaseURL() + "List.txt");
 		Utils.loadFile(loadDescriptionAC, "Presentation_" + LocaleInfo.getCurrentLocale().getLocaleName() + ".html");
 		Utils.showWaitCursor(getView().getMainPane().getBody());
-		clickHandler = getView().getContentFlow().addItemClickListener(contentFlowClickListener);
+		registerHandler(getView().getContentFlow().addItemClickListener(contentFlowClickListener));
 		getView().getFrBtn().addClickHandler(frHandler);
 		getView().getEnBtn().addClickHandler(enHandler);
-	}
-	
-	@Override
-	protected void onUnbind() {
-		super.onUnbind();
-		clickHandler.removeHandler();
 	}
 
 	@Override
@@ -149,13 +141,11 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 					// Add property Categories
 					String []categories = entry.substring(entry.indexOf(":") + 1).replaceAll(" ", "").split(",");
 					if(categories.length == 0) continue;
-//					ArrayList<Integer> catIds = new ArrayList<Integer>();
 					for(String category : categories) {
 						boolean found = false;
 						for(Category cat : this.categories) {
 							if(cat != null && cat.getName().equals(category)) {
 								found = true;
-//								catIds.add(cat.getId());
 								p.addCategoryId(cat.getId());
 								break;
 							}
@@ -165,12 +155,10 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 								Log.info("Add category <" + category + ">");
 							}
 							this.categories.add(new Category(categoriesNumber, category, category));
-//							catIds.add(categoriesNumber++);
 							p.addCategoryId(categoriesNumber++);
 						}
 					}
 					p.addProperty("imageUrl", GWT.getHostPageBaseURL() + "photos/" + p.getNameOrTitle() + "/" + p.getProperty("Show"));
-//					p.setCategoryIds(catIds.toArray());
 					continue;
 				}// End of categories process
 				String []prop = entry.split(":");
@@ -198,6 +186,8 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 			Log.info("Log picture done, now init coverflow");
 			getView().addCategories(categories);
 			getView().addItems(pictures);// Initialize cover flow
+//			PicturesLoadedEvent.fire(this.getEventBus(), pictures, categories);
+			getEventBus().fireEvent(new PicturesLoadedEvent(pictures, categories));
 			Utils.showDefaultCursor(getView().getMainPane().getBody());
 			getView().init();
 			return;

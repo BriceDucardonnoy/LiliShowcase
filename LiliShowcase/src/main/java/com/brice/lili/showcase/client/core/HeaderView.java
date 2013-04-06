@@ -1,6 +1,9 @@
 package com.brice.lili.showcase.client.core;
 
+import java.util.Vector;
+
 import com.brice.lili.showcase.client.lang.Translate;
+import com.brice.lili.showcase.shared.model.Category;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -78,6 +81,15 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 	public void onMenuSelection(SelectionEvent<Item> event) {
 		MenuItem item = (MenuItem) event.getSelectedItem();
 		Info.display("Action", translate.YouClickOn() + " " + item.getText());
+	}
+
+	@Override
+	public void addGalleries(Vector<Category> categories) {
+		for(Category category : categories) {
+			MenuItem item = new MenuItem(category.getName());
+			item.setItemId(category.getId().toString());
+			menuGallery.add(item);
+		}
 	}
 	
 }

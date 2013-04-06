@@ -52,8 +52,8 @@
 									<button:TextButton ui:field="galleryButton">
 										<button:menu>
 			             					<menu:Menu ui:field="menuGallery" maxHeight="200">
-								            	<menu:MenuItem text="Cut" />
-								            	<menu:MenuItem text="Copy" />
+								            	<!-- <menu:MenuItem text="Cut" />
+								            	<menu:MenuItem text="Copy" /> -->
 											</menu:Menu>
 										</button:menu>
 									</button:TextButton>

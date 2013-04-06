@@ -294,10 +294,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	
 	public void sortChanged(String name) {
 		sortName = name;
-		/* 
-		 * TODO BDY: see why a different timeout is needed: trouble happens only for category 0 which is the biggest => timeout
-		 * should probably be adapted to the number of item to display
-		 */
 		categoryChanged(allPictures.size() * 28);// 250: arbitrary optimistic timeout
 	}
 	
