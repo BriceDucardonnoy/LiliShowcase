@@ -29,6 +29,7 @@ X Traduction UiBinder (dans le client bundle ?)
 X Page de "en cours de construction"
 
 0 Enlever north pane du mainPain
+0 Icon au dessus de chaque bouton du menu ?
 0 Mettre sous licence BSD
 0 Composants autour 1re page
 0 Googles analitics ?
