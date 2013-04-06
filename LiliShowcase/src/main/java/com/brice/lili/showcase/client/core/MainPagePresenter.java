@@ -108,7 +108,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 	protected void onBind() {
 		super.onBind();
 		Utils.loadFile(loadListAC, GWT.getHostPageBaseURL() + "List.txt");
-		Utils.loadFile(loadDescriptionAC, "Presentation_" + LocaleInfo.getCurrentLocale().getLocaleName() + ".txt");
+		Utils.loadFile(loadDescriptionAC, "Presentation_" + LocaleInfo.getCurrentLocale().getLocaleName() + ".html");
 		Utils.showWaitCursor(getView().getMainPane().getBody());
 		clickHandler = getView().getContentFlow().addItemClickListener(contentFlowClickListener);
 		getView().getFrBtn().addClickHandler(frHandler);

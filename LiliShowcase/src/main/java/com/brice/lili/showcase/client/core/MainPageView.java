@@ -38,6 +38,7 @@ import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderL
 import com.sencha.gxt.widget.core.client.container.MarginData;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
+import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import com.sencha.gxt.widget.core.client.form.Radio;
 import com.sencha.gxt.widget.core.client.info.Info;
 
@@ -48,7 +49,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	private final Widget widget;
 	@UiField ContentFlow<Picture> contentFlow;
 //	@UiField BorderLayoutContainer con;
-//	@UiField TextButton testBtn;
 	@UiField ComboBox<Category> categoriesCB;
 	@UiField ContentPanel mainPane;
 	@UiField(provided = true) ListStore<Category> store;
@@ -60,6 +60,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@UiField Image tr_en;
 	@UiField ContentPanel southCP;
 	@UiField RichTextArea description;
+	@UiField FieldLabel categoryField;
+	@UiField FieldLabel sortField;
 	
 	@UiField(provided = true)
 	MarginData outerData = new MarginData(10);
@@ -116,6 +118,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		date.setBoxLabel(translate.Date());
 		dimension.setBoxLabel(translate.Dimension());
 		color.setBoxLabel(translate.Color());
+		categoryField.setText(translate.Category());
+		sortField.setText(translate.Sort());
 		
 		ToggleGroup sortToggle = new ToggleGroup();
 		sortToggle.add(title);
@@ -323,12 +327,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		}
 	}
 	
-//	@UiHandler("testBtn")
-//	void handleClick(SelectEvent e) {
-////		contentFlow.refreshActiveItem();
-////		contentFlow.moveTo(0);
-//	}
-
 	@Override
 	public Picture getCurrentPicture() {
 		return (Picture) ((PhotoView)contentFlow.getActiveItem()).getPojo();

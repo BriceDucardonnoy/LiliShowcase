@@ -86,14 +86,14 @@
 					<gxt:ContentPanel headerVisible="false">
 						<container:VerticalLayoutContainer>
 							<container:child layoutData="{verticalLayoutData}">
-								<form:FieldLabel text="Category">
+								<form:FieldLabel ui:field="categoryField">
 						            <form:widget>
 										<form:ComboBox ui:field="categoriesCB" store="{store}" triggerAction="ALL" />
 									 </form:widget>
 					         	</form:FieldLabel>	
 							</container:child>
 							<container:child layoutData="{verticalLayoutData}">
-								<form:FieldLabel text="Sort">
+								<form:FieldLabel ui:field="sortField">
 						            <form:widget>
 						              <g:HorizontalPanel>
 						                <!-- <form:Radio ui:field="title" name="Title" boxLabel="Title" value="true" /> -->

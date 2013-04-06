@@ -16,12 +16,15 @@ V Gatekeeper sur la page detail qui renvoie vers une page "unauthorized" de faco
 V Clique de l'image mene vers une autre page
 V Lorem Ipsum "traduit" (marque pour montrer bien reconnu la locale)
 V HTMLiser le textarea -> richtextarea
+V Mettre .html pour presentation
+V Menu sur toutes les pages
+V Traduire menu
 
 X Traduction UiBinder (dans le client bundle ?)
+X Page de "en cours de construction"
 
-0 Menu sur toutes les pages
-0 Traduire menu
-0 Peupler le menu de galeries et expo dynamiquement
+0 Peupler le menu de galeries (category) et expo dynamiquement
+0 Resize du showcase quand le panel south est resize
 0 Mettre sous licence BSD
 0 Composants autour 1re page
 0 Composants 2eme page

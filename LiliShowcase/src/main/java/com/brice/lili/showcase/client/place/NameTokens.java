@@ -6,6 +6,7 @@ public class NameTokens {
 	public static final String error = "error";
 	public static final String detail = "detail";
 	public static final String emptyselection = "emptyselection";
+	public static final String buildingplace = "buildingplace";
 
 	public static String getMainpage() {
 		return mainpage;
@@ -21,6 +22,10 @@ public class NameTokens {
 
 	public static String getEmptyselection() {
 		return emptyselection;
+	}
+
+	public static String getBuildingplace() {
+		return buildingplace;
 	}
 
 

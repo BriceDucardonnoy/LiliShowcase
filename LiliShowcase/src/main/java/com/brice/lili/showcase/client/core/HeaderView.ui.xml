@@ -43,71 +43,27 @@
 							This is my header<hr/>
 						</g:HTMLPanel> -->
 						<toolbar:ToolBar>
- 
-            <!-- <button:TextButton text="Button w/ Menu" icon="{images.menu_show}"> -->
-            <button:TextButton text="Button w/ Menu">
-              <button:menu>
-                <menu:Menu ui:field="menu1">
-                  <!-- <form:ComboBox name="name" forceSelection="true" triggerAction="ALL" /> -->
-                  <menu:CheckMenuItem text="I Like Cats" checked="true" />
-                  <menu:CheckMenuItem text="I Like Dogs" />
-                  <menu:SeparatorMenuItem />
-                  <menu:MenuItem text="Radio Options">
-                    <menu:submenu>
-                      <menu:Menu>
-                        <menu:CheckMenuItem text="Blue Theme" group="radios" checked="true" />
-                        <menu:CheckMenuItem text="Gray Theme" group="radios" />
-                      </menu:Menu>
-                    </menu:submenu>
-                  </menu:MenuItem>
-                  <!-- <menu:MenuItem text="Choose a Date" icon="{images.calendar}"> -->
-                  <menu:MenuItem text="Choose a Date">
-                    <menu:submenu>
-                      <menu:DateMenu ui:field="dateMenu" />
-                    </menu:submenu>
-                  </menu:MenuItem>
-                  <menu:MenuItem text="Choose a Color">
-                    <menu:submenu>
-                      <menu:ColorMenu ui:field="colorMenu" />
-                    </menu:submenu>
-                  </menu:MenuItem>
-                </menu:Menu>
-              </button:menu>
-            </button:TextButton>
- 
-            <toolbar:SeparatorToolItem />
- 
-            <!-- <button:SplitButton text="Split Button" icon="{images.list_items}"> -->
-            <button:SplitButton text="Split Button">
-              <button:menu>
-                <menu:Menu ui:field="splitButtonMenu">
-                  <!-- <menu:MenuItem HTML="<b>Bold</b>" />
-                  <menu:MenuItem HTML="<i>Italic</i>" />
-                  <menu:MenuItem HTML="<u>Underline</u>" /> -->
-                  <menu:MenuItem HTML="Bold" />
-                  <menu:MenuItem HTML="Italic" />
-                  <menu:MenuItem HTML="Underline" />
-                </menu:Menu>
-              </button:menu>
-            </button:SplitButton>
- 
-            <toolbar:SeparatorToolItem />
- 
-            <button:ToggleButton text="Toggle" value="true" />
- 
-            <toolbar:SeparatorToolItem />
- 
-            <button:TextButton text="Scrolling Menu">
-              <button:menu>
-                <menu:Menu ui:field="scrollMenu" maxHeight="200" />
-              </button:menu>
-            </button:TextButton>
- 
-            <toolbar:SeparatorToolItem />
- 
-            <toolbar:FillToolItem />
- 
-          </toolbar:ToolBar>
+							<button:TextButton ui:field="homeButton" />
+							<!-- <button:TextButton text="Button w/ Menu" icon="{images.menu_show}"> -->
+							<toolbar:SeparatorToolItem />
+							<button:TextButton ui:field="galleryButton">
+								<button:menu>
+	             					<menu:Menu ui:field="menuGallery" maxHeight="200">
+						            	<menu:MenuItem text="Cut" />
+						            	<menu:MenuItem text="Copy" />
+									</menu:Menu>
+								</button:menu>
+							</button:TextButton>
+							<toolbar:SeparatorToolItem />
+							<button:TextButton ui:field="expoButton" />
+							<toolbar:SeparatorToolItem />
+							<button:TextButton ui:field="contactButton" />
+							<toolbar:SeparatorToolItem />
+							<button:TextButton ui:field="legalButton" />
+							<toolbar:SeparatorToolItem />
+							<button:TextButton ui:field="linkButton" />
+				            <toolbar:FillToolItem />
+			         	</toolbar:ToolBar>
 					</container:north>
 					<!-- Center -->
 					<container:center layoutData="{centerData}">
