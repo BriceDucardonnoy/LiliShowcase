@@ -6,6 +6,8 @@ import org.gwt.contentflow4gwt.client.ContentFlow;
 import org.gwt.contentflow4gwt.client.ContentFlowItemClickListener;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.brice.lili.showcase.client.events.CategoryChangedEvent;
+import com.brice.lili.showcase.client.events.CategoryChangedEvent.CategoryChangedHandler;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent;
 import com.brice.lili.showcase.client.lang.Translate;
 import com.brice.lili.showcase.client.place.NameTokens;
@@ -40,12 +42,13 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		public ContentPanel getMainPane();
 		public void addItems(Vector<Picture> people);
 		public void addCategories(Vector<Category> categories);
-		public ComboBox<Category> getCategoriesSelecteur();
+		public ComboBox<Category> getCategoriesSelector();
 		public Picture getCurrentPicture();
 		public void init();
 		public Image getFrBtn();
 		public Image getEnBtn();
 		public void setDescriptionText(String text);
+		public void changeCurrentCategory(Integer categoryId);
 	}
 	
 	public static final String DETAIL_KEYWORD = "picture";
@@ -66,6 +69,13 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
         	placeManager.revealPlace(request);
         }
     };
+    
+    private CategoryChangedHandler categoryChangedHandler = new CategoryChangedHandler() {
+		@Override
+		public void onCategoryChanged(CategoryChangedEvent event) {
+			MainPagePresenter.this.getView().changeCurrentCategory(event.getCategoryId());
+		}
+	};
     
     private ClickHandler frHandler = new ClickHandler() {
 		@Override
@@ -109,15 +119,16 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		Utils.loadFile(loadDescriptionAC, "Presentation_" + LocaleInfo.getCurrentLocale().getLocaleName() + ".html");
 		Utils.showWaitCursor(getView().getMainPane().getBody());
 		registerHandler(getView().getContentFlow().addItemClickListener(contentFlowClickListener));
-		getView().getFrBtn().addClickHandler(frHandler);
-		getView().getEnBtn().addClickHandler(enHandler);
+		registerHandler(getEventBus().addHandler(CategoryChangedEvent.getType(), categoryChangedHandler));
+		registerHandler(getView().getFrBtn().addClickHandler(frHandler));
+		registerHandler(getView().getEnBtn().addClickHandler(enHandler));
 	}
 
-	@Override
-	protected void onReveal() {
-		super.onReveal();
+//	@Override
+//	protected void onReveal() {
+//		super.onReveal();
 //		getView().getMainPane().add(getView().getContentFlow());// Done now in UiBinder file
-	}
+//	}
 	
 //	Log.info("getHostPageBaseURL: " + GWT.getHostPageBaseURL());// http://127.0.1.1:8888/
 //	Log.info("getModuleName: " + GWT.getModuleName());// liliShowcase

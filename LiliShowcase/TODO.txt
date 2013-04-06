@@ -19,13 +19,14 @@ V HTMLiser le textarea -> richtextarea
 V Mettre .html pour presentation
 V Menu sur toutes les pages
 V Traduire menu
+V Peupler le menu de galeries (category) et expo dynamiquement
+V Menu Gallery gere le changement de categorie dans le coverflow
+V Menu Gallery ou combobox repondent au meme event pour le changement de category (dans le mainpresenter vu que c'est lui qui contient le coverflow)
+V Menu Gallery a une fleche sur la categorie courante et met a jour la combobox sans event (pour eviter double-refresh du coverflow)
 
 X Traduction UiBinder (dans le client bundle ?)
 X Page de "en cours de construction"
 
-0 Peupler le menu de galeries (category) et expo dynamiquement
-0 Menu Gallery gere le changement de categorie dans le coverflow
-0 Menu Gallery ou combobox repondent au meme event pour le changement de category (dans le mainpresenter vu que c'est lui qui contient le coverflow)
 0 Enlever north pane du mainPain
 0 Resize du showcase quand le panel south est resize
 0 Mettre sous licence BSD

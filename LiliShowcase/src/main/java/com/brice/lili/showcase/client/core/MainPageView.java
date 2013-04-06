@@ -66,7 +66,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@UiField(provided = true)
 	MarginData outerData = new MarginData(10);
 	@UiField(provided = true)
-	BorderLayoutData northData = new BorderLayoutData(100);
+	BorderLayoutData northData = new BorderLayoutData(75);
 	@UiField(provided = true)
 	BorderLayoutData westData = new BorderLayoutData(150);
 	@UiField(provided = true)
@@ -120,6 +120,9 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		color.setBoxLabel(translate.Color());
 		categoryField.setText(translate.Category());
 		sortField.setText(translate.Sort());
+		
+		// No more used since menu exists
+		categoryField.setVisible(false);
 		
 		ToggleGroup sortToggle = new ToggleGroup();
 		sortToggle.add(title);
@@ -217,7 +220,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	}
 
 	@Override
-	public ComboBox<Category> getCategoriesSelecteur() {
+	public ComboBox<Category> getCategoriesSelector() {
 		return categoriesCB;
 	}
 	
@@ -252,8 +255,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	 * Clear ordered pictures and add new ones in specific order
 	 * Then add it in DOM
 	 */
-	public void categoryChanged() {
-		categoryChanged(150);
+	public void refreshCoverFlow() {
+		refreshCoverFlow(150);
 	}
 	
 	/**
@@ -262,7 +265,10 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	 * Then add it in DOM
 	 * @param timeout the time to wait before refreshing DOM in ms
 	 */
-	public void categoryChanged(final int timeout) {
+	public void refreshCoverFlow(final int timeout) {
+		if(Log.isInfoEnabled()) {
+			Info.display("Refresh", "Refresh coverflow for category " + categoriesCB.getStore().get(currentCategoryId).getName());
+		}
 		/*
 		 *  Remove objects pushed twice in target (objects from contentflow project in public)
 		 */
@@ -294,7 +300,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	
 	public void sortChanged(String name) {
 		sortName = name;
-		categoryChanged(allPictures.size() * 28);// 250: arbitrary optimistic timeout
+		refreshCoverFlow(allPictures.size() * 28);// 250: arbitrary optimistic timeout
 	}
 	
 	/*
@@ -316,10 +322,11 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		* onSelection gives a SelectionEvent
 		*/
 //		Window.alert("Hello, AJAX");
+		// WARNING!!! This is not bijectif with CategoryChangedEvent => menu Gallery has check icon not updated: use fireEventFromSource and compare with 'this'
 		if(e.getSelectedItem() != null) {
 			if(e.getSelectedItem().getId().equals(currentCategoryId)) return;
 			currentCategoryId = e.getSelectedItem().getId();
-			categoryChanged(150);
+			refreshCoverFlow();
 		}
 	}
 	
@@ -342,6 +349,16 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	public void setDescriptionText(String text) {
 		description.setEnabled(false);
 		description.setHTML(text);
+	}
+
+	@Override
+	public void changeCurrentCategory(Integer categoryId) {
+		if(categoryId.equals(currentCategoryId)) return;
+		currentCategoryId = categoryId;
+		refreshCoverFlow();
+		if(categoriesCB.getStore().get(categoryId) != null && categoriesCB.getStore().get(categoryId).getId().equals(categoryId)) {
+			categoriesCB.setValue(categoriesCB.getStore().get(categoryId));
+		}
 	}
 
 }

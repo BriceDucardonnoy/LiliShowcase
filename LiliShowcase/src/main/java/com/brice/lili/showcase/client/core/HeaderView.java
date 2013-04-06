@@ -5,7 +5,6 @@ import java.util.Vector;
 import com.brice.lili.showcase.client.lang.Translate;
 import com.brice.lili.showcase.shared.model.Category;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -17,9 +16,8 @@ import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.info.Info;
-import com.sencha.gxt.widget.core.client.menu.Item;
+import com.sencha.gxt.widget.core.client.menu.CheckMenuItem;
 import com.sencha.gxt.widget.core.client.menu.Menu;
-import com.sencha.gxt.widget.core.client.menu.MenuItem;
 
 public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 	
@@ -77,19 +75,28 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 		Info.display("INFO", ((TextButton) e.getSource()).getText());
 	}
 	
-	@UiHandler("menuGallery")
-	public void onMenuSelection(SelectionEvent<Item> event) {
-		MenuItem item = (MenuItem) event.getSelectedItem();
-		Info.display("Action", translate.YouClickOn() + " " + item.getText());
+//	@UiHandler("menuGallery")
+//	public void onMenuSelection(SelectionEvent<Item> event) {
+//		MenuItem item = (MenuItem) event.getSelectedItem();
+//		Info.display("Action", translate.YouClickOn() + " " + item.getText());
+//	}
+	
+	@Override
+	public Menu getGalleryMenu() {
+		return menuGallery;
 	}
 
 	@Override
 	public void addGalleries(Vector<Category> categories) {
+		if(categories == null || categories.size() == 0) return;
 		for(Category category : categories) {
-			MenuItem item = new MenuItem(category.getName());
+			CheckMenuItem item = new CheckMenuItem(category.getName());
+			item.setGroup("gallery");
 			item.setItemId(category.getId().toString());
 			menuGallery.add(item);
 		}
+		((CheckMenuItem)menuGallery.getItemByItemId(categories.get(0).getId().toString())).setChecked(true);
+//		menuGallery.setActiveItem(menuGallery.getItemByItemId(categories.get(1).getId().toString()), false);
 	}
 	
 }
