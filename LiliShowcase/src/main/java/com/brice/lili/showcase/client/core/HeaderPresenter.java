@@ -86,7 +86,6 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 			@Override
 			public void onSelect(SelectEvent event) {
 				if(placeManager.getCurrentPlaceRequest().getNameToken().equals(NameTokens.mainpage)) return;
-				Info.display("Go to accueil", "Go to accueil");
 				PlaceRequest request = new PlaceRequest(NameTokens.mainpage);
 	        	placeManager.revealPlace(request);
 			}
