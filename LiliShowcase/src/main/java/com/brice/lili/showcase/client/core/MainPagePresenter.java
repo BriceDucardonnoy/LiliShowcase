@@ -73,6 +73,10 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
     private CategoryChangedHandler categoryChangedHandler = new CategoryChangedHandler() {
 		@Override
 		public void onCategoryChanged(CategoryChangedEvent event) {
+			if(!placeManager.getCurrentPlaceRequest().getNameToken().equals(NameTokens.mainpage)) {
+				PlaceRequest request = new PlaceRequest(NameTokens.mainpage);
+				placeManager.revealPlace(request);
+			}
 			MainPagePresenter.this.getView().changeCurrentCategory(event.getCategoryId());
 		}
 	};
@@ -102,9 +106,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		categories = new Vector<Category>();
 		pictures = new Vector<Picture>();
 		Log.info("Current local is " + LocaleInfo.getCurrentLocale().getLocaleName());
-//		 UrlBuilder builder = Location.createUrlBuilder().setParameter("locale", "fr");
-//		 Window.Location.replace(builder.buildString());
-//		Log.info("Current local 2 is " + LocaleInfo.getCurrentLocale().getLocaleName());
 	}
 
 	@Override

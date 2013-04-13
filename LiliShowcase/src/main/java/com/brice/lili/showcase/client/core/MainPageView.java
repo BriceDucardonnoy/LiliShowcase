@@ -360,13 +360,18 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	}
 
 	@Override
-	public void changeCurrentCategory(Integer categoryId) {
+	public void changeCurrentCategory(final Integer categoryId) {
 		if(categoryId.equals(currentCategoryId)) return;
 		currentCategoryId = categoryId;
-		refreshCoverFlow();
-		if(categoriesCB.getStore().get(categoryId) != null && categoriesCB.getStore().get(categoryId).getId().equals(categoryId)) {
-			categoriesCB.setValue(categoriesCB.getStore().get(categoryId));
-		}
+		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+			@Override
+			public void execute() {
+				refreshCoverFlow();
+				if(categoriesCB.getStore().get(categoryId) != null && categoriesCB.getStore().get(categoryId).getId().equals(categoryId)) {
+					categoriesCB.setValue(categoriesCB.getStore().get(categoryId));
+				}
+			}
+		});
 	}
 
 }

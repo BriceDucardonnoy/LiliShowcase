@@ -62,6 +62,16 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		}
 	};
 	
+	private SelectHandler homeHandler = new SelectHandler() {
+		@Override
+		public void onSelect(SelectEvent event) {
+			if(placeManager.getCurrentPlaceRequest().getNameToken().equals(NameTokens.mainpage)) return;
+			PlaceRequest request = new PlaceRequest(NameTokens.mainpage);
+        	placeManager.revealPlace(request);
+//        	placeManager.revealDefaultPlace();
+		}
+	};
+	
 	@ProxyCodeSplit
 	public interface MyProxy extends Proxy<HeaderPresenter> {
 	}
@@ -81,14 +91,7 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		super.onBind();
 		registerHandler(getEventBus().addHandler(PicturesLoadedEvent.getType(), pictureLoadedHandler));
 		registerHandler(getView().getGalleryMenu().addSelectionHandler(categoryChangedHandler));
-		registerHandler(getView().getHomeButton().addSelectHandler(new SelectHandler() {
-			@Override
-			public void onSelect(SelectEvent event) {
-				if(placeManager.getCurrentPlaceRequest().getNameToken().equals(NameTokens.mainpage)) return;
-				PlaceRequest request = new PlaceRequest(NameTokens.mainpage);
-	        	placeManager.revealPlace(request);
-			}
-		}));
+		registerHandler(getView().getHomeButton().addSelectHandler(homeHandler));
 	}
 	
 }
