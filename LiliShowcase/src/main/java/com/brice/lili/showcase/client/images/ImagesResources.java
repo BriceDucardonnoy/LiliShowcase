@@ -41,9 +41,6 @@ public interface ImagesResources extends ClientBundle {
 	@Source("Logo2_small.png")
 	ImageResource logo2Small();
 	
-	@Source("Header_80.png")
-	ImageResource header80();
-	
 	@Source("Header_200.png")
 	ImageResource header200();
 	

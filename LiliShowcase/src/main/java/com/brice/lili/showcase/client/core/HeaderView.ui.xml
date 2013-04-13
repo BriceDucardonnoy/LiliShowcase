@@ -51,6 +51,9 @@
 	    .cursorImageFlag {
 			cursor: pointer;
 		}
+		.globalStyle {
+			background: #000000 repeat scroll 0 0;
+		}
 	</ui:style>
 
 	<container:Viewport>
@@ -62,7 +65,7 @@
 						<!-- <g:HTMLPanel>
 							This is my header<hr/>
 						</g:HTMLPanel> -->
-						<container:HorizontalLayoutContainer>
+						<container:HorizontalLayoutContainer addStyleNames="{style.globalStyle}" borders="false">
 							<container:child layoutData="{horizontalLayoutData}">
 								<g:Image resource='{res.header200}' />
 							</container:child>
@@ -111,7 +114,7 @@
 					</container:north>
 					<!-- Center -->
 					<container:center layoutData="{centerData}">
-						<gxt:ContentPanel headerVisible="false" ui:field="mainCenterPane">
+						<gxt:ContentPanel headerVisible="false" borders="false" bodyBorder="false" ui:field="mainCenterPane">
 						</gxt:ContentPanel>
 					</container:center>
 					<!-- SOUTH -->

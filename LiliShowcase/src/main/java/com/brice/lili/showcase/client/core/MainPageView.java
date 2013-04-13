@@ -63,10 +63,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@UiField FieldLabel sortField;
 	
 	@UiField(provided = true)
-	MarginData outerData = new MarginData(10);
-	@UiField(provided = true)
-	BorderLayoutData northData = new BorderLayoutData(0);// Hide it
-	@UiField(provided = true)
 	BorderLayoutData westData = new BorderLayoutData(150);
 	@UiField(provided = true)
 	BorderLayoutData centerData = new BorderLayoutData();
@@ -74,7 +70,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@UiField(provided = true)
 	BorderLayoutData eastData = new BorderLayoutData(150);
 	@UiField(provided = true)
-	BorderLayoutData southData = new BorderLayoutData(100);
+	BorderLayoutData southData = new BorderLayoutData(170d);
 	@UiField(provided = true)
 	MarginData marginData = new MarginData(5);
 
@@ -91,12 +87,9 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@Inject
 	public MainPageView(final Binder binder) {
 		// Provided true => create them before createAndBindUi
-//		northData.setMargins(new Margins(5));
-		westData.setMargins(new Margins(0, 5, 0, 5));
-		eastData.setMargins(new Margins(0, 5, 0, 5));
-		southData.setMargins(new Margins(5));
+		westData.setMargins(new Margins(0, 0, 0, 0));
+		eastData.setMargins(new Margins(0, 0, 0, 0));
 		southData.setCollapsible(true);
-		southData.setSize(170d);
 		southData.setSplit(true);
 		centerData.setMinSize(350);
 		
