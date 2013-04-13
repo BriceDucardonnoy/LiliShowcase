@@ -36,7 +36,6 @@ import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData;
 import com.sencha.gxt.widget.core.client.container.MarginData;
-import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import com.sencha.gxt.widget.core.client.form.Radio;
@@ -66,7 +65,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@UiField(provided = true)
 	MarginData outerData = new MarginData(10);
 	@UiField(provided = true)
-	BorderLayoutData northData = new BorderLayoutData(75);
+	BorderLayoutData northData = new BorderLayoutData(0);// Hide it
 	@UiField(provided = true)
 	BorderLayoutData westData = new BorderLayoutData(150);
 	@UiField(provided = true)
@@ -78,8 +77,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	BorderLayoutData southData = new BorderLayoutData(100);
 	@UiField(provided = true)
 	MarginData marginData = new MarginData(5);
-	@UiField(provided = true)
-	VerticalLayoutData verticalLayoutData = new VerticalLayoutData();
 
     private CategoryProperties props = GWT.create(CategoryProperties.class);
     private ArrayList<PhotoView> allPictures = null;
@@ -94,7 +91,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@Inject
 	public MainPageView(final Binder binder) {
 		// Provided true => create them before createAndBindUi
-		northData.setMargins(new Margins(5));
+//		northData.setMargins(new Margins(5));
 		westData.setMargins(new Margins(0, 5, 0, 5));
 		eastData.setMargins(new Margins(0, 5, 0, 5));
 		southData.setMargins(new Margins(5));
@@ -102,12 +99,12 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		southData.setSize(170d);
 		southData.setSplit(true);
 		centerData.setMinSize(350);
-		verticalLayoutData.setMargins(new Margins(5));
 		
 		store = new ListStore<Category>(props.key());
 		
 		widget = binder.createAndBindUi(this);
 		
+		sortName = "Date";
 		allPictures = new ArrayList<PhotoView>();
 		orderedPictures = new ArrayList<Integer>();
 		categoriesCB.setForceSelection(true);

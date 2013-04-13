@@ -6,10 +6,14 @@ import com.brice.lili.showcase.client.events.CategoryChangedEvent;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent.PicturesLoadedHandler;
 import com.brice.lili.showcase.client.place.NameTokens;
+import com.brice.lili.showcase.client.utils.Utils;
 import com.brice.lili.showcase.shared.model.Category;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.user.client.ui.Image;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
@@ -42,6 +46,8 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		public TextButton getContactButton();
 		public TextButton getLegalButton();
 		public TextButton getLinkButton();
+		public Image getFrBtn();
+		public Image getEnBtn();
 	}
 	
 	private PicturesLoadedHandler pictureLoadedHandler = new PicturesLoadedHandler() {
@@ -72,6 +78,20 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		}
 	};
 	
+	private ClickHandler frHandler = new ClickHandler() {
+		@Override
+		public void onClick(ClickEvent arg0) {
+			Utils.switchLocale("fr");
+		}
+	};
+
+	private ClickHandler enHandler = new ClickHandler() {
+		@Override
+		public void onClick(ClickEvent arg0) {
+			Utils.switchLocale("en");
+		}
+	};
+	
 	@ProxyCodeSplit
 	public interface MyProxy extends Proxy<HeaderPresenter> {
 	}
@@ -92,6 +112,8 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		registerHandler(getEventBus().addHandler(PicturesLoadedEvent.getType(), pictureLoadedHandler));
 		registerHandler(getView().getGalleryMenu().addSelectionHandler(categoryChangedHandler));
 		registerHandler(getView().getHomeButton().addSelectHandler(homeHandler));
+		registerHandler(getView().getFrBtn().addClickHandler(frHandler));
+		registerHandler(getView().getEnBtn().addClickHandler(enHandler));
 	}
 	
 }

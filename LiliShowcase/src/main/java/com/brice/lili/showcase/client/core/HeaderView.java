@@ -7,12 +7,12 @@ import com.brice.lili.showcase.shared.model.Category;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.button.TextButton;
-import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData;
 import com.sencha.gxt.widget.core.client.menu.CheckMenuItem;
 import com.sencha.gxt.widget.core.client.menu.Menu;
 
@@ -22,9 +22,6 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 
 	private final Widget widget;
 	
-	@UiField(provided = true)
-	BorderLayoutData northData = new BorderLayoutData(50);
-	
 	@UiField ContentPanel mainCenterPane;
 	@UiField TextButton homeButton;
 	@UiField TextButton galleryButton;
@@ -33,6 +30,8 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 	@UiField TextButton contactButton;
 	@UiField TextButton legalButton;
 	@UiField TextButton linkButton;
+	@UiField Image tr_fr;
+	@UiField Image tr_en;
 
 	public interface Binder extends UiBinder<Widget, HeaderView> {
 	}
@@ -124,6 +123,16 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 	@Override
 	public TextButton getLinkButton() {
 		return linkButton;
+	}
+	
+	@Override
+	public Image getFrBtn() {
+		return tr_fr;
+	}
+
+	@Override
+	public Image getEnBtn() {
+		return tr_en;
 	}
 	
 }

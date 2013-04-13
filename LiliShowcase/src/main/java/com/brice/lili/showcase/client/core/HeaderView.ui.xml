@@ -11,14 +11,16 @@
 	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
 	ui:generateLocales='default'>
 
+	<!-- Layout -->
 	<ui:with type="com.sencha.gxt.core.client.util.Margins" field="outerMargins">
 		<ui:attributes top="0" right="0" bottom="0" left="0" />
 	</ui:with>
-	
 	<ui:with type="com.sencha.gxt.widget.core.client.container.MarginData" field="outerData">
 		<ui:attributes margins="{outerMargins}" />
 	</ui:with>
-	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="northData" />
+	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="northData">
+		<ui:attributes size="80" />
+	</ui:with>
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="westData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="centerData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="eastData" />
@@ -29,7 +31,27 @@
 	<ui:with type="com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer.HorizontalLayoutData" field="horizontalLayoutDataMain">
 		<ui:attributes width="1" height="1" />
 	</ui:with>
+	<ui:with type="com.sencha.gxt.widget.core.client.container.BoxLayoutContainer.BoxLayoutData" field="horizontalLayoutDataFlag">
+		<ui:attributes margins="{margins0}" />
+	</ui:with>
+	<!-- <ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="verticalLayoutData" /> -->
+	<ui:with type="com.sencha.gxt.core.client.util.Margins" field="margins0">
+		<ui:attributes top="0" right="0" bottom="0" left="0" />
+	</ui:with>
+	<ui:with type="com.sencha.gxt.core.client.util.Padding" field="padding0">
+		<ui:attributes top="0" right="0" bottom="0" left="0" />
+	</ui:with>
+	<ui:with type="com.sencha.gxt.widget.core.client.container.BoxLayoutContainer.BoxLayoutData" field="boxLayoutDataMargins0">
+		<ui:attributes margins="{margins0}" />
+	</ui:with>
+	<!-- Resources -->
 	<ui:with field='res' type='com.brice.lili.showcase.client.images.ImagesResources' />
+	
+	<ui:style>
+	    .cursorImageFlag {
+			cursor: pointer;
+		}
+	</ui:style>
 
 	<container:Viewport>
 		<container:SimpleContainer borders="false">
@@ -45,28 +67,46 @@
 								<g:Image resource='{res.logo2Small}' />
 							</container:child>
 							<container:child layoutData="{horizontalLayoutDataMain}">
-								<toolbar:ToolBar>
-									<button:TextButton ui:field="homeButton" />
-									<!-- <button:TextButton text="Button w/ Menu" icon="{images.menu_show}"> -->
-									<toolbar:SeparatorToolItem />
-									<button:TextButton ui:field="galleryButton">
-										<button:menu>
-			             					<menu:Menu ui:field="menuGallery" maxHeight="200">
-								            	<!-- <menu:MenuItem text="Cut" />
-								            	<menu:MenuItem text="Copy" /> -->
-											</menu:Menu>
-										</button:menu>
-									</button:TextButton>
-									<toolbar:SeparatorToolItem />
-									<button:TextButton ui:field="expoButton" />
-									<toolbar:SeparatorToolItem />
-									<button:TextButton ui:field="contactButton" />
-									<toolbar:SeparatorToolItem />
-									<button:TextButton ui:field="legalButton" />
-									<toolbar:SeparatorToolItem />
-									<button:TextButton ui:field="linkButton" />
-						            <toolbar:FillToolItem />
-					         	</toolbar:ToolBar>
+								<!-- <container:VerticalLayoutContainer>
+									<container:child layoutData="{verticalLayoutData}">
+									</container:child>
+								</container:VerticalLayoutContainer> -->
+								<container:VBoxLayoutContainer padding="{padding0}" vBoxLayoutAlign="RIGHT">
+									<container:child layoutData="{boxLayoutDataMargins0}">
+								  		<container:HBoxLayoutContainer hBoxLayoutAlign="BOTTOM" pack="END">
+											<container:child layoutData="{horizontalLayoutDataFlag}">
+												<g:Image resource='{res.france24}' ui:field="tr_fr" addStyleNames="{style.cursorImageFlag}" />
+											</container:child>
+											<container:child layoutData="{horizontalLayoutDataFlag}">
+												<g:Image resource='{res.uk24}' ui:field="tr_en" addStyleNames="{style.cursorImageFlag}" />
+									    	</container:child>
+								  		</container:HBoxLayoutContainer>
+								  	</container:child>
+									<container:child layoutData="{boxLayoutDataMargins0}">
+										<toolbar:ToolBar>
+											<button:TextButton ui:field="homeButton" />
+											<!-- <button:TextButton text="Button w/ Menu" icon="{images.menu_show}"> -->
+											<toolbar:SeparatorToolItem />
+											<button:TextButton ui:field="galleryButton">
+												<button:menu>
+					             					<menu:Menu ui:field="menuGallery" maxHeight="200">
+										            	<!-- <menu:MenuItem text="Cut" />
+										            	<menu:MenuItem text="Copy" /> -->
+													</menu:Menu>
+												</button:menu>
+											</button:TextButton>
+											<toolbar:SeparatorToolItem />
+											<button:TextButton ui:field="expoButton" />
+											<toolbar:SeparatorToolItem />
+											<button:TextButton ui:field="contactButton" />
+											<toolbar:SeparatorToolItem />
+											<button:TextButton ui:field="legalButton" />
+											<toolbar:SeparatorToolItem />
+											<button:TextButton ui:field="linkButton" />
+								            <toolbar:FillToolItem />
+							         	</toolbar:ToolBar>
+								  	</container:child>
+								</container:VBoxLayoutContainer>
 					    	</container:child>
 						</container:HorizontalLayoutContainer>
 					</container:north>

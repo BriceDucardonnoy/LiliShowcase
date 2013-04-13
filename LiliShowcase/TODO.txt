@@ -24,18 +24,17 @@ V Menu Gallery gere le changement de categorie dans le coverflow
 V Menu Gallery ou combobox repondent au meme event pour le changement de category (dans le mainpresenter vu que c'est lui qui contient le coverflow)
 V Menu Gallery a une fleche sur la categorie courante et met a jour la combobox sans event (pour eviter double-refresh du coverflow)
 V Resize du showcase quand le panel south est resize : le layer blanc du coverflow ne se fait plus depuis la suppression du style dans uibinder du coverflow
+V Enlever north pane du mainPain
 
 X Traduction UiBinder (dans le client bundle ?)
 X Page de "en cours de construction"
 
-0 Enlever north pane du mainPain
 0 Icon au dessus de chaque bouton du menu ?
-0 Mettre sous licence BSD
 0 Composants autour 1re page
-0 Googles analitics ?
+0 Design general (black)
 0 Lazy loading des images sur la 2eme page pour ne pas ralentir le chargement de la 1re
 0 Composants 2eme page
-0 Theme black
-0 Design general
+0 Mettre sous licence BSD
+0 Googles analitics ?
 O (Enlever scrollbar (juste un parametre a changer dans l'init du coverflow))
 O Enlever les infos redondantes (remove des fichiers dans le webapp ?)
