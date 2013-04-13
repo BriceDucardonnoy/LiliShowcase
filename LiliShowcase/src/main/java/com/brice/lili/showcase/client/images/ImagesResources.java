@@ -23,6 +23,12 @@ public interface ImagesResources extends ClientBundle {
 	@Source("Logo4.png")
 	ImageResource logo4();
 	
+	@Source("Logo3_32.png")
+	ImageResource logo3small();
+	
+	@Source("Logo4_32.png")
+	ImageResource logo4small();
+	
 	@Source("Tache.png")
 	ImageResource logoTache();
 
@@ -34,5 +40,20 @@ public interface ImagesResources extends ClientBundle {
 	
 	@Source("Logo2_small.png")
 	ImageResource logo2Small();
+	
+	@Source("Header_80.png")
+	ImageResource header80();
+	
+	@Source("Header_200.png")
+	ImageResource header200();
+	
+	@Source("contact.png")
+	ImageResource contact();
+	
+	@Source("copyright_inv.png")
+	ImageResource copyright();
+	
+	@Source("link.png")
+	ImageResource link();
 
 }

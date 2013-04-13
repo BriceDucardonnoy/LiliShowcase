@@ -41,11 +41,17 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 		widget = binder.createAndBindUi(this);
 		
 		homeButton.setText(translate.Home());
+		homeButton.setTitle(translate.Home());
 		galleryButton.setText(translate.Gallery());
+		galleryButton.setTitle(translate.Gallery());
 		expoButton.setText(translate.Expositions());
+		expoButton.setTitle(translate.Expositions());
 		contactButton.setText(translate.Contact());
+		contactButton.setTitle(translate.Contact());
 		legalButton.setText(translate.Legal());
+		legalButton.setTitle(translate.Legal());
 		linkButton.setText(translate.Link());
+		linkButton.setTitle(translate.Link());
 	}
 
 	@Override

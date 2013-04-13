@@ -19,14 +19,14 @@
 		<ui:attributes margins="{outerMargins}" />
 	</ui:with>
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="northData">
-		<ui:attributes size="80" />
+		<ui:attributes size="200" />
 	</ui:with>
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="westData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="centerData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="eastData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="southData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer.HorizontalLayoutData" field="horizontalLayoutData">
-		<ui:attributes width="40" height="1" />
+		<ui:attributes width="-1" height="1" />
 	</ui:with>
 	<ui:with type="com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer.HorizontalLayoutData" field="horizontalLayoutDataMain">
 		<ui:attributes width="1" height="1" />
@@ -64,7 +64,7 @@
 						</g:HTMLPanel> -->
 						<container:HorizontalLayoutContainer>
 							<container:child layoutData="{horizontalLayoutData}">
-								<g:Image resource='{res.logo2Small}' />
+								<g:Image resource='{res.header200}' />
 							</container:child>
 							<container:child layoutData="{horizontalLayoutDataMain}">
 								<!-- <container:VerticalLayoutContainer>
@@ -84,10 +84,9 @@
 								  	</container:child>
 									<container:child layoutData="{boxLayoutDataMargins0}">
 										<toolbar:ToolBar>
-											<button:TextButton ui:field="homeButton" />
-											<!-- <button:TextButton text="Button w/ Menu" icon="{images.menu_show}"> -->
+											<button:TextButton ui:field="homeButton" icon="{res.logo4small}" iconAlign="TOP" />
 											<toolbar:SeparatorToolItem />
-											<button:TextButton ui:field="galleryButton">
+											<button:TextButton ui:field="galleryButton" iconAlign="TOP">
 												<button:menu>
 					             					<menu:Menu ui:field="menuGallery" maxHeight="200">
 										            	<!-- <menu:MenuItem text="Cut" />
@@ -96,13 +95,13 @@
 												</button:menu>
 											</button:TextButton>
 											<toolbar:SeparatorToolItem />
-											<button:TextButton ui:field="expoButton" />
+											<button:TextButton ui:field="expoButton" iconAlign="TOP" />
 											<toolbar:SeparatorToolItem />
-											<button:TextButton ui:field="contactButton" />
+											<button:TextButton ui:field="contactButton" icon="{res.contact}" iconAlign="TOP" />
 											<toolbar:SeparatorToolItem />
-											<button:TextButton ui:field="legalButton" />
+											<button:TextButton ui:field="legalButton" icon="{res.copyright}" iconAlign="TOP" />
 											<toolbar:SeparatorToolItem />
-											<button:TextButton ui:field="linkButton" />
+											<button:TextButton ui:field="linkButton" icon="{res.link}" iconAlign="TOP" />
 								            <toolbar:FillToolItem />
 							         	</toolbar:ToolBar>
 								  	</container:child>
