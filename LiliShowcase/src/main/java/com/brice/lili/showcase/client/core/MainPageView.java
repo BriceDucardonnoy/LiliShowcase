@@ -158,7 +158,11 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
     }
 	
 	private PhotoView createImageView(Picture picture) {
-		allPictures.add(new PhotoView(new FitImage(picture.getImageUrl()), picture.getTitle(), picture));
+		String title = picture.getTitle();
+		String dim = picture.getProperty("Dimension").toString();
+		if(title == null) title = "";
+		if(dim == null) dim = "";
+		allPictures.add(new PhotoView(new FitImage(picture.getImageUrl()), title + "<br />" + dim, picture));
         return allPictures.get(allPictures.size() - 1);
     }
 	
@@ -345,6 +349,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 
 	@Override
 	public void setDescriptionText(String text) {
+		// TODO BDY: header en gris fonce (cf. slam plg work)
 		description.setEnabled(false);
 		description.setHTML(text);
 	}

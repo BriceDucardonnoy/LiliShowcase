@@ -51,6 +51,9 @@
 			height: 50%;
 			/*padding-right: 30px;*/
 		}
+		.globalStyle {
+			background: #000000 repeat scroll 0 0;
+		}
 		.innerContainer {
 			border: none;
 		}
@@ -141,7 +144,7 @@
 				<container:center layoutData="{centerData}">
 					<!-- <gxt:ContentPanel ui:field="mainPane" headerVisible="true" title="Showcase" bodyBorder="false"> -->
 					<gxt:ContentPanel ui:field="mainPane" headerVisible="false" bodyBorder="false" borders="false">
-						<contentflow4gwt:ContentFlow ui:field="contentFlow" />
+						<contentflow4gwt:ContentFlow ui:field="contentFlow" addStyleNames="{style.globalStyle}" />
 					</gxt:ContentPanel>
 				</container:center>
 				<!-- EAST -->
@@ -150,8 +153,9 @@
 				</container:east> -->
 				<!-- SOUTH -->
 				<container:south layoutData="{southData}">
+					<!-- For header over-head style, see slam what plg has done -->
 					<gxt:ContentPanel collapsible="true" borders="false" bodyBorder="false" ui:field="southCP">
-						<g:RichTextArea ui:field="description" enabled="false" />
+						<g:RichTextArea ui:field="description" enabled="false" addStyleNames="{style.globalStyle}" />
 					</gxt:ContentPanel>
 				</container:south>
 			</container:BorderLayoutContainer>

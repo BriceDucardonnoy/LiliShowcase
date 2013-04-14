@@ -25,13 +25,14 @@ V Menu Gallery ou combobox repondent au meme event pour le changement de categor
 V Menu Gallery a une fleche sur la categorie courante et met a jour la combobox sans event (pour eviter double-refresh du coverflow)
 V Resize du showcase quand le panel south est resize : le layer blanc du coverflow ne se fait plus depuis la suppression du style dans uibinder du coverflow
 V Enlever north pane du mainPain
+V Icon au dessus de chaque bouton du menu
+V Composants autour 1re page
+V Titre des images = nom<br />dimension<br />
 
 X Traduction UiBinder (dans le client bundle ?)
 X Page de "en cours de construction"
 
-0 Icon au dessus de chaque bouton du menu ?
-0 Composants autour 1re page
-0 Design general (black)
+0 Design general (black): reste le bandeau des ContentPanel et le menu
 0 Lazy loading des images sur la 2eme page pour ne pas ralentir le chargement de la 1re
 0 Composants 2eme page
 0 Mettre sous licence BSD
