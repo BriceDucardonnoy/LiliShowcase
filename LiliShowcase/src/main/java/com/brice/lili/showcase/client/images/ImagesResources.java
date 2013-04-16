@@ -4,7 +4,7 @@ import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 
 public interface ImagesResources extends ClientBundle {
-
+	
 	@Source("france.png")
 	ImageResource france();
 	
@@ -52,5 +52,5 @@ public interface ImagesResources extends ClientBundle {
 	
 	@Source("link.png")
 	ImageResource link();
-
+	
 }

@@ -1,0 +1,17 @@
+@sprite .header {
+  color: #373737;
+  /*color: #FFFFFF;*/
+  gwt-image: "headerBackground";
+  height: auto;
+  border: 1px solid #404040;
+}
+
+/* See com/sencha/gxt/theme/base/client/widget/Header.css referenced in DarkHeaderAppearance.java to know which css attribute override */
+.headerText {
+  /* font-family: tahoma, arial, verdana, sans-serif; */
+  font-family: helvetica,elvetica;
+  font-size: 13px;
+  font-weight: bold;
+  font-style: italic;
+  line-height: 15px;
+}

@@ -9,6 +9,7 @@ import org.gwt.contentflow4gwt.client.PhotoView;
 import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.lang.Translate;
 import com.brice.lili.showcase.client.properties.CategoryProperties;
+import com.brice.lili.showcase.client.styles.DarkContentPanelAppearance;
 import com.brice.lili.showcase.client.utils.Utils;
 import com.brice.lili.showcase.shared.model.Category;
 import com.brice.lili.showcase.shared.model.Picture;
@@ -103,6 +104,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		categoriesCB.setForceSelection(true);
 		categoriesCB.setEditable(false);
 		southCP.setHeadingText(translate.ArtistPresentation());
+		southCP.getHeader().setBorders(false);
 		
 		title.setBoxLabel(translate.Title());
 		date.setBoxLabel(translate.Date());
@@ -205,12 +207,20 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	/*
 	 * As for UiHandler, method name has no importance, it's the parameter type of the return...
 	 */
-	@UiFactory ContentFlow<Picture> createContentFlow() {
+	@UiFactory
+	ContentFlow<Picture> createContentFlow() {
 		return new ContentFlow<Picture>(true, true);
 	}
 	
-	@UiFactory ComboBox<Category> createCategoryComboBox() {
+	@UiFactory
+	ComboBox<Category> createCategoryComboBox() {
 		return new ComboBox<Category>(store, props.name());
+	}
+	
+	@UiFactory
+	ContentPanel createSouthCP() {
+		Log.info("create scp");
+		return new ContentPanel(new DarkContentPanelAppearance());
 	}
 
 	@Override
@@ -349,9 +359,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 
 	@Override
 	public void setDescriptionText(String text) {
-		// TODO BDY: header en gris fonce (cf. slam plg work)
-		description.setEnabled(false);
 		description.setHTML(text);
+//		description.unsinkEvents(Event.ONCLICK);
 	}
 
 	@Override
