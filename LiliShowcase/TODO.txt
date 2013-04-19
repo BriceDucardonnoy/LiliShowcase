@@ -32,11 +32,17 @@ V Titre des images = nom<br />dimension<br />
 X Traduction UiBinder (dans le client bundle ?)
 X Page de "en cours de construction"
 
-0 Design general (black): reste le bandeau des ContentPanel et le menu
+0 Design general (black): reste le menu, les bordures blanches et les icones
+0 Default translate est en francais
 0 RichTextArea is editable on FF (not Chrome and Opera): peut-etre changer en htmlpanel
-0 Lazy loading des images sur la 2eme page pour ne pas ralentir le chargement de la 1re
-0 Composants 2eme page
 0 Mettre sous licence BSD
+
+0 Composants 2eme page
+0 Lazy loading des images sur la 2eme page pour ne pas ralentir le chargement de la 1re
+
+0 Enlever les infos redondantes (remove des fichiers dans le webapp ?)
+0 Maven voir pour goal deploy et usage des profiles pour deploy dev et deploy prod
+
 0 Googles analitics ?
-O (Enlever scrollbar (juste un parametre a changer dans l'init du coverflow))
-O Enlever les infos redondantes (remove des fichiers dans le webapp ?)
+0 (Enlever scrollbar (juste un parametre a changer dans l'init du coverflow))
+

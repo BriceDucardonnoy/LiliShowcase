@@ -1,9 +1,12 @@
 @sprite .header {
-  color: #373737;
   /*color: #FFFFFF;*/
-  gwt-image: "headerBackground";
+  /* gwt-image: "headerBackground"; */
+  gwt-image: "darkHeaderBackground";
   height: auto;
+  color: #DDDDDD;
   border: 1px solid #404040;
+  /* color:#eeeef0;
+  border:1px solid #000000; */
 }
 
 /* See com/sencha/gxt/theme/base/client/widget/Header.css referenced in DarkHeaderAppearance.java to know which css attribute override */
@@ -14,4 +17,8 @@
   font-weight: bold;
   font-style: italic;
   line-height: 15px;
+}
+
+.headerIcon {
+	
 }

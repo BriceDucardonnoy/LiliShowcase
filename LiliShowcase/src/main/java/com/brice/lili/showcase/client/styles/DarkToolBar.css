@@ -1,0 +1,42 @@
+
+@external x-toolbar-mark ;
+
+.toolBar { 
+  width: auto;
+  height: auto;
+  /* border: none; */
+  border: thin;
+}
+
+.x-toolbar-mark {
+  border-width: 0 0 1px 0;
+  /* border-bottom: 0px solid #99b9e9; */
+  border-bottom: 0px solid #DDDDDD;
+}
+
+@sprite .x-toolbar-mark {
+  gwt-image: 'blackBackground';
+  /* background-color: #D0DEF0; */
+  background-color: #292929;
+  height: auto;
+  
+  font-family: helvetica,elvetica;
+  font-size: 13px;
+  font-weight: bold;
+  font-style: italic;
+  line-height: 15px;
+  color: white;
+}
+
+/* @sprite .over {
+  gwt-image: 'selectedBackground';
+  height: auto;
+  border: 1px dotted #DDDDDD !important;
+  cursor: pointer;
+}
+
+.sel {
+  background: none repeat scroll 0 50% #DFE8F6;
+  border: 1px dotted #A3BAE9 !important;
+  cursor: pointer;
+} */

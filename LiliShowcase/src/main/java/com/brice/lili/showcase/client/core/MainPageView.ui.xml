@@ -48,22 +48,6 @@
 	    .cursorImageFlag {
 			cursor: pointer;
 		}
-		
-		.middle-header-collapsible {
-			font: bold italic 18px Arial, Helvetica, sans-serif !important;
-			font-family:  Arial, Helvetica, sans-serif !important;
-			font-weight: bold italic !important;
-			font-size: 18px !important;
-			text-align: right !important;
-			padding: 0px;
-			color: #000;
-			background: #222; /* for non-css3 browsers */
-			/*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#555555', endColorstr='#999999') !important; /* for IE */
-			/*background: -webkit-gradient(linear, left top, left bottom, from(#555), to(#999)) ! important; /* for webkit browsers */
-			/*background: -moz-linear-gradient(top,  #555,  #999) !important; /* for firefox 3.6+ */
-		    /*cursor: pointer;
-		    /*border: 2px solid #888 !important;*/
-		}
 	</ui:style>
 	
 	<ui:with type="com.sencha.gxt.core.client.util.Margins" field="margins0">

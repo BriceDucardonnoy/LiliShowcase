@@ -219,7 +219,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	
 	@UiFactory
 	ContentPanel createSouthCP() {
-		Log.info("create scp");
 		return new ContentPanel(new DarkContentPanelAppearance());
 	}
 

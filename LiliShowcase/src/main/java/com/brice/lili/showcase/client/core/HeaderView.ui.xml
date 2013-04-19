@@ -86,7 +86,7 @@
 								  		</container:HBoxLayoutContainer>
 								  	</container:child>
 									<container:child layoutData="{boxLayoutDataMargins0}">
-										<toolbar:ToolBar>
+										<toolbar:ToolBar ui:field="toolbar">
 											<button:TextButton ui:field="homeButton" icon="{res.logo4small}" iconAlign="TOP" />
 											<toolbar:SeparatorToolItem />
 											<button:TextButton ui:field="galleryButton" iconAlign="TOP">

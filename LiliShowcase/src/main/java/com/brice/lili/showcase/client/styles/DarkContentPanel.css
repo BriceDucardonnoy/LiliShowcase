@@ -2,7 +2,11 @@
   border-color: #404040;
 }
 
+.noHeader {
+  border-top-width: 0px; 
+}
+
 .body {
-  background-color: #FFFFFF;
+  background-color: #000000;
   border-color: #404040;
 }

@@ -20,7 +20,7 @@ public class DarkHeaderAppearance extends HeaderDefaultAppearance {
 
 		String headerBar();
 	}
-
+// TODO BDY: configure topBorder.gif and top right icon to be dark
 	public interface DarkHeaderResources extends HeaderResources {
 
 		@Source({"com/sencha/gxt/theme/base/client/widget/Header.css", "DarkHeader.css"})
@@ -28,6 +28,10 @@ public class DarkHeaderAppearance extends HeaderDefaultAppearance {
 
 		@ImageOptions(repeatStyle = RepeatStyle.Horizontal)
 		ImageResource headerBackground();
+		
+		@Source("com/brice/lili/showcase/client/styles/black/images/black/panel/white-top-bottom.gif")
+		@ImageOptions(repeatStyle = RepeatStyle.Horizontal)
+		ImageResource darkHeaderBackground();
 	}
 
 
