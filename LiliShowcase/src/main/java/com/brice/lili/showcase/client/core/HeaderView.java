@@ -3,7 +3,7 @@ package com.brice.lili.showcase.client.core;
 import java.util.Vector;
 
 import com.brice.lili.showcase.client.lang.Translate;
-import com.brice.lili.showcase.client.styles.DarkToolBarAppearance;
+import com.brice.lili.showcase.client.styles.toolbar.DarkToolBarAppearance;
 import com.brice.lili.showcase.shared.model.Category;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;

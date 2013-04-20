@@ -41,7 +41,7 @@ X Page de "en cours de construction"
 0 Mettre sous licence BSD
 
 0 Composants 2eme page
-0 Description = titre<br />format<br />medium<br />annee
+0 Description = titre<br />format<br />medium<br />annee<br />price si vendu, voir pour traduction de "vendu" et "sans titre"
 0 Lazy loading des images sur la 2eme page pour ne pas ralentir le chargement de la 1re
 
 0 Enlever les infos redondantes (remove des fichiers dans le webapp ?)

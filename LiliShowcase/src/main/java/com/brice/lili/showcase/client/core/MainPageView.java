@@ -9,7 +9,7 @@ import org.gwt.contentflow4gwt.client.PhotoView;
 import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.lang.Translate;
 import com.brice.lili.showcase.client.properties.CategoryProperties;
-import com.brice.lili.showcase.client.styles.DarkContentPanelAppearance;
+import com.brice.lili.showcase.client.styles.panel.DarkContentPanelAppearance;
 import com.brice.lili.showcase.client.utils.Utils;
 import com.brice.lili.showcase.shared.model.Category;
 import com.brice.lili.showcase.shared.model.Picture;

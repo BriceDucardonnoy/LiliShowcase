@@ -1,6 +1,6 @@
-package com.brice.lili.showcase.client.styles;
+package com.brice.lili.showcase.client.styles.button.cell;
 
-import com.allen_sauer.gwt.log.client.Log;
+import com.brice.lili.showcase.client.styles.button.frame.DarkButtonTableFrameResources;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.ImageResource.ImageOptions;
@@ -64,16 +64,6 @@ public class DarkButtonCellAppearance<C> extends ButtonCellDefaultAppearance<C> 
 	 * @param frame the frame
 	 */
 	public DarkButtonCellAppearance(DarkButtonCellResources resources, ButtonCellTemplates templates, Frame frame) {
-//		this.resources = resources;
-//		this.templates = templates;
-//		this.frame = frame;
-//
-//		this.style = resources.style();
-//
-//		StyleInjectorHelper.ensureInjected(this.style, true);
-//
-//		heightOffset = frame.getFrameSize(null).getHeight();
 		super(resources, templates, frame);
-		Log.info("DarkButtonCellAppearance");
 	}
 }

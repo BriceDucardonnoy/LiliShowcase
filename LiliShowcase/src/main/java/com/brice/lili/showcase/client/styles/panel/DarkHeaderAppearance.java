@@ -1,4 +1,4 @@
-package com.brice.lili.showcase.client.styles;
+package com.brice.lili.showcase.client.styles.panel;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ImageResource;

@@ -31,7 +31,7 @@
   <!-- <replace-with class="com.brice.lili.showcase.client.styles.DarkButtonCellAppearance">
     <when-type-is class="com.sencha.gxt.theme.base.client.button.ButtonCellDefaultAppearance" />
   </replace-with> -->
-  <replace-with class="com.brice.lili.showcase.client.styles.DarkButtonCellAppearance">
+  <replace-with class="com.brice.lili.showcase.client.styles.button.cell.DarkButtonCellAppearance">
     <when-type-is class="com.sencha.gxt.cell.core.client.ButtonCell.ButtonCellAppearance" />
   </replace-with>
   

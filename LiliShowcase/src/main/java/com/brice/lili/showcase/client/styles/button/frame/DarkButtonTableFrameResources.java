@@ -1,4 +1,4 @@
-package com.brice.lili.showcase.client.styles;
+package com.brice.lili.showcase.client.styles.button.frame;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.ImageResource.ImageOptions;
