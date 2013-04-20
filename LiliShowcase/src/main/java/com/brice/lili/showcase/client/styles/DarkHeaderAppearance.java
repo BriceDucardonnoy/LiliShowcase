@@ -1,6 +1,5 @@
 package com.brice.lili.showcase.client.styles;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.ImageResource.ImageOptions;
@@ -38,7 +37,6 @@ public class DarkHeaderAppearance extends HeaderDefaultAppearance {
 	public DarkHeaderAppearance() {
 		this(GWT.<DarkHeaderResources> create(DarkHeaderResources.class),
 				GWT.<Template> create(Template.class));
-		Log.info("new DarkHeaderAppearance");
 	}
 
 	public DarkHeaderAppearance(HeaderResources resources, Template template) {

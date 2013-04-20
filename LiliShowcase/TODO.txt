@@ -32,12 +32,16 @@ V Titre des images = nom<br />dimension<br />
 X Traduction UiBinder (dans le client bundle ?)
 X Page de "en cours de construction"
 
-0 Design general (black): reste le menu, les bordures blanches et les icones
+0 Design general (black): reste le menu, les bordures blanches ou gris foncees, les boutons, le contentpanel collapse et les icones
 0 Default translate est en francais
 0 RichTextArea is editable on FF (not Chrome and Opera): peut-etre changer en htmlpanel
+0 Popups pour contact, expositions, legal et link
+0 Resize sur le collapse
+0 Chrome frame
 0 Mettre sous licence BSD
 
 0 Composants 2eme page
+0 Description = titre<br />format<br />medium<br />annee
 0 Lazy loading des images sur la 2eme page pour ne pas ralentir le chargement de la 1re
 
 0 Enlever les infos redondantes (remove des fichiers dans le webapp ?)

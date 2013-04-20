@@ -1,4 +1,5 @@
 @external x-toolbar-mark;
+/* @external content, bottom, bottomLeft, bottomRight, top, topLeft, topRight, left, right, pressed, focus; */
 
 .button {
   cursor: pointer;
@@ -109,7 +110,32 @@
   background-repeat: no-repeat;
 }
 
-.over {}
+.over {
+  /* gwt-image: 'blackBackground';
+  background-repeat: repeat; */
+  background-color: #000000;
+  height: auto;
+  
+  font-family: helvetica,elvetica;
+  font-size: 13px;
+  font-weight: bold;
+  font-style: italic;
+  line-height: 15px;
+  color: #222222;
+}
+
+/* .pressed {
+  gwt-image: 'blackBackground';
+  background-color: #000000;
+  height: auto;
+  
+  font-family: helvetica,elvetica;
+  font-size: 13px;
+  font-weight: bold;
+  font-style: italic;
+  line-height: 15px;
+  color: #222222;
+} */
 
 @if user.agent ie6 {
   @eval ARROW com.sencha.gxt.core.client.util.ImageHelper.createModuleBasedUrl("base/images/button/arrow.gif");

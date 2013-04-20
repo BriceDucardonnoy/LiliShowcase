@@ -28,12 +28,12 @@
   <inherits name='com.sencha.gxt.ui.GXT'/>
   <inherits name='com.sencha.gxt.theme.gray.Gray'/>
   <!-- <inherits name='com.brice.lili.showcase.client.styles.Dark' /> -->
-  <!-- <replace-with class="com.brice.lili.showcase.client.styles.DarkContentPanelAppearance">
-    <when-type-is class="com.sencha.gxt.widget.core.client.ContentPanel.ContentPanelAppearance" />
-  </replace-with>
-  <replace-with class="com.brice.lili.showcase.client.styles.DarkPanelHeaderAppearance">
-    <when-type-is class="com.sencha.gxt.widget.core.client.ContentPanel.PanelHeaderAppearance" />
+  <!-- <replace-with class="com.brice.lili.showcase.client.styles.DarkButtonCellAppearance">
+    <when-type-is class="com.sencha.gxt.theme.base.client.button.ButtonCellDefaultAppearance" />
   </replace-with> -->
+  <replace-with class="com.brice.lili.showcase.client.styles.DarkButtonCellAppearance">
+    <when-type-is class="com.sencha.gxt.cell.core.client.ButtonCell.ButtonCellAppearance" />
+  </replace-with>
   
   <inherits name="javax.validation.Validation"/>
   <!-- ContentFlow module -->
