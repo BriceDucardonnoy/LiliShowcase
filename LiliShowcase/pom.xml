@@ -7,7 +7,7 @@
 	<groupId>com.brice.lili</groupId>
 	<artifactId>LiliShowcase</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.7-SNAPSHOT</version>
 	<name>GWT Maven Archetype</name>
 
 	<properties>
