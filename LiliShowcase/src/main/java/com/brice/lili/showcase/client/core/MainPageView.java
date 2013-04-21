@@ -99,6 +99,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		widget = binder.createAndBindUi(this);
 		
 		sortName = "Date";
+//		sortName = title.getName();
 		allPictures = new ArrayList<PhotoView>();
 		orderedPictures = new ArrayList<Integer>();
 		categoriesCB.setForceSelection(true);
@@ -121,7 +122,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		sortToggle.add(date);
 		sortToggle.add(dimension);
 		sortToggle.add(color);
-		sortName = title.getName();
 		// SortToggle only infer on view representation => configure it in view
 		sortToggle.addValueChangeHandler(new ValueChangeHandler<HasValue<Boolean>>() {
 			@Override
@@ -155,7 +155,9 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
         	addInOrderedData(picture, allPictures.size() - 1);
         }
         for(Integer i : orderedPictures) {
-			contentFlow.addItems(allPictures.get(i));
+			if(!((Picture)allPictures.get(i).getPojo()).getCategoryIds().isEmpty()) {
+				contentFlow.addItems(allPictures.get(i));
+			}
 		}
     }
 	
@@ -267,16 +269,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	 * Then add it in DOM
 	 */
 	public void refreshCoverFlow() {
-		refreshCoverFlow(150);
-	}
-	
-	/**
-	 * Display pictures for given category
-	 * Clear ordered pictures and add new ones in specific order
-	 * Then add it in DOM
-	 * @param timeout the time to wait before refreshing DOM in ms
-	 */
-	public void refreshCoverFlow(final int timeout) {
 		if(Log.isInfoEnabled()) {
 			Info.display("Refresh", "Refresh coverflow for category " + categoriesCB.getStore().get(currentCategoryId).getName());
 		}
@@ -303,7 +295,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 				if(Log.isTraceEnabled()) {
 					Log.trace("Refresh DOM");
 				}
-				contentFlow.refreshActiveItem(timeout);
+				contentFlow.refreshActiveItem(orderedPictures.size() * 50);
 			}
 		});
 
@@ -311,7 +303,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	
 	public void sortChanged(String name) {
 		sortName = name;
-		refreshCoverFlow(allPictures.size() * 28);// 250: arbitrary optimistic timeout
+		refreshCoverFlow();
 	}
 	
 	/*

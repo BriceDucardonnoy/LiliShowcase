@@ -28,13 +28,17 @@ V Enlever north pane du mainPain
 V Icon au dessus de chaque bouton du menu
 V Composants autour 1re page
 V Titre des images = nom<br />dimension<br />
+V Default translate est en francais
+V Gallery: enlever la categorie "" (qui doit etre masquee) et trier par ordre alphabetique en mettant "Tout" en premier
+V Bug sur coverflow qui a trop de fichiers (rallonger le coef du timeout en 28 passe a 50)
 
 X Traduction UiBinder (dans le client bundle ?)
 X Page de "en cours de construction"
 
+0 Gallery: bug quand accents ou fichier non trouve
 0 Design general (black): reste le menu, les bordures blanches ou gris foncees, les boutons, le contentpanel collapse et les icones
-0 Default translate est en francais
 0 RichTextArea is editable on FF (not Chrome and Opera): peut-etre changer en htmlpanel
+0 Traduire categorie 'tout' ou au moins mettre une majuscule
 0 Popups pour contact, expositions, legal et link
 0 Resize sur le collapse
 0 Chrome frame
