@@ -137,7 +137,8 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 //	Log.info("getModuleBaseURL: " + GWT.getModuleBaseURL());// http://127.0.1.1:8888/liliShowcase/
 	
 	private void initPictures(String list) {
-		picts = list.replaceAll("\r", "").replaceAll("\n", "").split(";");
+//		picts = list.replaceAll("\r", "").replaceAll("\n", "").split(";");
+		picts = list.replaceAll("\r",  "").split("\n");
 		Log.info("Picture " + picts[0]);
 		Utils.loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photos/" + picts[0] + "/Details.txt");
 	}
@@ -147,8 +148,12 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		if(!infos.isEmpty() && !infos.contains("HTTP ERROR: 404")) {
 			Picture p = new Picture();
 			// Special case for imageUrl to build from 'Show'
-			String []entries = infos.replaceAll("\r", "").replaceAll("\n", "").split(";");
+//			String []entries = infos.replaceAll("\r", "").replaceAll("\n", "").split(";");
+			String []entries = infos.replaceAll("\r", "").split("\n");
 			for(String entry : entries) {
+				if(entry.endsWith(";")) {
+					entry = entry.replaceAll(";$", "");
+				}
 				if(entry.startsWith("Categories")) {
 					// Add property Categories
 					String []categories = entry.substring(entry.indexOf(":") + 1).replaceAll(" ", "").split(",");
@@ -218,7 +223,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		for(int i = 0 ; i < categories.size() ; i++) {
 			Category cat = categories.get(i);
 //			if(!cat.getName().equalsIgnoreCase(translate.All()) && newCat.getName().compareToIgnoreCase(cat.getName()) < 0) {
-			if(!cat.getName().equalsIgnoreCase("tout") && newCat.getName().compareToIgnoreCase(cat.getName()) < 0) {
+			if(!cat.getName().equalsIgnoreCase("tout") && newCat.getName().compareToIgnoreCase(cat.getName()) > 0) {
 				categories.insertElementAt(newCat, i);
 				return;
 			}
