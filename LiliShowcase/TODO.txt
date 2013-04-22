@@ -38,11 +38,12 @@ X Page de "en cours de construction"
 0 Bug sur coverflow qui a trop de fichiers (rallonger le coef du timeout en 28 passe a 50)
 0 Curseur d'attente pendant chargement (dans la lib coverflow)
 0 Switch de langue fait perdre le menu gallery (les categories)
-0 Design general (black): reste le menu, les bordures blanches (south border?) ou gris foncees, les boutons, le contentpanel collapse et les icones
+0 Design general (black): reste le menu, les bordures blanches (south border? non, split bar) ou gris foncees, les boutons, le contentpanel collapse et les icones
+0 Resize sur le collapse du south pane
+0 Lazy loading des images meme pour la 1re page: chargement de X images transparentes puis chargment image par image qui peuple a la volee le coverflow
 0 RichTextArea is editable on FF (not Chrome and Opera): peut-etre changer en htmlpanel
 0 Traduire categorie 'tout' ou au moins mettre une majuscule
 0 Popups pour contact, expositions, legal et link
-0 Resize sur le collapse
 0 Chrome frame
 0 Mettre sous licence BSD
 
@@ -52,7 +53,6 @@ X Page de "en cours de construction"
 
 0 Enlever les infos redondantes (remove des fichiers dans le webapp ?)
 0 Maven voir pour goal deploy et usage des profiles pour deploy dev et deploy prod
-0 Lazy loading des images meme pour la 1re page
 0 Typo du titre sous l'image (page 1)
 
 0 Googles analitics ?
