@@ -49,6 +49,8 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		public Image getEnBtn();
 		public void setDescriptionText(String text);
 		public void changeCurrentCategory(Integer categoryId);
+		public void addItem(Picture picture);
+		public void setViewAtStartState();
 	}
 	
 	public static final String DETAIL_KEYWORD = "picture";
@@ -62,6 +64,9 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 	private String[] picts;
 	private int categoriesNumber = 0;
 	
+	/*
+	 * Handlers
+	 */
 	private ContentFlowItemClickListener contentFlowClickListener = new ContentFlowItemClickListener() {
         public void onItemClicked(Widget widget) {
         	Info.display(translate.Selection(), translate.YouClickOn() + " " + getView().getCurrentPicture().getTitle());
@@ -95,6 +100,9 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		}
 	};
 	
+	/*
+	 * Class Methods
+	 */
 	@ProxyStandard
 	@NameToken(NameTokens.mainpage)
 	public interface MyProxy extends ProxyPlace<MainPagePresenter> {
@@ -145,8 +153,9 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 	
 	private void loadPictureInfo(String infos, int nextInd) {
 		// Store info
+		Picture p = null;
 		if(!infos.isEmpty() && !infos.contains("HTTP ERROR: 404")) {
-			Picture p = new Picture();
+			p = new Picture();
 			// Special case for imageUrl to build from 'Show'
 //			String []entries = infos.replaceAll("\r", "").replaceAll("\n", "").split(";");
 			String []entries = infos.replaceAll("\r", "").split("\n");
@@ -176,7 +185,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 							p.addCategoryId(categoriesNumber++);
 						}
 					}
-//					p.addProperty("imageUrl", GWT.getHostPageBaseURL() + "photos/" + p.getNameOrTitle() + "/" + p.getProperty("Show"));
 					p.addProperty("imageUrl", GWT.getHostPageBaseURL() + "photos/" + picts[nextInd - 1] + "/" + p.getProperty("Show"));
 					continue;
 				}// End of categories process
@@ -193,23 +201,33 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 			}// End of properties process
 			pictures.add(p);
 		}
+		// Launch view initialization
+//		else if(nextInd == picts.length) {
+		if(categories.size() > 0 && pictures.size() == 1) {// Init
+			Log.info("Log picture done, now init coverflow");
+//			getView().addCategories(categories);
+			getView().addItems(pictures);// Initialize cover flow
+//			getEventBus().fireEvent(new PicturesLoadedEvent(pictures, categories));
+//			Utils.showDefaultCursor(getView().getMainPane().getBody());
+			getView().init();
+//			return;
+		}
+		else {
+			if(p != null) getView().addItem(p);
+		}
 		// Browse next picture
 		if(nextInd < picts.length) {
 			if(!picts[nextInd].isEmpty()) {
 				Log.info("Picture " + picts[nextInd]);
-				Utils.loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photos/" + picts[nextInd++] + "/Details.txt");
+//				Utils.loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photos/" + picts[nextInd++] + "/Details.txt");
+				Utils.loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photos/" + picts[nextInd] + "/Details.txt");
 			}
 		}
-		// Launch view initialization
-		else if(nextInd == picts.length) {
-			Log.info("Log picture done, now init coverflow");
+		if(nextInd == picts.length) {
 			getView().addCategories(categories);
-			getView().addItems(pictures);// Initialize cover flow
-//			PicturesLoadedEvent.fire(this.getEventBus(), pictures, categories);
 			getEventBus().fireEvent(new PicturesLoadedEvent(pictures, categories));
 			Utils.showDefaultCursor(getView().getMainPane().getBody());
-			getView().init();
-			return;
+			getView().setViewAtStartState();
 		}
 	}
 	

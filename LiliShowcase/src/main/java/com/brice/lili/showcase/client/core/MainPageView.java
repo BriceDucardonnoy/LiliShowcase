@@ -148,25 +148,39 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	}
 
 	@Override
-	public void addItems(Vector<Picture> people) {
-		int number = people.size();
-        for (final Picture picture : generatePictures(people, number)) {
+	public void addItems(Vector<Picture> pictures) {
+		int number = pictures.size();
+        for (final Picture picture : generatePictures(pictures, number)) {
         	createImageView(picture);
         	addInOrderedData(picture, allPictures.size() - 1);
         }
         for(Integer i : orderedPictures) {
-			if(!((Picture)allPictures.get(i).getPojo()).getCategoryIds().isEmpty()) {
+			if(!((Picture)allPictures.get(i).getPojo()).getCategoryIds().isEmpty()) {// If pictures belongs to no category, ignore it
 				contentFlow.addItems(allPictures.get(i));
 			}
 		}
     }
 	
+	@Override
+	public void addItem(Picture picture) {
+		createImageView(picture);
+    	int place = addInOrderedData(picture, allPictures.size() - 1);
+    	if(!picture.getCategoryIds().isEmpty()) {// If pictures belongs to no category, ignore it
+    		Log.info("Add item " + ((Picture)((PhotoView)allPictures.get(orderedPictures.get(place))).getPojo()).getTitleOrName() + " at place " + place);
+			contentFlow.addItem(allPictures.get(orderedPictures.get(place)), place);
+//    		contentFlow.addItems(allPictures.get(place));
+		}
+	}
+	
 	private PhotoView createImageView(Picture picture) {
 		String title = picture.getTitle();
 		String dim = picture.getProperty("Dimension").toString();
+		String date = picture.getProperty("Date").toString();
 		if(title == null) title = "";
 		if(dim == null) dim = "";
-		allPictures.add(new PhotoView(new FitImage(picture.getImageUrl()), title + "<br />" + dim, picture));
+		if(date == null) date = "";
+		allPictures.add(new PhotoView(new FitImage(picture.getImageUrl()), title + "<br />" + dim + 
+				(Log.isInfoEnabled() ? " " + date : ""), picture));
         return allPictures.get(allPictures.size() - 1);
     }
 	
@@ -183,6 +197,11 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@Override
 	public ContentFlow<Picture> getContentFlow() {
 		return contentFlow;
+	}
+	
+	@Override
+	public void setViewAtStartState() {
+		contentFlow.moveTo(0);
 	}
 
 	@Override
@@ -245,11 +264,11 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void addInOrderedData(Picture pojo, Integer refIdx) {
+	private int addInOrderedData(Picture pojo, Integer refIdx) {
 		// If POJO doesn't contain sortName property, add it at the end
 		if(pojo.getProperty(sortName) == null) {
 			orderedPictures.add(refIdx);
-			return;
+			return orderedPictures.size() - 1;
 		}
 		for(int i = 0 ; i < orderedPictures.size() ; i++) {
 			Picture pict = (Picture) allPictures.get(orderedPictures.get(i)).getPojo();
@@ -257,10 +276,11 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 			if(pict.getProperty(sortName) == null || 
 					((Comparable<Object>)pict.getProperty(sortName)).compareTo(pojo.getProperty(sortName)) > 0) {
 				orderedPictures.add(i, refIdx);
-				return;
+				return i;
 			}
 		}
 		orderedPictures.add(refIdx);
+		return orderedPictures.size() - 1;
 	}
 	
 	/**
@@ -304,13 +324,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 				if(Log.isTraceEnabled()) {
 					Log.trace("Refresh DOM");
 				}
-				// Lame hack
-//				int timeout;
-//				timeout = orderedPictures.size() < 10 ? orderedPictures.size() * 28 : orderedPictures.size() * 60;
-//				int size = orderedPictures.size();
-//				int mod = size / 10;
-//				mod = mod == 0 ? 1 : mod;
-//				timeout = size * mod * 30;
+//				orderedPictures.size() * 28
 				contentFlow.refreshActiveItem(28);
 			}
 		});
