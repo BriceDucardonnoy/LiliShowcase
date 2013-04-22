@@ -37,6 +37,7 @@ X Page de "en cours de construction"
 
 0 Bug sur coverflow qui a trop de fichiers (rallonger le coef du timeout en 28 passe a 50)
 0 Curseur d'attente pendant chargement (dans la lib coverflow)
+0 Switch de langue fait perdre le menu gallery (les categories)
 0 Design general (black): reste le menu, les bordures blanches (south border?) ou gris foncees, les boutons, le contentpanel collapse et les icones
 0 RichTextArea is editable on FF (not Chrome and Opera): peut-etre changer en htmlpanel
 0 Traduire categorie 'tout' ou au moins mettre une majuscule
