@@ -276,6 +276,10 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		 *  Remove objects pushed twice in target (objects from contentflow project in public)
 		 */
 		// Update data
+		for(Integer i : orderedPictures) {
+			allPictures.get(i).getContainer().removeStyleName("active");
+			allPictures.get(i).getContainer().setVisible(false);// TODO BDY: finish it and decrease timeout counter
+		}
 		orderedPictures.clear();
 		int sz = allPictures.size();
 		for(int i = 0 ; i < sz ; i++) {
@@ -295,7 +299,14 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 				if(Log.isTraceEnabled()) {
 					Log.trace("Refresh DOM");
 				}
-				contentFlow.refreshActiveItem(orderedPictures.size() * 50);
+				// Lame hack
+				int timeout;
+//				timeout = orderedPictures.size() < 10 ? orderedPictures.size() * 28 : orderedPictures.size() * 60;
+				int size = orderedPictures.size();
+				int mod = size / 10;
+				mod = mod == 0 ? 1 : mod;
+				timeout = size * mod * 30;
+				contentFlow.refreshActiveItem(timeout);
 			}
 		});
 
