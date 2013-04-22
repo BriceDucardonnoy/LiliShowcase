@@ -44,13 +44,18 @@ public interface ImagesResources extends ClientBundle {
 	@Source("Header_200.png")
 	ImageResource header200();
 	
-	@Source("contact.png")
+	ImageResource home();
+	
+	ImageResource gallery();	
+
+	@Source("calendar.png")
+	ImageResource exposition();
+	
 	ImageResource contact();
 	
-	@Source("copyright_inv.png")
-	ImageResource copyright();
+	@Source("copyright.png")
+	ImageResource legal();
 	
-	@Source("link.png")
-	ImageResource link();
+	ImageResource link();	
 	
 }

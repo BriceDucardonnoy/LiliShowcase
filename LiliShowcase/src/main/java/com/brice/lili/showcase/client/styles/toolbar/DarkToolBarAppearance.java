@@ -1,4 +1,4 @@
-package com.brice.lili.showcase.client.styles;
+package com.brice.lili.showcase.client.styles.toolbar;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
@@ -16,15 +16,8 @@ public class DarkToolBarAppearance extends ToolBarBaseAppearance {
 		DarkToolBarStyle style();
 
 		@ImageOptions(repeatStyle = RepeatStyle.Horizontal)
-		ImageResource background();
-		
-		@ImageOptions(repeatStyle = RepeatStyle.Horizontal)
-		@Source("com/brice/lili/showcase/client/styles/black/images/black/toolbar/bg.gif")
+		@Source("com/brice/lili/showcase/client/styles/black/images/black/toolbar/bg-000000.png")
 		ImageResource blackBackground();
-		
-		@ImageOptions(repeatStyle = RepeatStyle.Horizontal)
-		@Source("com/brice/lili/showcase/client/styles/black/images/black/toolbar/tb-btn-sprite.gif")
-		ImageResource selectedBackground();
 	}
 
 	public interface DarkToolBarStyle extends ToolBarBaseStyle, CssResource {

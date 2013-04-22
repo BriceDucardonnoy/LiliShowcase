@@ -1,9 +1,9 @@
-Steve Jobs;
-Poupi;
-Sergey Brin;
-Larry Page;
-John Doerr;
-Eric Schmidt;
-Larry Wayne;
-Steve Wozniak;
-John Cook;
+Steve Jobs
+Poupi
+Sergey Brin
+Larry Page
+John Doerr
+Eric Schmidt
+Larry Wayne
+Steve Wozniak
+John Cook

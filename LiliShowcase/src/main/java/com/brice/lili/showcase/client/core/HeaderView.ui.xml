@@ -87,9 +87,9 @@
 								  	</container:child>
 									<container:child layoutData="{boxLayoutDataMargins0}">
 										<toolbar:ToolBar ui:field="toolbar">
-											<button:TextButton ui:field="homeButton" icon="{res.logo4small}" iconAlign="TOP" />
+											<button:TextButton ui:field="homeButton" icon="{res.home}" iconAlign="TOP" />
 											<toolbar:SeparatorToolItem />
-											<button:TextButton ui:field="galleryButton" iconAlign="TOP">
+											<button:TextButton ui:field="galleryButton" icon="{res.gallery}" iconAlign="TOP">
 												<button:menu>
 					             					<menu:Menu ui:field="menuGallery" maxHeight="200">
 										            	<!-- <menu:MenuItem text="Cut" />
@@ -98,11 +98,11 @@
 												</button:menu>
 											</button:TextButton>
 											<toolbar:SeparatorToolItem />
-											<button:TextButton ui:field="expoButton" iconAlign="TOP" />
+											<button:TextButton ui:field="expoButton" icon="{res.exposition}" iconAlign="TOP" />
 											<toolbar:SeparatorToolItem />
 											<button:TextButton ui:field="contactButton" icon="{res.contact}" iconAlign="TOP" />
 											<toolbar:SeparatorToolItem />
-											<button:TextButton ui:field="legalButton" icon="{res.copyright}" iconAlign="TOP" />
+											<button:TextButton ui:field="legalButton" icon="{res.legal}" iconAlign="TOP" />
 											<toolbar:SeparatorToolItem />
 											<button:TextButton ui:field="linkButton" icon="{res.link}" iconAlign="TOP" />
 								            <toolbar:FillToolItem />

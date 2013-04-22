@@ -9,7 +9,7 @@ import org.gwt.contentflow4gwt.client.PhotoView;
 import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.lang.Translate;
 import com.brice.lili.showcase.client.properties.CategoryProperties;
-import com.brice.lili.showcase.client.styles.DarkContentPanelAppearance;
+import com.brice.lili.showcase.client.styles.panel.DarkContentPanelAppearance;
 import com.brice.lili.showcase.client.utils.Utils;
 import com.brice.lili.showcase.shared.model.Category;
 import com.brice.lili.showcase.shared.model.Picture;
@@ -99,6 +99,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		widget = binder.createAndBindUi(this);
 		
 		sortName = "Date";
+//		sortName = title.getName();
 		allPictures = new ArrayList<PhotoView>();
 		orderedPictures = new ArrayList<Integer>();
 		categoriesCB.setForceSelection(true);
@@ -121,7 +122,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		sortToggle.add(date);
 		sortToggle.add(dimension);
 		sortToggle.add(color);
-		sortName = title.getName();
 		// SortToggle only infer on view representation => configure it in view
 		sortToggle.addValueChangeHandler(new ValueChangeHandler<HasValue<Boolean>>() {
 			@Override
@@ -155,7 +155,9 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
         	addInOrderedData(picture, allPictures.size() - 1);
         }
         for(Integer i : orderedPictures) {
-			contentFlow.addItems(allPictures.get(i));
+			if(!((Picture)allPictures.get(i).getPojo()).getCategoryIds().isEmpty()) {
+				contentFlow.addItems(allPictures.get(i));
+			}
 		}
     }
 	
@@ -267,16 +269,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	 * Then add it in DOM
 	 */
 	public void refreshCoverFlow() {
-		refreshCoverFlow(150);
-	}
-	
-	/**
-	 * Display pictures for given category
-	 * Clear ordered pictures and add new ones in specific order
-	 * Then add it in DOM
-	 * @param timeout the time to wait before refreshing DOM in ms
-	 */
-	public void refreshCoverFlow(final int timeout) {
 		if(Log.isInfoEnabled()) {
 			Info.display("Refresh", "Refresh coverflow for category " + categoriesCB.getStore().get(currentCategoryId).getName());
 		}
@@ -284,6 +276,10 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		 *  Remove objects pushed twice in target (objects from contentflow project in public)
 		 */
 		// Update data
+		for(Integer i : orderedPictures) {
+			allPictures.get(i).getContainer().removeStyleName("active");
+			allPictures.get(i).getContainer().setVisible(false);// TODO BDY: finish it and decrease timeout counter
+		}
 		orderedPictures.clear();
 		int sz = allPictures.size();
 		for(int i = 0 ; i < sz ; i++) {
@@ -303,6 +299,13 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 				if(Log.isTraceEnabled()) {
 					Log.trace("Refresh DOM");
 				}
+				// Lame hack
+				int timeout;
+//				timeout = orderedPictures.size() < 10 ? orderedPictures.size() * 28 : orderedPictures.size() * 60;
+				int size = orderedPictures.size();
+				int mod = size / 10;
+				mod = mod == 0 ? 1 : mod;
+				timeout = size * mod * 30;
 				contentFlow.refreshActiveItem(timeout);
 			}
 		});
@@ -311,7 +314,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	
 	public void sortChanged(String name) {
 		sortName = name;
-		refreshCoverFlow(allPictures.size() * 28);// 250: arbitrary optimistic timeout
+		refreshCoverFlow();
 	}
 	
 	/*

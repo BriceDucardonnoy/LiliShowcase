@@ -137,7 +137,8 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 //	Log.info("getModuleBaseURL: " + GWT.getModuleBaseURL());// http://127.0.1.1:8888/liliShowcase/
 	
 	private void initPictures(String list) {
-		picts = list.replaceAll("\r", "").replaceAll("\n", "").split(";");
+//		picts = list.replaceAll("\r", "").replaceAll("\n", "").split(";");
+		picts = list.replaceAll("\r",  "").split("\n");
 		Log.info("Picture " + picts[0]);
 		Utils.loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photos/" + picts[0] + "/Details.txt");
 	}
@@ -147,16 +148,21 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		if(!infos.isEmpty() && !infos.contains("HTTP ERROR: 404")) {
 			Picture p = new Picture();
 			// Special case for imageUrl to build from 'Show'
-			String []entries = infos.replaceAll("\r", "").replaceAll("\n", "").split(";");
+//			String []entries = infos.replaceAll("\r", "").replaceAll("\n", "").split(";");
+			String []entries = infos.replaceAll("\r", "").split("\n");
 			for(String entry : entries) {
+				if(entry.endsWith(";")) {
+					entry = entry.replaceAll(";$", "");
+				}
 				if(entry.startsWith("Categories")) {
 					// Add property Categories
 					String []categories = entry.substring(entry.indexOf(":") + 1).replaceAll(" ", "").split(",");
 					if(categories.length == 0) continue;
 					for(String category : categories) {
+						if(category.isEmpty()) continue;
 						boolean found = false;
 						for(Category cat : this.categories) {
-							if(cat != null && cat.getName().equals(category)) {
+							if(cat != null && cat.getName().equalsIgnoreCase(category)) {
 								found = true;
 								p.addCategoryId(cat.getId());
 								break;
@@ -166,11 +172,12 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 							if(Log.isTraceEnabled()) {
 								Log.info("Add category <" + category + ">");
 							}
-							this.categories.add(new Category(categoriesNumber, category, category));
+							addNewCategory(new Category(categoriesNumber, category, category));
 							p.addCategoryId(categoriesNumber++);
 						}
 					}
-					p.addProperty("imageUrl", GWT.getHostPageBaseURL() + "photos/" + p.getNameOrTitle() + "/" + p.getProperty("Show"));
+//					p.addProperty("imageUrl", GWT.getHostPageBaseURL() + "photos/" + p.getNameOrTitle() + "/" + p.getProperty("Show"));
+					p.addProperty("imageUrl", GWT.getHostPageBaseURL() + "photos/" + picts[nextInd - 1] + "/" + p.getProperty("Show"));
 					continue;
 				}// End of categories process
 				String []prop = entry.split(":");
@@ -187,14 +194,14 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 			pictures.add(p);
 		}
 		// Browse next picture
-		for(int i = nextInd ; i < picts.length ; i++) {
-			if(picts[i].isEmpty()) continue;
-			Log.info("Picture " + picts[i]);
-			Utils.loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photos/" + picts[i] + "/Details.txt");
-			break;
+		if(nextInd < picts.length) {
+			if(!picts[nextInd].isEmpty()) {
+				Log.info("Picture " + picts[nextInd]);
+				Utils.loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photos/" + picts[nextInd++] + "/Details.txt");
+			}
 		}
 		// Launch view initialization
-		if(nextInd == picts.length){
+		else if(nextInd == picts.length) {
 			Log.info("Log picture done, now init coverflow");
 			getView().addCategories(categories);
 			getView().addItems(pictures);// Initialize cover flow
@@ -204,6 +211,24 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 			getView().init();
 			return;
 		}
+	}
+	
+	private void addNewCategory(Category newCat) {
+		if(newCat == null) return;
+//		if(newCat.getName().equals(translate.All())) {
+		if(newCat.getName().equalsIgnoreCase("tout")) {
+			categories.insertElementAt(newCat, 0);
+			return;
+		}
+		for(int i = 0 ; i < categories.size() ; i++) {
+			Category cat = categories.get(i);
+//			if(!cat.getName().equalsIgnoreCase(translate.All()) && newCat.getName().compareToIgnoreCase(cat.getName()) < 0) {
+			if(!cat.getName().equalsIgnoreCase("tout") && newCat.getName().compareToIgnoreCase(cat.getName()) > 0) {
+				categories.insertElementAt(newCat, i);
+				return;
+			}
+		}
+		categories.add(newCat);
 	}
 	
 	/*
