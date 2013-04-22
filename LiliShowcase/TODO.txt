@@ -31,11 +31,11 @@ V Titre des images = nom<br />dimension<br />
 V Default translate est en francais
 V Gallery: enlever la categorie "" (qui doit etre masquee) et trier par ordre alphabetique en mettant "Tout" en premier
 V Gallery: bug quand accents ou fichier non trouve
+V Bug sur coverflow qui a trop de fichiers (rallonger le coef du timeout en 28 passe a 50 NON) => clean photo view class/style
 
 X Traduction UiBinder (dans le client bundle ?)
 X Page de "en cours de construction"
 
-0 Bug sur coverflow qui a trop de fichiers (rallonger le coef du timeout en 28 passe a 50)
 0 Lazy loading des images meme pour la 1re page: chargement de X images transparentes puis chargement 
 	image par image qui peuple a la volee le coverflow
 0 Switch de langue fait perdre le menu gallery (les categories)
