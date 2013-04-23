@@ -50,7 +50,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		public void setDescriptionText(String text);
 		public void changeCurrentCategory(Integer categoryId);
 		public void addItem(Picture picture);
-		public void setViewAtStartState();
 	}
 	
 	public static final String DETAIL_KEYWORD = "picture";
@@ -203,18 +202,18 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		}
 		// Launch view initialization
 //		else if(nextInd == picts.length) {
-		if(categories.size() > 0 && pictures.size() == 1) {// Init
-			Log.info("Log picture done, now init coverflow");
+//		if(categories.size() > 0 && pictures.size() == 1) {// Init
+//			Log.info("Log picture done, now init coverflow");
 //			getView().addCategories(categories);
-			getView().addItems(pictures);// Initialize cover flow
+//			getView().addItems(pictures);// Initialize cover flow
 //			getEventBus().fireEvent(new PicturesLoadedEvent(pictures, categories));
 //			Utils.showDefaultCursor(getView().getMainPane().getBody());
-			getView().init();
+//			getView().init();
 //			return;
-		}
-		else {
+//		}
+//		else {
 			if(p != null) getView().addItem(p);
-		}
+//		}
 		// Browse next picture
 		if(nextInd < picts.length) {
 			if(!picts[nextInd].isEmpty()) {
@@ -227,21 +226,22 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 			getView().addCategories(categories);
 			getEventBus().fireEvent(new PicturesLoadedEvent(pictures, categories));
 			Utils.showDefaultCursor(getView().getMainPane().getBody());
-			getView().setViewAtStartState();
 		}
 	}
 	
 	private void addNewCategory(Category newCat) {
 		if(newCat == null) return;
 //		if(newCat.getName().equals(translate.All())) {
-		if(newCat.getName().equalsIgnoreCase("tout")) {
+//		if(newCat.getName().equalsIgnoreCase("tout")) {
+		if(newCat.getName().equalsIgnoreCase("tout") || newCat.getName().equalsIgnoreCase("all")) {// TESTME BDY: all or tout (translation)
 			categories.insertElementAt(newCat, 0);
 			return;
 		}
 		for(int i = 0 ; i < categories.size() ; i++) {
 			Category cat = categories.get(i);
 //			if(!cat.getName().equalsIgnoreCase(translate.All()) && newCat.getName().compareToIgnoreCase(cat.getName()) < 0) {
-			if(!cat.getName().equalsIgnoreCase("tout") && newCat.getName().compareToIgnoreCase(cat.getName()) > 0) {
+//			if(!cat.getName().equalsIgnoreCase("tout") && newCat.getName().compareToIgnoreCase(cat.getName()) > 0) {
+			if(!cat.getName().equalsIgnoreCase("tout") && !cat.getName().equalsIgnoreCase("all") && newCat.getName().compareToIgnoreCase(cat.getName()) > 0) {
 				categories.insertElementAt(newCat, i);
 				return;
 			}

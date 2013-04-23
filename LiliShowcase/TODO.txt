@@ -34,7 +34,6 @@ V Gallery: bug quand accents ou fichier non trouve
 V Bug sur coverflow qui a trop de fichiers (rallonger le coef du timeout en 28 passe a 50 NON) => clean photo view class/style
 
 X Traduction UiBinder (dans le client bundle ?)
-X Page de "en cours de construction"
 
 0 Lazy loading des images meme pour la 1re page: chargement de X images transparentes puis chargement 
 	image par image qui peuple a la volee le coverflow
@@ -47,6 +46,7 @@ V	- les boutons
 V	- le contentpanel collapse
 V	- les icones
 0 Resize sur le collapse du south pane
+0 Page de "en cours de construction": lien vers index.html par defaut d'ovh
 0 RichTextArea is editable on FF (not Chrome and Opera): peut-etre changer en htmlpanel
 0 Traduire categorie 'tout' ou au moins mettre une majuscule
 0 Popups pour contact, expositions, legal et link

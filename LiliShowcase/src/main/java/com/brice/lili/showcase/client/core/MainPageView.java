@@ -31,6 +31,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.reveregroup.gwt.imagepreloader.client.FitImage;
+import com.reveregroup.gwt.imagepreloader.client.FitImageLoadEvent;
+import com.reveregroup.gwt.imagepreloader.client.FitImageLoadHandler;
 import com.sencha.gxt.core.client.util.Margins;
 import com.sencha.gxt.core.client.util.ToggleGroup;
 import com.sencha.gxt.data.shared.ListStore;
@@ -81,6 +83,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
     
     private Integer currentCategoryId = null;
     private String sortName;
+    private int loadedImage = 0;
 
 	public interface Binder extends UiBinder<Widget, MainPageView> {
 	}
@@ -161,25 +164,72 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		}
     }
 	
-	@Override
-	public void addItem(Picture picture) {
+	private void addItemAndInit(final Picture picture) {
 		createImageView(picture);
-    	int place = addInOrderedData(picture, allPictures.size() - 1);
-    	if(!picture.getCategoryIds().isEmpty()) {// If pictures belongs to no category, ignore it
-    		Log.info("Add item " + ((Picture)((PhotoView)allPictures.get(orderedPictures.get(place))).getPojo()).getTitleOrName() + " at place " + place);
-			contentFlow.addItem(allPictures.get(orderedPictures.get(place)), place);
-//    		contentFlow.addItems(allPictures.get(place));
+    	addInOrderedData(picture, allPictures.size() - 1);
+    	if(!((Picture)allPictures.get(0).getPojo()).getCategoryIds().isEmpty()) {// If pictures belongs to no category, ignore it
+			contentFlow.addItems(allPictures.get(0));
+//    		contentFlow.addItem(allPictures.get(0));
+			loadedImage++;
+//			init();
 		}
 	}
 	
+	@Override
+	public void addItem(final Picture picture) {
+    	if(!picture.getCategoryIds().isEmpty()) {// If pictures belongs to no category, ignore it
+    		Scheduler.get().scheduleIncremental(new RepeatingCommand() {
+				@Override
+				public boolean execute() {
+					if(loadedImage != 0) return true;
+//					if(!contentFlow.isInit()) {
+//						addItemAndInit(picture);
+//						return false;
+//					}
+					Utils.showWaitCursor(mainPane.getBody());
+					createImageView(picture);
+					int place = addInOrderedData(picture, allPictures.size() - 1);
+					Log.info("Add item " + ((Picture)((PhotoView)allPictures.get(orderedPictures.get(place))).getPojo()).getTitleOrName() + " at place " + place);
+					if(contentFlow.isInit()) {
+						contentFlow.addItem(allPictures.get(orderedPictures.get(place)), place);
+					}
+					else {
+//						init();
+						contentFlow.addItems(allPictures.get(0));
+					}
+					loadedImage++;
+					return false;
+				}
+			});
+//    		contentFlow.addItems(allPictures.get(place));
+		}
+    	else {
+			Log.info("Don't add item " + picture.getTitleOrName() + " (no category)");
+		}
+	}
+	
+	private FitImageLoadHandler flh = new FitImageLoadHandler() {
+		@Override
+		public void imageLoaded(FitImageLoadEvent event) {
+			Log.info("Image loaded " + ((FitImage)event.getSource()).getUrl());
+			if(!contentFlow.isInit()) {
+				init();
+			}
+			else {
+				loadedImage--;
+			}
+			Utils.showDefaultCursor(mainPane.getBody());
+		}
+	};
+	
 	private PhotoView createImageView(Picture picture) {
 		String title = picture.getTitle();
-		String dim = picture.getProperty("Dimension").toString();
-		String date = picture.getProperty("Date").toString();
+		String dim = picture.getProperty("Dimension", "").toString();
+		String date = picture.getProperty("Date", "").toString();
 		if(title == null) title = "";
 		if(dim == null) dim = "";
 		if(date == null) date = "";
-		allPictures.add(new PhotoView(new FitImage(picture.getImageUrl()), title + "<br />" + dim + 
+		allPictures.add(new PhotoView(new FitImage(picture.getImageUrl(), flh), title + "<br />" + dim + 
 				(Log.isInfoEnabled() ? " " + date : ""), picture));
         return allPictures.get(allPictures.size() - 1);
     }
@@ -200,11 +250,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	}
 	
 	@Override
-	public void setViewAtStartState() {
-		contentFlow.moveTo(0);
-	}
-
-	@Override
 	public ContentPanel getMainPane() {
 		return mainPane;
 	}
@@ -217,6 +262,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 			public boolean execute() {
 				if(getContentFlow().isAttached()) {
 					getContentFlow().init();
+					loadedImage--;
 					Utils.showDefaultCursor(mainPane.getBody());
 					return false;
 				}
@@ -292,9 +338,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		if(Log.isInfoEnabled()) {
 			Info.display("Refresh", "Refresh coverflow for category " + categoriesCB.getStore().get(currentCategoryId).getName());
 		}
-		/*
-		 *  Remove objects pushed twice in target (objects from contentflow project in public)
-		 */
 		/*
 		 *  Update data
 		 */
