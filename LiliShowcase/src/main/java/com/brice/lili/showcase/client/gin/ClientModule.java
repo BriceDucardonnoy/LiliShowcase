@@ -17,6 +17,8 @@ import com.brice.lili.showcase.client.place.ErrorPlace;
 import com.brice.lili.showcase.client.place.NameTokens;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
+import com.brice.lili.showcase.client.core.ArtisticApproachPresenter;
+import com.brice.lili.showcase.client.core.ArtisticApproachView;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -45,6 +47,9 @@ public class ClientModule extends AbstractPresenterModule {
 		bindPresenter(UnauthorizedPresenter.class,
 				UnauthorizedPresenter.MyView.class, UnauthorizedView.class,
 				UnauthorizedPresenter.MyProxy.class);
+
+		bindPresenter(ArtisticApproachPresenter.class, ArtisticApproachPresenter.MyView.class,
+				ArtisticApproachView.class, ArtisticApproachPresenter.MyProxy.class);
 	}
 	
 }

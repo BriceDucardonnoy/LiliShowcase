@@ -327,12 +327,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 					Log.trace("Refresh DOM");
 				}
 				// Lame hack
-//				int timeout;
-//				timeout = orderedPictures.size() < 10 ? orderedPictures.size() * 28 : orderedPictures.size() * 60;
-//				int size = orderedPictures.size();
-//				int mod = size / 10;
-//				mod = mod == 0 ? 1 : mod;
-//				timeout = size * mod * 30;
 				contentFlow.refreshActiveItem(orderedPictures.size() * 28);
 			}
 		});

@@ -6,7 +6,21 @@
 	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
 	ui:generateLocales='default'>
 
-	<g:HTMLPanel>
-		This page isn't yet available
-	</g:HTMLPanel>
+	<ui:style>
+		.globalStyle {
+			background: #000000 repeat scroll 0 0;
+			color: #DDDDDD;
+			font-family: helvetica;
+			font-size: 20;
+			text-align: center;
+			padding-top: 80px;
+		}
+	</ui:style>
+
+	<g:SimplePanel addStyleNames="{style.globalStyle}">
+		<g:HTMLPanel>
+			<p>Page en cours de construction. Merci de revenir plus tard.</p><br />
+			<p>Page under construction. Thanks to come back later.</p><br />
+		</g:HTMLPanel>
+	</g:SimplePanel>
 </ui:UiBinder>

@@ -7,6 +7,7 @@ public class NameTokens {
 	public static final String detail = "detail";
 	public static final String emptyselection = "emptyselection";
 	public static final String buildingplace = "buildingplace";
+	public static final String artisticapproach = "artisticapproach";
 
 	public static String getMainpage() {
 		return mainpage;
@@ -26,6 +27,10 @@ public class NameTokens {
 
 	public static String getBuildingplace() {
 		return buildingplace;
+	}
+
+	public static String getArtisticapproach() {
+		return artisticapproach;
 	}
 
 

@@ -54,6 +54,7 @@ V	- les icones
 0 RichTextArea is editable on FF (not Chrome and Opera): peut-etre changer en htmlpanel
 0 Traduire la presentation
 0 Reagrandir un peu les images
+0 Interdire acces au site depuis une autre url ou lancer les initialisation depuis le headerview
 0 Traduire categorie 'tout' ou au moins mettre une majuscule
 0 Chrome frame pour IE8 ou < ou mettre une page qui indique d'aller vers un autre navigateur
 0 Mettre sous licence BSD

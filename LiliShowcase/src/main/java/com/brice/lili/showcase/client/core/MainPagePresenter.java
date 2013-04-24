@@ -153,7 +153,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		if(!infos.isEmpty() && !infos.contains("HTTP ERROR: 404")) {
 			Picture p = new Picture();
 			// Special case for imageUrl to build from 'Show'
-//			String []entries = infos.replaceAll("\r", "").replaceAll("\n", "").split(";");
 			String []entries = infos.replaceAll("\r", "").split("\n");
 			for(String entry : entries) {
 				if(entry.endsWith(";")) {

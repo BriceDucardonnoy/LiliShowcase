@@ -14,6 +14,7 @@ import com.google.inject.Provider;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.client.gin.DispatchAsyncModule;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.brice.lili.showcase.client.core.ArtisticApproachPresenter;
 
 @GinModules({DispatchAsyncModule.class, ClientModule.class})
 public interface ClientGinjector extends Ginjector {
@@ -33,4 +34,6 @@ public interface ClientGinjector extends Ginjector {
 	DetailGateKeeper getDetailGateKeeper();
 
 	AsyncProvider<UnauthorizedPresenter> getUnauthorizedPresenter();
+
+	AsyncProvider<ArtisticApproachPresenter> getArtisticApproachPresenter();
 }

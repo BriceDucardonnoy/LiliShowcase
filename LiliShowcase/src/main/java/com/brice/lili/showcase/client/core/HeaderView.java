@@ -31,6 +31,7 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 	@UiField TextButton galleryButton;
 	@UiField Menu menuGallery;
 	@UiField TextButton expoButton;
+	@UiField TextButton approachButton;
 	@UiField TextButton contactButton;
 	@UiField TextButton legalButton;
 	@UiField TextButton linkButton;
@@ -50,6 +51,8 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 		galleryButton.setTitle(translate.Gallery());
 		expoButton.setText(translate.Expositions());
 		expoButton.setTitle(translate.Expositions());
+		approachButton.setText(translate.ArtisticApproach());
+		approachButton.setTitle(translate.ArtisticApproachTooltip());
 		contactButton.setText(translate.Contact());
 		contactButton.setTitle(translate.Contact());
 		legalButton.setText(translate.Legal());
@@ -109,6 +112,11 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 	@Override
 	public TextButton getExpoButton() {
 		return expoButton;
+	}
+	
+	@Override
+	public TextButton getApproachButton() {
+		return approachButton;
 	}
 
 	@Override
