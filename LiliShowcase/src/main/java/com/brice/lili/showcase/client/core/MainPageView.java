@@ -31,6 +31,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.reveregroup.gwt.imagepreloader.client.FitImage;
+import com.reveregroup.gwt.imagepreloader.client.FitImageLoadEvent;
+import com.reveregroup.gwt.imagepreloader.client.FitImageLoadHandler;
 import com.sencha.gxt.core.client.util.Margins;
 import com.sencha.gxt.core.client.util.ToggleGroup;
 import com.sencha.gxt.data.shared.ListStore;
@@ -161,12 +163,23 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		}
     }
 	
+	private FitImageLoadHandler flh = new FitImageLoadHandler() {
+		@Override
+		public void imageLoaded(FitImageLoadEvent event) {
+			Log.info("Image loaded " + ((FitImage)event.getSource()).getUrl());
+//			Utils.showDefaultCursor(mainPane.getBody());
+		}
+	};
+	
 	private PhotoView createImageView(Picture picture) {
 		String title = picture.getTitle();
-		String dim = picture.getProperty("Dimension").toString();
+		String dim = picture.getProperty("Dimension", "").toString();
+		String date = picture.getProperty("Date", "").toString();
 		if(title == null) title = "";
 		if(dim == null) dim = "";
-		allPictures.add(new PhotoView(new FitImage(picture.getImageUrl()), title + "<br />" + dim, picture));
+		if(date == null) date = "";
+		allPictures.add(new PhotoView(new FitImage(picture.getImageUrl(), flh), title + "<br />" + dim + 
+				(Log.isInfoEnabled() ? "<br />" + date : ""), picture));
         return allPictures.get(allPictures.size() - 1);
     }
 	

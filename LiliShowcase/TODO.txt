@@ -35,10 +35,13 @@ V Bug sur coverflow qui a trop de fichiers (rallonger le coef du timeout en 28 p
 
 X Traduction UiBinder (dans le client bundle ?)
 X Page de "en cours de construction"
-
-0 Lazy loading des images meme pour la 1re page: chargement de X images transparentes puis chargement 
+X Lazy loading des images meme pour la 1re page: chargement de X images transparentes puis chargement 
 	image par image qui peuple a la volee le coverflow
+X Resize sur le collapse du south pane => plus d'actualite car affichage dans nouvelle page
+
+0 Reduire la taille de toutes les images vers 300x??? (env 50ko)
 0 Switch de langue fait perdre le menu gallery (les categories)
+0 Presentation de l'artiste => Demarche artistique dans une nouvelle page pour avoir coverflow sur toute la page (=> nouveau bouton)
 0 Design general (black): 
 V	- le menu
 0	- les bordures blanches (south border? non, split bar)
@@ -46,12 +49,11 @@ V	- le menu
 V	- les boutons
 V	- le contentpanel collapse
 V	- les icones
-0 Resize sur le collapse du south pane
+0 Popups pour contact, expositions, legal et link
 0 RichTextArea is editable on FF (not Chrome and Opera): peut-etre changer en htmlpanel
 0 Traduire categorie 'tout' ou au moins mettre une majuscule
-0 Popups pour contact, expositions, legal et link
 0 Curseur d'attente pendant chargement (dans la lib coverflow)
-0 Chrome frame
+0 Chrome frame pour IE8 ou < ou mettre une page qui indique d'aller vers un autre navigateur
 0 Mettre sous licence BSD
 
 0 Composants 2eme page

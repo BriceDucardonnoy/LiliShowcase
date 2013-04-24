@@ -88,6 +88,10 @@ public class Picture implements Serializable {
 		return properties.get(property);
 	}
 	
+	public Comparable<?> getProperty(String property, Comparable<?> fallback) {
+		return properties.get(property) != null ? properties.get(property) : fallback;
+	}
+	
 	public Comparable<?> addProperty(String property, Comparable<?> value) {
 		return properties.put(property, value);
 	}
