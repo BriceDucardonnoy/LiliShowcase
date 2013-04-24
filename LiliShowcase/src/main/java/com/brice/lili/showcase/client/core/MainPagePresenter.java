@@ -64,7 +64,9 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 	
 	private ContentFlowItemClickListener contentFlowClickListener = new ContentFlowItemClickListener() {
         public void onItemClicked(Widget widget) {
-        	Info.display(translate.Selection(), translate.YouClickOn() + " " + getView().getCurrentPicture().getTitle());
+        	if(Log.isInfoEnabled()) {
+        		Info.display(translate.Selection(), translate.YouClickOn() + " " + getView().getCurrentPicture().getTitle());
+        	}
         	PlaceRequest request = new PlaceRequest(NameTokens.detail).with(DETAIL_KEYWORD, getView().getCurrentPicture().getTitleOrName());
         	placeManager.revealPlace(request);
         }
@@ -125,11 +127,14 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		registerHandler(getView().getEnBtn().addClickHandler(enHandler));
 	}
 
-//	@Override
-//	protected void onReveal() {
-//		super.onReveal();
+	@Override
+	protected void onReveal() {
+		super.onReveal();
 //		getView().getMainPane().add(getView().getContentFlow());// Done now in UiBinder file
-//	}
+		if(!categories.isEmpty() && !pictures.isEmpty()) {
+			getEventBus().fireEvent(new PicturesLoadedEvent(pictures, categories));
+		}
+	}
 	
 //	Log.info("getHostPageBaseURL: " + GWT.getHostPageBaseURL());// http://127.0.1.1:8888/
 //	Log.info("getModuleName: " + GWT.getModuleName());// liliShowcase

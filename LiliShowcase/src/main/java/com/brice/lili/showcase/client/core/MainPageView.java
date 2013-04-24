@@ -83,6 +83,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
     
     private Integer currentCategoryId = null;
     private String sortName;
+    private int loadedPictures = 0;
 
 	public interface Binder extends UiBinder<Widget, MainPageView> {
 	}
@@ -130,7 +131,9 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 			public void onValueChange(ValueChangeEvent<HasValue<Boolean>> event) {
 				ToggleGroup group = (ToggleGroup)event.getSource();
 				Radio radio = (Radio)group.getValue();
-				Info.display("Sort Changed", translate.YouveSelected() + " " + radio.getBoxLabel());
+				if(Log.isInfoEnabled()) {
+					Info.display("Sort Changed", translate.YouveSelected() + " " + radio.getBoxLabel());
+				}
 				sortChanged(radio.getName());
 			}
 		});
@@ -157,8 +160,11 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
         	addInOrderedData(picture, allPictures.size() - 1);
         }
         for(Integer i : orderedPictures) {
-			if(!((Picture)allPictures.get(i).getPojo()).getCategoryIds().isEmpty()) {
+			if(!((Picture)allPictures.get(i).getPojo()).getCategoryIds().isEmpty()) {// If belongs to no category, doens't display it
 				contentFlow.addItems(allPictures.get(i));
+			}
+			else {
+				loadedPictures++;
 			}
 		}
     }
@@ -167,7 +173,10 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		@Override
 		public void imageLoaded(FitImageLoadEvent event) {
 			Log.info("Image loaded " + ((FitImage)event.getSource()).getUrl());
-//			Utils.showDefaultCursor(mainPane.getBody());
+			loadedPictures++;
+			if(loadedPictures >= allPictures.size()) {
+				Utils.showDefaultCursor(mainPane.getBody());
+			}
 		}
 	};
 	
@@ -211,7 +220,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 			public boolean execute() {
 				if(getContentFlow().isAttached()) {
 					getContentFlow().init();
-					Utils.showDefaultCursor(mainPane.getBody());
+//					Utils.showDefaultCursor(mainPane.getBody());
 					return false;
 				}
 				return true;
@@ -324,7 +333,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 //				int mod = size / 10;
 //				mod = mod == 0 ? 1 : mod;
 //				timeout = size * mod * 30;
-				contentFlow.refreshActiveItem(28);
+				contentFlow.refreshActiveItem(orderedPictures.size() * 28);
 			}
 		});
 

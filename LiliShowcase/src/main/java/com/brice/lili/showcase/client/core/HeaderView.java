@@ -2,6 +2,7 @@ package com.brice.lili.showcase.client.core;
 
 import java.util.Vector;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.lang.Translate;
 import com.brice.lili.showcase.client.styles.toolbar.DarkToolBarAppearance;
 import com.brice.lili.showcase.shared.model.Category;
@@ -75,25 +76,16 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 		}
 	}
 	
-//	@UiHandler(value = {"homeButton", "expoButton", "contactButton", "legalButton", "linkButton"})
-//	void handleClick(SelectEvent e) {
-//		Info.display("INFO", ((TextButton) e.getSource()).getText());
-//	}
-//	
-//	@UiHandler("menuGallery")
-//	public void onMenuSelection(SelectionEvent<Item> event) {
-//		MenuItem item = (MenuItem) event.getSelectedItem();
-//		Info.display("Action", translate.YouClickOn() + " " + item.getText());
-//	}
-	
 	@Override
 	public Menu getGalleryMenu() {
 		return menuGallery;
 	}
-
+	
 	@Override
 	public void addGalleries(Vector<Category> categories) {
-		if(categories == null || categories.size() == 0) return;
+		Log.info("Categories size to add is " + categories.size());
+		if(categories == null || categories.size() == 0) return ;
+		menuGallery.clear();
 		for(Category category : categories) {
 			CheckMenuItem item = new CheckMenuItem(category.getName());
 			item.setGroup("gallery");
@@ -103,7 +95,7 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 		((CheckMenuItem)menuGallery.getItemByItemId(categories.get(0).getId().toString())).setChecked(true);
 //		menuGallery.setActiveItem(menuGallery.getItemByItemId(categories.get(1).getId().toString()), false);
 	}
-
+	
 	@Override
 	public TextButton getHomeButton() {
 		return homeButton;
