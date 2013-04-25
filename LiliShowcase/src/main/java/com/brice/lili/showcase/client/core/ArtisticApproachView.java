@@ -11,16 +11,15 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.sencha.gxt.core.client.XTemplates;
-import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer.HtmlData;
 import com.sencha.gxt.widget.core.client.container.HtmlLayoutContainer;
 
 public class ArtisticApproachView extends ViewImpl implements ArtisticApproachPresenter.MyView {
 
 	private final Widget widget;
 	
-//	@UiField HTMLPanel presentationPane;
-	@UiField HtmlLayoutContainer presentationPane;
+//	@UiField HtmlLayoutContainer presentationPane;
 //	@UiField RichTextArea description;
+	@UiField HTMLPanel pane;
 
 	public interface Binder extends UiBinder<Widget, ArtisticApproachView> {
 	}
@@ -28,7 +27,7 @@ public class ArtisticApproachView extends ViewImpl implements ArtisticApproachPr
 	@Inject
 	public ArtisticApproachView(final Binder binder) {
 		widget = binder.createAndBindUi(this);
-		presentationPane.setId("PresentationPaneID");
+//		presentationPane.setId("PresentationPaneID");
 	}
 
 	@Override
@@ -50,11 +49,11 @@ public class ArtisticApproachView extends ViewImpl implements ArtisticApproachPr
 	@Override
 	public void setArtisticApproach(String html) {
 		Log.info("SetArtisticApproach \n" + html);
+//		HTMLPanel p = new HTMLPanel(html);
+//		presentationPane.add(p, new HtmlData(".approach"));
+		
 //		description.setHTML(html);
-//		presentationPane.getElement().setInnerHTML(html);
-		HTMLPanel p = new HTMLPanel(html);
-		presentationPane.add(p, new HtmlData(".approach"));
-//		pane.add(presentationPane);
-//		pane.setWidget(presentationPane);
+		
+		pane.getElement().setInnerHTML(html);
 	}
 }

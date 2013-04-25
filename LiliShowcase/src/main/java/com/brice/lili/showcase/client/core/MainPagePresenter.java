@@ -47,7 +47,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		public void init();
 		public Image getFrBtn();
 		public Image getEnBtn();
-		public void setDescriptionText(String text);
 		public void changeCurrentCategory(Integer categoryId);
 	}
 	

@@ -35,26 +35,27 @@ V Bug sur coverflow qui a trop de fichiers (rallonger le coef du timeout en 28 p
 V Reduire la taille de toutes les images vers 300x??? (env 50ko)
 V Curseur d'attente pendant le chargement des images (utiliser le handler de fit image pour compter le nombre d'images uploadees)
 V Switch de langue fait perdre le menu gallery (les categories)
-
-X Traduction UiBinder (dans le client bundle ?)
-X Lazy loading des images meme pour la 1re page: chargement de X images transparentes puis chargement 
-	image par image qui peuple a la volee le coverflow
-X Resize sur le collapse du south pane => plus d'actualite car affichage dans nouvelle page
-
-0 Presentation de l'artiste => Demarche artistique dans une nouvelle page pour avoir coverflow sur toute la page (=> nouveau bouton)
-0 Page de "en cours de construction" => mettre en tout noir
-0 Design general (black): 
+V RichTextArea is editable on FF (not Chrome and Opera): peut-etre changer en htmlpanel
+V Design general (black): 
 V	- le menu
 0	- les bordures blanches (south border? non, split bar)
 0	- les bordures internes gris foncees
 V	- les boutons
 V	- le contentpanel collapse
 V	- les icones
+V Presentation de l'artiste => Demarche artistique dans une nouvelle page pour avoir coverflow sur toute la page (=> nouveau bouton)
+V Page de "en cours de construction" => mettre en tout noir
+
+X Traduction UiBinder (dans le client bundle ?)
+X Lazy loading des images meme pour la 1re page: chargement de X images transparentes puis chargement 
+	image par image qui peuple a la volee le coverflow
+X Resize sur le collapse du south pane => plus d'actualite car affichage dans nouvelle page
+
 0 Popups pour contact, expositions (copie flyer), legal et link
-0 RichTextArea is editable on FF (not Chrome and Opera): peut-etre changer en htmlpanel
 0 Traduire la presentation
-0 Reagrandir un peu les images
+0 Page de demarche artistique ne se scroll pas (mettre dans un border layout ?)
 0 Interdire acces au site depuis une autre url ou lancer les initialisation depuis le headerview
+0 Reagrandir un peu les images
 0 Traduire categorie 'tout' ou au moins mettre une majuscule
 0 Chrome frame pour IE8 ou < ou mettre une page qui indique d'aller vers un autre navigateur
 0 Mettre sous licence BSD

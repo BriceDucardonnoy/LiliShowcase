@@ -11,18 +11,27 @@
 	<ui:style>
 		.globalStyle {
 			background: #000000 repeat scroll 0 0;
+			background-color: black;
 			width: 100%;
 			height: 100%;
+
+			color: #DDDDDD;
+			font-family: helvetica;
+			font-size: 20;
+			text-align: center;
+			padding-top: 80px;
+			vertical-align: middle;
 		}
 	</ui:style>
 
-	<!-- <g:HTMLPanel ui:field="presentationPane" addStyleNames="{style.globalStyle}" /> -->
-	<container:HtmlLayoutContainer ui:field="presentationPane" addStyleNames="{style.globalStyle}" />
-	<!-- <g:SimplePanel>
-		<gxt:ContentPanel collapsible="true" borders="false" bodyBorder="false" ui:field="southCP" headerVisible="false">
-			<g:RichTextArea ui:field="description" enabled="false" addStyleNames="{style.globalStyle}" />
-		</gxt:ContentPanel>
-	</g:SimplePanel> -->
-	<!-- <g:HTMLPanel ui:field="presentationPane" /> -->
-	<!-- <g:SimplePanel ui:field="pane" /> -->
+	<!-- <container:SimpleContainer addStyleNames="{style.globalStyle}">
+		<g:RichTextArea ui:field="description" enabled="false" addStyleNames="{style.globalStyle}" />
+	</container:SimpleContainer> -->
+
+	<!-- <container:SimpleContainer addStyleNames="{style.globalStyle}">
+		<container:child>
+			<container:HtmlLayoutContainer ui:field="presentationPane" addStyleNames="{style.globalStyle}" />
+		</container:child>
+	</container:SimpleContainer> -->
+	<g:HTMLPanel addStyleNames="{style.globalStyle}" ui:field="pane" />
 </ui:UiBinder>

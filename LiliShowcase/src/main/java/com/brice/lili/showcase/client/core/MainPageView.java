@@ -26,7 +26,6 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -60,8 +59,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@UiField Radio color;
 	@UiField Image tr_fr;
 	@UiField Image tr_en;
-	@UiField ContentPanel southCP;
-	@UiField RichTextArea description;
 	@UiField FieldLabel categoryField;
 	@UiField FieldLabel sortField;
 	
@@ -107,8 +104,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		orderedPictures = new ArrayList<Integer>();
 		categoriesCB.setForceSelection(true);
 		categoriesCB.setEditable(false);
-		southCP.setHeadingText(translate.ArtistPresentation());
-		southCP.getHeader().setBorders(false);
 		
 		title.setBoxLabel(translate.Title());
 		date.setBoxLabel(translate.Date());
@@ -137,14 +132,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 				sortChanged(radio.getName());
 			}
 		});
-		
-//		southCP.addResizeHandler(new ResizeHandler() {
-//			@Override
-//			public void onResize(ResizeEvent event) {
-////				contentFlow.
-//				fire window.resize event to refresh coverflow
-//			}
-//		});
 	}
 
 	@Override
@@ -378,12 +365,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@Override
 	public Image getEnBtn() {
 		return tr_en;
-	}
-
-	@Override
-	public void setDescriptionText(String text) {
-		description.setHTML(text);
-//		description.unsinkEvents(Event.ONCLICK);
 	}
 
 	@Override

@@ -137,12 +137,12 @@
 					<gxt:ContentPanel />
 				</container:east> -->
 				<!-- SOUTH -->
-				<container:south layoutData="{southData}">
-					<!-- For header over-head style, see slam what plg has done -->
-					<gxt:ContentPanel collapsible="true" borders="false" bodyBorder="false" ui:field="southCP">
-						<g:RichTextArea ui:field="description" enabled="false" addStyleNames="{style.globalStyle}" />
+				<!-- <container:south layoutData="{southData}">
+					For header over-head style, see slam what plg has done
+					<gxt:ContentPanel collapsible="true" borders="false" bodyBorder="false" ui:field="southCP" visible="false">
+						<g:RichTextArea ui:field="description" enabled="false" addStyleNames="{style.globalStyle}" visible="false" />
 					</gxt:ContentPanel>
-				</container:south>
+				</container:south> -->
 			</container:BorderLayoutContainer>
 		</container:child>
 	</container:SimpleContainer>
