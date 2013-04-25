@@ -100,7 +100,7 @@
 											<toolbar:SeparatorToolItem />
 											<button:TextButton ui:field="expoButton" icon="{res.exposition}" iconAlign="TOP" />
 											<toolbar:SeparatorToolItem />
-											<button:TextButton ui:field="approachButton" icon="{res.exposition}" iconAlign="TOP" />
+											<button:TextButton ui:field="approachButton" icon="{res.gallery}" iconAlign="TOP" />
 											<toolbar:SeparatorToolItem />
 											<button:TextButton ui:field="contactButton" icon="{res.contact}" iconAlign="TOP" />
 											<toolbar:SeparatorToolItem />
@@ -116,8 +116,7 @@
 					</container:north>
 					<!-- Center -->
 					<container:center layoutData="{centerData}">
-						<gxt:ContentPanel headerVisible="false" borders="false" bodyBorder="false" ui:field="mainCenterPane">
-						</gxt:ContentPanel>
+						<gxt:ContentPanel headerVisible="false" borders="false" bodyBorder="false" ui:field="mainCenterPane"  addStyleNames="{style.globalStyle}" />
 					</container:center>
 					<!-- SOUTH -->
 					<!-- <container:south layoutData="{southData}">

@@ -14,13 +14,14 @@
 			font-size: 20;
 			text-align: center;
 			padding-top: 80px;
+			height: 100%;
+			width: 100%;
+			vertical-align: middle;
 		}
 	</ui:style>
 
-	<g:SimplePanel addStyleNames="{style.globalStyle}">
-		<g:HTMLPanel>
-			<p>Page en cours de construction. Merci de revenir plus tard.</p><br />
-			<p>Page under construction. Thanks to come back later.</p><br />
-		</g:HTMLPanel>
-	</g:SimplePanel>
+	<g:HTMLPanel addStyleNames="{style.globalStyle}">
+		<p>Page en cours de construction. Merci de revenir plus tard.</p><br />
+		<p>Page under construction. Thanks to come back later.</p><br />
+	</g:HTMLPanel>
 </ui:UiBinder>

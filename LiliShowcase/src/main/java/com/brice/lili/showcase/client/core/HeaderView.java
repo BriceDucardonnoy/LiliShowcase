@@ -70,7 +70,9 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 	public void setInSlot(Object slot, Widget content) {
 		if(slot == HeaderPresenter.SLOT_mainContent) {
 			mainCenterPane.clear();
+			mainCenterPane.addStyleName("background: black");
 			if(content != null) {
+				content.addStyleName("background: black");
 				mainCenterPane.add(content);
 			}
 		}

@@ -28,7 +28,6 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
-import com.sencha.gxt.widget.core.client.info.Info;
 import com.sencha.gxt.widget.core.client.menu.Item;
 import com.sencha.gxt.widget.core.client.menu.Menu;
 import com.sencha.gxt.widget.core.client.menu.MenuItem;
@@ -83,7 +82,6 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 	private SelectHandler approachHandler = new SelectHandler() {
 		@Override
 		public void onSelect(SelectEvent event) {
-			Info.display("Artiste", "Demarche");
 			if(placeManager.getCurrentPlaceRequest().getNameToken().equals(NameTokens.artisticapproach)) return;
 			PlaceRequest request = new PlaceRequest(NameTokens.artisticapproach);
         	placeManager.revealPlace(request);
