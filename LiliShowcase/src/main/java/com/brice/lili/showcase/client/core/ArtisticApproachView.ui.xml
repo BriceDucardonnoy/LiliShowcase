@@ -20,6 +20,9 @@
 			width: 100%;
 			height: 100%;
 		}
+		.autoflow {
+			overflow-y: auto;
+		}
 	</ui:style>
 
 	<!-- <container:SimpleContainer addStyleNames="{style.globalStyle}">
@@ -32,7 +35,13 @@
 		</container:child>
 	</container:SimpleContainer> -->
 	
-	<g:HTMLPanel addStyleNames="{style.globalStyle}" ui:field="pane" />
+	<container:SimpleContainer addStyleNames="{style.autoflow}" ui:field="mainPane">
+		<container:child>
+			<g:HTMLPanel addStyleNames="{style.globalStyle}" ui:field="pane" />
+		</container:child>
+	</container:SimpleContainer>
+	
+	<!-- <g:HTMLPanel addStyleNames="{style.globalStyle}" ui:field="pane" /> -->
 	
 	<!-- <ui:with type="com.sencha.gxt.core.client.util.Margins" field="outerMargins">
 	 	<ui:attributes top="0" right="0" bottom="0" left="0" />
@@ -47,7 +56,6 @@
 			<container:BorderLayoutContainer ui:field="con" borders="false" addStyleNames="{style.globalStyle}">
 				<container:center layoutData="{centerData}">
 					<gxt:ContentPanel ui:field="mainPane" headerVisible="false" bodyBorder="false" borders="false" addStyleNames="{style.globalStyle}" >
-						<g:RichTextArea ui:field="description" enabled="false" addStyleNames="{style.globalStyle}" />
 						<g:HTMLPanel addStyleNames="{style.globalStyle}" ui:field="pane" />
 					</gxt:ContentPanel>
 				</container:center>

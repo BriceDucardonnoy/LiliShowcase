@@ -11,26 +11,23 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.sencha.gxt.widget.core.client.ContentPanel;
+import com.sencha.gxt.widget.core.client.container.SimpleContainer;
 
 public class ArtisticApproachView extends ViewImpl implements ArtisticApproachPresenter.MyView {
 
 	private final Widget widget;
 	
 //	@UiField HtmlLayoutContainer presentationPane;
-//	@UiField RichTextArea description;
 	
 	@UiField HTMLPanel pane;
+	@UiField SimpleContainer mainPane;
 //	@UiField ContentPanel mainPane;
-//	@UiField(provided = true)
-//	BorderLayoutData centerData = new BorderLayoutData();
 
 	public interface Binder extends UiBinder<Widget, ArtisticApproachView> {
 	}
 
 	@Inject
 	public ArtisticApproachView(final Binder binder) {
-//		centerData.setMinSize(350);
-//		centerData.setSize(1d);
 		widget = binder.createAndBindUi(this);
 //		presentationPane.setId("PresentationPaneID");
 	}
@@ -57,7 +54,6 @@ public class ArtisticApproachView extends ViewImpl implements ArtisticApproachPr
 //		HTMLPanel p = new HTMLPanel(html);
 //		presentationPane.add(p, new HtmlData(".approach"));
 //		description.setHTML(html);
-		
 		pane.getElement().setInnerHTML(html);
 		
 //		mainPane.clear();

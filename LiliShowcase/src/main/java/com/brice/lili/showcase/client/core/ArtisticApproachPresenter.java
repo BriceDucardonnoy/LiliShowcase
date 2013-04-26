@@ -46,13 +46,13 @@ public class ArtisticApproachPresenter extends Presenter<ArtisticApproachPresent
 	@Override
 	protected void onReveal() {
 		super.onReveal();
-//		getView().setArtisticApproach(html);
+		getView().setArtisticApproach(html);
 	}
 	
 	@Override
 	protected void onReset() {
 		super.onReset();
-		getView().setArtisticApproach(html);
+//		getView().setArtisticApproach(html);
 	}
 	
 	private AsyncCallback<String> loadDescriptionAC = new AsyncCallback<String>() {
