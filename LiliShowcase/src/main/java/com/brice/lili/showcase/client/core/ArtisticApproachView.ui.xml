@@ -29,7 +29,7 @@
 		<g:RichTextArea ui:field="description" enabled="false" addStyleNames="{style.globalStyle}" />
 	</container:SimpleContainer> -->
 
-	<!-- <container:SimpleContainer addStyleNames="{style.globalStyle}">
+	<!-- <container:SimpleContainer addStyleNames="{style.autoflow}" ui:field="mainPane">
 		<container:child>
 			<container:HtmlLayoutContainer ui:field="presentationPane" addStyleNames="{style.globalStyle}" />
 		</container:child>
