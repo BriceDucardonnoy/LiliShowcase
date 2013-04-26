@@ -4,6 +4,7 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'
 	xmlns:gxt='urn:import:com.sencha.gxt.widget.core.client'
 	xmlns:container='urn:import:com.sencha.gxt.widget.core.client.container'
+	xmlns:form="urn:import:com.sencha.gxt.widget.core.client.form"
 	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
 	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
 	ui:generateLocales='default'>
@@ -12,15 +13,12 @@
 		.globalStyle {
 			background: #000000 repeat scroll 0 0;
 			background-color: black;
+		}
+		.globalStyle2 {
+			background: #000000 repeat scroll 0 0;
+			background-color: black;
 			width: 100%;
 			height: 100%;
-			overflow: auto;
-			color: #DDDDDD;
-			font-family: helvetica;
-			font-size: 20;
-			text-align: center;
-			padding-top: 80px;
-			vertical-align: middle;
 		}
 	</ui:style>
 
@@ -33,5 +31,27 @@
 			<container:HtmlLayoutContainer ui:field="presentationPane" addStyleNames="{style.globalStyle}" />
 		</container:child>
 	</container:SimpleContainer> -->
+	
 	<g:HTMLPanel addStyleNames="{style.globalStyle}" ui:field="pane" />
+	
+	<!-- <ui:with type="com.sencha.gxt.core.client.util.Margins" field="outerMargins">
+	 	<ui:attributes top="0" right="0" bottom="0" left="0" />
+	</ui:with>
+	<ui:with type="com.sencha.gxt.widget.core.client.container.MarginData" field="outerData">
+		<ui:attributes margins="{outerMargins}" />
+	</ui:with>
+	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="centerData" />
+	
+	<container:SimpleContainer>
+		<container:child layoutData="{outerData}">
+			<container:BorderLayoutContainer ui:field="con" borders="false" addStyleNames="{style.globalStyle}">
+				<container:center layoutData="{centerData}">
+					<gxt:ContentPanel ui:field="mainPane" headerVisible="false" bodyBorder="false" borders="false" addStyleNames="{style.globalStyle}" >
+						<g:RichTextArea ui:field="description" enabled="false" addStyleNames="{style.globalStyle}" />
+						<g:HTMLPanel addStyleNames="{style.globalStyle}" ui:field="pane" />
+					</gxt:ContentPanel>
+				</container:center>
+			</container:BorderLayoutContainer>
+		</container:child>
+	</container:SimpleContainer> -->
 </ui:UiBinder>

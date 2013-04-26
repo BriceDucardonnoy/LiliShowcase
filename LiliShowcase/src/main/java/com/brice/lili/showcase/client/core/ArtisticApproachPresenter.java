@@ -24,6 +24,8 @@ public class ArtisticApproachPresenter extends Presenter<ArtisticApproachPresent
 	@NameToken(NameTokens.artisticapproach)
 	public interface MyProxy extends ProxyPlace<ArtisticApproachPresenter> {
 	}
+	
+	private String html;
 
 	@Inject
 	public ArtisticApproachPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy) {
@@ -41,6 +43,18 @@ public class ArtisticApproachPresenter extends Presenter<ArtisticApproachPresent
 		Utils.loadFile(loadDescriptionAC, "Presentation_" + LocaleInfo.getCurrentLocale().getLocaleName() + ".html");
 	}
 	
+	@Override
+	protected void onReveal() {
+		super.onReveal();
+//		getView().setArtisticApproach(html);
+	}
+	
+	@Override
+	protected void onReset() {
+		super.onReset();
+		getView().setArtisticApproach(html);
+	}
+	
 	private AsyncCallback<String> loadDescriptionAC = new AsyncCallback<String>() {
 		@Override
 		public void onFailure(Throwable caught) {
@@ -50,7 +64,8 @@ public class ArtisticApproachPresenter extends Presenter<ArtisticApproachPresent
 		@Override
 		public void onSuccess(String result) {
 			if(!result.contains("Error 404 NOT_FOUND")) {
-				getView().setArtisticApproach(result);
+				html = result;
+//				getView().setArtisticApproach(result);
 			}
 		}
 	};
