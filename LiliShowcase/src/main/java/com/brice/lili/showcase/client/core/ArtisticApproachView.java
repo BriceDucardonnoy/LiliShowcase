@@ -1,15 +1,12 @@
 package com.brice.lili.showcase.client.core;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.brice.lili.showcase.client.styles.panel.DarkContentPanelAppearance;
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
-import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.container.SimpleContainer;
 
 public class ArtisticApproachView extends ViewImpl implements ArtisticApproachPresenter.MyView {
@@ -60,8 +57,4 @@ public class ArtisticApproachView extends ViewImpl implements ArtisticApproachPr
 //		mainPane.setWidget(new HTML("<h1 style=\"color: red\">PATATE</h1>"));// Works with only that in presentation_default.html
 	}
 	
-	@UiFactory
-	ContentPanel createContentPanel() {
-		return new ContentPanel(new DarkContentPanelAppearance());
-	}
 }

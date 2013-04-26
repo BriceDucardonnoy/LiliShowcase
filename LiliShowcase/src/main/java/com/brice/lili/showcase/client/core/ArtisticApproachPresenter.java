@@ -25,7 +25,7 @@ public class ArtisticApproachPresenter extends Presenter<ArtisticApproachPresent
 	public interface MyProxy extends ProxyPlace<ArtisticApproachPresenter> {
 	}
 	
-	private String html;
+//	private String html;
 
 	@Inject
 	public ArtisticApproachPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy) {
@@ -46,7 +46,7 @@ public class ArtisticApproachPresenter extends Presenter<ArtisticApproachPresent
 	@Override
 	protected void onReveal() {
 		super.onReveal();
-		getView().setArtisticApproach(html);
+//		getView().setArtisticApproach(html);
 	}
 	
 	@Override
@@ -64,8 +64,8 @@ public class ArtisticApproachPresenter extends Presenter<ArtisticApproachPresent
 		@Override
 		public void onSuccess(String result) {
 			if(!result.contains("Error 404 NOT_FOUND")) {
-				html = result;
-//				getView().setArtisticApproach(result);
+//				html = result;
+				getView().setArtisticApproach(result);
 			}
 		}
 	};
