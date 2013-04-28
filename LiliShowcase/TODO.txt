@@ -59,7 +59,8 @@ X Lazy loading des images meme pour la 1re page: chargement de X images transpar
 X Resize sur le collapse du south pane => plus d'actualite car affichage dans nouvelle page
 X Interdire acces au site depuis une autre url ou lancer les initialisation depuis le headerview : semble etre corrige
 
-0 onReset de mainView = onResize pour se recalculer (resize du coverflow uniquement ?)
+0 Au resize sur une page autre que main, retour sur main requiert un resize pour afficher le coverflow correctement
+	onReset de mainView = onResize pour se recalculer (resize du coverflow uniquement ?)
 0 expositions (copie flyer) : voir helloworld UiBinder dans gxt showcase/windows
 0 Popups pour contact
 0 legal
