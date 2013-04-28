@@ -4,11 +4,9 @@ import java.util.Vector;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.lang.Translate;
-import com.brice.lili.showcase.client.styles.toolbar.DarkToolBarAppearance;
 import com.brice.lili.showcase.shared.model.Category;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
@@ -18,7 +16,6 @@ import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.menu.CheckMenuItem;
 import com.sencha.gxt.widget.core.client.menu.Menu;
-import com.sencha.gxt.widget.core.client.toolbar.ToolBar;
 
 public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 	
@@ -147,9 +144,9 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 		return tr_en;
 	}
 	
-	@UiFactory
-	ToolBar createToolbar() {
-		return new ToolBar(new DarkToolBarAppearance());
-	}
+//	@UiFactory
+//	ToolBar createToolbar() {
+//		return new ToolBar(new DarkToolBarAppearance());
+//	}
 	
 }

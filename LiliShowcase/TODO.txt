@@ -51,18 +51,19 @@ V Page de demarche artistique ne se scroll pas (mettre dans un border layout: ES
 	Meme probleme observe pour tous les widget (RichTextArea...) : ne fonctionne qu'apres resize de la window
 	doLayout sur content (headerview) semble ok
 V Icon demarche artistique
+V Black theme de la toolbar pas entierement applique si une autre page que le main est charge au debut
 
 X Traduction UiBinder (dans le client bundle ?)
 X Lazy loading des images meme pour la 1re page: chargement de X images transparentes puis chargement 
 	image par image qui peuple a la volee le coverflow
 X Resize sur le collapse du south pane => plus d'actualite car affichage dans nouvelle page
+X Interdire acces au site depuis une autre url ou lancer les initialisation depuis le headerview : semble etre corrige
 
 0 onReset de mainView = onResize pour se recalculer (resize du coverflow uniquement ?)
 0 expositions (copie flyer) : voir helloworld UiBinder dans gxt showcase/windows
 0 Popups pour contact
 0 legal
 0 link
-0 Interdire acces au site depuis une autre url ou lancer les initialisation depuis le headerview
 0 Toolbar ne se relayout pas correctement apres resize (taille -1 pas prioritaire ?)
 0 Tester avec Safari
 0 Reagrandir un peu les images

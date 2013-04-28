@@ -34,12 +34,9 @@
   <replace-with class="com.brice.lili.showcase.client.styles.button.cell.DarkButtonCellAppearance">
     <when-type-is class="com.sencha.gxt.cell.core.client.ButtonCell.ButtonCellAppearance" />
   </replace-with>
-  <!-- <replace-with class="com.brice.lili.showcase.client.styles.panel.DarkContentPanelAppearance">
-    <when-type-is class="com.sencha.gxt.theme.gray.client.panel.GrayContentPanelAppearance" />
+  <replace-with class="com.brice.lili.showcase.client.styles.toolbar.DarkToolBarAppearance">
+    <when-type-is class="com.sencha.gxt.widget.core.client.toolbar.ToolBar.ToolBarAppearance" />
   </replace-with>
-  <replace-with class="com.brice.lili.showcase.client.styles.panel.DarkContentPanelAppearance">
-    <when-type-is class="com.sencha.gxt.theme.base.client.panel.ContentPanelBaseAppearance" />
-  </replace-with> -->
   
   <inherits name="javax.validation.Validation"/>
   <!-- ContentFlow module -->
