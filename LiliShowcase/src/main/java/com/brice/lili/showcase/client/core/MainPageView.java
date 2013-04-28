@@ -264,7 +264,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 			Picture pict = (Picture) allPictures.get(orderedPictures.get(i)).getPojo();
 			if(pojo == pict) continue;// Doesn't test with itself
 			if(pict.getProperty(sortName) == null || 
-					((Comparable<Object>)pict.getProperty(sortName)).compareTo(pojo.getProperty(sortName)) > 0) {
+					((Comparable<Object>)pict.getProperty(sortName)).compareTo(pojo.getProperty(sortName)) < 0) {
 				orderedPictures.add(i, refIdx);
 				return;
 			}

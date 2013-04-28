@@ -74,6 +74,7 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 			mainCenterPane.clear();
 			if(content != null) {
 				mainCenterPane.add(content);
+				mainCenterPane.forceLayout();
 			}
 		}
 		else {

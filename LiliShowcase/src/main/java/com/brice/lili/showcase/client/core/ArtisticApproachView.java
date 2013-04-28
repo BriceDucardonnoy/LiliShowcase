@@ -33,6 +33,11 @@ public class ArtisticApproachView extends ViewImpl implements ArtisticApproachPr
 		return widget;
 	}
 	
+	@Override
+	public SimpleContainer getMainPane() {
+		return mainPane;
+	}
+	
 //	public interface HtmlLayoutContainerTemplate extends XTemplates {
 //		@XTemplate("<div width=\"100%\" height=\"100%\" class=\"approach\" />")
 //		SafeHtml getTemplate();

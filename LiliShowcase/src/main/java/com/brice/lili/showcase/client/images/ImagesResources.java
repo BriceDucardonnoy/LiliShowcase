@@ -56,6 +56,9 @@ public interface ImagesResources extends ClientBundle {
 	@Source("copyright.png")
 	ImageResource legal();
 	
-	ImageResource link();	
+	ImageResource link();
+	
+	@Source("demarche.png")
+	ImageResource approach();
 	
 }

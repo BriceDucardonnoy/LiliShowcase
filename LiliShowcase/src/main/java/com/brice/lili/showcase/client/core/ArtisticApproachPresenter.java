@@ -3,8 +3,11 @@ package com.brice.lili.showcase.client.core;
 import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.place.NameTokens;
 import com.brice.lili.showcase.client.utils.Utils;
+import com.google.gwt.core.shared.GWT;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.ResizeLayoutPanel;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
@@ -13,11 +16,14 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
+import com.sencha.gxt.widget.core.client.container.SimpleContainer;
+import com.sencha.gxt.widget.core.client.event.ResizeStartEvent;
 
 public class ArtisticApproachPresenter extends Presenter<ArtisticApproachPresenter.MyView, ArtisticApproachPresenter.MyProxy> {
 
 	public interface MyView extends View {
 		public void setArtisticApproach(String htmlText);
+		public SimpleContainer getMainPane();
 	}
 	
 	@ProxyCodeSplit
@@ -53,6 +59,8 @@ public class ArtisticApproachPresenter extends Presenter<ArtisticApproachPresent
 	protected void onReset() {
 		super.onReset();
 //		getView().setArtisticApproach(html);
+//		getEventBus().fireEvent(new ResizeStartEvent(getView().getMainPane(), null));
+//		getView().getMainPane().forceLayout();
 	}
 	
 	private AsyncCallback<String> loadDescriptionAC = new AsyncCallback<String>() {

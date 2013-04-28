@@ -98,15 +98,15 @@
 												</button:menu>
 											</button:TextButton>
 											<toolbar:SeparatorToolItem />
-											<button:TextButton ui:field="expoButton" icon="{res.exposition}" iconAlign="TOP" />
+											<button:TextButton ui:field="approachButton" icon="{res.approach}" iconAlign="TOP" />
 											<toolbar:SeparatorToolItem />
-											<button:TextButton ui:field="approachButton" icon="{res.gallery}" iconAlign="TOP" />
+											<button:TextButton ui:field="expoButton" icon="{res.exposition}" iconAlign="TOP" />
 											<toolbar:SeparatorToolItem />
 											<button:TextButton ui:field="contactButton" icon="{res.contact}" iconAlign="TOP" />
 											<toolbar:SeparatorToolItem />
-											<button:TextButton ui:field="legalButton" icon="{res.legal}" iconAlign="TOP" />
-											<toolbar:SeparatorToolItem />
 											<button:TextButton ui:field="linkButton" icon="{res.link}" iconAlign="TOP" />
+											<toolbar:SeparatorToolItem />
+											<button:TextButton ui:field="legalButton" icon="{res.legal}" iconAlign="TOP" />
 								            <toolbar:FillToolItem />
 							         	</toolbar:ToolBar>
 								  	</container:child>

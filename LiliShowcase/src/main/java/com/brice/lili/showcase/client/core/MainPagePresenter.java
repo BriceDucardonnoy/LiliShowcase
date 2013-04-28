@@ -134,6 +134,12 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		}
 	}
 	
+	@Override
+	protected void onReset() {
+		super.onReset();
+		// TODO BDY: resize or relayout
+	}
+	
 //	Log.info("getHostPageBaseURL: " + GWT.getHostPageBaseURL());// http://127.0.1.1:8888/
 //	Log.info("getModuleName: " + GWT.getModuleName());// liliShowcase
 //	Log.info("getModuleBaseForStaticFiles: " + GWT.getModuleBaseForStaticFiles());// http://127.0.1.1:8888/liliShowcase/ 
