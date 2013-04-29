@@ -6,7 +6,13 @@
 	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
 	ui:generateLocales='default'>
 
-	<g:PopupPanel modal="true" autoHideEnabled="true" glassEnabled="true">
+	<ui:style>
+	    .zindex {
+			z-index: 42;
+		}
+	</ui:style>
+
+	<g:PopupPanel modal="true" autoHideEnabled="true" glassEnabled="true" addStyleNames="{style.zindex}">
 		<g:Image url="Documents/Exposition.jpg" ui:field="expositionImage" altText="Exposition" />
 	</g:PopupPanel>
 </ui:UiBinder>

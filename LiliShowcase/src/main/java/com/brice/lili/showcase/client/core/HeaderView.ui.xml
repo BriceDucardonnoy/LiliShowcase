@@ -57,9 +57,9 @@
 	</ui:style>
 
 	<container:Viewport>
-		<container:SimpleContainer borders="false">
+		<container:SimpleContainer borders="false" addStyleNames="{style.globalStyle}">
 			<container:child layoutData="{outerData}">
-				<container:BorderLayoutContainer borders="false">
+				<container:BorderLayoutContainer borders="false"  addStyleNames="{style.globalStyle}">
 					<!-- NORTH -->
 					<container:north layoutData="{northData}">
 						<!-- <g:HTMLPanel>
