@@ -91,8 +91,8 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 	
 	@Override
 	public void addGalleries(Vector<Category> categories) {
-		Log.info("Categories size to add is " + categories.size());
-		if(categories == null || categories.size() == 0) return ;
+		if(categories == null || categories.size() == 0 || categories.size() == menuGallery.getWidgetCount()) return ;
+		Log.info("Categories to update (size to add is " + categories.size() + ")");
 		menuGallery.clear();
 		for(Category category : categories) {
 			CheckMenuItem item = new CheckMenuItem(category.getName());

@@ -36,7 +36,9 @@ public class ArtisticApproachView extends ViewImpl implements ArtisticApproachPr
 	
 	@Override
 	public void setArtisticApproach(String html) {
-		Log.info("SetArtisticApproach \n" + html);
+		if(Log.isTraceEnabled()) {
+			Log.info("SetArtisticApproach \n" + html);
+		}
 		pane.getElement().setInnerHTML(html);
 	}
 	

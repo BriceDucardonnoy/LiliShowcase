@@ -45,6 +45,7 @@ V	- le contentpanel collapse
 V	- les icones
 V Page de "en cours de construction" => mettre en tout noir
 V Traduire la presentation
+V Resize sur le collapse du south pane => plus d'actualite car affichage dans nouvelle page
 V Presentation de l'artiste => Demarche artistique dans une nouvelle page pour avoir coverflow sur toute la page (=> nouveau bouton)
 V Page de demarche artistique ne se scroll pas (mettre dans un border layout: ESSAYER --ou overflow a auto ?)
 	Ni Borderlayout ni overflow.
@@ -57,15 +58,15 @@ V expositions (copie flyer, seul solution sans administration par developpeur) :
 V legal
 V Popups pour contact => Non, mailto
 V Bug sur flyer: scrollbar et titre coverflow toujours visible, les masquer ? ==> mettre un z-index au gwt popup
+V Bug lorsque clic sur gallery depuis une autre page: selectionne toujours 'tout'
 
 X Traduction UiBinder (dans le client bundle ?)
 X Lazy loading des images meme pour la 1re page: chargement de X images transparentes puis chargement 
 	image par image qui peuple a la volee le coverflow
-X Resize sur le collapse du south pane => plus d'actualite car affichage dans nouvelle page
 X Interdire acces au site depuis une autre url ou lancer les initialisation depuis le headerview : semble etre corrige
 
 0 link
-0 Bug lorsque clic sur gallery depuis une autre page: selectionne toujours 'tout'
+0 Mettre les icones en 24x24
 0 Au resize sur une page autre que main, retour sur main requiert un resize pour afficher le coverflow correctement
 	onReset de mainView = onResize pour se recalculer (resize du coverflow uniquement ?)
 

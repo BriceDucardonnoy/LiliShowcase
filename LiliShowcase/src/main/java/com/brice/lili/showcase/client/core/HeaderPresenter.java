@@ -67,6 +67,10 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 	private SelectionHandler<Item> categoryChangedHandler = new SelectionHandler<Item>() {
 		@Override
 		public void onSelection(SelectionEvent<Item> event) {
+			if(!placeManager.getCurrentPlaceRequest().getNameToken().equals(NameTokens.mainpage)) {
+				PlaceRequest request = new PlaceRequest(NameTokens.mainpage);
+				placeManager.revealPlace(request);
+			}
 			MenuItem item = (MenuItem) event.getSelectedItem();
 			Integer categoryId = Integer.parseInt(item.getItemId(), 10);
 			if(categoryId != null) {

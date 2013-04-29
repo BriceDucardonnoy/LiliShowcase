@@ -75,10 +75,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
     private CategoryChangedHandler categoryChangedHandler = new CategoryChangedHandler() {
 		@Override
 		public void onCategoryChanged(CategoryChangedEvent event) {
-			if(!placeManager.getCurrentPlaceRequest().getNameToken().equals(NameTokens.mainpage)) {
-				PlaceRequest request = new PlaceRequest(NameTokens.mainpage);
-				placeManager.revealPlace(request);
-			}
 			MainPagePresenter.this.getView().changeCurrentCategory(event.getCategoryId());
 		}
 	};
