@@ -71,12 +71,17 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 			mainCenterPane.clear();
 			if(content != null) {
 				mainCenterPane.add(content);
-				mainCenterPane.forceLayout();
+//				mainCenterPane.forceLayout();
 			}
 		}
 		else {
 			super.setInSlot(slot, content);
 		}
+	}
+	
+	@Override
+	public ContentPanel getMainCenterPane() {
+		return mainCenterPane;
 	}
 	
 	@Override

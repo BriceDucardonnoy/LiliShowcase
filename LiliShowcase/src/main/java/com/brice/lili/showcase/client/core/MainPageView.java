@@ -325,6 +325,12 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		refreshCoverFlow();
 	}
 	
+	@Override
+	public void resize() {
+		contentFlow.resize();
+		refreshCoverFlow();
+	}
+	
 	/*
 	 * ComboBox change selection event
 	 * This action has only consequences in the view representation => can be managed in the view

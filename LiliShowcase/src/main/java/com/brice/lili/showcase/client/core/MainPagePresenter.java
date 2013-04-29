@@ -48,6 +48,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		public Image getFrBtn();
 		public Image getEnBtn();
 		public void changeCurrentCategory(Integer categoryId);
+		public void resize();
 	}
 	
 	public static final String DETAIL_KEYWORD = "picture";
@@ -132,12 +133,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		if(!categories.isEmpty() && !pictures.isEmpty()) {
 			getEventBus().fireEvent(new PicturesLoadedEvent(pictures, categories));
 		}
-	}
-	
-	@Override
-	protected void onReset() {
-		super.onReset();
-		// TODO BDY: resize or relayout
 	}
 	
 //	Log.info("getHostPageBaseURL: " + GWT.getHostPageBaseURL());// http://127.0.1.1:8888/

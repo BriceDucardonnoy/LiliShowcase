@@ -19,6 +19,8 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
 import com.brice.lili.showcase.client.core.ArtisticApproachPresenter;
 import com.brice.lili.showcase.client.core.ArtisticApproachView;
+import com.brice.lili.showcase.client.core.windows.ExpositionPresenter;
+import com.brice.lili.showcase.client.core.windows.ExpositionView;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -50,6 +52,9 @@ public class ClientModule extends AbstractPresenterModule {
 
 		bindPresenter(ArtisticApproachPresenter.class, ArtisticApproachPresenter.MyView.class,
 				ArtisticApproachView.class, ArtisticApproachPresenter.MyProxy.class);
+
+		bindPresenterWidget(ExpositionPresenter.class,
+				ExpositionPresenter.MyView.class, ExpositionView.class);
 	}
 	
 }

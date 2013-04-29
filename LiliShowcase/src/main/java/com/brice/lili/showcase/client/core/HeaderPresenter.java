@@ -2,6 +2,7 @@ package com.brice.lili.showcase.client.core;
 
 import java.util.Vector;
 
+import com.brice.lili.showcase.client.core.windows.ExpositionPresenter;
 import com.brice.lili.showcase.client.events.CategoryChangedEvent;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent.PicturesLoadedHandler;
@@ -25,6 +26,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
+import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
@@ -36,6 +38,7 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 
 	@ContentSlot public static final Type<RevealContentHandler<?>> SLOT_mainContent = new Type<RevealContentHandler<?>>();
 	@Inject PlaceManager placeManager;
+	@Inject ExpositionPresenter expositionPresenter;
 	
 	public interface MyView extends View {
 		public void addGalleries(Vector<Category> categories);
@@ -49,6 +52,7 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		public TextButton getLinkButton();
 		public Image getFrBtn();
 		public Image getEnBtn();
+		public ContentPanel getMainCenterPane();
 	}
 	
 	private PicturesLoadedHandler pictureLoadedHandler = new PicturesLoadedHandler() {
@@ -88,6 +92,13 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		}
 	};
 	
+	private SelectHandler expositionHandler = new SelectHandler() {
+		@Override
+		public void onSelect(SelectEvent event) {
+			addToPopupSlot(expositionPresenter);
+		}
+	};
+	
 	private ClickHandler frHandler = new ClickHandler() {
 		@Override
 		public void onClick(ClickEvent arg0) {
@@ -123,8 +134,14 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		registerHandler(getView().getGalleryMenu().addSelectionHandler(categoryChangedHandler));
 		registerHandler(getView().getHomeButton().addSelectHandler(homeHandler));
 		registerHandler(getView().getApproachButton().addSelectHandler(approachHandler));
+		registerHandler(getView().getExpoButton().addSelectHandler(expositionHandler));
 		registerHandler(getView().getFrBtn().addClickHandler(frHandler));
 		registerHandler(getView().getEnBtn().addClickHandler(enHandler));
 	}
 	
+	@Override
+	protected void onReset() {
+		super.onReset();
+		getView().getMainCenterPane().forceLayout();
+	}
 }
