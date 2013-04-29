@@ -291,6 +291,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		for(Integer i : orderedPictures) {
 			allPictures.get(i).getContainer().removeStyleName("active");
 			allPictures.get(i).getContainer().setVisible(false);
+			// TODO BDY: make scrollbar and global caption not visible if current page and popup displayed (need to add event on popup shown
 		}
 		orderedPictures.clear();
 		int sz = allPictures.size();

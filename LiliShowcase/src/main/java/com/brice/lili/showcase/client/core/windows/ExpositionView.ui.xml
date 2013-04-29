@@ -7,6 +7,6 @@
 	ui:generateLocales='default'>
 
 	<g:PopupPanel modal="true" autoHideEnabled="true" glassEnabled="true">
-		<g:Image url="Exposition.jpg" ui:field="expositionImage" altText="Exposition" />
+		<g:Image url="Documents/Exposition.jpg" ui:field="expositionImage" altText="Exposition" />
 	</g:PopupPanel>
 </ui:UiBinder>

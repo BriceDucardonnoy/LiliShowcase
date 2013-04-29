@@ -118,7 +118,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 	@Override
 	protected void onBind() {
 		super.onBind();
-		Utils.loadFile(loadListAC, GWT.getHostPageBaseURL() + "List.txt");
+		Utils.loadFile(loadListAC, GWT.getHostPageBaseURL() + "Documents/List.txt");
 		Utils.showWaitCursor(getView().getMainPane().getBody());
 		registerHandler(getView().getContentFlow().addItemClickListener(contentFlowClickListener));
 		registerHandler(getEventBus().addHandler(CategoryChangedEvent.getType(), categoryChangedHandler));

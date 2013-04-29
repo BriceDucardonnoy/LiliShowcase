@@ -21,6 +21,8 @@ import com.brice.lili.showcase.client.core.ArtisticApproachPresenter;
 import com.brice.lili.showcase.client.core.ArtisticApproachView;
 import com.brice.lili.showcase.client.core.windows.ExpositionPresenter;
 import com.brice.lili.showcase.client.core.windows.ExpositionView;
+import com.brice.lili.showcase.client.core.windows.LegalPresenter;
+import com.brice.lili.showcase.client.core.windows.LegalView;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -55,6 +57,9 @@ public class ClientModule extends AbstractPresenterModule {
 
 		bindPresenterWidget(ExpositionPresenter.class,
 				ExpositionPresenter.MyView.class, ExpositionView.class);
+
+		bindPresenterWidget(LegalPresenter.class, LegalPresenter.MyView.class,
+				LegalView.class);
 	}
 	
 }

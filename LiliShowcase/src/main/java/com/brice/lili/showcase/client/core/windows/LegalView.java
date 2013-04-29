@@ -1,26 +1,26 @@
-package com.brice.lili.showcase.client.core;
+package com.brice.lili.showcase.client.core.windows;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.ViewImpl;
+import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.PopupViewImpl;
 import com.sencha.gxt.widget.core.client.container.SimpleContainer;
 
-public class ArtisticApproachView extends ViewImpl implements ArtisticApproachPresenter.MyView {
+public class LegalView extends PopupViewImpl implements LegalPresenter.MyView {
 
 	private final Widget widget;
-	
 	@UiField HTMLPanel pane;
 	@UiField SimpleContainer mainPane;
 
-	public interface Binder extends UiBinder<Widget, ArtisticApproachView> {
+	public interface Binder extends UiBinder<Widget, LegalView> {
 	}
 
 	@Inject
-	public ArtisticApproachView(final Binder binder) {
+	public LegalView(final EventBus eventBus, final Binder binder) {
+		super(eventBus);
 		widget = binder.createAndBindUi(this);
 	}
 
@@ -35,9 +35,7 @@ public class ArtisticApproachView extends ViewImpl implements ArtisticApproachPr
 	}
 	
 	@Override
-	public void setArtisticApproach(String html) {
-		Log.info("SetArtisticApproach \n" + html);
+	public void setLegal(String html) {
 		pane.getElement().setInnerHTML(html);
 	}
-	
 }

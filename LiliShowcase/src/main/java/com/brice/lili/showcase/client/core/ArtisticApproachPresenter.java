@@ -3,11 +3,8 @@ package com.brice.lili.showcase.client.core;
 import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.place.NameTokens;
 import com.brice.lili.showcase.client.utils.Utils;
-import com.google.gwt.core.shared.GWT;
-import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.ResizeLayoutPanel;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
@@ -17,7 +14,6 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.sencha.gxt.widget.core.client.container.SimpleContainer;
-import com.sencha.gxt.widget.core.client.event.ResizeStartEvent;
 
 public class ArtisticApproachPresenter extends Presenter<ArtisticApproachPresenter.MyView, ArtisticApproachPresenter.MyProxy> {
 
@@ -31,8 +27,6 @@ public class ArtisticApproachPresenter extends Presenter<ArtisticApproachPresent
 	public interface MyProxy extends ProxyPlace<ArtisticApproachPresenter> {
 	}
 	
-//	private String html;
-
 	@Inject
 	public ArtisticApproachPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy) {
 		super(eventBus, view, proxy);
@@ -46,21 +40,7 @@ public class ArtisticApproachPresenter extends Presenter<ArtisticApproachPresent
 	@Override
 	protected void onBind() {
 		super.onBind();
-		Utils.loadFile(loadDescriptionAC, "Presentation_" + LocaleInfo.getCurrentLocale().getLocaleName() + ".html");
-	}
-	
-	@Override
-	protected void onReveal() {
-		super.onReveal();
-//		getView().setArtisticApproach(html);
-	}
-	
-	@Override
-	protected void onReset() {
-		super.onReset();
-//		getView().setArtisticApproach(html);
-//		getEventBus().fireEvent(new ResizeStartEvent(getView().getMainPane(), null));
-//		getView().getMainPane().forceLayout();
+		Utils.loadFile(loadDescriptionAC, "Documents/Presentation_" + LocaleInfo.getCurrentLocale().getLocaleName() + ".html");
 	}
 	
 	private AsyncCallback<String> loadDescriptionAC = new AsyncCallback<String>() {
@@ -72,7 +52,6 @@ public class ArtisticApproachPresenter extends Presenter<ArtisticApproachPresent
 		@Override
 		public void onSuccess(String result) {
 			if(!result.contains("Error 404 NOT_FOUND")) {
-//				html = result;
 				getView().setArtisticApproach(result);
 			}
 		}

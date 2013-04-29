@@ -3,6 +3,7 @@ package com.brice.lili.showcase.client.core;
 import java.util.Vector;
 
 import com.brice.lili.showcase.client.core.windows.ExpositionPresenter;
+import com.brice.lili.showcase.client.core.windows.LegalPresenter;
 import com.brice.lili.showcase.client.events.CategoryChangedEvent;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent.PicturesLoadedHandler;
@@ -39,6 +40,7 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 	@ContentSlot public static final Type<RevealContentHandler<?>> SLOT_mainContent = new Type<RevealContentHandler<?>>();
 	@Inject PlaceManager placeManager;
 	@Inject ExpositionPresenter expositionPresenter;
+	@Inject LegalPresenter legalPresenter;
 	
 	public interface MyView extends View {
 		public void addGalleries(Vector<Category> categories);
@@ -99,6 +101,13 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		}
 	};
 	
+	private SelectHandler legalHandler = new SelectHandler() {
+		@Override
+		public void onSelect(SelectEvent event) {
+			addToPopupSlot(legalPresenter);
+		}
+	};
+	
 	private ClickHandler frHandler = new ClickHandler() {
 		@Override
 		public void onClick(ClickEvent arg0) {
@@ -135,6 +144,7 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		registerHandler(getView().getHomeButton().addSelectHandler(homeHandler));
 		registerHandler(getView().getApproachButton().addSelectHandler(approachHandler));
 		registerHandler(getView().getExpoButton().addSelectHandler(expositionHandler));
+		registerHandler(getView().getLegalButton().addSelectHandler(legalHandler));
 		registerHandler(getView().getFrBtn().addClickHandler(frHandler));
 		registerHandler(getView().getEnBtn().addClickHandler(enHandler));
 	}
