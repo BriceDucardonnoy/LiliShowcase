@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import com.brice.lili.showcase.client.core.windows.ExpositionPresenter;
 import com.brice.lili.showcase.client.core.windows.LegalPresenter;
+import com.brice.lili.showcase.client.core.windows.LegalWindow;
 import com.brice.lili.showcase.client.events.CategoryChangedEvent;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent.PicturesLoadedHandler;
@@ -104,7 +105,9 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 	private SelectHandler legalHandler = new SelectHandler() {
 		@Override
 		public void onSelect(SelectEvent event) {
-			addToPopupSlot(legalPresenter);
+//			addToPopupSlot(legalPresenter);
+			LegalWindow legal = new LegalWindow();
+			legal.show();
 		}
 	};
 	
