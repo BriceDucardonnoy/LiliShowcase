@@ -1,6 +1,8 @@
 
 package com.brice.lili.showcase.client.gin;
 
+import com.brice.lili.showcase.client.core.ArtisticApproachPresenter;
+import com.brice.lili.showcase.client.core.ArtisticApproachView;
 import com.brice.lili.showcase.client.core.DetailPresenter;
 import com.brice.lili.showcase.client.core.DetailView;
 import com.brice.lili.showcase.client.core.ErrorPresenter;
@@ -11,18 +13,14 @@ import com.brice.lili.showcase.client.core.MainPagePresenter;
 import com.brice.lili.showcase.client.core.MainPageView;
 import com.brice.lili.showcase.client.core.UnauthorizedPresenter;
 import com.brice.lili.showcase.client.core.UnauthorizedView;
+import com.brice.lili.showcase.client.core.windows.ExpositionPresenter;
+import com.brice.lili.showcase.client.core.windows.ExpositionView;
 import com.brice.lili.showcase.client.place.ClientPlaceManager;
 import com.brice.lili.showcase.client.place.DefaultPlace;
 import com.brice.lili.showcase.client.place.ErrorPlace;
 import com.brice.lili.showcase.client.place.NameTokens;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
-import com.brice.lili.showcase.client.core.ArtisticApproachPresenter;
-import com.brice.lili.showcase.client.core.ArtisticApproachView;
-import com.brice.lili.showcase.client.core.windows.ExpositionPresenter;
-import com.brice.lili.showcase.client.core.windows.ExpositionView;
-import com.brice.lili.showcase.client.core.windows.LegalPresenter;
-import com.brice.lili.showcase.client.core.windows.LegalView;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -57,9 +55,6 @@ public class ClientModule extends AbstractPresenterModule {
 
 		bindPresenterWidget(ExpositionPresenter.class,
 				ExpositionPresenter.MyView.class, ExpositionView.class);
-
-		bindPresenterWidget(LegalPresenter.class, LegalPresenter.MyView.class,
-				LegalView.class);
 	}
 	
 }

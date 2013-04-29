@@ -54,6 +54,7 @@ V Icon demarche artistique
 V Black theme de la toolbar pas entierement applique si une autre page que le main est charge au debut
 V Tester avec Safari
 V expositions (copie flyer, seul solution sans administration par developpeur) : voir Dani's course lesson 5
+V legal
 
 X Traduction UiBinder (dans le client bundle ?)
 X Lazy loading des images meme pour la 1re page: chargement de X images transparentes puis chargement 
@@ -61,7 +62,6 @@ X Lazy loading des images meme pour la 1re page: chargement de X images transpar
 X Resize sur le collapse du south pane => plus d'actualite car affichage dans nouvelle page
 X Interdire acces au site depuis une autre url ou lancer les initialisation depuis le headerview : semble etre corrige
 
-0 legal
 0 Popups pour contact
 0 link
 0 Bug sur flyer: scrollbar et titre coverflow toujours visible, les masquer ?

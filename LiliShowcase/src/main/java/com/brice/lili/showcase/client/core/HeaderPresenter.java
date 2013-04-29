@@ -3,7 +3,6 @@ package com.brice.lili.showcase.client.core;
 import java.util.Vector;
 
 import com.brice.lili.showcase.client.core.windows.ExpositionPresenter;
-import com.brice.lili.showcase.client.core.windows.LegalPresenter;
 import com.brice.lili.showcase.client.core.windows.LegalWindow;
 import com.brice.lili.showcase.client.events.CategoryChangedEvent;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent;
@@ -16,6 +15,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Image;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -41,7 +41,6 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 	@ContentSlot public static final Type<RevealContentHandler<?>> SLOT_mainContent = new Type<RevealContentHandler<?>>();
 	@Inject PlaceManager placeManager;
 	@Inject ExpositionPresenter expositionPresenter;
-	@Inject LegalPresenter legalPresenter;
 	
 	public interface MyView extends View {
 		public void addGalleries(Vector<Category> categories);
@@ -102,10 +101,17 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		}
 	};
 	
+	private SelectHandler contactHandler = new SelectHandler() {
+		@Override
+		public void onSelect(SelectEvent event) {
+//			Window.Location.assign("mailto:contact@deblache.com?Subject=Contact%20from%20site&Body=Bonjour");
+			Window.Location.assign("mailto:contact@deblache.com");
+		}
+	};
+	
 	private SelectHandler legalHandler = new SelectHandler() {
 		@Override
 		public void onSelect(SelectEvent event) {
-//			addToPopupSlot(legalPresenter);
 			LegalWindow legal = new LegalWindow();
 			legal.show();
 		}
@@ -148,6 +154,7 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		registerHandler(getView().getApproachButton().addSelectHandler(approachHandler));
 		registerHandler(getView().getExpoButton().addSelectHandler(expositionHandler));
 		registerHandler(getView().getLegalButton().addSelectHandler(legalHandler));
+		registerHandler(getView().getContactButton().addSelectHandler(contactHandler));
 		registerHandler(getView().getFrBtn().addClickHandler(frHandler));
 		registerHandler(getView().getEnBtn().addClickHandler(enHandler));
 	}

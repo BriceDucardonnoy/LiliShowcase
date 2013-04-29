@@ -20,7 +20,7 @@ public class LegalWindow extends Window {
 		super();
 		setModal(true);
 		setHeadingText(translate.Legal());
-		setSize("600px", "600px");
+		setSize("650px", "600px");
 		buildUi();
 	}
 	
