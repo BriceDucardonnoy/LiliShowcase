@@ -67,6 +67,7 @@ X Interdire acces au site depuis une autre url ou lancer les initialisation depu
 
 0 link
 0 Mettre les icones en 24x24
+0 Logo en haut a gauche ramene vers accueil
 0 Au resize sur une page autre que main, retour sur main requiert un resize pour afficher le coverflow correctement
 	onReset de mainView = onResize pour se recalculer (resize du coverflow uniquement ?)
 
