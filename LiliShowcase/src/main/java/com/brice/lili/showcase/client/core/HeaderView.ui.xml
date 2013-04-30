@@ -26,7 +26,7 @@
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="eastData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="southData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer.HorizontalLayoutData" field="horizontalLayoutData">
-		<ui:attributes width="-1" height="1" />
+		<ui:attributes width="745" height="1" />
 	</ui:with>
 	<ui:with type="com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer.HorizontalLayoutData" field="horizontalLayoutDataMain">
 		<ui:attributes width="1" height="1" />
@@ -67,7 +67,7 @@
 						</g:HTMLPanel> -->
 						<container:HorizontalLayoutContainer addStyleNames="{style.globalStyle}" borders="false">
 							<container:child layoutData="{horizontalLayoutData}">
-								<g:Image resource='{res.header200}' />
+								<g:Image resource='{res.header200}' ui:field="logo" addStyleNames="{style.cursorImageFlag}" />
 							</container:child>
 							<container:child layoutData="{horizontalLayoutDataMain}">
 								<!-- <container:VerticalLayoutContainer>

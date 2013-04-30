@@ -55,6 +55,7 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		public Image getFrBtn();
 		public Image getEnBtn();
 		public ContentPanel getMainCenterPane();
+		public Image getLogo();
 	}
 	
 	private PicturesLoadedHandler pictureLoadedHandler = new PicturesLoadedHandler() {
@@ -76,6 +77,15 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 			if(categoryId != null) {
 				getEventBus().fireEvent(new CategoryChangedEvent(categoryId));
 			}
+		}
+	};
+
+	private ClickHandler logoHandler = new ClickHandler() {
+		@Override
+		public void onClick(ClickEvent arg0) {
+			if(placeManager.getCurrentPlaceRequest().getNameToken().equals(NameTokens.mainpage)) return;
+			PlaceRequest request = new PlaceRequest(NameTokens.mainpage);
+        	placeManager.revealPlace(request);
 		}
 	};
 	
@@ -154,6 +164,7 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		super.onBind();
 		registerHandler(getEventBus().addHandler(PicturesLoadedEvent.getType(), pictureLoadedHandler));
 		registerHandler(getView().getGalleryMenu().addSelectionHandler(categoryChangedHandler));
+		registerHandler(getView().getLogo().addClickHandler(logoHandler));
 		registerHandler(getView().getHomeButton().addSelectHandler(homeHandler));
 		registerHandler(getView().getApproachButton().addSelectHandler(approachHandler));
 		registerHandler(getView().getExpoButton().addSelectHandler(expositionHandler));

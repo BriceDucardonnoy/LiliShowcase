@@ -24,6 +24,7 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 	private final Widget widget;
 	
 	@UiField ContentPanel mainCenterPane;
+	@UiField Image logo;
 	@UiField TextButton homeButton;
 	@UiField TextButton galleryButton;
 	@UiField Menu menuGallery;
@@ -147,6 +148,11 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 	@Override
 	public Image getEnBtn() {
 		return tr_en;
+	}
+	
+	@Override 
+	public Image getLogo() {
+		return logo;
 	}
 	
 //	@UiFactory

@@ -59,19 +59,17 @@ V legal
 V Popups pour contact => Non, mailto
 V Bug sur flyer: scrollbar et titre coverflow toujours visible, les masquer ? ==> mettre un z-index au gwt popup
 V Bug lorsque clic sur gallery depuis une autre page: selectionne toujours 'tout'
+V Logo en haut a gauche ramene vers accueil
+V Interdire acces au site depuis une autre url ou lancer les initialisation depuis le headerview : semble etre corrige
+V Mettre les icones en 24x24
 
 X Traduction UiBinder (dans le client bundle ?)
-X Lazy loading des images meme pour la 1re page: chargement de X images transparentes puis chargement 
-	image par image qui peuple a la volee le coverflow
-X Interdire acces au site depuis une autre url ou lancer les initialisation depuis le headerview : semble etre corrige
 
 0 link
-0 Mettre les icones en 24x24
-0 Logo en haut a gauche ramene vers accueil
+0 Toolbar ne se relayout pas correctement apres resize (taille -1 pas prioritaire ?)
 0 Au resize sur une page autre que main, retour sur main requiert un resize pour afficher le coverflow correctement
 	onReset de mainView = onResize pour se recalculer (resize du coverflow uniquement ?)
 
-0 Toolbar ne se relayout pas correctement apres resize (taille -1 pas prioritaire ?)
 0 Legal anglais
 0 Reagrandir un peu les images
 
