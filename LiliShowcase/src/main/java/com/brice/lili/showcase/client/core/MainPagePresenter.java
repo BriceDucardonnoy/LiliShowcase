@@ -51,7 +51,9 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		public void resize();
 	}
 	
-	public static final String DETAIL_KEYWORD = "picture";
+	public static final String DETAIL_KEYWORD	= "picture";
+	public static final String PHOTOSFOLDER 	= "photos";
+	public static final String FILEINFO		= "fileInfo";
 	
 	@Inject PlaceManager placeManager;
 	
@@ -67,8 +69,9 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
         	if(Log.isInfoEnabled()) {
         		Info.display(translate.Selection(), translate.YouClickOn() + " " + getView().getCurrentPicture().getTitle());
         	}
-        	PlaceRequest request = new PlaceRequest(NameTokens.detail).with(DETAIL_KEYWORD, getView().getCurrentPicture().getTitleOrName());
+        	PlaceRequest request = new PlaceRequest(NameTokens.detail).with(DETAIL_KEYWORD, (String) getView().getCurrentPicture().getProperty(FILEINFO));
         	placeManager.revealPlace(request);
+        	getEventBus().fireEvent(new PicturesLoadedEvent(pictures, categories));// FIXME BDY: doesn't work on deployed mode
         }
     };
     
@@ -140,13 +143,14 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 //		picts = list.replaceAll("\r", "").replaceAll("\n", "").split(";");
 		picts = list.replaceAll("\r",  "").split("\n");
 		Log.info("Picture " + picts[0]);
-		Utils.loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photos/" + picts[0] + "/Details.txt");
+		Utils.loadFile(loadInfoAC, GWT.getHostPageBaseURL() + PHOTOSFOLDER + "/" + picts[0] + "/Details.txt");
 	}
 	
 	private void loadPictureInfo(String infos, int nextInd) {
 		// Store info
 		if(!infos.isEmpty() && !infos.contains("HTTP ERROR: 404")) {
 			Picture p = new Picture();
+			p.addProperty(FILEINFO, picts[nextInd - 1]);
 			// Special case for imageUrl to build from 'Show'
 			String []entries = infos.replaceAll("\r", "").split("\n");
 			for(String entry : entries) {
@@ -176,7 +180,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 						}
 					}
 //					p.addProperty("imageUrl", GWT.getHostPageBaseURL() + "photos/" + p.getNameOrTitle() + "/" + p.getProperty("Show"));
-					p.addProperty("imageUrl", GWT.getHostPageBaseURL() + "photos/" + picts[nextInd - 1] + "/" + p.getProperty("Show"));
+					p.addProperty("imageUrl", GWT.getHostPageBaseURL() + PHOTOSFOLDER + "/" + picts[nextInd - 1] + "/" + p.getProperty("Show"));
 					continue;
 				}// End of categories process
 				String []prop = entry.split(":");
@@ -196,7 +200,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		if(nextInd < picts.length) {
 			if(!picts[nextInd].isEmpty()) {
 				Log.info("Picture " + picts[nextInd]);
-				Utils.loadFile(loadInfoAC, GWT.getHostPageBaseURL() + "photos/" + picts[nextInd++] + "/Details.txt");
+				Utils.loadFile(loadInfoAC, GWT.getHostPageBaseURL() + PHOTOSFOLDER + "/" + picts[nextInd++] + "/Details.txt");
 			}
 		}
 		// Launch view initialization

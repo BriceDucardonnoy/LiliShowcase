@@ -5,8 +5,23 @@
 	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
 	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
 	ui:generateLocales='default'>
-
-	<g:HTMLPanel>
-	You need to select a picture first
+	
+	<ui:style>
+		.globalStyle {
+			background: #000000 repeat scroll 0 0;
+			color: #DDDDDD;
+			font-family: helvetica;
+			font-size: 20;
+			text-align: center;
+			padding-top: 80px;
+			height: 100%;
+			width: 100%;
+			vertical-align: middle;
+		}
+	</ui:style>
+	
+	<g:HTMLPanel addStyleNames="{style.globalStyle}">
+		<p>Vous devez d'abord s&eacute;lectionner un tableau</p><br />
+		<p>You need to select a picture first</p>
 	</g:HTMLPanel>
 </ui:UiBinder>
