@@ -73,10 +73,13 @@ X Traduction UiBinder (dans le client bundle ?)
 0 Legal anglais
 0 Reagrandir un peu les images
 
-Composants 2eme page
-0 Rappel de l'image en haut à droite: utiliser un FitImage avec un stretch à false au lieu d'une Image gwt, ou setHeight et setWidth
+---------------- Composants 2eme page ----------------
+0 Rappel de l'image en haut à droite, différentes idées pour le stretch présent :
+	utiliser centercontainer au lieu de simplecontainer qui fit l'enfant
+	setHeight et setWidth
+	utiliser un FitImage avec un stretch à false au lieu d'une Image gwt
 0 Description = titre<br />format<br />medium<br />annee<br />price si vendu, voir pour traduction de "vendu" et "sans titre"
-0 Pour liste image dans le south, voir le listview dans le showcase de gxt et faire une liste d'un presenterWidget
+0 Pour liste image dans le south, voir le listview dans le showcase de gxt et faire une liste d'un presenterWidget contenant une image
 0 Pendant chargement de l'image : public static void prefetch(java.lang.String url):
 	Causes the browser to pre-fetch the image at a given URL.
 	Peut-être à utiliser aussi pour le coverflow
