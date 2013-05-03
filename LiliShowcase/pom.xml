@@ -53,6 +53,12 @@
 			<version>${gwtVersion}</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- <dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-dev</artifactId>
+			<version>${gwtVersion}</version>
+			<scope>compile</scope>
+		</dependency> -->
 		<dependency>
 			<groupId>com.sencha.gxt</groupId>
 			<artifactId>gxt</artifactId>
@@ -196,7 +202,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.1.1</version>
+				<version>2.3</version>
 				<executions>
 					<execution>
 						<phase>compile</phase>
@@ -212,10 +218,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>3.1</version>
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
+					<!-- <fork>true</fork> -->
 				</configuration>
 			</plugin>
 		</plugins>

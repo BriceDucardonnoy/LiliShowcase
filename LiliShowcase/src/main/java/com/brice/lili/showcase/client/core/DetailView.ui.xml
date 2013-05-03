@@ -40,7 +40,7 @@
 		<ui:attributes size="200" />
 	</ui:with>
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="westData">
-		<ui:attributes size="300" />
+		<ui:attributes size="300d" />
 	</ui:with>
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="centerData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="eastData" />
