@@ -84,7 +84,9 @@ X Traduction UiBinder (dans le client bundle ?)
 	Causes the browser to pre-fetch the image at a given URL.
 	Peut-être à utiliser aussi pour le coverflow
 0 Pour image affichée dans la zone center, mettre un effet de fadin (gxt showcase FX)
+0 Ajouter bouton pour ouvrir en grand dans une autre fenêtre
 0 Lazy loading des images sur la 2eme page pour ne pas ralentir le chargement de la 1re
+0 Gérer le chargement du site par la page de détails directement (charge quand même les images et catégories)
 0 Pour exposition: chargement d'une page html pour que Lili puisse ajouter de façon autonome des info
 
 0 Traduire categorie 'tout' ou au moins mettre une majuscule

@@ -59,7 +59,9 @@
 				<container:west layoutData="{westData}">
 					<container:VerticalLayoutContainer visible="true" borders="true" addStyleNames="{style.globalStyle}">
 						<container:child layoutData="{verticalLayoutData}">
-							<g:Image ui:field="mainImage" altText="Full" />
+							<container:CenterLayoutContainer ui:field="imageContainer">
+								<g:Image ui:field="mainImage" altText="Full Picture" />
+							</container:CenterLayoutContainer>
 						</container:child>
 						<container:child layoutData="{verticalLayoutData}">
 							<container:SimpleContainer ui:field="description" />

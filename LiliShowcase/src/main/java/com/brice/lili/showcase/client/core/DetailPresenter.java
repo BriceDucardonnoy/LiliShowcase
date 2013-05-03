@@ -3,6 +3,7 @@ package com.brice.lili.showcase.client.core;
 import java.util.Vector;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.brice.lili.showcase.client.context.ApplicationContext;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent.PicturesLoadedHandler;
 import com.brice.lili.showcase.client.gateKeepers.DetailGateKeeper;
@@ -30,6 +31,7 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 	
 	public interface MyView extends View {
 		public Image getMainImage();
+		public void updateMainImage(String url);
 	}
 	
 	private PicturesLoadedHandler pictureLoadedHandler = new PicturesLoadedHandler() {
@@ -45,9 +47,11 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 	public interface MyProxy extends ProxyPlace<DetailPresenter> {
 	}
 
+	@SuppressWarnings("unchecked")
 	@Inject
 	public DetailPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy) {
 		super(eventBus, view, proxy);
+		pictures = (Vector<Picture>) ApplicationContext.getInstance().getProperty("pictures");
 	}
 
 	@Override
@@ -88,7 +92,7 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 			placeManager.revealUnauthorizedPlace(NameTokens.detail);
 		}
 		// Show: picture arg/show property
-		getView().getMainImage().setUrl(currentPicture.getImageUrl());
+		getView().updateMainImage(currentPicture.getImageUrl());
 	}
 	
 	@Override

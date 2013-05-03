@@ -6,6 +6,7 @@ import org.gwt.contentflow4gwt.client.ContentFlow;
 import org.gwt.contentflow4gwt.client.ContentFlowItemClickListener;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.brice.lili.showcase.client.context.ApplicationContext;
 import com.brice.lili.showcase.client.events.CategoryChangedEvent;
 import com.brice.lili.showcase.client.events.CategoryChangedEvent.CategoryChangedHandler;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent;
@@ -71,7 +72,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
         	}
         	PlaceRequest request = new PlaceRequest(NameTokens.detail).with(DETAIL_KEYWORD, (String) getView().getCurrentPicture().getProperty(FILEINFO));
         	placeManager.revealPlace(request);
-        	getEventBus().fireEvent(new PicturesLoadedEvent(pictures, categories));// FIXME BDY: doesn't work on deployed mode
         }
     };
     
@@ -210,6 +210,8 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 			getView().addItems(pictures);// Initialize cover flow
 //			PicturesLoadedEvent.fire(this.getEventBus(), pictures, categories);
 			getEventBus().fireEvent(new PicturesLoadedEvent(pictures, categories));
+			ApplicationContext.getInstance().addProperty("categories", categories);
+			ApplicationContext.getInstance().addProperty("pictures", pictures);
 			Utils.showDefaultCursor(getView().getMainPane().getBody());
 			getView().init();
 			return;
