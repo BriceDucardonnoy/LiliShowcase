@@ -101,7 +101,6 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 		}
 		// Show: picture arg/show property
 		getView().updateMainImage(currentPicture.getImageUrl());
-		// TODO BDY: infos
 		String info = "<div style=\"" +
 				"color: #DDDDDD;" +
 				"font-family: helvetica; " +
@@ -111,7 +110,7 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 				"overflow: auto;" +
 				"\">";
 		info += "<div style=\"text-align: center; font-size: 18px;\"><b>" + translate.Details() + "</b></div><br />";
-		info += translate.Title() + getSeparatorDependingLocale() + currentPicture.getTitle() + "<br />";
+		info += translate.Title() + getSeparatorDependingLocale() + currentPicture.getTranslatedTitle(locale) + "<br />";
 		info += translate.Dimension() + getSeparatorDependingLocale() + currentPicture.getProperty("Dimension", "") + "<br />";
 		info += translate.Medium() + getSeparatorDependingLocale() + currentPicture.getProperty("Medium", "") + "<br />";
 		info += translate.Date() + getSeparatorDependingLocale() + currentPicture.getProperty("Date", "") + "<br />";

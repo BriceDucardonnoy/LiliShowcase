@@ -56,6 +56,7 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 		if(mainImage.getHeight() >= mainImage.getWidth()) {
 			mainImage.setHeight("100%");
 			if(mainImage.getWidth() > westData.getSize()) {
+				mainImage.getElement().getStyle().clearHeight();
 				Log.info("Set width to " + Long.toString(Math.round(westData.getSize())) + "px");
 				mainImage.setWidth(Long.toString(Math.round(westData.getSize())) + "px");
 			}
@@ -63,6 +64,7 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 		else {
 			mainImage.setWidth("100%");
 			if(mainImage.getHeight() > imageContainer.getOffsetHeight(true)) {
+				mainImage.getElement().getStyle().clearWidth();
 				Log.info("Set height to " + imageContainer.getOffsetHeight(true) + "px");
 				mainImage.setHeight(imageContainer.getOffsetHeight(true) + "px");
 			}

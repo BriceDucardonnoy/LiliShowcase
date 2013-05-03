@@ -34,6 +34,27 @@ public class Picture implements Serializable {
     		(properties.containsKey("Title") ? (String) properties.get("Title") : "");
     }
     
+    /**
+     * Returns a translated title for pictures called "sans titre"
+     * @param locale The locale (supported en and fr)
+     * @return The translated title if "sans titre", the original title otherwise
+     */
+    public String getTranslatedTitle(String locale) {
+    	String title = getTitle();
+    	if(title.equalsIgnoreCase("sans titre")) {
+    		if(locale.equals("fr")) {
+    			return title;
+    		}
+    		else if(locale.equals("en")) {
+    			return "no name";
+    		}
+    		else {
+    			return title;
+    		}
+    	}
+    	return title;
+    }
+    
     public String getNameOrTitle() {
     	if(properties.containsKey("name")) return (String) properties.get("name");
     	if(properties.containsKey("Name")) return (String) properties.get("Name");
