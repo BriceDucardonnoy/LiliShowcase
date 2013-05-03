@@ -7,8 +7,11 @@ import com.brice.lili.showcase.client.context.ApplicationContext;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent.PicturesLoadedHandler;
 import com.brice.lili.showcase.client.gateKeepers.DetailGateKeeper;
+import com.brice.lili.showcase.client.lang.Translate;
 import com.brice.lili.showcase.client.place.NameTokens;
 import com.brice.lili.showcase.shared.model.Picture;
+import com.google.gwt.core.shared.GWT;
+import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.ui.Image;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -24,14 +27,18 @@ import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 
 public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPresenter.MyProxy> {
 
+	private final Translate translate = GWT.create(Translate.class);
+	
 	@Inject PlaceManager placeManager;
 	private String pictureFolder = "";
 	private Vector<Picture> pictures = null;
 	private Picture currentPicture = null;
+	private String locale;
 	
 	public interface MyView extends View {
 		public Image getMainImage();
 		public void updateMainImage(String url);
+		public void updateDetailInfo(String html);
 	}
 	
 	private PicturesLoadedHandler pictureLoadedHandler = new PicturesLoadedHandler() {
@@ -51,6 +58,7 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 	@Inject
 	public DetailPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy) {
 		super(eventBus, view, proxy);
+		locale = LocaleInfo.getCurrentLocale().getLocaleName();
 		pictures = (Vector<Picture>) ApplicationContext.getInstance().getProperty("pictures");
 	}
 
@@ -93,13 +101,37 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 		}
 		// Show: picture arg/show property
 		getView().updateMainImage(currentPicture.getImageUrl());
+		// TODO BDY: infos
+		String info = "<div style=\"" +
+				"color: #DDDDDD;" +
+				"font-family: helvetica; " +
+				"font-size: 14px;" +
+				"padding-left: 10px;" +
+				"padding-left: 10px;" +
+				"overflow: auto;" +
+				"\">";
+		info += "<div style=\"text-align: center; font-size: 18px;\"><b>" + translate.Details() + "</b></div><br />";
+		info += translate.Title() + getSeparatorDependingLocale() + currentPicture.getTitle() + "<br />";
+		info += translate.Dimension() + getSeparatorDependingLocale() + currentPicture.getProperty("Dimension", "") + "<br />";
+		info += translate.Medium() + getSeparatorDependingLocale() + currentPicture.getProperty("Medium", "") + "<br />";
+		info += translate.Date() + getSeparatorDependingLocale() + currentPicture.getProperty("Date", "") + "<br />";
+		if(((String) currentPicture.getProperty("Price", "")).equalsIgnoreCase("vendu")) {
+			info += translate.Price() + getSeparatorDependingLocale() + translate.Sold() + "<br />";
+		}
+		info += "</div>";
+		getView().updateDetailInfo(info);
 	}
 	
-	@Override
-	protected void onReset() {
-		super.onReset();
-		if(Log.isTraceEnabled()) {
-			Log.trace("Picture selected is " + pictureFolder);
+	private String getSeparatorDependingLocale() {
+		if(locale.equals("fr")) {
+			return " : ";
+		}
+		else if(locale.equals("en")) {
+			return ": ";
+		}
+		else {
+			return " : ";
 		}
 	}
+	
 }

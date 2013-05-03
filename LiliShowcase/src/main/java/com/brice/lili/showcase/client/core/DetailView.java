@@ -5,12 +5,14 @@ import com.google.gwt.event.dom.client.LoadEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData;
 import com.sencha.gxt.widget.core.client.container.CenterLayoutContainer;
+import com.sencha.gxt.widget.core.client.container.SimpleContainer;
 
 public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 
@@ -18,6 +20,7 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 	@UiField BorderLayoutData westData;
 	@UiField CenterLayoutContainer imageContainer;
 	@UiField Image mainImage;
+	@UiField SimpleContainer description;
 	
 	public interface Binder extends UiBinder<Widget, DetailView> {
 	}
@@ -65,6 +68,11 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 			}
 		}
 		imageContainer.forceLayout();
+	}
+
+	@Override
+	public void updateDetailInfo(String html) {
+		description.add(new HTML(html));
 	}
 	
 }

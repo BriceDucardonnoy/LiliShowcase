@@ -66,6 +66,7 @@ V Rappel de l'image en haut à droite, différentes idées pour le stretch prés
 	V utiliser centercontainer au lieu de simplecontainer qui fit l'enfant
 	V setHeight et setWidth
 	X utiliser un FitImage avec un stretch à false au lieu d'une Image gwt
+V Description = titre<br />format<br />medium<br />annee<br />price si vendu, voir pour traduction de "vendu" et "sans titre"
 
 X Traduction UiBinder (dans le client bundle ?)
 
@@ -81,7 +82,6 @@ X Traduction UiBinder (dans le client bundle ?)
 Update run configuration to specify the good jvm to use
 -------------------------------------------------------------------------
 ---------------- Composants 2eme page ----------------
-0 Description = titre<br />format<br />medium<br />annee<br />price si vendu, voir pour traduction de "vendu" et "sans titre"
 0 Pour liste image dans le south, voir le listview dans le showcase de gxt et faire une liste d'un presenterWidget contenant une image
 0 Pendant chargement de l'image : public static void prefetch(java.lang.String url):
 	Causes the browser to pre-fetch the image at a given URL.

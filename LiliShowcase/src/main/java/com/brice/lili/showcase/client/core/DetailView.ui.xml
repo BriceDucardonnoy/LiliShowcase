@@ -64,7 +64,7 @@
 							</container:CenterLayoutContainer>
 						</container:child>
 						<container:child layoutData="{verticalLayoutData}">
-							<container:SimpleContainer ui:field="description" />
+							<container:CenterLayoutContainer ui:field="description" />
 						</container:child>
 					</container:VerticalLayoutContainer>
 				</container:west>
