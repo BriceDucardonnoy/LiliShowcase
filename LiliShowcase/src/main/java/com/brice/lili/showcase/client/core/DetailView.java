@@ -2,9 +2,9 @@ package com.brice.lili.showcase.client.core;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.event.dom.client.LoadEvent;
-import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -42,11 +42,12 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 		if(Log.isTraceEnabled()) {
 			Log.trace("Update to image " + url);
 		}
-//		imageContainer.clear();
-//		imageContainer.clearSizeCache();
 		mainImage.setUrl(url);
+	}
+	
+	@UiHandler("mainImage")
+	void loadHandle(LoadEvent event) {
 		// Stretch to the biggest dimension
-		// FIXME BDY: old layout can be applied after render => need to re-go on it to have the good layout
 		mainImage.getElement().getStyle().clearHeight();
 		mainImage.getElement().getStyle().clearWidth();
 		if(mainImage.getHeight() >= mainImage.getWidth()) {
@@ -65,4 +66,5 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 		}
 		imageContainer.forceLayout();
 	}
+	
 }
