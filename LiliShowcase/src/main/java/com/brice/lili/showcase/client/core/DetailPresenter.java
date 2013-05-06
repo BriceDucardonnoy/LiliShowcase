@@ -1,5 +1,6 @@
 package com.brice.lili.showcase.client.core;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -10,7 +11,7 @@ import com.brice.lili.showcase.client.gateKeepers.DetailGateKeeper;
 import com.brice.lili.showcase.client.lang.Translate;
 import com.brice.lili.showcase.client.place.NameTokens;
 import com.brice.lili.showcase.shared.model.Picture;
-import com.google.gwt.core.shared.GWT;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.ui.Image;
 import com.google.inject.Inject;
@@ -39,6 +40,7 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 		public Image getMainImage();
 		public void updateMainImage(String url);
 		public void updateDetailInfo(String html);
+		public void updateThumbs(ArrayList<String> thumbsArray);
 	}
 	
 	private PicturesLoadedHandler pictureLoadedHandler = new PicturesLoadedHandler() {
@@ -70,7 +72,7 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 	@Override
 	public void prepareFromRequest(PlaceRequest request) {
 		super.prepareFromRequest(request);
-		pictureFolder = request.getParameter(MainPagePresenter.DETAIL_KEYWORD, "wildCard");
+		pictureFolder = request.getParameter(ApplicationContext.DETAIL_KEYWORD, "wildCard");
 		// PictureName is now available in onReveal and onReset method
 		// If pictureName isn't ok, redirect to unauthorized page (URL set manually)
 	}
@@ -84,6 +86,7 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 	@Override
 	protected void onReveal() {
 		super.onReveal();
+		// Retrieves chosen picture
 		Log.info("Picture folder name is " + pictureFolder);
 		if(pictures == null || pictures.isEmpty()) {
 			placeManager.revealErrorPlace(NameTokens.detail);
@@ -91,15 +94,16 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 		}
 		// No need to reload info, already in picture, just need to load images
 		for(Picture picture : pictures) {
-			if(picture.getProperty(MainPagePresenter.FILEINFO, "").equals(pictureFolder)) {
+			if(picture.getProperty(ApplicationContext.FILEINFO, "").equals(pictureFolder)) {
 				currentPicture = picture;
 				break;
 			}
 		}
 		if(currentPicture == null) {
 			placeManager.revealUnauthorizedPlace(NameTokens.detail);
+			return;
 		}
-		// Show: picture arg/show property
+		// Shows picture information
 		getView().updateMainImage(currentPicture.getImageUrl());
 		String info = "<div style=\"" +
 				"color: #DDDDDD;" +
@@ -119,6 +123,20 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 		}
 		info += "</div>";
 		getView().updateDetailInfo(info);
+		// Get details pictures
+		String details = (String) currentPicture.getProperty("Details");
+		ArrayList<String> thumbsArray = new ArrayList<String>();
+		if(details != null && !details.isEmpty()) {
+			String thumbs[] = details.substring(details.indexOf(":") + 1).split(",");
+			thumbsArray.add(currentPicture.getImageUrl());// Add main picture to the details
+			if(thumbs.length > 0) {// Add the others details
+				for(String thumb : thumbs) {
+					thumbsArray.add(GWT.getHostPageBaseURL() + ApplicationContext.PHOTOSFOLDER + "/" + pictureFolder + "/" + thumb.trim());
+					Log.info("Add detail " + thumbsArray.get(thumbsArray.size() - 1));
+				}
+			}
+		}
+		getView().updateThumbs(thumbsArray);
 	}
 	
 	private String getSeparatorDependingLocale() {

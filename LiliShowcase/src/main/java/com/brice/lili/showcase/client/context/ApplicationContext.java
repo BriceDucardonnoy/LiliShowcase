@@ -7,6 +7,10 @@ public class ApplicationContext {
 	private static ApplicationContext instance = null;
 	private HashMap<String, Object> userObjects;
 	
+	public static final String DETAIL_KEYWORD	= "picture";
+	public static final String PHOTOSFOLDER 	= "photos";
+	public static final String FILEINFO		= "fileInfo";
+	
 	private ApplicationContext() {
 		userObjects = new HashMap<String, Object>();
 	}

@@ -1,7 +1,7 @@
 package com.brice.lili.showcase.client.gateKeepers;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.brice.lili.showcase.client.core.MainPagePresenter;
+import com.brice.lili.showcase.client.context.ApplicationContext;
 import com.brice.lili.showcase.client.place.NameTokens;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.proxy.Gatekeeper;
@@ -15,11 +15,11 @@ public class DetailGateKeeper implements Gatekeeper {
 	public boolean canReveal() {
 		if(Log.isTraceEnabled()) {
 			Log.trace(placeManager.getCurrentPlaceRequest().getNameToken() + ": " + 
-					placeManager.getCurrentPlaceRequest().getParameter(MainPagePresenter.DETAIL_KEYWORD, ""));
+					placeManager.getCurrentPlaceRequest().getParameter(ApplicationContext.DETAIL_KEYWORD, ""));
 		}
 		
 		if(placeManager.getCurrentPlaceRequest().getNameToken().equals(NameTokens.detail) &&
-				!placeManager.getCurrentPlaceRequest().getParameter(MainPagePresenter.DETAIL_KEYWORD, "").isEmpty()) {
+				!placeManager.getCurrentPlaceRequest().getParameter(ApplicationContext.DETAIL_KEYWORD, "").isEmpty()) {
 			return true;
 		}
 		return false;
