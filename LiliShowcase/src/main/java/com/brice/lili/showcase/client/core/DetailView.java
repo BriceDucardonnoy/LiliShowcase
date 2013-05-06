@@ -16,6 +16,7 @@ import com.gwtplatform.mvp.client.ViewImpl;
 import com.reveregroup.gwt.imagepreloader.client.FitImage;
 import com.reveregroup.gwt.imagepreloader.client.FitImageLoadEvent;
 import com.reveregroup.gwt.imagepreloader.client.FitImageLoadHandler;
+import com.sencha.gxt.core.client.dom.ScrollSupport.ScrollMode;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.CenterLayoutContainer;
@@ -43,6 +44,7 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 		widget = binder.createAndBindUi(this);
 		thumbs = new ArrayList<FitImage>();
 		loadedPictures = 0;
+		thumbContainer.setScrollMode(ScrollMode.AUTO);
 	}
 
 	@Override
@@ -101,9 +103,8 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 		if(!urls.isEmpty()) {
 			Utils.showWaitCursor(con.getElement());
 		}
-		Log.info("ThumbData.size == " + ((int)thumbData.getSize()));
 		for(String url : urls) {
-			FitImage im = new FitImage(url, (int) thumbData.getSize(), (int) thumbData.getSize(), flh);
+			FitImage im = new FitImage(url, (int) thumbData.getSize(), ((int) thumbData.getSize()) - 20, flh);// - 20: scrollbar height
 			thumbs.add(im);
 			thumbContainer.add(im);
 		}
