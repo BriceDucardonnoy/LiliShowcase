@@ -107,6 +107,10 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 			FitImage im = new FitImage(url, (int) thumbData.getSize(), ((int) thumbData.getSize()) - 20, flh);// - 20: scrollbar height
 			thumbs.add(im);
 			thumbContainer.add(im);
+//			CenterLayoutContainer lcl = new CenterLayoutContainer();
+//			lcl.setSize("150px", "130px");
+//			lcl.add(im);
+//			thumbContainer.add(lcl);
 		}
 	}
 	
