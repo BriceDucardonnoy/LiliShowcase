@@ -94,7 +94,7 @@ Update run configuration to specify the good jvm to use
 
 0 Faire manuel (doc commitée avec le projet ou faite avec le wiki github)
 0 Traduire categorie 'tout' ou au moins mettre une majuscule
-0 Chrome frame pour IE8 ou < ou mettre une page qui indique d'aller vers un autre navigateur
+0 Bloquer changement catégories sous IE ou mettre une page qui indique d'aller vers un autre navigateur
 0 Typo du titre sous l'image (page 1)
 0 Passage de la souris sur l'image en 2ème page affiche un carré avec un zoom de l'image en question
 0 Mettre sous licence BSD
