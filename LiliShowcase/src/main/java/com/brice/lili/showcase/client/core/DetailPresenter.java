@@ -132,7 +132,9 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 			if(thumbs.length > 0) {// Add the others details
 				for(String thumb : thumbs) {
 					thumbsArray.add(GWT.getHostPageBaseURL() + ApplicationContext.PHOTOSFOLDER + "/" + pictureFolder + "/" + thumb.trim());
-					Log.info("Add detail " + thumbsArray.get(thumbsArray.size() - 1));
+					if(Log.isTraceEnabled()) {
+						Log.trace("Add detail " + thumbsArray.get(thumbsArray.size() - 1));
+					}
 				}
 			}
 		}

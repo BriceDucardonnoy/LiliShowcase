@@ -51,6 +51,9 @@
 	<ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="verticalLayoutData">
     	<ui:attributes width="1" height="0.5" margins="{margins0}" />
  	</ui:with>
+ 	<!-- ListView utils -->
+ 	<!-- <ui:with type="com.sencha.gxt.data.shared.ListStore" field="store"></ui:with>
+ 	<ui:with type="com.sencha.gxt.core.client.ValueProvider" field="pictureProvider"></ui:with> -->
 	
 	<container:SimpleContainer addStyleNames="{style.globalStyle}">
 		<container:child layoutData="{outerData}">
@@ -81,7 +84,11 @@
 						</container:center>
 						<!-- Thumb -->
 						<container:south layoutData="{thumbData}">
-							<container:HorizontalLayoutContainer borders="true" addStyleNames="{style.globalStyle}" ui:field="thumbContainer" />
+							<!-- <container:HorizontalLayoutContainer borders="true" addStyleNames="{style.globalStyle}" ui:field="thumbContainer" /> -->
+							<container:SimpleContainer ui:field="thumbContainer" addStyleNames="{style.globalStyle}">
+								<!-- <gxt:ListView ui:field="thumbList" store="{store}" valueProvider="{pictureProvider}" /> -->
+								<gxt:ListView ui:field="thumbList" />
+							</container:SimpleContainer>
 						</container:south>
 					</container:BorderLayoutContainer>
 				</container:center>
