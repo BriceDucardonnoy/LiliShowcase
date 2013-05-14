@@ -12,8 +12,9 @@ import com.google.gwt.event.dom.client.LoadEvent;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.safehtml.shared.SafeHtml;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.text.shared.AbstractSafeHtmlRenderer;
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.HTML;
@@ -24,10 +25,14 @@ import com.gwtplatform.mvp.client.ViewImpl;
 import com.reveregroup.gwt.imagepreloader.client.FitImage;
 import com.reveregroup.gwt.imagepreloader.client.FitImageLoadEvent;
 import com.reveregroup.gwt.imagepreloader.client.FitImageLoadHandler;
+import com.sencha.gxt.cell.core.client.SimpleSafeHtmlCell;
+import com.sencha.gxt.core.client.IdentityValueProvider;
 import com.sencha.gxt.core.client.ValueProvider;
 import com.sencha.gxt.core.client.XTemplates;
+import com.sencha.gxt.core.client.resources.CommonStyles;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.widget.core.client.ListView;
+import com.sencha.gxt.widget.core.client.ListViewCustomAppearance;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData;
 import com.sencha.gxt.widget.core.client.container.CenterLayoutContainer;
@@ -37,6 +42,7 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 
 	private final Translate translate = GWT.create(Translate.class);
 	private final Widget widget;
+	
 	@UiField BorderLayoutContainer con;
 	@UiField BorderLayoutData westData;
 	@UiField BorderLayoutData thumbData;
@@ -44,7 +50,7 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 	@UiField Image mainImage;
 	@UiField SimpleContainer description;
 //	@UiField HorizontalLayoutContainer thumbContainer;
-	@UiField ListView<Picture, String> thumbList;
+	@UiField(provided=true) ListView<Picture, Picture> thumbList;
 //	@UiField ListStore<Picture> store;
 //	@UiField ValueProvider<Picture, String> pictureProvider;
 	
@@ -58,7 +64,7 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 	public interface Binder extends UiBinder<Widget, DetailView> {
 	}
 	
-	private interface Renderer extends XTemplates {
+	interface Renderer extends XTemplates {
 //		@XTemplate("<div class="{style.thumb}"><img src="{photo.pathUri}" title="{photo.name}"></div>
 //<span class="x-editable">{photo.name:shorten(18)}</span>")
 		@XTemplate("<div class=\"{style.thumb}\"><img src=\"{picture.imageUrl}\"></div>")
@@ -79,7 +85,46 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 	
 	@Inject
 	public DetailView(final Binder binder) {
-		widget = binder.createAndBindUi(this);
+		final Renderer renderer = GWT.create(Renderer.class);
+		final Resources resources = GWT.create(Resources.class);
+	    resources.css().ensureInjected();
+	    final Style style = resources.css();
+	 
+	    ListViewCustomAppearance<Picture> appearance = new ListViewCustomAppearance<Picture>("." + style.thumbWrap(),
+	    		style.over(), style.select()) {
+	    	@Override
+	    	public void renderEnd(SafeHtmlBuilder builder) {
+	    		String markup = new StringBuilder("<div class=\"").append(CommonStyles.get().clear()).append("\"></div>").toString();
+	    		builder.appendHtmlConstant(markup);
+	    	}
+	    	@Override
+	    	public void renderItem(SafeHtmlBuilder builder, SafeHtml content) {
+	    		builder.appendHtmlConstant("<div class='" + style.thumbWrap() + "' style='border: 1px solid white'>");
+	    		builder.append(content);
+	    		builder.appendHtmlConstant("</div>");
+	    	}
+	    };
+	    store = new ListStore<Picture>(props.key());
+		pictureProvider = props.imageUrl();
+		thumbList = new ListView<Picture, Picture>(store, new IdentityValueProvider<Picture>() {
+			@Override
+			public void setValue(Picture object, Picture value) {
+			}
+		}, appearance);
+		thumbList.setCell(new SimpleSafeHtmlCell<Picture>(new AbstractSafeHtmlRenderer<Picture>() {
+			@Override
+			public SafeHtml render(Picture object) {
+				return renderer.renderItem(object, style);
+			}
+		}));
+//		thumbList.getSelectionModel().addSelectionChangedHandler(new SelectionChangedHandler<Photo>() {
+//			@Override
+//			public void onSelectionChanged(SelectionChangedEvent<Photo> event) {
+//				panel.setHeadingText("Simple ListView (" + event.getSelection().size() + " items selected)");
+//			}
+//		});
+	    
+	    widget = binder.createAndBindUi(this);
 		thumbs = new ArrayList<FitImage>();
 		loadedPictures = 0;
 //		thumbContainer.setScrollMode(ScrollMode.AUTO);
@@ -91,20 +136,16 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 	}
 	
 //	@UiFactory
-//	ValueProvider<Picture, String> createPictureProvider() {
-//		return props.imageUrl();
+//	ListView<Picture, String> createListView() {
+////		HttpProxy<Object> proxy = new HttpProxy<Object>(new RequestBuilder(RequestBuilder.GET, ""));
+////		Loader<Object, String> loader = new Loader<Object, String>(proxy);
+////		loader.addLoadHandler(new ListStoreBinding<Object, Picture, List<Photo>>(store));
+////	    loader.load();
+//		Log.info("UiFactory");
+//		store = new ListStore<Picture>(props.key());
+//		pictureProvider = props.imageUrl();
+//		return new ListView<Picture, String>(store, pictureProvider);
 //	}
-	
-	@UiFactory
-	ListView<Picture, String> createListView() {
-//		HttpProxy<Object> proxy = new HttpProxy<Object>(new RequestBuilder(RequestBuilder.GET, ""));
-//		Loader<Object, String> loader = new Loader<Object, String>(proxy);
-//		loader.addLoadHandler(new ListStoreBinding<Object, Picture, List<Photo>>(store));
-//	    loader.load();
-		store = new ListStore<Picture>(props.key());
-		pictureProvider = props.imageUrl();
-		return new ListView<Picture, String>(store, pictureProvider);
-	}
 	
 	@Override
 	public Image getMainImage() {
@@ -122,7 +163,7 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 	@UiHandler("mainImage")
 	void loadHandle(LoadEvent event) {
 		// Stretch to the biggest dimension
-		// TODO BDY: test with FitImage
+		// TESTME BDY: test with FitImage
 		mainImage.getElement().getStyle().clearHeight();
 		mainImage.getElement().getStyle().clearWidth();
 		if(mainImage.getHeight() >= mainImage.getWidth()) {
