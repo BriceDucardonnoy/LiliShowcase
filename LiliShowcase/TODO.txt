@@ -62,11 +62,13 @@ V Bug lorsque clic sur gallery depuis une autre page: selectionne toujours 'tout
 V Logo en haut a gauche ramene vers accueil
 V Interdire acces au site depuis une autre url ou lancer les initialisation depuis le headerview : semble etre corrige
 V Mettre les icones en 24x24
+V Lazy loading des images sur la 2eme page pour ne pas ralentir le chargement de la 1re
 V Rappel de l'image en haut à droite, différentes idées pour le stretch présent :
 	V utiliser centercontainer au lieu de simplecontainer qui fit l'enfant
 	V setHeight et setWidth
 	X utiliser un FitImage avec un stretch à false au lieu d'une Image gwt
 V Description = titre<br />format<br />medium<br />annee<br />price si vendu, voir pour traduction de "vendu" et "sans titre"
+V Pour liste image dans le south, voir le listview dans le showcase de gxt et faire une liste d'un presenterWidget contenant une image
 
 X Traduction UiBinder (dans le client bundle ?)
 
@@ -82,13 +84,11 @@ X Traduction UiBinder (dans le client bundle ?)
 Update run configuration to specify the good jvm to use
 -------------------------------------------------------------------------
 ---------------- Composants 2eme page ----------------
-0 Pour liste image dans le south, voir le listview dans le showcase de gxt et faire une liste d'un presenterWidget contenant une image
 0 Pendant chargement de l'image : public static void prefetch(java.lang.String url):
 	Causes the browser to pre-fetch the image at a given URL.
 	Peut-être à utiliser aussi pour le coverflow
 0 Pour image affichée dans la zone center, mettre un effet de fadin (gxt showcase FX)
 0 Ajouter bouton pour ouvrir en grand dans une autre fenêtre
-0 Lazy loading des images sur la 2eme page pour ne pas ralentir le chargement de la 1re
 0 Gérer le chargement du site par la page de détails directement (charge quand même les images et catégories)
 0 Pour exposition: chargement d'une page html pour que Lili puisse ajouter de façon autonome des info
 

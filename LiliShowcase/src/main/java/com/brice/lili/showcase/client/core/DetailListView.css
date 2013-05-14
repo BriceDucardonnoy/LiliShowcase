@@ -5,7 +5,8 @@
 
 .thumb img {
   height: 130px;
-  width: 150px;
+  /* width: 150px; */
+  width: 100%;
 }
 
 .thumbWrap {
@@ -31,7 +32,8 @@
 
 .select {
   background: none repeat scroll 0 50% #565656;
-  border: 0 dotted #ABABAB !important;
+  /* border: 1px dotted #ABABAB !important; */
+  border: 1px solid #565656 !important;
   cursor: pointer;
 }
 

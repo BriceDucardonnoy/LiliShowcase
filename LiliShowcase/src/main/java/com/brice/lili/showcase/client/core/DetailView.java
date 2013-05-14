@@ -46,14 +46,9 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 	@UiField Image mainImage;
 	@UiField SimpleContainer description;
 	@UiField(provided=true) ListView<Picture, Picture> thumbList;
-//	@UiField ListStore<Picture> store;
-//	@UiField ValueProvider<Picture, String> pictureProvider;
 	
 	private ListStore<Picture> store;
-//	private ValueProvider<Picture, String> pictureProvider;
 	
-//	private ArrayList<FitImage> thumbs;
-//	private int loadedPictures;
 	private PictureProperties props = GWT.create(PictureProperties.class);
 	
 	public interface Binder extends UiBinder<Widget, DetailView> {
@@ -101,7 +96,6 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 	    	}
 	    };
 	    store = new ListStore<Picture>(props.key());
-//		pictureProvider = props.imageUrl();
 		thumbList = new ListView<Picture, Picture>(store, new IdentityValueProvider<Picture>() {
 			@Override
 			public void setValue(Picture object, Picture value) {
@@ -113,35 +107,21 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 				return renderer.renderItem(object, style);
 			}
 		}));
-//		thumbList.getSelectionModel().addSelectionChangedHandler(new SelectionChangedHandler<Photo>() {
+//		thumbList.getSelectionModel().addSelectionChangedHandler(new SelectionChangedHandler<Picture>() {
 //			@Override
-//			public void onSelectionChanged(SelectionChangedEvent<Photo> event) {
-//				panel.setHeadingText("Simple ListView (" + event.getSelection().size() + " items selected)");
+//			public void onSelectionChanged(SelectionChangedEvent<Picture> event) {
+//				TODO BDY: load image in center pane
 //			}
 //		});
 	    
 	    widget = binder.createAndBindUi(this);
 	    thumbList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-//		loadedPictures = 0;
-//		thumbContainer.setScrollMode(ScrollMode.AUTO);
 	}
 
 	@Override
 	public Widget asWidget() {
 		return widget;
 	}
-	
-//	@UiFactory
-//	ListView<Picture, String> createListView() {
-////		HttpProxy<Object> proxy = new HttpProxy<Object>(new RequestBuilder(RequestBuilder.GET, ""));
-////		Loader<Object, String> loader = new Loader<Object, String>(proxy);
-////		loader.addLoadHandler(new ListStoreBinding<Object, Picture, List<Photo>>(store));
-////	    loader.load();
-//		Log.info("UiFactory");
-//		store = new ListStore<Picture>(props.key());
-//		pictureProvider = props.imageUrl();
-//		return new ListView<Picture, String>(store, pictureProvider);
-//	}
 	
 	@Override
 	public Image getMainImage() {
@@ -188,29 +168,15 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 
 	@Override
 	public void updateThumbs(ArrayList<String> urls) {
-//		loadedPictures = 0;
 		store.clear();
 //		if(!urls.isEmpty()) {
 //			Utils.showWaitCursor(con.getElement());
 //		}
 		for(String url : urls) {
-//			FitImage im = new FitImage(url, (int) thumbData.getSize(), ((int) thumbData.getSize()) - 20, flh);// - 20: scrollbar height
 			Picture p = new Picture(translate.Details());
 			p.getProperties().put("imageUrl", url);
 			store.add(p);
 		}
 	}
-	
-//	private FitImageLoadHandler flh = new FitImageLoadHandler() {
-//		@Override
-//		public void imageLoaded(FitImageLoadEvent event) {
-//			Log.info("Detail image loaded " + ((FitImage)event.getSource()).getUrl());
-//			loadedPictures++;
-//			if(loadedPictures >= thumbs.size()) {
-//				Utils.showDefaultCursor(con.getElement());
-//				thumbList.refresh();
-////				thumbContainer.forceLayout();
-//			}
-//		}
-//	};
+
 }
