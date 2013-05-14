@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.lang.Translate;
 import com.brice.lili.showcase.client.properties.PictureProperties;
-import com.brice.lili.showcase.client.utils.Utils;
 import com.brice.lili.showcase.shared.model.Picture;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.LoadEvent;
@@ -22,13 +21,10 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
-import com.reveregroup.gwt.imagepreloader.client.FitImage;
-import com.reveregroup.gwt.imagepreloader.client.FitImageLoadEvent;
-import com.reveregroup.gwt.imagepreloader.client.FitImageLoadHandler;
 import com.sencha.gxt.cell.core.client.SimpleSafeHtmlCell;
 import com.sencha.gxt.core.client.IdentityValueProvider;
-import com.sencha.gxt.core.client.ValueProvider;
 import com.sencha.gxt.core.client.XTemplates;
+import com.sencha.gxt.core.client.Style.SelectionMode;
 import com.sencha.gxt.core.client.resources.CommonStyles;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.widget.core.client.ListView;
@@ -49,16 +45,15 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 	@UiField CenterLayoutContainer imageContainer;
 	@UiField Image mainImage;
 	@UiField SimpleContainer description;
-//	@UiField HorizontalLayoutContainer thumbContainer;
 	@UiField(provided=true) ListView<Picture, Picture> thumbList;
 //	@UiField ListStore<Picture> store;
 //	@UiField ValueProvider<Picture, String> pictureProvider;
 	
 	private ListStore<Picture> store;
-	private ValueProvider<Picture, String> pictureProvider;
+//	private ValueProvider<Picture, String> pictureProvider;
 	
-	private ArrayList<FitImage> thumbs;
-	private int loadedPictures;
+//	private ArrayList<FitImage> thumbs;
+//	private int loadedPictures;
 	private PictureProperties props = GWT.create(PictureProperties.class);
 	
 	public interface Binder extends UiBinder<Widget, DetailView> {
@@ -67,7 +62,7 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 	interface Renderer extends XTemplates {
 //		@XTemplate("<div class="{style.thumb}"><img src="{photo.pathUri}" title="{photo.name}"></div>
 //<span class="x-editable">{photo.name:shorten(18)}</span>")
-		@XTemplate("<div class=\"{style.thumb}\"><img src=\"{picture.imageUrl}\"></div>")
+		@XTemplate("<div class=\"{style.thumb}\"><img src=\"{picture.imageUrl}\" alt=\"Detail\"></div>")
 		public SafeHtml renderItem(Picture picture, Style style);
 	}
 	
@@ -96,16 +91,17 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 	    	public void renderEnd(SafeHtmlBuilder builder) {
 	    		String markup = new StringBuilder("<div class=\"").append(CommonStyles.get().clear()).append("\"></div>").toString();
 	    		builder.appendHtmlConstant(markup);
+//	    		Utils.showDefaultCursor(con.getElement());
 	    	}
 	    	@Override
 	    	public void renderItem(SafeHtmlBuilder builder, SafeHtml content) {
-	    		builder.appendHtmlConstant("<div class='" + style.thumbWrap() + "' style='border: 1px solid white'>");
+	    		builder.appendHtmlConstant("<div class='" + style.thumbWrap() + "'>");
 	    		builder.append(content);
 	    		builder.appendHtmlConstant("</div>");
 	    	}
 	    };
 	    store = new ListStore<Picture>(props.key());
-		pictureProvider = props.imageUrl();
+//		pictureProvider = props.imageUrl();
 		thumbList = new ListView<Picture, Picture>(store, new IdentityValueProvider<Picture>() {
 			@Override
 			public void setValue(Picture object, Picture value) {
@@ -125,8 +121,8 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 //		});
 	    
 	    widget = binder.createAndBindUi(this);
-		thumbs = new ArrayList<FitImage>();
-		loadedPictures = 0;
+	    thumbList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+//		loadedPictures = 0;
 //		thumbContainer.setScrollMode(ScrollMode.AUTO);
 	}
 
@@ -192,33 +188,29 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 
 	@Override
 	public void updateThumbs(ArrayList<String> urls) {
-		loadedPictures = 0;
-		thumbs.clear();
+//		loadedPictures = 0;
 		store.clear();
-//		thumbContainer.clear();
-		if(!urls.isEmpty()) {
-			Utils.showWaitCursor(con.getElement());
-		}
+//		if(!urls.isEmpty()) {
+//			Utils.showWaitCursor(con.getElement());
+//		}
 		for(String url : urls) {
-			FitImage im = new FitImage(url, (int) thumbData.getSize(), ((int) thumbData.getSize()) - 20, flh);// - 20: scrollbar height
-			thumbs.add(im);
+//			FitImage im = new FitImage(url, (int) thumbData.getSize(), ((int) thumbData.getSize()) - 20, flh);// - 20: scrollbar height
 			Picture p = new Picture(translate.Details());
 			p.getProperties().put("imageUrl", url);
 			store.add(p);
-//			thumbContainer.add(im);
 		}
 	}
 	
-	private FitImageLoadHandler flh = new FitImageLoadHandler() {
-		@Override
-		public void imageLoaded(FitImageLoadEvent event) {
-			Log.info("Detail image loaded " + ((FitImage)event.getSource()).getUrl());
-			loadedPictures++;
-			if(loadedPictures >= thumbs.size()) {
-				Utils.showDefaultCursor(con.getElement());
-				thumbList.refresh();
-//				thumbContainer.forceLayout();
-			}
-		}
-	};
+//	private FitImageLoadHandler flh = new FitImageLoadHandler() {
+//		@Override
+//		public void imageLoaded(FitImageLoadEvent event) {
+//			Log.info("Detail image loaded " + ((FitImage)event.getSource()).getUrl());
+//			loadedPictures++;
+//			if(loadedPictures >= thumbs.size()) {
+//				Utils.showDefaultCursor(con.getElement());
+//				thumbList.refresh();
+////				thumbContainer.forceLayout();
+//			}
+//		}
+//	};
 }

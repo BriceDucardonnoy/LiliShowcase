@@ -87,7 +87,7 @@
 							<!-- <container:HorizontalLayoutContainer borders="true" addStyleNames="{style.globalStyle}" ui:field="thumbContainer" /> -->
 							<container:SimpleContainer ui:field="thumbContainer" addStyleNames="{style.globalStyle}">
 								<!-- <gxt:ListView ui:field="thumbList" store="{store}" valueProvider="{pictureProvider}" /> -->
-								<gxt:ListView ui:field="thumbList" />
+								<gxt:ListView ui:field="thumbList" addStyleNames="{style.globalStyle}" />
 							</container:SimpleContainer>
 						</container:south>
 					</container:BorderLayoutContainer>
