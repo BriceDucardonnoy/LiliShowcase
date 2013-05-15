@@ -1,6 +1,7 @@
 package com.brice.lili.showcase.client.core;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.lang.Translate;
@@ -21,10 +22,11 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
+import com.reveregroup.gwt.imagepreloader.client.FitImage;
 import com.sencha.gxt.cell.core.client.SimpleSafeHtmlCell;
 import com.sencha.gxt.core.client.IdentityValueProvider;
-import com.sencha.gxt.core.client.XTemplates;
 import com.sencha.gxt.core.client.Style.SelectionMode;
+import com.sencha.gxt.core.client.XTemplates;
 import com.sencha.gxt.core.client.resources.CommonStyles;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.widget.core.client.ListView;
@@ -33,6 +35,8 @@ import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData;
 import com.sencha.gxt.widget.core.client.container.CenterLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.SimpleContainer;
+import com.sencha.gxt.widget.core.client.selection.SelectionChangedEvent;
+import com.sencha.gxt.widget.core.client.selection.SelectionChangedEvent.SelectionChangedHandler;
 
 public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 
@@ -40,12 +44,15 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 	private final Widget widget;
 	
 	@UiField BorderLayoutContainer con;
+	@UiField BorderLayoutContainer center;
 	@UiField BorderLayoutData westData;
 	@UiField BorderLayoutData thumbData;
 	@UiField CenterLayoutContainer imageContainer;
 	@UiField Image mainImage;
 	@UiField SimpleContainer description;
 	@UiField(provided=true) ListView<Picture, Picture> thumbList;
+	@UiField CenterLayoutContainer centerSC;
+	@UiField FitImage centerImage;
 	
 	private ListStore<Picture> store;
 	
@@ -101,21 +108,31 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 			public void setValue(Picture object, Picture value) {
 			}
 		}, appearance);
+		
+		widget = binder.createAndBindUi(this);
+		
 		thumbList.setCell(new SimpleSafeHtmlCell<Picture>(new AbstractSafeHtmlRenderer<Picture>() {
 			@Override
 			public SafeHtml render(Picture object) {
 				return renderer.renderItem(object, style);
 			}
 		}));
-//		thumbList.getSelectionModel().addSelectionChangedHandler(new SelectionChangedHandler<Picture>() {
-//			@Override
-//			public void onSelectionChanged(SelectionChangedEvent<Picture> event) {
-//				TODO BDY: load image in center pane
-//			}
-//		});
-	    
-	    widget = binder.createAndBindUi(this);
+		thumbList.getSelectionModel().addSelectionChangedHandler(new SelectionChangedHandler<Picture>() {
+			@Override
+			public void onSelectionChanged(SelectionChangedEvent<Picture> event) {
+				List<Picture> sel = event.getSelection();
+				if(sel == null || sel.isEmpty()) {
+					centerImage.setUrl("");
+				}
+				else {
+					centerImage.setUrl(sel.get(0).getImageUrl());
+				}
+				centerImage.setMaxSize(center.getCenterWidget().getOffsetWidth(), center.getCenterWidget().getOffsetHeight());
+				centerSC.forceLayout();
+			}
+		});
 	    thumbList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+//	    centerImage.setMaxSize(center.getCenterWidget().getOffsetWidth(), center.getCenterWidget().getOffsetHeight());
 	}
 
 	@Override

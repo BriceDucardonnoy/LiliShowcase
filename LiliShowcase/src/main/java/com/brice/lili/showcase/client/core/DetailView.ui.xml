@@ -2,10 +2,11 @@
 
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'
-	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
-	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
 	xmlns:gxt="urn:import:com.sencha.gxt.widget.core.client"
 	xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
+	xmlns:imagepreloader="urn:import:com.reveregroup.gwt.imagepreloader.client"
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
 	ui:generateLocales='default'>
 
 	<ui:style>
@@ -80,15 +81,16 @@
 					<container:BorderLayoutContainer ui:field="center" borders="true" addStyleNames="{style.globalStyle}">
 						<!-- Main picture -->
 						<container:center layoutData="{centerData}">
-							<container:SimpleContainer ui:field="centerSC" addStyleNames="{style.globalStyle}" />
+							<container:CenterLayoutContainer ui:field="centerSC" borders="false" addStyleNames="{style.globalStyle}">
+								<imagepreloader:FitImage ui:field="centerImage" addStyleNames="{style.globalStyle}" />
+							</container:CenterLayoutContainer>
 						</container:center>
 						<!-- Thumb -->
 						<container:south layoutData="{thumbData}">
-							<!-- <container:HorizontalLayoutContainer borders="true" addStyleNames="{style.globalStyle}" ui:field="thumbContainer" /> -->
-							<container:SimpleContainer ui:field="thumbContainer" addStyleNames="{style.globalStyle}">
+							<!-- <container:SimpleContainer ui:field="thumbContainer" addStyleNames="{style.globalStyle}"> -->
 								<!-- <gxt:ListView ui:field="thumbList" store="{store}" valueProvider="{pictureProvider}" /> -->
 								<gxt:ListView ui:field="thumbList" addStyleNames="{style.globalStyle}" />
-							</container:SimpleContainer>
+							<!-- </container:SimpleContainer> -->
 						</container:south>
 					</container:BorderLayoutContainer>
 				</container:center>
