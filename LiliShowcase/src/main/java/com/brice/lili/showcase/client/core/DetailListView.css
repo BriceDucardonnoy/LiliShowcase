@@ -6,7 +6,7 @@
 .thumb img {
   height: 130px;/* Refers to thumbData size - 20 because of margins etc. */
   /* width: 150px; */
-  width: 100%;
+  /* width: 100%; */
 }
 
 .thumbWrap {
