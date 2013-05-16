@@ -69,6 +69,7 @@ V Rappel de l'image en haut à droite, différentes idées pour le stretch prés
 	X utiliser un FitImage avec un stretch à false au lieu d'une Image gwt
 V Description = titre<br />format<br />medium<br />annee<br />price si vendu, voir pour traduction de "vendu" et "sans titre"
 V Pour liste image dans le south, voir le listview dans le showcase de gxt et faire une liste d'un presenterWidget contenant une image
+V Curseur pointer sur l'image du centre et clique dessus l'ouvre dans une nouvelle fenêtre ou ajouter bouton
 
 X Traduction UiBinder (dans le client bundle ?)
 
@@ -87,7 +88,7 @@ Update run configuration to specify the good jvm to use
 0 Pendant chargement de l'image : public static void prefetch(java.lang.String url):
 	Causes the browser to pre-fetch the image at a given URL.
 	Peut-être à utiliser aussi pour le coverflow
-0 Curseur pointer sur l'image du centre et clique dessus l'ouvre dans une nouvelle fenêtre ou ajouter bouton
+0 Chargement automatique d'une image au chargement de la page
 0 Pour image affichée dans la zone center, mettre un effet de fadin (gxt showcase FX)
 0 Créer alias aurelie.deblache.com
 0 Gérer le chargement du site par la page de détails directement (charge quand même les images et catégories)
