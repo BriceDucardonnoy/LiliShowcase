@@ -23,6 +23,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.reveregroup.gwt.imagepreloader.client.FitImage;
+import com.reveregroup.gwt.imagepreloader.client.FitImageLoadEvent;
+import com.reveregroup.gwt.imagepreloader.client.FitImageLoadHandler;
 import com.sencha.gxt.cell.core.client.SimpleSafeHtmlCell;
 import com.sencha.gxt.core.client.IdentityValueProvider;
 import com.sencha.gxt.core.client.Style.SelectionMode;
@@ -127,12 +129,18 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 				else {
 					centerImage.setUrl(sel.get(0).getImageUrl());
 				}
+//				centerImage.setMaxSize(center.getCenterWidget().getOffsetWidth(), center.getCenterWidget().getOffsetHeight());
+//				centerSC.forceLayout();
+			}
+		});
+	    thumbList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+	    centerImage.addFitImageLoadHandler(new FitImageLoadHandler() {
+			@Override
+			public void imageLoaded(FitImageLoadEvent event) {
 				centerImage.setMaxSize(center.getCenterWidget().getOffsetWidth(), center.getCenterWidget().getOffsetHeight());
 				centerSC.forceLayout();
 			}
 		});
-	    thumbList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-//	    centerImage.setMaxSize(center.getCenterWidget().getOffsetWidth(), center.getCenterWidget().getOffsetHeight());
 	}
 
 	@Override
