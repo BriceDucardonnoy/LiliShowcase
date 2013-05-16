@@ -24,6 +24,9 @@
 			width: 100%;
 			vertical-align: middle;
 		}
+		.cursorImageFlag {
+			cursor: pointer;
+		}
 	</ui:style>
 
 	<!-- MARGINS -->
@@ -82,7 +85,7 @@
 						<!-- Main picture -->
 						<container:center layoutData="{centerData}">
 							<container:CenterLayoutContainer ui:field="centerSC" borders="false" addStyleNames="{style.globalStyle}">
-								<imagepreloader:FitImage ui:field="centerImage" addStyleNames="{style.globalStyle}" />
+								<imagepreloader:FitImage ui:field="centerImage" addStyleNames="{style.globalStyle} {style.cursorImageFlag}" />
 							</container:CenterLayoutContainer>
 						</container:center>
 						<!-- Thumb -->

@@ -6,8 +6,10 @@ import java.util.List;
 import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.lang.Translate;
 import com.brice.lili.showcase.client.properties.PictureProperties;
+import com.brice.lili.showcase.client.utils.Utils;
 import com.brice.lili.showcase.shared.model.Picture;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.LoadEvent;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
@@ -17,6 +19,7 @@ import com.google.gwt.text.shared.AbstractSafeHtmlRenderer;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
@@ -127,6 +130,7 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 					centerImage.setUrl("");
 				}
 				else {
+					Utils.showWaitCursor(con.getElement());
 					centerImage.setUrl(sel.get(0).getImageUrl());
 				}
 //				centerImage.setMaxSize(center.getCenterWidget().getOffsetWidth(), center.getCenterWidget().getOffsetHeight());
@@ -139,6 +143,7 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 			public void imageLoaded(FitImageLoadEvent event) {
 				centerImage.setMaxSize(center.getCenterWidget().getOffsetWidth(), center.getCenterWidget().getOffsetHeight());
 				centerSC.forceLayout();
+				Utils.showDefaultCursor(con.getElement());
 			}
 		});
 	}
@@ -202,6 +207,21 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 			p.getProperties().put("imageUrl", url);
 			store.add(p);
 		}
+	}
+	
+	@UiHandler("centerImage")
+	void clickHandle(ClickEvent event) {
+		if(centerImage.getUrl().isEmpty()) return;
+		Window.open(centerImage.getUrl(), translate.Details(), "titlebar=yes," + 
+			"menubar=no," + 
+			"navigation=false," +
+			"location=false," + 
+			"bookmarks=no," +
+			"tabs=no," +
+			"resizable=yes," + 
+			"scrollbars=yes," + 
+			"status=no," + 
+			"dependent=true");
 	}
 
 }
