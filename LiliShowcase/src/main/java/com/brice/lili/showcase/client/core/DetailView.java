@@ -9,6 +9,8 @@ import com.brice.lili.showcase.client.properties.PictureProperties;
 import com.brice.lili.showcase.client.utils.Utils;
 import com.brice.lili.showcase.shared.model.Picture;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.LoadEvent;
 import com.google.gwt.resources.client.ClientBundle;
@@ -207,6 +209,14 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 			p.getProperties().put("imageUrl", url);
 			store.add(p);
 		}
+		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+			@Override
+			public void execute() {
+				if(store.size() > 0) {
+					thumbList.getSelectionModel().select(0, false);
+				}
+			}
+		});
 	}
 	
 	@UiHandler("centerImage")

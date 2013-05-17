@@ -70,8 +70,10 @@ V Rappel de l'image en haut à droite, différentes idées pour le stretch prés
 V Description = titre<br />format<br />medium<br />annee<br />price si vendu, voir pour traduction de "vendu" et "sans titre"
 V Pour liste image dans le south, voir le listview dans le showcase de gxt et faire une liste d'un presenterWidget contenant une image
 V Curseur pointer sur l'image du centre et clique dessus l'ouvre dans une nouvelle fenêtre ou ajouter bouton
+V Chargement automatique d'une image au chargement de la page
 
 X Traduction UiBinder (dans le client bundle ?)
+X Pour image affichée dans la zone center, mettre un effet de fadin (gxt showcase FX)
 
 0 link
 0 Toolbar ne se relayout pas correctement apres resize (taille -1 pas prioritaire ?) (See overflow toolbar (northsouth component))
@@ -88,8 +90,6 @@ Update run configuration to specify the good jvm to use
 0 Pendant chargement de l'image : public static void prefetch(java.lang.String url):
 	Causes the browser to pre-fetch the image at a given URL.
 	Peut-être à utiliser aussi pour le coverflow
-0 Chargement automatique d'une image au chargement de la page
-0 Pour image affichée dans la zone center, mettre un effet de fadin (gxt showcase FX)
 0 Créer alias aurelie.deblache.com
 0 Gérer le chargement du site par la page de détails directement (charge quand même les images et catégories)
 0 Pour exposition: chargement d'une page html pour que Lili puisse ajouter de façon autonome des info
