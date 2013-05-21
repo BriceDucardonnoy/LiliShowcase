@@ -8,7 +8,6 @@ import com.brice.lili.showcase.client.core.windows.ExpositionPresenter;
 import com.brice.lili.showcase.client.core.windows.LegalWindow;
 import com.brice.lili.showcase.client.events.CategoryChangedEvent;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent;
-import com.brice.lili.showcase.client.events.PicturesLoadedEvent.PicturesLoadedHandler;
 import com.brice.lili.showcase.client.place.NameTokens;
 import com.brice.lili.showcase.client.utils.Utils;
 import com.brice.lili.showcase.shared.model.Category;

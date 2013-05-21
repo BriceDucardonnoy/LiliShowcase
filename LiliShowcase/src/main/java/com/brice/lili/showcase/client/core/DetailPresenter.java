@@ -12,6 +12,8 @@ import com.brice.lili.showcase.client.lang.Translate;
 import com.brice.lili.showcase.client.place.NameTokens;
 import com.brice.lili.showcase.shared.model.Picture;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.ui.Image;
 import com.google.inject.Inject;
@@ -25,16 +27,21 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
+import com.sencha.gxt.widget.core.client.box.AutoProgressMessageBox;
 
 public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPresenter.MyProxy> {
 
 	private final Translate translate = GWT.create(Translate.class);
+	private final int MAXWAITTIME = 20;
 	
 	@Inject PlaceManager placeManager;
 	private String pictureFolder = "";
 	private Vector<Picture> pictures = null;
 	private Picture currentPicture = null;
 	private String locale;
+	private boolean arePicturesLoaded;
+	private AutoProgressMessageBox waitBox;
+	private int waitTime;
 	
 	public interface MyView extends View {
 		public Image getMainImage();
@@ -47,6 +54,31 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 		@Override
 		public void onPicturesLoaded(PicturesLoadedEvent event) {
 			pictures = event.getPictures();
+			Log.info("Pictures loaded: " + pictures.size());
+			arePicturesLoaded = true;
+		}
+	};
+	
+	private RepeatingCommand loadPicturesWaitCmd = new RepeatingCommand() {
+		@Override
+		public boolean execute() {
+			if(arePicturesLoaded) {
+				waitBox.hide();
+				if(initializeCurrentPicture()) {
+					// Shows picture information
+					showPictureMainThumbAndInfo();
+					// Shows pictures thumbs
+					showPicturesThumb();
+				}
+				return false;
+			}
+			if(waitTime >= MAXWAITTIME) {
+				waitBox.hide();
+				placeManager.revealErrorPlace(NameTokens.detail);
+				return false;
+			}
+			waitTime++;
+			return true;
 		}
 	};
 
@@ -62,6 +94,11 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 		super(eventBus, view, proxy);
 		locale = LocaleInfo.getCurrentLocale().getLocaleName();
 		pictures = (Vector<Picture>) ApplicationContext.getInstance().getProperty("pictures");
+		arePicturesLoaded = false;
+		waitBox = new AutoProgressMessageBox(translate.Loading());
+		waitBox.setTitle(translate.Loading());
+		waitBox.setMessage(translate.LoadingMessage());
+		waitBox.setProgressText(translate.Loading());
 	}
 
 	@Override
@@ -86,14 +123,35 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 	@Override
 	protected void onReveal() {
 		super.onReveal();
-		// Retrieves chosen picture
+		/*
+		 *  Retrieves chosen picture
+		 */
 		Log.info("Picture folder name is " + pictureFolder);
 		if(pictures == null || pictures.isEmpty()) {
-			placeManager.revealErrorPlace(NameTokens.detail);
+			// If pictures aren't loaded, wait for 20s that's done to display good one or redirect to error place
+			if(arePicturesLoaded) {
+				placeManager.revealErrorPlace(NameTokens.detail);
+				return;				
+			}
+			waitTime = 0;
+			waitBox.show();
+			waitBox.auto();
+			Scheduler.get().scheduleFixedDelay(loadPicturesWaitCmd, 1000);// 1s
 			return;
 		}
+		if(initializeCurrentPicture()) {
+			// Shows picture information
+			showPictureMainThumbAndInfo();
+			// Shows pictures thumbs
+			showPicturesThumb();
+		}
+	}
+	
+	private boolean initializeCurrentPicture() {
 		// No need to reload info, already in picture, just need to load images
+		Log.info("Picture folder: " + pictureFolder);
 		for(Picture picture : pictures) {
+			Log.info("Prop " + picture.getProperty(ApplicationContext.FILEINFO, ""));
 			if(picture.getProperty(ApplicationContext.FILEINFO, "").equals(pictureFolder)) {
 				currentPicture = picture;
 				break;
@@ -101,10 +159,15 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 		}
 		if(currentPicture == null) {
 			placeManager.revealUnauthorizedPlace(NameTokens.detail);
-			return;
+			return false;
 		}
-		// Shows picture information
+		return true;
+	}
+	
+	private void showPictureMainThumbAndInfo() {
+		// Main thumb
 		getView().updateMainImage(currentPicture.getImageUrl());
+		// Info
 		String info = "<div style=\"" +
 				"color: #DDDDDD;" +
 				"font-family: helvetica; " +
@@ -123,7 +186,9 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 		}
 		info += "</div>";
 		getView().updateDetailInfo(info);
-		// Get details pictures
+	}
+	
+	private void showPicturesThumb() {
 		String details = (String) currentPicture.getProperty("Details");
 		ArrayList<String> thumbsArray = new ArrayList<String>();
 		if(details != null && !details.isEmpty()) {
