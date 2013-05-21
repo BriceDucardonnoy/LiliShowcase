@@ -55,11 +55,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 	
 	private final Translate translate = GWT.create(Translate.class);
 	
-//	private Vector<Picture> pictures;
-//	private Vector<Category> categories;
-//	private String[] picts;
-//	private int categoriesNumber = 0;
-	
 	private PicturesLoadedHandler pictureLoadedHandler = new PicturesLoadedHandler() {
 		@Override
 		public void onPicturesLoaded(PicturesLoadedEvent event) {
@@ -107,9 +102,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 	@Inject
 	public MainPagePresenter(final EventBus eventBus, final MyView view, final MyProxy proxy) {
 		super(eventBus, view, proxy);
-//		categories = new Vector<Category>();
-//		pictures = new Vector<Picture>();
-//		Log.info("Current local is " + LocaleInfo.getCurrentLocale().getLocaleName());
 	}
 
 	@Override
@@ -121,8 +113,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 	@Override
 	protected void onBind() {
 		super.onBind();
-//		Utils.loadFile(loadListAC, GWT.getHostPageBaseURL() + "Documents/List.txt");
-//		Utils.showWaitCursor(getView().getMainPane().getBody());
 		registerHandler(getEventBus().addHandler(PicturesLoadedEvent.getType(), pictureLoadedHandler));
 		registerHandler(getView().getContentFlow().addItemClickListener(contentFlowClickListener));
 		registerHandler(getEventBus().addHandler(CategoryChangedEvent.getType(), categoryChangedHandler));
@@ -134,15 +124,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 		}
 	}
 
-	@Override
-	protected void onReveal() {
-		super.onReveal();
-//		getView().getMainPane().add(getView().getContentFlow());// Done now in UiBinder file
-//		if(!categories.isEmpty() && !pictures.isEmpty()) {
-//			getEventBus().fireEvent(new PicturesLoadedEvent(pictures, categories));
-//		}
-	}
-	
 	private void initDataAndView(Vector<Category> categories, Vector<Picture> pictures) {
 		getView().addCategories(categories);
 		getView().addItems(pictures);// Initialize cover flow
@@ -153,145 +134,5 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 //	Log.info("getModuleName: " + GWT.getModuleName());// liliShowcase
 //	Log.info("getModuleBaseForStaticFiles: " + GWT.getModuleBaseForStaticFiles());// http://127.0.1.1:8888/liliShowcase/ 
 //	Log.info("getModuleBaseURL: " + GWT.getModuleBaseURL());// http://127.0.1.1:8888/liliShowcase/
-	
-//	private void initPictures(String list) {
-////		picts = list.replaceAll("\r", "").replaceAll("\n", "").split(";");
-//		picts = list.replaceAll("\r",  "").split("\n");
-//		Log.info("Picture " + picts[0]);
-//		Utils.loadFile(loadInfoAC, GWT.getHostPageBaseURL() + ApplicationContext.PHOTOSFOLDER + "/" + picts[0] + "/Details.txt");
-//	}
-	
-//	private void loadPictureInfo(String infos, int nextInd) {
-//		// Store info
-//		if(!infos.isEmpty() && !infos.contains("HTTP ERROR: 404")) {
-//			Picture p = new Picture();
-//			p.addProperty(ApplicationContext.FILEINFO, picts[nextInd - 1]);
-//			// Special case for imageUrl to build from 'Show'
-//			String []entries = infos.replaceAll("\r", "").split("\n");
-//			for(String entry : entries) {
-//				if(entry.endsWith(";")) {
-//					entry = entry.replaceAll(";$", "");
-//				}
-//				if(entry.startsWith("Categories")) {
-//					// Add property Categories
-//					String []categories = entry.substring(entry.indexOf(":") + 1).replaceAll(" ", "").split(",");
-//					if(categories.length == 0) continue;
-//					for(String category : categories) {
-//						if(category.isEmpty()) continue;
-//						boolean found = false;
-//						for(Category cat : this.categories) {
-//							if(cat != null && cat.getName().equalsIgnoreCase(category)) {
-//								found = true;
-//								p.addCategoryId(cat.getId());
-//								break;
-//							}
-//						}
-//						if(!found) {
-//							if(Log.isTraceEnabled()) {
-//								Log.info("Add category <" + category + ">");
-//							}
-//							addNewCategory(new Category(categoriesNumber, category, category));
-//							p.addCategoryId(categoriesNumber++);
-//						}
-//					}
-////					p.addProperty("imageUrl", GWT.getHostPageBaseURL() + "photos/" + p.getNameOrTitle() + "/" + p.getProperty("Show"));
-//					p.addProperty("imageUrl", GWT.getHostPageBaseURL() + ApplicationContext.PHOTOSFOLDER + "/" + picts[nextInd - 1] + "/" + p.getProperty("Show"));
-//					continue;
-//				}// End of categories process
-//				String []prop = entry.split(":");
-//				if(prop.length == 2) {
-//					p.addProperty(prop[0].trim(), prop[1].trim());
-//				}
-//				else {
-//					if(Log.isTraceEnabled()) {
-//						Log.warn("Line <" + entry + "> doesn't contain 2 properties");
-//					}
-//					if(prop.length == 1) p.addProperty(prop[0], null);
-//				}
-//			}// End of properties process
-//			pictures.add(p);
-//		}
-//		// Browse next picture
-//		if(nextInd < picts.length) {
-//			if(!picts[nextInd].isEmpty()) {
-//				Log.info("Picture " + picts[nextInd]);
-//				Utils.loadFile(loadInfoAC, GWT.getHostPageBaseURL() + ApplicationContext.PHOTOSFOLDER + "/" + picts[nextInd++] + "/Details.txt");
-//			}
-//		}
-//		// Launch view initialization
-//		else if(nextInd == picts.length) {
-//			Log.info("Log picture done, now init coverflow");
-//			getView().addCategories(categories);
-//			getView().addItems(pictures);// Initialize cover flow
-////			PicturesLoadedEvent.fire(this.getEventBus(), pictures, categories);
-//			getEventBus().fireEvent(new PicturesLoadedEvent(pictures, categories));
-//			ApplicationContext.getInstance().addProperty("categories", categories);
-//			ApplicationContext.getInstance().addProperty("pictures", pictures);
-//			Utils.showDefaultCursor(getView().getMainPane().getBody());
-//			getView().init();
-//			return;
-//		}
-//	}
-	
-//	private void addNewCategory(Category newCat) {
-//		if(newCat == null) return;
-////		if(newCat.getName().equals(translate.All())) {
-//		if(newCat.getName().equalsIgnoreCase("tout")) {
-//			categories.insertElementAt(newCat, 0);
-//			return;
-//		}
-//		for(int i = 0 ; i < categories.size() ; i++) {
-//			Category cat = categories.get(i);
-////			if(!cat.getName().equalsIgnoreCase(translate.All()) && newCat.getName().compareToIgnoreCase(cat.getName()) < 0) {
-//			if(!cat.getName().equalsIgnoreCase("tout") && newCat.getName().compareToIgnoreCase(cat.getName()) > 0) {
-//				categories.insertElementAt(newCat, i);
-//				return;
-//			}
-//		}
-//		categories.add(newCat);
-//	}
-	
-	/*
-	 * AsyncCallbacks
-	 */
-//	private AsyncCallback<String> loadListAC = new AsyncCallback<String>() {
-//		@Override
-//		public void onFailure(Throwable caught) {
-//			Log.error("Loading list failed: " + caught.getMessage());
-//			caught.printStackTrace();
-//		}
-//		@Override
-//		public void onSuccess(String result) {
-//			if(Log.isTraceEnabled()) {
-//            	Log.trace("List: \n" + result);
-//            }
-//			if(result.isEmpty()) {
-//				Log.error("List of pictures is empty");
-//			}
-//			else {
-//				initPictures(result);
-//			}
-//		}
-//	};
-	
-//	private AsyncCallback<String> loadInfoAC = new AsyncCallback<String>() {
-//		private int ind = 0;
-//		@Override
-//		public void onFailure(Throwable caught) {
-//			Log.error("Loading details failed: " + caught.getMessage());
-//			caught.printStackTrace();
-//			loadPictureInfo("", ++ind);
-//		}
-//		@Override
-//		public void onSuccess(String result) {
-//			if(Log.isTraceEnabled()) {
-//            	Log.trace("Info: \n" + result);
-//            }
-//			if(result.isEmpty()) {
-//				Log.warn("List of pictures is empty");
-//			}
-//			loadPictureInfo(result, ++ind);
-//		}
-//	};
 	
 }

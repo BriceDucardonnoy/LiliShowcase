@@ -196,6 +196,7 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 	@Override
 	public void updateDetailInfo(String html) {
 		description.add(new HTML(html));
+		description.forceLayout();
 	}
 
 	@Override

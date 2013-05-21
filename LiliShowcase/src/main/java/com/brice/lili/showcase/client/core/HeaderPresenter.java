@@ -67,13 +67,6 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		public Image getLogo();
 	}
 	
-//	private PicturesLoadedHandler pictureLoadedHandler = new PicturesLoadedHandler() {
-//		@Override
-//		public void onPicturesLoaded(PicturesLoadedEvent event) {
-//			HeaderPresenter.this.getView().addGalleries(event.getCategories());
-//		}
-//	};
-	
 	private SelectionHandler<Item> categoryChangedHandler = new SelectionHandler<Item>() {
 		@Override
 		public void onSelection(SelectionEvent<Item> event) {
@@ -177,7 +170,6 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		Utils.loadFile(loadListAC, GWT.getHostPageBaseURL() + "Documents/List.txt");
 		Utils.showWaitCursor(getView().getMainCenterPane().getBody());
 		
-//		registerHandler(getEventBus().addHandler(PicturesLoadedEvent.getType(), pictureLoadedHandler));
 		registerHandler(getView().getGalleryMenu().addSelectionHandler(categoryChangedHandler));
 		registerHandler(getView().getLogo().addClickHandler(logoHandler));
 		registerHandler(getView().getHomeButton().addSelectHandler(homeHandler));
@@ -262,15 +254,11 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		// Launch view initialization
 		else if(nextInd == picts.length) {
 			Log.info("Log picture done, now init coverflow");
-//			getView().addCategories(categories);
-//			getView().addItems(pictures);// Initialize cover flow
-//			PicturesLoadedEvent.fire(this.getEventBus(), pictures, categories);
 			getView().addGalleries(categories);
 			getEventBus().fireEvent(new PicturesLoadedEvent(pictures, categories));
 			ApplicationContext.getInstance().addProperty("categories", categories);
 			ApplicationContext.getInstance().addProperty("pictures", pictures);
 			Utils.showDefaultCursor(getView().getMainCenterPane().getBody());
-//			getView().init();
 			return;
 		}
 	}

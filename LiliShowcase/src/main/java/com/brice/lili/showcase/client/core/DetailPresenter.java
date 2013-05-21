@@ -54,7 +54,9 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 		@Override
 		public void onPicturesLoaded(PicturesLoadedEvent event) {
 			pictures = event.getPictures();
-			Log.info("Pictures loaded: " + pictures.size());
+			if(Log.isTraceEnabled()) {
+				Log.trace("Pictures loaded: " + pictures.size());
+			}
 			arePicturesLoaded = true;
 		}
 	};
@@ -123,9 +125,7 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 	@Override
 	protected void onReveal() {
 		super.onReveal();
-		/*
-		 *  Retrieves chosen picture
-		 */
+		// Retrieves chosen picture
 		Log.info("Picture folder name is " + pictureFolder);
 		if(pictures == null || pictures.isEmpty()) {
 			// If pictures aren't loaded, wait for 20s that's done to display good one or redirect to error place
@@ -149,9 +149,13 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 	
 	private boolean initializeCurrentPicture() {
 		// No need to reload info, already in picture, just need to load images
-		Log.info("Picture folder: " + pictureFolder);
+		if(Log.isTraceEnabled()) {
+			Log.trace("Picture folder: " + pictureFolder);
+		}
 		for(Picture picture : pictures) {
-			Log.info("Prop " + picture.getProperty(ApplicationContext.FILEINFO, ""));
+			if(Log.isTraceEnabled()) {
+				Log.trace("Prop " + picture.getProperty(ApplicationContext.FILEINFO, ""));
+			}
 			if(picture.getProperty(ApplicationContext.FILEINFO, "").equals(pictureFolder)) {
 				currentPicture = picture;
 				break;
