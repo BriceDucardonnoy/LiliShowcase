@@ -278,9 +278,6 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	 * Then add it in DOM
 	 */
 	public void refreshCoverFlow() {
-		if(Log.isInfoEnabled()) {
-			Info.display("Refresh", "Refresh coverflow for category " + categoriesCB.getStore().get(currentCategoryId).getName());
-		}
 		/*
 		 *  Remove objects pushed twice in target (objects from contentflow project in public)
 		 */
@@ -373,19 +370,39 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 		return tr_en;
 	}
 
-	@Override
-	public void changeCurrentCategory(final Integer categoryId) {
+	private void startChangeCurrentCategory(final Integer categoryId) {
 		if(categoryId.equals(currentCategoryId)) return;
 		currentCategoryId = categoryId;
 		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 			@Override
 			public void execute() {
 				refreshCoverFlow();
-				if(categoriesCB.getStore().get(categoryId) != null && categoriesCB.getStore().get(categoryId).getId().equals(categoryId)) {
-					categoriesCB.setValue(categoriesCB.getStore().get(categoryId));
-				}
+//				if(categoriesCB.getStore().get(categoryId) != null && categoriesCB.getStore().get(categoryId).getId().equals(categoryId)) {
+//					categoriesCB.setValue(categoriesCB.getStore().get(categoryId));
+//				}
 			}
 		});
+	}
+	
+	@Override
+	public void changeCurrentCategory(final Integer categoryId) {
+		if(contentFlow.isInit()) {
+			startChangeCurrentCategory(categoryId);
+			return;
+		}
+		// Wait for cover flow to be initialized and change current category
+		// That case can append if another page is loaded in first and then a category selection is done without going to home before
+		Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
+			@Override
+			public boolean execute() {
+				if(contentFlow.isInit() && loadedPictures >= allPictures.size()) {
+					startChangeCurrentCategory(categoryId);
+					Log.info("Start change current category");
+					return false;
+				}
+				return true;
+			}
+		}, 1000);// 1s
 	}
 
 }

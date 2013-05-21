@@ -253,7 +253,7 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		}
 		// Launch view initialization
 		else if(nextInd == picts.length) {
-			Log.info("Log picture done, now init coverflow");
+			Log.info("Log picture done!!!");
 			getView().addGalleries(categories);
 			getEventBus().fireEvent(new PicturesLoadedEvent(pictures, categories));
 			ApplicationContext.getInstance().addProperty("categories", categories);

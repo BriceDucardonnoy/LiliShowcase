@@ -143,6 +143,7 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 	    centerImage.addFitImageLoadHandler(new FitImageLoadHandler() {
 			@Override
 			public void imageLoaded(FitImageLoadEvent event) {
+//				centerImage.setVisible(!centerImage.getUrl().isEmpty());
 				centerImage.setMaxSize(center.getCenterWidget().getOffsetWidth(), center.getCenterWidget().getOffsetHeight());
 				centerSC.forceLayout();
 				Utils.showDefaultCursor(con.getElement());
