@@ -95,7 +95,12 @@ Update run configuration to specify the good jvm to use
 	Causes the browser to pre-fetch the image at a given URL.
 	Peut-être à utiliser aussi pour le coverflow
 0 Bug si chargement d'un détail sans images: prend celui du détail précédent
+	Reproductible sur chrome en chargeant un détail et en faisant ctrl+clic sur l'image affichée : devrait la masquer mais ne le fait pas
+	Arrive sur chrome et safari
+0 Bug si souris sur dernière image de la ligne des vignettes
+0 Pour le clique sur image, ouvrire une fenêtre non modale qui est à la taille de l'image
 0 Enlever les bordures
+0 Afficher l'adresse mail quelque part pour ceux qui n'ont pas de client mail configuré
 0 Mettre les détails
 0 Pour exposition: chargement d'une page html pour que Lili puisse ajouter de façon autonome des info
 
