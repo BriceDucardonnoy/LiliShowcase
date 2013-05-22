@@ -88,6 +88,7 @@ X Pendant chargement de l'image : public static void prefetch(java.lang.String u
 	Causes the browser to pre-fetch the image at a given URL.
 	Peut-être à utiliser aussi pour le coverflow
 
+0 Bug quand chargement sur détails puis directement go sur catégorie (reproductible parfois...)
 0 Pour le clique sur image, ouvrire une fenêtre non modale qui est à la taille de l'image et qui permet d'aller à la précédente ou suivante
 0 Au resize sur une page autre que main, retour sur main requiert un resize pour afficher le coverflow correctement: WindowResizeHandler?
 	onReset de mainView = onResize pour se recalculer (resize du coverflow uniquement ?)
