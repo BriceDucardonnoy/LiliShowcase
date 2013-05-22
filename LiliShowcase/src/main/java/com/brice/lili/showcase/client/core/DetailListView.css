@@ -24,10 +24,18 @@
 }
 
 .over {
-  background: repeat-x scroll left top #343434;
-  border: 0 solid #ddd !important;
-  padding: 5px;
+  /* background: repeat-x scroll left top #343434; */
+  background: none repeat scroll 0 0 #343434;
+  border: 0 none #ddd !important;
   cursor: pointer;
+  padding: 5px;
+  /* padding: 4px 6px 6px 4px; */
+  /*border-style: none;
+  border-color: #ddd !important;
+  border-top: 0;
+  border-left: 0;
+  border-right: 2px;
+  border-bottom: 2px; */
 }
 
 .select {

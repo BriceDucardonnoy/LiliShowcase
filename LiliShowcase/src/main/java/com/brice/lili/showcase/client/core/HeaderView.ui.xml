@@ -54,6 +54,13 @@
 		.globalStyle {
 			background: #000000 repeat scroll 0 0;
 		}
+		.mailInfo {
+			color: white;
+			/*margin-right: 5px;*/
+			padding-right: 10px;
+			font-family: helvetica;
+			cursor: default;
+		}
 	</ui:style>
 
 	<container:Viewport>
@@ -77,6 +84,9 @@
 								<container:VBoxLayoutContainer padding="{padding0}" vBoxLayoutAlign="RIGHT">
 									<container:child layoutData="{boxLayoutDataMargins0}">
 								  		<container:HBoxLayoutContainer hBoxLayoutAlign="BOTTOM" pack="END">
+								  			<container:child>
+								  				<g:HTML addStyleNames="{style.mailInfo}">contact@deblache.com</g:HTML>
+								  			</container:child>
 											<container:child layoutData="{horizontalLayoutDataFlag}">
 												<g:Image resource='{res.france24}' ui:field="tr_fr" addStyleNames="{style.cursorImageFlag}" />
 											</container:child>

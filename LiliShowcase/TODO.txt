@@ -79,29 +79,29 @@ V Bug si chargement d'un détail sans images: prend celui du détail précédent
 	Reproductible sur chrome en chargeant un détail et en faisant ctrl+clic sur l'image affichée : devrait la masquer mais ne le fait pas
 	Arrive sur chrome et safari
 	=> setVisible
+V Enlever les bordures
+V Afficher l'adresse mail quelque part pour ceux qui n'ont pas de client mail configuré: àcôté des 2 drapeaux
 
 X Traduction UiBinder (dans le client bundle ?)
 X Pour image affichée dans la zone center, mettre un effet de fadin (gxt showcase FX)
 
 0 link
-0 Toolbar ne se relayout pas correctement apres resize (taille -1 pas prioritaire ?) (See overflow toolbar (northsouth component))
-0 Au resize sur une page autre que main, retour sur main requiert un resize pour afficher le coverflow correctement
+0 Toolbar ne se relayout pas correctement apres resize (taille -1 pas prioritaire ?) (See overflow toolbar (northsouth component)): WindowResizeHandler?
+0 Au resize sur une page autre que main, retour sur main requiert un resize pour afficher le coverflow correctement: WindowResizeHandler?
 	onReset de mainView = onResize pour se recalculer (resize du coverflow uniquement ?)
 0 Pendant chargement de l'image : public static void prefetch(java.lang.String url):
 	Causes the browser to pre-fetch the image at a given URL.
 	Peut-être à utiliser aussi pour le coverflow
 0 Legal anglais
 0 Reagrandir un peu les images
+0 Mettre les détails
 
 -------------------------------------------------------------------------
 Update run configuration to specify the good jvm to use
 -------------------------------------------------------------------------
 ---------------- Composants 2eme page ----------------
 0 Bug si souris sur dernière image de la ligne des vignettes (bordure noire invisible)
-0 Pour le clique sur image, ouvrire une fenêtre non modale qui est à la taille de l'image
-0 Enlever les bordures
-0 Afficher l'adresse mail quelque part pour ceux qui n'ont pas de client mail configuré
-0 Mettre les détails
+0 Pour le clique sur image, ouvrire une fenêtre non modale qui est à la taille de l'image et qui permet d'aller à la précédente ou suivante
 0 Pour exposition: chargement d'une page html pour que Lili puisse ajouter de façon autonome des info
 
 0 Faire manuel (doc commitée avec le projet ou faite avec le wiki github)

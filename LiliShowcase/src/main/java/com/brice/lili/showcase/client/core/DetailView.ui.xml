@@ -61,7 +61,7 @@
 	
 	<container:SimpleContainer addStyleNames="{style.globalStyle}">
 		<container:child layoutData="{outerData}">
-			<container:BorderLayoutContainer ui:field="con" borders="true" addStyleNames="{style.globalStyle}">
+			<container:BorderLayoutContainer ui:field="con" borders="false" addStyleNames="{style.globalStyle}">
 				<!-- NORTH -->
 				<!-- <container:north layoutData="{northData}" /> -->
 				<!-- WEST -->
@@ -69,7 +69,7 @@
 					<container:VerticalLayoutContainer visible="true" borders="true" addStyleNames="{style.globalStyle}">
 						<!-- Main thumb -->
 						<container:child layoutData="{verticalLayoutData}">
-							<container:CenterLayoutContainer ui:field="imageContainer" borders="true">
+							<container:CenterLayoutContainer ui:field="imageContainer" borders="false">
 								<g:Image ui:field="mainImage" altText="Full Picture" />
 							</container:CenterLayoutContainer>
 						</container:child>
@@ -81,10 +81,10 @@
 				</container:west>
 				<!-- CENTER -->
 				<container:center layoutData="{centerData}">
-					<container:BorderLayoutContainer ui:field="center" borders="true" addStyleNames="{style.globalStyle}">
+					<container:BorderLayoutContainer ui:field="center" borders="false" addStyleNames="{style.globalStyle}">
 						<!-- Main picture -->
 						<container:center layoutData="{centerData}">
-							<container:CenterLayoutContainer ui:field="centerSC" borders="false" addStyleNames="{style.globalStyle}">
+							<container:CenterLayoutContainer ui:field="centerSC" borders="true" addStyleNames="{style.globalStyle}">
 								<imagepreloader:FitImage ui:field="centerImage" addStyleNames="{style.globalStyle} {style.cursorImageFlag}" />
 							</container:CenterLayoutContainer>
 						</container:center>
@@ -92,7 +92,7 @@
 						<container:south layoutData="{thumbData}">
 							<!-- <container:SimpleContainer ui:field="thumbContainer" addStyleNames="{style.globalStyle}"> -->
 								<!-- <gxt:ListView ui:field="thumbList" store="{store}" valueProvider="{pictureProvider}" /> -->
-								<gxt:ListView ui:field="thumbList" addStyleNames="{style.globalStyle}" />
+								<gxt:ListView ui:field="thumbList" borders="true" addStyleNames="{style.globalStyle}" />
 							<!-- </container:SimpleContainer> -->
 						</container:south>
 					</container:BorderLayoutContainer>
