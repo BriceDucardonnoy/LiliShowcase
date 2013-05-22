@@ -129,9 +129,12 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 			public void onSelectionChanged(SelectionChangedEvent<Picture> event) {
 				List<Picture> sel = event.getSelection();
 				if(sel == null || sel.isEmpty()) {
+					Log.info("Url null or empty");
 					centerImage.setUrl("");
+					centerImage.setVisible(false);
 				}
 				else {
+					centerImage.setVisible(true);
 					Utils.showWaitCursor(con.getElement());
 					centerImage.setUrl(sel.get(0).getImageUrl());
 				}
@@ -143,6 +146,7 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 	    centerImage.addFitImageLoadHandler(new FitImageLoadHandler() {
 			@Override
 			public void imageLoaded(FitImageLoadEvent event) {
+				Log.info("Center image loaded: " + centerImage.getUrl());
 //				centerImage.setVisible(!centerImage.getUrl().isEmpty());
 				centerImage.setMaxSize(center.getCenterWidget().getOffsetWidth(), center.getCenterWidget().getOffsetHeight());
 				centerSC.forceLayout();
