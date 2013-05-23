@@ -81,6 +81,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
     private Integer currentCategoryId = null;
     private String sortName;
     private int loadedPictures = 0;
+    private boolean isResizing = false;
 
 	public interface Binder extends UiBinder<Widget, MainPageView> {
 	}
@@ -325,12 +326,13 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	
 	@Override
 	public void resize() {
-//		mainPane.forceLayout();
 		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 			@Override
 			public void execute() {
 				if(contentFlow.isInit()) {
+					isResizing = true;
 					contentFlow.resize();
+					isResizing = false;
 				}
 			}
 		});
@@ -395,17 +397,17 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	
 	@Override
 	public void changeCurrentCategory(final Integer categoryId) {
-		if(contentFlow.isInit() && loadedPictures >= allPictures.size()) {
-			Log.info("Start change current category immediately");
-			startChangeCurrentCategory(categoryId);
-			return;
-		}
+//		if(contentFlow.isInit() && loadedPictures >= allPictures.size() && !isResizing) {
+//			Log.info("Start change current category immediately");
+//			startChangeCurrentCategory(categoryId);
+//			return;
+//		}
 		// Wait for cover flow to be initialized and change current category
 		// That case can append if another page is loaded in first and then a category selection is done without going to home before
 		Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
 			@Override
 			public boolean execute() {
-				if(contentFlow.isInit() && loadedPictures >= allPictures.size()) {
+				if(contentFlow.isInit() && loadedPictures >= allPictures.size() && !isResizing) {
 					Log.info("Start change current category");
 					startChangeCurrentCategory(categoryId);
 					return false;
