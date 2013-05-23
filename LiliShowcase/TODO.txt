@@ -83,6 +83,7 @@ V Enlever les bordures
 V Afficher l'adresse mail quelque part pour ceux qui n'ont pas de client mail configuré: àcôté des 2 drapeaux
 V Détails: l'image centrale ne se resize pas au redimensionnement de la fenêtre
 V Toolbar ne se relayout pas correctement apres resize (taille -1 pas prioritaire ?) (See overflow toolbar (northsouth component)): WindowResizeHandler?
+V Au resize de la page de détail, l'image de rappel sur la gauche ne se resize pas correctement
 
 X Traduction UiBinder (dans le client bundle ?)
 X Pour image affichée dans la zone center, mettre un effet de fadin (gxt showcase FX)

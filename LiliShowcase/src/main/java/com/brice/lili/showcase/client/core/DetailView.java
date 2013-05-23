@@ -161,6 +161,12 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 				centerSC.forceLayout();
 			}
 		});
+	    imageContainer.addResizeHandler(new ResizeHandler() {
+			@Override
+			public void onResize(ResizeEvent event) {
+				resizeMainImage();
+			}
+		});
 	}
 
 	@Override
@@ -183,6 +189,10 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 	
 	@UiHandler("mainImage")
 	void loadHandle(LoadEvent event) {
+		resizeMainImage();
+	}
+	
+	public void resizeMainImage() {
 		// Stretch to the biggest dimension
 		// TESTME BDY: test with FitImage
 		mainImage.getElement().getStyle().clearHeight();

@@ -325,7 +325,9 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	
 	@Override
 	public void resize() {
-		contentFlow.resize();
+		if(contentFlow.isInit()) {
+			contentFlow.resize();
+		}
 //		refreshCoverFlow();
 	}
 	
