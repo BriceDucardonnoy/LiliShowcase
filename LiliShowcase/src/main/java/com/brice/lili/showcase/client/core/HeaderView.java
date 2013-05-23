@@ -54,6 +54,10 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 		homeButton.setTitle(translate.Home());
 		galleryButton.setText(translate.Gallery());
 		galleryButton.setTitle(translate.Gallery());
+//		if(Window.Navigator.getUserAgent().equals("IE")) {
+		// Cookie usage: Cookies.getCookie("ScriptEasyWarningSeen");
+//			// TODO BDY: galleryButton.setEnable(false); if IE8, maybe IE9, and show info advising usage of another browser
+//		}
 		expoButton.setText(translate.Expositions());
 		expoButton.setTitle(translate.Expositions());
 		approachButton.setText(translate.ArtisticApproach());
