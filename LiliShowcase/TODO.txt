@@ -88,15 +88,16 @@ X Pour image affichée dans la zone center, mettre un effet de fadin (gxt showca
 X Pendant chargement de l'image : public static void prefetch(java.lang.String url):
 	Causes the browser to pre-fetch the image at a given URL.
 	Peut-être à utiliser aussi pour le coverflow
+X Bug quand chargement depuis la page de détails puis directement go sur catégorie
+	Reproductible parfois en mode avec cache sur navigateur un peu lent...
+	Interdire la sélection de catégorie dans le cas où le cover flow n'est pas initialisé
 
 0 Au resize sur une page autre que main, retour sur main requiert un resize pour afficher le coverflow correctement: WindowResizeHandler?
 	onReset de mainView = onResize pour se recalculer (resize du coverflow uniquement ?)
 0 Toolbar ne se relayout pas correctement apres resize (taille -1 pas prioritaire ?) (See overflow toolbar (northsouth component)): WindowResizeHandler?
-0 Bug quand chargement depuis la page de détails puis directement go sur catégorie
-	Reproductible parfois en mode avec cache sur navigateur un peu lent...
-	Interdire la sélection de catégorie dans le cas où le cover flow n'est pas initialisé
-0 Pour le clique sur image, ouvrir une fenêtre non modale qui est à la taille de l'image et qui permet d'aller à la précédente ou suivante
 0 Mettre une progressBar (pas auto, mais avec vrai ratio) au lieu du curseur d'attente dans la page d'accueil
+0 Bloquer changement catégories sous IE8 (et 9 ?) ou mettre une page qui indique d'aller vers un autre navigateur
+0 Pour le clique sur image, ouvrir une fenêtre non modale qui est à la taille de l'image et qui permet d'aller à la précédente ou suivante
 0 Mettre les détails et mettre Tout au lieu de tout
 
 0 link: même système que Légal
@@ -110,7 +111,6 @@ Update run configuration to specify the good jvm to use
 0 Bug si souris sur dernière image de la ligne des vignettes (Float css en cause)
 0 Faire manuel (doc commitée avec le projet ou faite avec le wiki github)
 0 Traduire categorie 'tout' ou au moins mettre une majuscule
-0 Bloquer changement catégories sous IE ou mettre une page qui indique d'aller vers un autre navigateur
 0 Typo du titre sous l'image (page 1)
 0 Passage de la souris sur l'image en 2ème page affiche un carré avec un zoom de l'image en question
 0 Mettre sous licence BSD
