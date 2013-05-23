@@ -98,6 +98,8 @@ X Bug quand chargement depuis la page de détails puis directement go sur catég
 0 Mettre une progressBar (pas auto, mais avec vrai ratio) au lieu du curseur d'attente dans la page d'accueil
 0 Bloquer changement catégories sous IE8 (et 9 ?) ou mettre une page qui indique d'aller vers un autre navigateur
 0 Pour le clique sur image, ouvrir une fenêtre non modale qui est à la taille de l'image et qui permet d'aller à la précédente ou suivante
+	En attendant, paramétrer la size de la version actuelle dans les features à partir de l'image cliquée
+0 Proposer les vignettes sur la droite plutôt qu'en bas
 0 Mettre les détails et mettre Tout au lieu de tout
 
 0 link: même système que Légal
