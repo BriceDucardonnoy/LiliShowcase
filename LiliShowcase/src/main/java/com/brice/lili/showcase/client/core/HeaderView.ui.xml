@@ -34,7 +34,7 @@
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BoxLayoutContainer.BoxLayoutData" field="horizontalLayoutDataFlag">
 		<ui:attributes margins="{margins0}" />
 	</ui:with>
-	<!-- <ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="verticalLayoutData" /> -->
+	<ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="verticalLayoutData" />
 	<ui:with type="com.sencha.gxt.core.client.util.Margins" field="margins0">
 		<ui:attributes top="0" right="0" bottom="0" left="0" />
 	</ui:with>
@@ -69,20 +69,15 @@
 				<container:BorderLayoutContainer borders="false"  addStyleNames="{style.globalStyle}">
 					<!-- NORTH -->
 					<container:north layoutData="{northData}">
-						<!-- <g:HTMLPanel>
-							This is my header<hr/>
-						</g:HTMLPanel> -->
 						<container:HorizontalLayoutContainer addStyleNames="{style.globalStyle}" borders="false">
+							<!-- Logo -->
 							<container:child layoutData="{horizontalLayoutData}">
 								<g:Image resource='{res.header200}' ui:field="logo" addStyleNames="{style.cursorImageFlag}" />
 							</container:child>
 							<container:child layoutData="{horizontalLayoutDataMain}">
-								<!-- <container:VerticalLayoutContainer>
+								<container:VerticalLayoutContainer ui:field="headerHC">
 									<container:child layoutData="{verticalLayoutData}">
-									</container:child>
-								</container:VerticalLayoutContainer> -->
-								<container:VBoxLayoutContainer padding="{padding0}" vBoxLayoutAlign="RIGHT" ui:field="headerHC">
-									<container:child layoutData="{boxLayoutDataMargins0}">
+										<!-- Mail contact and flags -->
 								  		<container:HBoxLayoutContainer hBoxLayoutAlign="BOTTOM" pack="END">
 								  			<container:child>
 								  				<g:HTML addStyleNames="{style.mailInfo}">contact@deblache.com</g:HTML>
@@ -95,7 +90,9 @@
 									    	</container:child>
 								  		</container:HBoxLayoutContainer>
 								  	</container:child>
-									<container:child layoutData="{boxLayoutDataMargins0}">
+								  	<!-- Toolbar -->
+									<!-- <container:child layoutData="{boxLayoutDataMargins0}"> -->
+									<container:child layoutData="{verticalLayoutData}">
 										<toolbar:ToolBar ui:field="toolbar">
 											<button:TextButton ui:field="homeButton" icon="{res.home}" iconAlign="TOP" />
 											<toolbar:SeparatorToolItem />
@@ -119,8 +116,12 @@
 											<button:TextButton ui:field="legalButton" icon="{res.legal}" iconAlign="TOP" />
 								            <toolbar:FillToolItem />
 							         	</toolbar:ToolBar>
+									</container:child>
+								</container:VerticalLayoutContainer>
+								<!-- <container:VBoxLayoutContainer padding="{padding0}" vBoxLayoutAlign="RIGHT" ui:field="headerHC">
+									<container:child layoutData="{boxLayoutDataMargins0}">
 								  	</container:child>
-								</container:VBoxLayoutContainer>
+								</container:VBoxLayoutContainer> -->
 					    	</container:child>
 						</container:HorizontalLayoutContainer>
 					</container:north>

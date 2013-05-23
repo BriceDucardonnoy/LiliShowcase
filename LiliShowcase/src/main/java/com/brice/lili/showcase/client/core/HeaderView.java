@@ -17,7 +17,8 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.button.TextButton;
-import com.sencha.gxt.widget.core.client.container.VBoxLayoutContainer;
+import com.sencha.gxt.widget.core.client.container.BoxLayoutContainer.BoxLayoutPack;
+import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.menu.CheckMenuItem;
 import com.sencha.gxt.widget.core.client.menu.Menu;
 import com.sencha.gxt.widget.core.client.toolbar.ToolBar;
@@ -40,7 +41,7 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 	@UiField TextButton linkButton;
 	@UiField Image tr_fr;
 	@UiField Image tr_en;
-	@UiField VBoxLayoutContainer headerHC;
+	@UiField VerticalLayoutContainer headerHC;
 	@UiField ToolBar toolbar;
 
 	public interface Binder extends UiBinder<Widget, HeaderView> {
@@ -70,12 +71,12 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 		linkButton.setTitle(translate.Link());
 		
 		mainCenterPane.setId("mainCenterPane");
+		toolbar.setPack(BoxLayoutPack.END);
 		
 		headerHC.addResizeHandler(new ResizeHandler() {
 			@Override
 			public void onResize(ResizeEvent event) {
-				Log.info("Resize header");
-				// TODO BDY: resize toolbar
+				headerHC.forceLayout();
 			}
 		});
 	}
