@@ -325,9 +325,15 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	
 	@Override
 	public void resize() {
-		if(contentFlow.isInit()) {
-			contentFlow.resize();
-		}
+//		mainPane.forceLayout();
+		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+			@Override
+			public void execute() {
+				if(contentFlow.isInit()) {
+					contentFlow.resize();
+				}
+			}
+		});
 //		refreshCoverFlow();
 	}
 	
