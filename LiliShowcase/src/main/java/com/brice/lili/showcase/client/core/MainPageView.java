@@ -207,6 +207,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 			public boolean execute() {
 				if(getContentFlow().isAttached()) {
 					getContentFlow().init();
+					Log.info("Init done");
 //					Utils.showDefaultCursor(mainPane.getBody());
 					return false;
 				}
@@ -325,7 +326,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@Override
 	public void resize() {
 		contentFlow.resize();
-		refreshCoverFlow();
+//		refreshCoverFlow();
 	}
 	
 	/*
@@ -386,7 +387,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	
 	@Override
 	public void changeCurrentCategory(final Integer categoryId) {
-		if(contentFlow.isInit()) {
+		if(contentFlow.isInit() && loadedPictures >= allPictures.size()) {
+			Log.info("Start change current category immediately");
 			startChangeCurrentCategory(categoryId);
 			return;
 		}
@@ -396,8 +398,8 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 			@Override
 			public boolean execute() {
 				if(contentFlow.isInit() && loadedPictures >= allPictures.size()) {
-					startChangeCurrentCategory(categoryId);
 					Log.info("Start change current category");
+					startChangeCurrentCategory(categoryId);
 					return false;
 				}
 				return true;

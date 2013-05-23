@@ -13,6 +13,8 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.LoadEvent;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.safehtml.shared.SafeHtml;
@@ -147,10 +149,16 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 			@Override
 			public void imageLoaded(FitImageLoadEvent event) {
 				Log.info("Center image loaded: " + centerImage.getUrl());
-//				centerImage.setVisible(!centerImage.getUrl().isEmpty());
 				centerImage.setMaxSize(center.getCenterWidget().getOffsetWidth(), center.getCenterWidget().getOffsetHeight());
 				centerSC.forceLayout();
 				Utils.showDefaultCursor(con.getElement());
+			}
+		});
+	    centerSC.addResizeHandler(new ResizeHandler() {
+			@Override
+			public void onResize(ResizeEvent event) {
+				centerImage.setMaxSize(center.getCenterWidget().getOffsetWidth(), center.getCenterWidget().getOffsetHeight());
+				centerSC.forceLayout();
 			}
 		});
 	}
