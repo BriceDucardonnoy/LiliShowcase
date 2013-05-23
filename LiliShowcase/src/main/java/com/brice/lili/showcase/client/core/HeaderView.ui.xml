@@ -81,7 +81,7 @@
 									<container:child layoutData="{verticalLayoutData}">
 									</container:child>
 								</container:VerticalLayoutContainer> -->
-								<container:VBoxLayoutContainer padding="{padding0}" vBoxLayoutAlign="RIGHT">
+								<container:VBoxLayoutContainer padding="{padding0}" vBoxLayoutAlign="RIGHT" ui:field="headerHC">
 									<container:child layoutData="{boxLayoutDataMargins0}">
 								  		<container:HBoxLayoutContainer hBoxLayoutAlign="BOTTOM" pack="END">
 								  			<container:child>

@@ -6,6 +6,8 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.lang.Translate;
 import com.brice.lili.showcase.shared.model.Category;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Image;
@@ -15,8 +17,10 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.button.TextButton;
+import com.sencha.gxt.widget.core.client.container.VBoxLayoutContainer;
 import com.sencha.gxt.widget.core.client.menu.CheckMenuItem;
 import com.sencha.gxt.widget.core.client.menu.Menu;
+import com.sencha.gxt.widget.core.client.toolbar.ToolBar;
 
 public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 	
@@ -36,6 +40,8 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 	@UiField TextButton linkButton;
 	@UiField Image tr_fr;
 	@UiField Image tr_en;
+	@UiField VBoxLayoutContainer headerHC;
+	@UiField ToolBar toolbar;
 
 	public interface Binder extends UiBinder<Widget, HeaderView> {
 	}
@@ -60,6 +66,14 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 		linkButton.setTitle(translate.Link());
 		
 		mainCenterPane.setId("mainCenterPane");
+		
+		headerHC.addResizeHandler(new ResizeHandler() {
+			@Override
+			public void onResize(ResizeEvent event) {
+				Log.info("Resize header");
+				// TODO BDY: resize toolbar
+			}
+		});
 	}
 
 	@Override

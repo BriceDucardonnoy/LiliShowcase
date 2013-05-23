@@ -102,10 +102,11 @@ X Pendant chargement de l'image : public static void prefetch(java.lang.String u
 0 link: même système que Légal
 0 Legal anglais
 0 Pour exposition: chargement d'une page html pour que Lili puisse ajouter de façon autonome des info
-0 Gérer user agent iPad ou Android
+0 Faire un nouveau projet de coverflow pur GWT (avec img google/FitImage ou sprite GXT) et l'intégrer dans ce projet
 -------------------------------------------------------------------------
 Update run configuration to specify the good jvm to use
 -------------------------------------------------------------------------
+0 Gérer user agent iPad ou Android
 0 Bug si souris sur dernière image de la ligne des vignettes (Float css en cause)
 0 Faire manuel (doc commitée avec le projet ou faite avec le wiki github)
 0 Traduire categorie 'tout' ou au moins mettre une majuscule
