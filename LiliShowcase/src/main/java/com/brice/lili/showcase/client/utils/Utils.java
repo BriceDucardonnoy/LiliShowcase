@@ -1,6 +1,8 @@
 package com.brice.lili.showcase.client.utils;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.brice.lili.showcase.client.lang.Translate;
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
@@ -12,8 +14,11 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.Location;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.sencha.gxt.widget.core.client.box.ProgressMessageBox;
 
 public class Utils {
+	private static final Translate translate = GWT.create(Translate.class);
+	private static ProgressMessageBox box;
 
 	/**
 	 * Cursor
@@ -55,6 +60,28 @@ public class Utils {
 			newUrl = newUrl.replace("gwt.codesvr=127.0.1.1%3A", "gwt.codesvr=127.0.1.1:");
 		}
 		Window.Location.replace(newUrl);
+	}
+	
+	public static void showLoadingProgressToolbar() {
+		if(box != null && box.isVisible()) return;
+		if(box == null) {
+			box = new ProgressMessageBox(translate.Loading(), translate.LoadingMessage());
+			box.setProgressText(translate.Loading());
+		}
+		box.show();
+		box.getButtonBar().setVisible(false);
+	}
+	
+	public static void updateProgressToolbar(double percent) {
+		if(box == null || !box.isVisible()) {
+			showLoadingProgressToolbar();
+		}
+		box.updateProgress(percent/100,  "{0}%");
+	}
+	
+	public static void hideLoadingProgressToolbar() {
+		if(box == null || !box.isVisible()) return;
+		box.hide();
 	}
 	
 }

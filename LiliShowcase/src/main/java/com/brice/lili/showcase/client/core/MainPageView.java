@@ -160,10 +160,12 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	private FitImageLoadHandler flh = new FitImageLoadHandler() {
 		@Override
 		public void imageLoaded(FitImageLoadEvent event) {
-			Log.info("Image loaded " + ((FitImage)event.getSource()).getUrl());
 			loadedPictures++;
+			Log.info("Image loaded : " + loadedPictures + " / " + allPictures.size() + ": " + ((FitImage)event.getSource()).getUrl());
+			Utils.updateProgressToolbar((loadedPictures * 100) / allPictures.size());
 			if(loadedPictures >= allPictures.size()) {
 				Utils.showDefaultCursor(mainPane.getBody());
+				Utils.hideLoadingProgressToolbar();
 			}
 		}
 	};
@@ -203,6 +205,7 @@ public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
 	@Override
 	public void init() {
 		Utils.showWaitCursor(mainPane.getBody());
+		Utils.showLoadingProgressToolbar();
 		Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
 			@Override
 			public boolean execute() {

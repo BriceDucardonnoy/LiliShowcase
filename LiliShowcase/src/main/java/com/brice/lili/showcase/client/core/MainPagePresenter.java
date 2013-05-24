@@ -113,7 +113,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 	@Override
 	protected void onBind() {
 		super.onBind();
-		Log.info("MainPagePresenter::onBind()");// TODO BDY: remove this comment
 		registerHandler(getEventBus().addHandler(PicturesLoadedEvent.getType(), pictureLoadedHandler));
 		registerHandler(getView().getContentFlow().addItemClickListener(contentFlowClickListener));
 		registerHandler(getEventBus().addHandler(CategoryChangedEvent.getType(), categoryChangedHandler));
@@ -128,7 +127,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
 	@Override
 	protected void onReveal() {
 		super.onReveal();
-		Log.info("MainPagePresenter::onReveal()");// TODO BDY: remove this comment
 		getView().resize();
 	}
 
