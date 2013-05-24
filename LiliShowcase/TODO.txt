@@ -88,6 +88,7 @@ V Au resize sur une page autre que main, retour sur main requiert un resize pour
 	onReveal de mainView = onResize pour se recalculer (resize du coverflow uniquement ? oui)
 V Au retour via un changement de catégorie => problème de layout
 V Mettre une progressBar (pas auto, mais avec vrai ratio) au lieu du curseur d'attente dans la page d'accueil
+V Paramétrer la size de la version actuelle dans les features à partir de l'image cliquée
 
 X Traduction UiBinder (dans le client bundle ?)
 X Pour image affichée dans la zone center, mettre un effet de fadin (gxt showcase FX)
@@ -100,7 +101,6 @@ X Bug quand chargement depuis la page de détails puis directement go sur catég
 
 0 Bloquer changement catégories sous IE8 (et 9 ?) ou mettre une page qui indique d'aller vers un autre navigateur
 0 Pour le clique sur image, ouvrir une fenêtre non modale qui est à la taille de l'image et qui permet d'aller à la précédente ou suivante
-	En attendant, paramétrer la size de la version actuelle dans les features à partir de l'image cliquée
 0 Proposer les vignettes sur la droite plutôt qu'en bas : plus adapté aux écrans actuels en 16:9 + supprimer bordure du haut
 0 Mettre les détails et mettre Tout au lieu de tout
 

@@ -255,6 +255,8 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 			"resizable=yes," + 
 			"scrollbars=yes," + 
 			"status=no," + 
+			"width=" + centerImage.getOriginalWidth() + "," +
+			"height=" + centerImage.getOriginalHeight() + "," +
 			"dependent=true");
 	}
 
