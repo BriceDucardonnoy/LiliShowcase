@@ -27,6 +27,14 @@
 		.cursorImageFlag {
 			cursor: pointer;
 		}
+		.leftBorder {
+			border: 0px solid #d0d0d0 !important;
+			border-width: 0 0 0 1px !important;
+		}
+		.rightBorder {
+			border: 0px solid #d0d0d0 !important;
+			border-width: 0 1px 0 0 !important;
+		}
 	</ui:style>
 
 	<!-- MARGINS -->
@@ -47,9 +55,8 @@
 		<ui:attributes size="300d" />
 	</ui:with>
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="centerData" />
-	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="eastData" />
 	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="thumbData">
-		<ui:attributes size="150d" />
+		<ui:attributes size="160d" />
 	</ui:with>
 	<!-- OTHER LAYOUT DATA -->
 	<ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="verticalLayoutData">
@@ -66,7 +73,7 @@
 				<!-- <container:north layoutData="{northData}" /> -->
 				<!-- WEST -->
 				<container:west layoutData="{westData}">
-					<container:VerticalLayoutContainer visible="true" borders="true" addStyleNames="{style.globalStyle}">
+					<container:VerticalLayoutContainer visible="true" borders="false" addStyleNames="{style.globalStyle} {style.rightBorder}">
 						<!-- Main thumb -->
 						<container:child layoutData="{verticalLayoutData}">
 							<container:CenterLayoutContainer ui:field="imageContainer" borders="false">
@@ -84,7 +91,7 @@
 					<container:BorderLayoutContainer ui:field="center" borders="false" addStyleNames="{style.globalStyle}">
 						<!-- Main picture -->
 						<container:center layoutData="{centerData}">
-							<container:CenterLayoutContainer ui:field="centerSC" borders="true" addStyleNames="{style.globalStyle}">
+							<container:CenterLayoutContainer ui:field="centerSC" borders="false" addStyleNames="{style.globalStyle}">
 								<imagepreloader:FitImage ui:field="centerImage" addStyleNames="{style.globalStyle} {style.cursorImageFlag}" />
 							</container:CenterLayoutContainer>
 						</container:center>
@@ -92,13 +99,15 @@
 						<container:south layoutData="{thumbData}">
 							<!-- <container:SimpleContainer ui:field="thumbContainer" addStyleNames="{style.globalStyle}"> -->
 								<!-- <gxt:ListView ui:field="thumbList" store="{store}" valueProvider="{pictureProvider}" /> -->
-								<gxt:ListView ui:field="thumbList" borders="true" addStyleNames="{style.globalStyle}" />
+								<!-- <gxt:ListView ui:field="thumbList" borders="true" addStyleNames="{style.globalStyle}" /> -->
 							<!-- </container:SimpleContainer> -->
 						</container:south>
 					</container:BorderLayoutContainer>
 				</container:center>
 				<!-- EAST -->
-				<!-- <container:east layoutData="{eastData}" /> -->
+				<container:east layoutData="{thumbData}" >
+					<gxt:ListView ui:field="thumbList" borders="false" addStyleNames="{style.globalStyle} {style.leftBorder}" />
+				</container:east>
 				<!-- SOUTH -->
 				<!-- <container:south layoutData="{southData}" /> -->
 			</container:BorderLayoutContainer>
