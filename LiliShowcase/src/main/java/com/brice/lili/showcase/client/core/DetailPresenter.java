@@ -197,7 +197,7 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 		ArrayList<String> thumbsArray = new ArrayList<String>();
 		if(details != null && !details.isEmpty()) {
 			String thumbs[] = details.substring(details.indexOf(":") + 1).split(",");
-			thumbsArray.add(currentPicture.getImageUrl());// Add main picture to the details
+//			thumbsArray.add(currentPicture.getImageUrl());// Add main picture to the details
 			if(thumbs.length > 0) {// Add the others details
 				for(String thumb : thumbs) {
 					thumbsArray.add(GWT.getHostPageBaseURL() + ApplicationContext.PHOTOSFOLDER + "/" + pictureFolder + "/" + thumb.trim());
