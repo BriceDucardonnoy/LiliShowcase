@@ -90,6 +90,7 @@ V Au retour via un changement de catégorie => problème de layout
 V Mettre une progressBar (pas auto, mais avec vrai ratio) au lieu du curseur d'attente dans la page d'accueil
 V Paramétrer la size de la version actuelle dans les features à partir de l'image cliquée
 V Proposer les vignettes sur la droite plutôt qu'en bas : plus adapté aux écrans actuels en 16:9 + supprimer bordure du haut + pas chargement de show en 1er
+V 	Bug si souris sur dernière image de la ligne des vignettes (Float css en cause) : plus d'actualité maintenant
 
 X Traduction UiBinder (dans le client bundle ?)
 X Pour image affichée dans la zone center, mettre un effet de fadin (gxt showcase FX)
@@ -108,11 +109,11 @@ X Bug quand chargement depuis la page de détails puis directement go sur catég
 0 Legal anglais
 0 Pour exposition: chargement d'une page html pour que Lili puisse ajouter de façon autonome des info
 0 Faire un nouveau projet de coverflow pur GWT (avec img google/FitImage ou sprite GXT) et l'intégrer dans ce projet
+0 Faire thême black
 -------------------------------------------------------------------------
 Update run configuration to specify the good jvm to use
 -------------------------------------------------------------------------
 0 Gérer user agent iPad ou Android
-0 Bug si souris sur dernière image de la ligne des vignettes (Float css en cause)
 0 Faire manuel (doc commitée avec le projet ou faite avec le wiki github)
 0 Traduire categorie 'tout' ou au moins mettre une majuscule
 0 Typo du titre sous l'image (page 1)
@@ -120,7 +121,3 @@ Update run configuration to specify the good jvm to use
 0 Mettre sous licence BSD
 0 Enlever les infos redondantes (remove des fichiers dans le webapp ?)
 0 Maven voir pour goal deploy et usage des profiles pour deploy dev et deploy prod
-
-0 Googles analitics ?
-0 (Enlever scrollbar (juste un parametre a changer dans l'init du coverflow))
-
