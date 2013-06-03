@@ -101,6 +101,7 @@ X Bug quand chargement depuis la page de détails puis directement go sur catég
 	Reproductible parfois en mode sans cache...
 	Interdire la sélection de catégorie dans le cas où le cover flow n'est pas initialisé
 
+0 Regarder les évènements touch de GWT/sencha pour gérer les téléphones/pad pour le coverflow
 0 Bloquer changement catégories sous IE8 (et 9 ?) ou mettre une page qui indique d'aller vers un autre navigateur
 0 Pour le clique sur image, ouvrir une fenêtre non modale qui est à la taille de l'image et qui permet d'aller à la précédente ou suivante
 0 Mettre les détails et mettre Tout au lieu de tout
