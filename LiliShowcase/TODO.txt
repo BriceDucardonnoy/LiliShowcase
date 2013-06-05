@@ -101,23 +101,25 @@ X Bug quand chargement depuis la page de détails puis directement go sur catég
 	Reproductible parfois en mode sans cache...
 	Interdire la sélection de catégorie dans le cas où le cover flow n'est pas initialisé
 
-0 Regarder les évènements touch de GWT/sencha pour gérer les téléphones/pad pour le coverflow
-0 Bloquer changement catégories sous IE8 (et 9 ?) ou mettre une page qui indique d'aller vers un autre navigateur
+---------------------- v2.0.0 ------------------
+    Si conservation du coverflow actuel
+	X Regarder les évènements touch de GWT/sencha pour gérer les téléphones/pad pour le coverflow
+	X Bloquer changement catégories sous IE8 (et 9 ?) ou mettre une page qui indique d'aller vers un autre navigateur
+	X Faire thême black
+	X Gérer user agent iPad ou Android
 0 Pour le clique sur image, ouvrir une fenêtre non modale qui est à la taille de l'image et qui permet d'aller à la précédente ou suivante
-0 Mettre les détails et mettre Tout au lieu de tout
-
+0 Mettre les détails et mettre Tout au lieu de tout et le traduire dans les différentes langues
 0 link: même système que Légal
-0 Legal anglais
+0 Legal anglais (voir avec Jonathan)
+0 Faire un nouveau projet de coverflow pur GWT ou CSS (avec img google/FitImage) et l'intégrer dans ce projet
+    0 Typo du titre sous l'image (page 1)
+0 Se débarasser de la partie GXT
 0 Pour exposition: chargement d'une page html pour que Lili puisse ajouter de façon autonome des info
-0 Faire un nouveau projet de coverflow pur GWT (avec img google/FitImage ou sprite GXT) et l'intégrer dans ce projet
-0 Faire thême black
+0 Faire manuel (doc commitée avec le projet ou faite avec le wiki github)
 -------------------------------------------------------------------------
 Update run configuration to specify the good jvm to use
 -------------------------------------------------------------------------
-0 Gérer user agent iPad ou Android
-0 Faire manuel (doc commitée avec le projet ou faite avec le wiki github)
-0 Traduire categorie 'tout' ou au moins mettre une majuscule
-0 Typo du titre sous l'image (page 1)
+---------------------- Idées pour la suite ------------------
 0 Passage de la souris sur l'image en 2ème page affiche un carré avec un zoom de l'image en question
 0 Mettre sous licence BSD
 0 Enlever les infos redondantes (remove des fichiers dans le webapp ?)
