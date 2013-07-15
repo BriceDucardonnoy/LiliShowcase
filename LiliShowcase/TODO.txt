@@ -107,6 +107,7 @@ X Bug quand chargement depuis la page de détails puis directement go sur catég
 	X Bloquer changement catégories sous IE8 (et 9 ?) ou mettre une page qui indique d'aller vers un autre navigateur
 	X Faire thême black
 	X Gérer user agent iPad ou Android
+0 Page de détails : clique sur l'image de gauche ramène le tableau complet au milieu
 0 Pour le clique sur image, ouvrir une fenêtre non modale qui est à la taille de l'image et qui permet d'aller à la précédente ou suivante
 0 Mettre les détails et mettre Tout au lieu de tout et le traduire dans les différentes langues
 0 link: même système que Légal
