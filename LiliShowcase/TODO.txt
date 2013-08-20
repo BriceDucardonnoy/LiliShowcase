@@ -103,7 +103,7 @@ V Proposer les vignettes sur la droite plutôt qu'en bas : plus adapté aux écr
 V 	Bug si souris sur dernière image de la ligne des vignettes (Float css en cause) : plus d'actualité maintenant
 ---------------------- v1.2.0 ------------------
 V Page de détails : clique sur l'image de gauche ramène le tableau complet au milieu
-0 Typo du titre sous l'image (page 1)
+V Typo du titre sous l'image (page 1)
 0 Mettre Tout au lieu de tout et le traduire dans les différentes langues
 0 link: même système que Légal
 0 Revoir la gestion sur les tactiles pour le coverflow (téléphones / pad)
@@ -121,6 +121,7 @@ V Page de détails : clique sur l'image de gauche ramène le tableau complet au 
 0 Faire un nouveau projet de coverflow pur GWT ou CSS (avec img google/FitImage) et l'intégrer dans ce projet
 -------------------------------------------------------------------------
 Update run configuration to specify the good jvm to use
+Update version: update in pom AND in classpath
 -------------------------------------------------------------------------
 ---------------------- Idées pour la suite ------------------
 0 Passage de la souris sur l'image en 2ème page affiche un carré avec un zoom de l'image en question
