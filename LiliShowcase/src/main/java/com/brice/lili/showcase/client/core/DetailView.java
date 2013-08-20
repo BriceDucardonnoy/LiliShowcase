@@ -91,6 +91,9 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 	
 	@Inject
 	public DetailView(final Binder binder) {
+		/*
+		 * Custom renderer for thumblist
+		 */
 		final Renderer renderer = GWT.create(Renderer.class);
 		final Resources resources = GWT.create(Resources.class);
 	    resources.css().ensureInjected();
@@ -112,20 +115,23 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 	    	}
 	    };
 	    store = new ListStore<Picture>(props.key());
-		thumbList = new ListView<Picture, Picture>(store, new IdentityValueProvider<Picture>() {
-			@Override
-			public void setValue(Picture object, Picture value) {
-			}
-		}, appearance);
-		
-		widget = binder.createAndBindUi(this);
-		
-		thumbList.setCell(new SimpleSafeHtmlCell<Picture>(new AbstractSafeHtmlRenderer<Picture>() {
-			@Override
-			public SafeHtml render(Picture object) {
-				return renderer.renderItem(object, style);
-			}
-		}));
+	    thumbList = new ListView<Picture, Picture>(store, new IdentityValueProvider<Picture>() {
+	    	@Override
+	    	public void setValue(Picture object, Picture value) {
+	    	}
+	    }, appearance);
+	    
+	    widget = binder.createAndBindUi(this);
+	    
+	    thumbList.setCell(new SimpleSafeHtmlCell<Picture>(new AbstractSafeHtmlRenderer<Picture>() {
+	    	@Override
+	    	public SafeHtml render(Picture object) {
+	    		return renderer.renderItem(object, style);
+	    	}
+	    }));
+	    /*
+	     * 
+	     */
 		thumbList.getSelectionModel().addSelectionChangedHandler(new SelectionChangedHandler<Picture>() {
 			@Override
 			public void onSelectionChanged(SelectionChangedEvent<Picture> event) {
@@ -243,8 +249,16 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 		});
 	}
 	
+	@UiHandler("mainImage")
+	void clickMainImageHandle(ClickEvent event) {
+		if(mainImage.getUrl().isEmpty()) return;
+		centerImage.setVisible(true);
+		Utils.showWaitCursor(con.getElement());
+		centerImage.setUrl(mainImage.getUrl());
+	}
+	
 	@UiHandler("centerImage")
-	void clickHandle(ClickEvent event) {
+	void clickCenterImageHandle(ClickEvent event) {
 		if(centerImage.getUrl().isEmpty()) return;
 		Window.open(centerImage.getUrl(), translate.Details(), "titlebar=yes," + 
 			"menubar=no," + 

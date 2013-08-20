@@ -77,7 +77,7 @@
 						<!-- Main thumb -->
 						<container:child layoutData="{verticalLayoutData}">
 							<container:CenterLayoutContainer ui:field="imageContainer" borders="false">
-								<g:Image ui:field="mainImage" altText="Full Picture" />
+								<g:Image ui:field="mainImage" altText="Full Picture" addStyleNames="{style.cursorImageFlag}" />
 							</container:CenterLayoutContainer>
 						</container:child>
 						<!-- Information -->
