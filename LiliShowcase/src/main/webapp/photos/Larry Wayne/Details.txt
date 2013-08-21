@@ -3,5 +3,5 @@ Show: wayne.jpg;
 Price: 100;
 Dimension: 70 x 70;
 Color: Gray;
-Categories:All;
+Categories: tout;
 Description:;

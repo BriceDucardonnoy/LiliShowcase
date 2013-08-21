@@ -1,7 +1,7 @@
 Title: sans titre;
 Show: sans titre.jpg;
 Dimension: 80 x 80 cm;
-MŽdium: Acrylique sur toile;
+Medium: Acrylique sur toile;
 Date: 2012;
 Price: Vendu;
 

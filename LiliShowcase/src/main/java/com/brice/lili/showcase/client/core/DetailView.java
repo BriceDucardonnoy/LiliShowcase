@@ -228,6 +228,24 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 		description.forceLayout();
 	}
 
+	protected ScheduledCommand select1stImageCmd = new ScheduledCommand() {
+		@Override
+		public void execute() {
+			if(store.size() > 0) {
+				thumbList.getSelectionModel().select(0, false);
+			}
+		}
+	};
+	
+	protected ScheduledCommand selectCenterImageCmd = new ScheduledCommand() {
+		@Override
+		public void execute() {
+			centerImage.setVisible(true);
+			Utils.showWaitCursor(con.getElement());
+			centerImage.setUrl(mainImage.getUrl());
+		}
+	};
+	
 	@Override
 	public void updateThumbs(ArrayList<String> urls) {
 		store.clear();
@@ -239,22 +257,14 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 			p.getProperties().put("imageUrl", url);
 			store.add(p);
 		}
-		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-			@Override
-			public void execute() {
-				if(store.size() > 0) {
-					thumbList.getSelectionModel().select(0, false);
-				}
-			}
-		});
+		Scheduler.get().scheduleDeferred(select1stImageCmd);
 	}
 	
 	@UiHandler("mainImage")
 	void clickMainImageHandle(ClickEvent event) {
+		thumbList.getSelectionModel().deselectAll();
 		if(mainImage.getUrl().isEmpty()) return;
-		centerImage.setVisible(true);
-		Utils.showWaitCursor(con.getElement());
-		centerImage.setUrl(mainImage.getUrl());
+		Scheduler.get().scheduleDeferred(selectCenterImageCmd);
 	}
 	
 	@UiHandler("centerImage")

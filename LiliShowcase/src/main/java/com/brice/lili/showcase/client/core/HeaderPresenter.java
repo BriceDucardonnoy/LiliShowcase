@@ -8,6 +8,7 @@ import com.brice.lili.showcase.client.core.windows.ExpositionPresenter;
 import com.brice.lili.showcase.client.core.windows.LegalWindow;
 import com.brice.lili.showcase.client.events.CategoryChangedEvent;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent;
+import com.brice.lili.showcase.client.lang.Translate;
 import com.brice.lili.showcase.client.place.NameTokens;
 import com.brice.lili.showcase.client.utils.Utils;
 import com.brice.lili.showcase.shared.model.Category;
@@ -43,6 +44,7 @@ import com.sencha.gxt.widget.core.client.menu.MenuItem;
 
 public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPresenter.MyProxy> {
 
+	private final Translate translate = GWT.create(Translate.class);
 	@ContentSlot public static final Type<RevealContentHandler<?>> SLOT_mainContent = new Type<RevealContentHandler<?>>();
 	@Inject PlaceManager placeManager;
 	@Inject ExpositionPresenter expositionPresenter;
@@ -211,6 +213,9 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 					if(categories.length == 0) continue;
 					for(String category : categories) {
 						if(category.isEmpty()) continue;
+						if(category.equalsIgnoreCase("tout")) {
+							category = translate.All();			
+						}
 						boolean found = false;
 						for(Category cat : this.categories) {
 							if(cat != null && cat.getName().equalsIgnoreCase(category)) {
@@ -265,15 +270,14 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 	
 	private void addNewCategory(Category newCat) {
 		if(newCat == null) return;
-//		if(newCat.getName().equals(translate.All())) {
-		if(newCat.getName().equalsIgnoreCase("tout")) {
+		if(newCat.getName().equalsIgnoreCase(translate.All())) {
 			categories.insertElementAt(newCat, 0);
 			return;
 		}
 		for(int i = 0 ; i < categories.size() ; i++) {
 			Category cat = categories.get(i);
-//			if(!cat.getName().equalsIgnoreCase(translate.All()) && newCat.getName().compareToIgnoreCase(cat.getName()) < 0) {
-			if(!cat.getName().equalsIgnoreCase("tout") && newCat.getName().compareToIgnoreCase(cat.getName()) > 0) {
+			// Add new category with alphabetic sort if doesn't exist.
+			if(!cat.getName().equalsIgnoreCase(translate.All()) && newCat.getName().compareToIgnoreCase(cat.getName()) > 0) {
 				categories.insertElementAt(newCat, i);
 				return;
 			}

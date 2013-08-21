@@ -3,5 +3,5 @@ Show: brin.jpg;
 Price: 300;
 Dimension: 100 x 200;
 Color: Blue;
-Categories:All,Good Side;
+Categories: tout,Good Side;
 Description:;

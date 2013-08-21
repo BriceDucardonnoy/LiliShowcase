@@ -3,5 +3,5 @@ Show: cook.jpg;
 Price: 170;
 Dimension: 40 x 40;
 Color: Gray;
-Categories:All,Good Side;
+Categories: tout,Good Side;
 Description:;

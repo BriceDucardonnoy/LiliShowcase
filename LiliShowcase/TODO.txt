@@ -104,10 +104,10 @@ V 	Bug si souris sur dernière image de la ligne des vignettes (Float css en cau
 ---------------------- v1.2.0 ------------------
 V Page de détails : clique sur l'image de gauche ramène le tableau complet au milieu
 V Typo du titre sous l'image (page 1)
-0 Mettre Tout au lieu de tout et le traduire dans les différentes langues
-0 link: même système que Légal
+V Mettre Tout au lieu de tout et le traduire dans les différentes langues
 0 Revoir la gestion sur les tactiles pour le coverflow (téléphones / pad)
 	X Regarder les évènements touch de GWT/sencha
+0 link: même système que Légal
 0 Pour le clique sur image, ouvrir une fenêtre non modale qui est à la taille de l'image et qui permet d'aller à la précédente ou suivante
 0 Legal anglais (voir avec Jonathan)
 0 Bloquer changement catégories sous IE8 (et 9 ?) ou mettre une page qui indique d'aller vers un autre navigateur

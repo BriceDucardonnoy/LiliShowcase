@@ -41,6 +41,9 @@ public class Picture implements Serializable {
      */
     public String getTranslatedTitle(String locale) {
     	String title = getTitle();
+    	if(title == null) {
+    		return "";
+    	}
     	if(title.equalsIgnoreCase("sans titre")) {
     		if(locale.equals("fr")) {
     			return title;

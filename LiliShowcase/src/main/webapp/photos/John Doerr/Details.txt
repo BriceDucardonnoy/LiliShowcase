@@ -3,5 +3,5 @@ Show: doerr.jpg;
 Price: 130;
 Dimension: 100 x 40;
 Color: Black;
-Categories:All;
+Categories: tout;
 Description:;

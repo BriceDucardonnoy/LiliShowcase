@@ -1,7 +1,7 @@
 Title: Maya;
 Show: Maya.jpg;
 Dimension: 61 x 121 cm;
-MŽdium: Acrylique sur bois;
+Medium: Acrylique sur bois;
 Date: 2007;
 Price: Vendu;
 

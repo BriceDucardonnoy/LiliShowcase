@@ -45,4 +45,9 @@ public class Category implements Serializable {
 		this.misc = misc;
 	}
 	
+	@Override
+	public String toString() {
+		return "Category " + id + " named " + name + " (" + misc + ")";
+	}
+	
 }

@@ -3,6 +3,6 @@ Show: schmidt.jpg;
 Price: 150;
 Dimension: 30 x 45;
 Color: Brown;
-Categories:All,Good Side;
+Categories: tout,Good Side;
 Date: 2013-04-12;
 Description:;
