@@ -21,6 +21,7 @@ import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Window.Navigator;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Image;
 import com.google.inject.Inject;
@@ -158,7 +159,8 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		super(eventBus, view, proxy);
 		categories = new Vector<Category>();
 		pictures = new Vector<Picture>();
-		Log.info("Current local is " + LocaleInfo.getCurrentLocale().getLocaleName());
+		Log.info("Current local is " + LocaleInfo.getCurrentLocale().getLocaleName() + ". "
+				+ "Platform and user agent are " + Navigator.getPlatform() + " | " + Navigator.getUserAgent());
 	}
 
 	@Override
