@@ -242,7 +242,7 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 		public void execute() {
 			centerImage.setVisible(true);
 			Utils.showWaitCursor(con.getElement());
-			centerImage.setUrl(mainImage.getUrl());
+			thumbList.getSelectionModel().select(0, false);
 		}
 	};
 	
@@ -263,7 +263,8 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 	@UiHandler("mainImage")
 	void clickMainImageHandle(ClickEvent event) {
 		thumbList.getSelectionModel().deselectAll();
-		if(mainImage.getUrl().isEmpty()) return;
+//		if(mainImage.getUrl().isEmpty()) return;
+		if(store.size() == 0) return;
 		Scheduler.get().scheduleDeferred(selectCenterImageCmd);
 	}
 	

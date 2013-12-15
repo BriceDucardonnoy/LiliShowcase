@@ -13,7 +13,7 @@
 	<properties>
 		<!-- Convenience property to set the GWT version -->
 		<gwtVersion>2.5.1</gwtVersion>
-		<gwtp.version>1.0-RC-3</gwtp.version>
+		<gwtp.version>1.0.1</gwtp.version>
 		<!-- GWT needs at least java 1.5 -->
 		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -94,7 +94,7 @@
 			<groupId>com.gwtplatform</groupId>
 			<artifactId>gwtp-dispatch-client</artifactId>
 			<version>${gwtp.version}</version>
-			<scope>provided</scope>
+			<!-- <scope>provided</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>com.gwtplatform</groupId>

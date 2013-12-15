@@ -101,20 +101,21 @@ V Mettre une progressBar (pas auto, mais avec vrai ratio) au lieu du curseur d'a
 V Paramétrer la size de la version actuelle dans les features à partir de l'image cliquée
 V Proposer les vignettes sur la droite plutôt qu'en bas : plus adapté aux écrans actuels en 16:9 + supprimer bordure du haut + pas chargement de show en 1er
 V 	Bug si souris sur dernière image de la ligne des vignettes (Float css en cause) : plus d'actualité maintenant
+V Page de détails : clique sur l'image de gauche ramène le tableau complet au milieu : ramène petite vignette pour l'instant
 ---------------------- v1.2.0 ------------------
-V Page de détails : clique sur l'image de gauche ramène le tableau complet au milieu
 V Typo du titre sous l'image (page 1)
 V Mettre Tout au lieu de tout et le traduire dans les différentes langues
 V Revoir la gestion sur les tactiles pour le coverflow (téléphones / pad)
 	V Regarder les évènements touch de GWT/sencha: fonctionne à peu près sur iPhone / iPod
 	V Gérer user agent iPad ou Android
+V Bloquer changement catégories sous IE8 ou mettre une page qui indique d'aller vers un autre navigateur (tester en le faisant pour FF par exemple)
 0 link: même système que Légal
 0 Pour le clique sur image, ouvrir une fenêtre non modale qui est à la taille de l'image et qui permet d'aller à la précédente ou suivante
 0 Legal anglais (voir avec Jonathan)
-0 Bloquer changement catégories sous IE8 (et 9 ?) ou mettre une page qui indique d'aller vers un autre navigateur
 ---------------------- v2.0.0 ------------------
 0 Faire une vue pour les mobiles en se servant des rebind dans le gwt.xml pour tester le user agent et rediriger vers la bonne implementation
 0 Faire un nouveau projet de coverflow pur GWT ou CSS (avec img google/FitImage) et l'intégrer dans ce projet
+	0 Trouver un moyen pour que les connexions lentes puissent quand même le voir
 0 Pour exposition: chargement d'une page html pour que Lili puisse ajouter de façon autonome des info
 ---------------------- v2.1.0 ------------------
 0 Se débarasser de la partie GXT

@@ -10,6 +10,7 @@ import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
@@ -55,10 +56,9 @@ public class HeaderView extends ViewImpl implements HeaderPresenter.MyView {
 		homeButton.setTitle(translate.Home());
 		galleryButton.setText(translate.Gallery());
 		galleryButton.setTitle(translate.Gallery());
-//		if(Window.Navigator.getUserAgent().equals("IE")) {
-		// Cookie usage: Cookies.getCookie("ScriptEasyWarningSeen");
-//			// TODO BDY: galleryButton.setEnable(false); if IE8, maybe IE9, and show info advising usage of another browser
-//		}
+		if(Window.Navigator.getUserAgent().contains("MSIE 8.0") || Window.Navigator.getUserAgent().contains("MSIE 9.0")) {
+			galleryButton.setEnabled(false);// if IE8, maybe IE9, and show info advising usage of another browser
+		}
 		expoButton.setText(translate.Expositions());
 		expoButton.setTitle(translate.Expositions());
 		approachButton.setText(translate.ArtisticApproach());
