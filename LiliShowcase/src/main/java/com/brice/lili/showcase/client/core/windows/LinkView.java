@@ -31,9 +31,9 @@ public class LinkView extends PopupViewImpl implements LinkPresenter.MyView {
 
 	@Override
 	public void setLinksText(String html) {
-		if(Log.isTraceEnabled()) {
+//		if(Log.isTraceEnabled()) {
 			Log.info("SetLinksText \n" + html);
-		}
+//		}
 		pane.getElement().setInnerHTML(html);
 	}
 }
