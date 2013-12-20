@@ -6,6 +6,7 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.context.ApplicationContext;
 import com.brice.lili.showcase.client.core.windows.ExpositionPresenter;
 import com.brice.lili.showcase.client.core.windows.LegalWindow;
+import com.brice.lili.showcase.client.core.windows.LinkPresenter;
 import com.brice.lili.showcase.client.events.CategoryChangedEvent;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent;
 import com.brice.lili.showcase.client.lang.Translate;
@@ -31,7 +32,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest.Builder;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
@@ -49,6 +50,7 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 	@ContentSlot public static final Type<RevealContentHandler<?>> SLOT_mainContent = new Type<RevealContentHandler<?>>();
 	@Inject PlaceManager placeManager;
 	@Inject ExpositionPresenter expositionPresenter;
+	@Inject LinkPresenter linkPresenter;
 	private Vector<Picture> pictures;
 	private Vector<Category> categories;
 	private String[] picts;
@@ -74,8 +76,9 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		@Override
 		public void onSelection(SelectionEvent<Item> event) {
 			if(!placeManager.getCurrentPlaceRequest().getNameToken().equals(NameTokens.mainpage)) {
-				PlaceRequest request = new PlaceRequest(NameTokens.mainpage);
-				placeManager.revealPlace(request);
+//				PlaceRequest request = new PlaceRequest(NameTokens.mainpage);
+//				placeManager.revealPlace(request);
+				placeManager.revealPlace(new Builder().nameToken(NameTokens.mainpage).build());
 			}
 			MenuItem item = (MenuItem) event.getSelectedItem();
 			Integer categoryId = Integer.parseInt(item.getItemId(), 10);
@@ -89,8 +92,7 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		@Override
 		public void onClick(ClickEvent arg0) {
 			if(placeManager.getCurrentPlaceRequest().getNameToken().equals(NameTokens.mainpage)) return;
-			PlaceRequest request = new PlaceRequest(NameTokens.mainpage);
-        	placeManager.revealPlace(request);
+			placeManager.revealPlace(new Builder().nameToken(NameTokens.mainpage).build());
 		}
 	};
 	
@@ -98,9 +100,7 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		@Override
 		public void onSelect(SelectEvent event) {
 			if(placeManager.getCurrentPlaceRequest().getNameToken().equals(NameTokens.mainpage)) return;
-			PlaceRequest request = new PlaceRequest(NameTokens.mainpage);
-        	placeManager.revealPlace(request);
-//        	placeManager.revealDefaultPlace();
+			placeManager.revealPlace(new Builder().nameToken(NameTokens.mainpage).build());
 		}
 	};
 	
@@ -108,8 +108,7 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		@Override
 		public void onSelect(SelectEvent event) {
 			if(placeManager.getCurrentPlaceRequest().getNameToken().equals(NameTokens.artisticapproach)) return;
-			PlaceRequest request = new PlaceRequest(NameTokens.artisticapproach);
-        	placeManager.revealPlace(request);
+        	placeManager.revealPlace(new Builder().nameToken(NameTokens.artisticapproach).build());
 		}
 	};
 	
@@ -133,6 +132,13 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		public void onSelect(SelectEvent event) {
 			LegalWindow legal = new LegalWindow();
 			legal.show();
+		}
+	};
+	
+	private SelectHandler linkHandler = new SelectHandler() {
+		@Override
+		public void onSelect(SelectEvent event) {
+			addToPopupSlot(linkPresenter);
 		}
 	};
 	
@@ -179,6 +185,7 @@ public class HeaderPresenter extends Presenter<HeaderPresenter.MyView, HeaderPre
 		registerHandler(getView().getHomeButton().addSelectHandler(homeHandler));
 		registerHandler(getView().getApproachButton().addSelectHandler(approachHandler));
 		registerHandler(getView().getExpoButton().addSelectHandler(expositionHandler));
+		registerHandler(getView().getLinkButton().addSelectHandler(linkHandler));
 		registerHandler(getView().getLegalButton().addSelectHandler(legalHandler));
 		registerHandler(getView().getContactButton().addSelectHandler(contactHandler));
 		registerHandler(getView().getFrBtn().addClickHandler(frHandler));

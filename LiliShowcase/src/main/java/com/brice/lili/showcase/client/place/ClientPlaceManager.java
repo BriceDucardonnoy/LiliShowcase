@@ -5,6 +5,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManagerImpl;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.TokenFormatter;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest.Builder;
 
 public class ClientPlaceManager extends PlaceManagerImpl {
 
@@ -17,8 +18,8 @@ public class ClientPlaceManager extends PlaceManagerImpl {
 			@DefaultPlace final String defaultPlaceNameToken, 
 			@ErrorPlace final String errorPlaceNameToken) {
 		super(eventBus, tokenFormatter);
-		this.defaultPlaceRequest = new PlaceRequest(defaultPlaceNameToken);
-		this.errorPlaceRequest = new PlaceRequest(errorPlaceNameToken);
+		this.defaultPlaceRequest = new Builder().nameToken(defaultPlaceNameToken).build();
+		this.errorPlaceRequest = new Builder().nameToken(errorPlaceNameToken).build();
 	}
 
 	@Override
@@ -33,8 +34,7 @@ public class ClientPlaceManager extends PlaceManagerImpl {
 	
 	@Override
 	public void revealUnauthorizedPlace(String unauthorizedHistoryToken) {
-		PlaceRequest request = new PlaceRequest(NameTokens.emptyselection);
-		revealPlace(request, false);
+		revealPlace(new Builder().nameToken(NameTokens.emptyselection).build());
 	}
 	
 }

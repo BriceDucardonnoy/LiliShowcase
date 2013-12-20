@@ -21,6 +21,8 @@ import com.brice.lili.showcase.client.place.ErrorPlace;
 import com.brice.lili.showcase.client.place.NameTokens;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
+import com.brice.lili.showcase.client.core.windows.LinkPresenter;
+import com.brice.lili.showcase.client.core.windows.LinkView;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -55,6 +57,9 @@ public class ClientModule extends AbstractPresenterModule {
 
 		bindPresenterWidget(ExpositionPresenter.class,
 				ExpositionPresenter.MyView.class, ExpositionView.class);
+
+		bindPresenterWidget(LinkPresenter.class, LinkPresenter.MyView.class,
+				LinkView.class);
 	}
 	
 }

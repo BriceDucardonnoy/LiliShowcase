@@ -28,7 +28,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest.Builder;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.sencha.gxt.widget.core.client.ContentPanel;
@@ -67,9 +67,11 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MyView, MainP
         	if(Log.isInfoEnabled()) {
         		Info.display(translate.Selection(), translate.YouClickOn() + " " + getView().getCurrentPicture().getTitle());
         	}
-        	PlaceRequest request = new PlaceRequest(NameTokens.detail).with(ApplicationContext.DETAIL_KEYWORD, 
-        			(String) getView().getCurrentPicture().getProperty(ApplicationContext.FILEINFO));
-        	placeManager.revealPlace(request);
+//        	PlaceRequest request = new PlaceRequest(NameTokens.detail).with(ApplicationContext.DETAIL_KEYWORD, 
+//        			(String) getView().getCurrentPicture().getProperty(ApplicationContext.FILEINFO));
+//        	placeManager.revealPlace(request);
+        	placeManager.revealPlace(new Builder().nameToken(NameTokens.detail).with(ApplicationContext.DETAIL_KEYWORD, 
+        			(String) getView().getCurrentPicture().getProperty(ApplicationContext.FILEINFO)).build());
         }
     };
     
