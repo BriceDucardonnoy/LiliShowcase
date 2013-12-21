@@ -7,28 +7,19 @@
 	ui:generateLocales='default'>
 
 	<ui:style>
-		.globalStyle {
-			background: #000000 repeat scroll 0 0;
-			background-color: black;
-			color: white;
-		}
-		.globalStyle2 {
-			background: #000000 repeat scroll 0 0;
-			background-color: black;
-			width: 100%;
-			height: 100%;
-		}
-		.autoflow {
-			overflow-y: auto;
-		}
 		.zindex {
 			z-index: 42;
+		}
+		.popup {
+			background: #222222 repeat scroll 0 0;
+			color: white;
+			border: 2px solid white;
+			/* round corners */
+			border-radius: 15px;
 		}
 	</ui:style>
 
 	<g:PopupPanel modal="true" autoHideEnabled="true" glassEnabled="true" addStyleNames="{style.zindex}">
-		<g:HTMLPanel addStyleNames="{style.globalStyle}" ui:field="pane" />
-		<!-- Patate -->
-		<!-- <g:Image url="Documents/Exposition.jpg" ui:field="expositionImage" altText="Exposition" /> -->
+		<g:HTMLPanel addStyleNames="{style.popup}" ui:field="pane" />
 	</g:PopupPanel>
 </ui:UiBinder>
