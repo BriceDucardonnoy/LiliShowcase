@@ -109,8 +109,8 @@ V Revoir la gestion sur les tactiles pour le coverflow (téléphones / pad)
 	V Regarder les évènements touch de GWT/sencha: fonctionne à peu près sur iPhone / iPod
 	V Gérer user agent iPad ou Android
 V Bloquer changement catégories sous IE8 ou mettre une page qui indique d'aller vers un autre navigateur (tester en le faisant pour FF par exemple)
-0 link: même système que Légal
-0 Pour le clique sur image, ouvrir une fenêtre non modale qui est à la taille de l'image et qui permet d'aller à la précédente ou suivante
+V link: même système que Légal
+0 Pour le clique sur image, ouvrir une fenêtre non modale qui est à la taille de l'image et qui permet d'aller à la précédente ou suivante ou un popup
 0 Legal anglais (voir avec Jonathan)
 ---------------------- v2.0.0 ------------------
 0 Faire une vue pour les mobiles en se servant des rebind dans le gwt.xml pour tester le user agent et rediriger vers la bonne implementation
