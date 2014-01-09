@@ -23,6 +23,8 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
 import com.brice.lili.showcase.client.core.windows.LinkPresenter;
 import com.brice.lili.showcase.client.core.windows.LinkView;
+import com.brice.lili.showcase.client.core.windows.PictureViewerPresenter;
+import com.brice.lili.showcase.client.core.windows.PictureViewerView;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -60,6 +62,9 @@ public class ClientModule extends AbstractPresenterModule {
 
 		bindPresenterWidget(LinkPresenter.class, LinkPresenter.MyView.class,
 				LinkView.class);
+
+		bindPresenterWidget(PictureViewerPresenter.class,
+				PictureViewerPresenter.MyView.class, PictureViewerView.class);
 	}
 	
 }

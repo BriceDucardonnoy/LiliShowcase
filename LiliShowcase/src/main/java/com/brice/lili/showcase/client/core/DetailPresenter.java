@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.context.ApplicationContext;
+import com.brice.lili.showcase.client.core.windows.PictureViewerPresenter;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent;
 import com.brice.lili.showcase.client.events.PicturesLoadedEvent.PicturesLoadedHandler;
 import com.brice.lili.showcase.client.gateKeepers.DetailGateKeeper;
@@ -14,6 +15,8 @@ import com.brice.lili.showcase.shared.model.Picture;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.RepeatingCommand;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.ui.Image;
 import com.google.inject.Inject;
@@ -27,6 +30,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
+import com.reveregroup.gwt.imagepreloader.client.FitImage;
 import com.sencha.gxt.widget.core.client.box.AutoProgressMessageBox;
 
 public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPresenter.MyProxy> {
@@ -35,6 +39,7 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 	private final int MAXWAITTIME = 20;
 	
 	@Inject PlaceManager placeManager;
+	@Inject PictureViewerPresenter pictureViewer;
 	private String pictureFolder = "";
 	private Vector<Picture> pictures = null;
 	private Picture currentPicture = null;
@@ -45,6 +50,7 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 	
 	public interface MyView extends View {
 		public Image getMainImage();
+		public FitImage getCenterImage();
 		public void updateMainImage(String url);
 		public void updateDetailInfo(String html);
 		public void updateThumbs(ArrayList<String> thumbsArray);
@@ -58,6 +64,14 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 				Log.trace("Pictures loaded: " + pictures.size());
 			}
 			arePicturesLoaded = true;
+		}
+	};
+	
+	private ClickHandler centerImageHandler = new ClickHandler() {
+		@Override
+		public void onClick(ClickEvent event) {
+			addToPopupSlot(pictureViewer);
+			pictureViewer.setImage(getView().getCenterImage().getUrl());
 		}
 	};
 	
@@ -120,6 +134,7 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 	protected void onBind() {
 		super.onBind();
 		registerHandler(getEventBus().addHandler(PicturesLoadedEvent.getType(), pictureLoadedHandler));
+		registerHandler(getView().getCenterImage().addClickHandler(centerImageHandler));
 	}
 	
 	@Override

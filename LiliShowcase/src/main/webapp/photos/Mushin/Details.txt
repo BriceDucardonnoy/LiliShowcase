@@ -6,5 +6,5 @@ Date: 2012;
 Price: Vendu;
 
 Categories: 2012, tout;
-Details: balon-01.jpg;
+Details: balon-01.jpg, le baiser bleu.jpg, Le bateau et les anges.jpg, Le secret.jpg;
 

@@ -84,4 +84,12 @@ public class Utils {
 		box.hide();
 	}
 	
+	public static final native int getScreenWidth() /*-{
+		return screen.width;
+	}-*/;
+
+	public static final native int getScreenHeight() /*-{
+		return screen.height;
+	}-*/;
+	
 }

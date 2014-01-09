@@ -1,0 +1,65 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	xmlns:imagepreloader="urn:import:com.reveregroup.gwt.imagepreloader.client"
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
+	ui:generateLocales='default'>
+
+	<ui:style>
+		.zindex {
+			z-index: 42;
+		}
+		.popup {
+			background: #222222 repeat scroll 0 0;
+			color: white;
+			border: 2px solid white;
+			padding-bottom: 40px;
+			/* round corners */
+			/*border-radius: 15px;*/
+		}
+		.header {
+			background: #555555 repeat scroll 0 0;
+			color: white;
+		}
+		.label {
+			color: red;
+			text-align: center;
+		}
+		.panel {
+			border: 1px solid red;
+			margin-top: -5px;
+		}
+		.button {
+		}
+	</ui:style>
+	
+	<g:PopupPanel modal="true" autoHideEnabled="true" glassEnabled="true" addStyleNames="{style.zindex}">
+		<g:HTMLPanel ui:field="pane">
+			<!-- <div style="color: white; background: #555555">Header</div> -->
+			<imagepreloader:FitImage ui:field="image" />
+			<g:LayoutPanel height="40px" addStyleNames="{style.panel}">
+				<g:layer width="33%" right="66%">
+					<!-- <g:Label addStyleNames="{style.label} {style.panel}">Left</g:Label> -->
+					<g:Button HTML="Title"></g:Button>
+				</g:layer>
+				<g:layer left="33%" right="33%">
+					<g:Label addStyleNames="{style.label} {style.panel}">Center</g:Label>
+				</g:layer>
+				<g:layer left="66%" width="33%">
+					<g:Label addStyleNames="{style.label} {style.panel}">Right</g:Label>
+				</g:layer>
+			</g:LayoutPanel>
+			<!-- Footer on image bottom -->
+			<!-- <div style="color: white; background: #555555; position: relative; margin-top: -5px; height: 40px; clear: both; opacity: 0.5;"> -->
+			<!-- </div> -->
+			<!-- Footer below image -->
+			<!-- <div style="color: white; background: #555555; position: relative; margin-top: -5px; height: 40px; clear: both;"> -->
+			<!-- Put left, right and close control over a transparent HTMLPanel which appears on mouse on -->
+			<!-- Footer -->
+			<!-- <div style="color: white; background: #555555; float: left;">Left Div</div>
+			<div style="color: white; background: #555555; float: right;">Right Div</div> -->
+		</g:HTMLPanel>
+	</g:PopupPanel>
+</ui:UiBinder>

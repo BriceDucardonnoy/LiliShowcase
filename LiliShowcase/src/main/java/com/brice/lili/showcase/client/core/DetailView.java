@@ -23,7 +23,6 @@ import com.google.gwt.text.shared.AbstractSafeHtmlRenderer;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
@@ -180,6 +179,12 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 		return widget;
 	}
 	
+
+	@Override
+	public FitImage getCenterImage() {
+		return centerImage;
+	}
+	
 	@Override
 	public Image getMainImage() {
 		return mainImage;
@@ -268,21 +273,21 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 		Scheduler.get().scheduleDeferred(selectCenterImageCmd);
 	}
 	
-	@UiHandler("centerImage")
-	void clickCenterImageHandle(ClickEvent event) {
-		if(centerImage.getUrl().isEmpty()) return;
-		Window.open(centerImage.getUrl(), translate.Details(), "titlebar=yes," + 
-			"menubar=no," + 
-			"navigation=false," +
-			"location=false," + 
-			"bookmarks=no," +
-			"tabs=no," +
-			"resizable=yes," + 
-			"scrollbars=yes," + 
-			"status=no," + 
-			"width=" + centerImage.getOriginalWidth() + "," +
-			"height=" + centerImage.getOriginalHeight() + "," +
-			"dependent=true");
-	}
+//	@UiHandler("centerImage")
+//	void clickCenterImageHandle(ClickEvent event) {
+//		if(centerImage.getUrl().isEmpty()) return;
+//		Window.open(centerImage.getUrl(), translate.Details(), "titlebar=yes," + 
+//			"menubar=no," + 
+//			"navigation=false," +
+//			"location=false," + 
+//			"bookmarks=no," +
+//			"tabs=no," +
+//			"resizable=yes," + 
+//			"scrollbars=yes," + 
+//			"status=no," + 
+//			"width=" + centerImage.getOriginalWidth() + "," +
+//			"height=" + centerImage.getOriginalHeight() + "," +
+//			"dependent=true");
+//	}
 
 }
