@@ -51,9 +51,6 @@
 	    .cursorImageFlag {
 			cursor: pointer;
 		}
-		.globalStyle {
-			background: #000000 repeat scroll 0 0;
-		}
 		.mailInfo {
 			color: white;
 			/*margin-right: 5px;*/
@@ -64,12 +61,12 @@
 	</ui:style>
 
 	<container:Viewport>
-		<container:SimpleContainer borders="false" addStyleNames="{style.globalStyle}">
+		<container:SimpleContainer borders="false" styleName="globalStyle">
 			<container:child layoutData="{outerData}">
-				<container:BorderLayoutContainer borders="false"  addStyleNames="{style.globalStyle}">
+				<container:BorderLayoutContainer borders="false"  styleName="globalStyle">
 					<!-- NORTH -->
 					<container:north layoutData="{northData}">
-						<container:HorizontalLayoutContainer addStyleNames="{style.globalStyle}" borders="false">
+						<container:HorizontalLayoutContainer styleName="globalStyle" borders="false">
 							<!-- Logo -->
 							<container:child layoutData="{horizontalLayoutData}">
 								<g:Image resource='{res.header200}' ui:field="logo" addStyleNames="{style.cursorImageFlag}" />
@@ -127,7 +124,7 @@
 					</container:north>
 					<!-- Center -->
 					<container:center layoutData="{centerData}">
-						<gxt:ContentPanel headerVisible="false" borders="false" bodyBorder="false" ui:field="mainCenterPane"  addStyleNames="{style.globalStyle}" />
+						<gxt:ContentPanel headerVisible="false" borders="false" bodyBorder="false" ui:field="mainCenterPane"  styleName="globalStyle" />
 					</container:center>
 					<!-- SOUTH -->
 					<!-- <container:south layoutData="{southData}">

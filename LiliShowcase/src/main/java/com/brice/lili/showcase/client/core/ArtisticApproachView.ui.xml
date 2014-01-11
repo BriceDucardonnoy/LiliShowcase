@@ -9,15 +9,6 @@
 	ui:generateLocales='default'>
 	
 	<ui:style>
-		.globalStyle {
-			background: #000000 repeat scroll 0 0;
-		}
-		.globalStyle2 {
-			background: #000000 repeat scroll 0 0;
-			/*background-color: black;*/
-			width: 100%;
-			height: 100%;
-		}
 		.autoflow {
 			overflow-y: auto;
 		}
@@ -35,7 +26,7 @@
 	
 	<container:SimpleContainer addStyleNames="{style.autoflow}" ui:field="mainPane">
 		<container:child>
-			<g:HTMLPanel addStyleNames="{style.globalStyle}" ui:field="pane" />
+			<g:HTMLPanel styleName="globalStyle" ui:field="pane" />
 		</container:child>
 	</container:SimpleContainer>
 	

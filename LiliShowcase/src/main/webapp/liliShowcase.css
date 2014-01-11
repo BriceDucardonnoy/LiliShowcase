@@ -35,15 +35,28 @@ h1 {
 
 .globalStyle {
 	background: #000000 repeat scroll 0 0;
-	background-color: black;
 }
 .globalStyle2 {
 	background: #000000 repeat scroll 0 0;
-	background-color: black;
 	width: 100%;
 	height: 100%;
 }
 
 .overflowAuto {
 	overflow: auto;
+}
+
+.buttonViewer {
+	/*width: 100%;*/
+	background: none repeat scroll 0 0 #000000;
+	color: #FFFFFF;
+	width: 50px;
+	border: 0 none;
+	/*border-radius: 15%;*/
+	cursor: pointer;
+	margin-top: 0px;
+}
+
+.buttonViewer:HOVER {
+	background: none repeat scroll 0 0 #222222;
 }

@@ -10,20 +10,6 @@
 	ui:generateLocales='default'>
 
 	<ui:style>
-		.globalStyle {
-			background: #000000 repeat scroll 0 0;
-		}
-		.globalStyle2 {
-			background: #000000 repeat scroll 0 0;
-			color: #DDDDDD;
-			font-family: helvetica;
-			font-size: 20;
-			text-align: center;
-			padding-top: 80px;
-			height: 100%;
-			width: 100%;
-			vertical-align: middle;
-		}
 		.cursorImageFlag {
 			cursor: pointer;
 		}
@@ -66,14 +52,15 @@
  	<!-- <ui:with type="com.sencha.gxt.data.shared.ListStore" field="store"></ui:with>
  	<ui:with type="com.sencha.gxt.core.client.ValueProvider" field="pictureProvider"></ui:with> -->
 	
-	<container:SimpleContainer addStyleNames="{style.globalStyle}">
+	<container:SimpleContainer styleName="globalStyle">
 		<container:child layoutData="{outerData}">
-			<container:BorderLayoutContainer ui:field="con" borders="false" addStyleNames="{style.globalStyle}">
+			<container:BorderLayoutContainer ui:field="con" borders="false" styleName="globalStyle">
 				<!-- NORTH -->
 				<!-- <container:north layoutData="{northData}" /> -->
 				<!-- WEST -->
 				<container:west layoutData="{westData}">
-					<container:VerticalLayoutContainer visible="true" borders="false" addStyleNames="{style.globalStyle} {style.rightBorder}">
+					<!-- <container:VerticalLayoutContainer visible="true" borders="false" addStyleNames="{style.globalStyle} {style.rightBorder}"> -->
+					<container:VerticalLayoutContainer visible="true" borders="false" styleName="globalStyle" addStyleNames="{style.rightBorder}">
 						<!-- Main thumb -->
 						<container:child layoutData="{verticalLayoutData}">
 							<container:CenterLayoutContainer ui:field="imageContainer" borders="false">
@@ -88,11 +75,11 @@
 				</container:west>
 				<!-- CENTER -->
 				<container:center layoutData="{centerData}">
-					<container:BorderLayoutContainer ui:field="center" borders="false" addStyleNames="{style.globalStyle}">
+					<container:BorderLayoutContainer ui:field="center" borders="false" styleName="globalStyle">
 						<!-- Main picture -->
 						<container:center layoutData="{centerData}">
-							<container:CenterLayoutContainer ui:field="centerSC" borders="false" addStyleNames="{style.globalStyle}">
-								<imagepreloader:FitImage ui:field="centerImage" addStyleNames="{style.globalStyle} {style.cursorImageFlag}" />
+							<container:CenterLayoutContainer ui:field="centerSC" borders="false" styleName="globalStyle">
+								<imagepreloader:FitImage ui:field="centerImage" styleName="globalStyle" addStyleNames="{style.cursorImageFlag}" />
 							</container:CenterLayoutContainer>
 						</container:center>
 						<!-- Thumb -->
@@ -106,7 +93,7 @@
 				</container:center>
 				<!-- EAST -->
 				<container:east layoutData="{thumbData}" >
-					<gxt:ListView ui:field="thumbList" borders="false" addStyleNames="{style.globalStyle} {style.leftBorder}" />
+					<gxt:ListView ui:field="thumbList" borders="false" styleName="globalStyle" addStyleNames="{style.leftBorder}" />
 				</container:east>
 				<!-- SOUTH -->
 				<!-- <container:south layoutData="{southData}" /> -->
