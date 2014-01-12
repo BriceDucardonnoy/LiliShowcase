@@ -1,8 +1,12 @@
 package com.brice.lili.showcase.client.core.windows;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.PopupView;
@@ -14,15 +18,31 @@ public class PictureViewerPresenter extends PresenterWidget<PictureViewerPresent
 	public interface MyView extends PopupView {
 		public HTMLPanel getHtmlPanel();
 		public FitImage getImage();
+		public FocusPanel getFocusPanel();
+		public Label getCountLabel();
 	}
 	
 	private int maxWidth;
 	private int maxHeight;
+	private int currentPicture;
+	private int nbPictures;
 	
 	@Inject
 	public PictureViewerPresenter(final EventBus eventBus, final MyView view) {
 		super(eventBus, view);
+		currentPicture = -1;
+		nbPictures = -1;
 	}
+	
+	private KeyPressHandler keyHandler = new KeyPressHandler() {
+		@Override
+		public void onKeyPress(KeyPressEvent event) {
+			Log.info("Key press event: " + event.getNativeEvent().getKeyCode());
+			if(event.isMetaKeyDown()) {
+				Log.info("Escape pressed");
+			}
+		}
+	};
 
 	@Override
 	protected void onBind() {
@@ -31,16 +51,35 @@ public class PictureViewerPresenter extends PresenterWidget<PictureViewerPresent
 //		maxHeight = Utils.getScreenHeight() - 30;
 		maxWidth = Window.getClientWidth() - 30;
 		maxHeight = Window.getClientHeight() /*- 20*/ - 40;
-		// TODO BDY: add key controls
+		registerHandler(getView().getFocusPanel().addKeyPressHandler(keyHandler));
 	}
 	
 	@Override
 	protected void onReveal() {
 		Log.info("Reveal Picture Viewer");
+		getView().getFocusPanel().setFocus(true);
 	}
 	
 	public void setImage(String url) {
 		getView().getImage().setUrl(url);
 		getView().getImage().setMaxSize(maxWidth, maxHeight);
+	}
+
+	public int getCurrentPicture() {
+		return currentPicture;
+	}
+
+	public void setCurrentPicture(int currentPicture) {
+		this.currentPicture = currentPicture;
+		getView().getCountLabel().setText(currentPicture + " / " + nbPictures);
+	}
+
+	public int getNbPictures() {
+		return nbPictures;
+	}
+
+	public void setNbPictures(int nbPictures) {
+		this.nbPictures = nbPictures;
+		getView().getCountLabel().setText(currentPicture + " / " + nbPictures);
 	}
 }

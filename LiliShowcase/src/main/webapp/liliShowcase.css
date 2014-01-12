@@ -60,3 +60,10 @@ h1 {
 .buttonViewer:HOVER {
 	background: none repeat scroll 0 0 #222222;
 }
+
+.labelViewer {
+	text-align: center;
+	color: white;
+	bottom: 25% !important;
+	top: 25% !important;
+}

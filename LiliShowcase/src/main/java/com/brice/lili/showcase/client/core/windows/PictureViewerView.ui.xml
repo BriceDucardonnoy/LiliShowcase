@@ -12,7 +12,7 @@
 			z-index: 42;
 		}
 		.panel {
-			border: 1px solid red;
+			/*border: 1px solid red;*/
 			margin-top: -5px;
 		}
 		.prevBtn {
@@ -22,19 +22,21 @@
 	</ui:style>
 	
 	<g:PopupPanel modal="true" autoHideEnabled="true" glassEnabled="true" addStyleNames="{style.zindex}">
-		<g:HTMLPanel ui:field="pane">
-			<imagepreloader:FitImage ui:field="image" />
-			<g:LayoutPanel height="40px" addStyleNames="{style.panel}">
-				<g:layer left="0px" width="33%">
-					<g:Button ui:field="prev" styleName="buttonViewer" addStyleNames="{style.prevBtn}"></g:Button>
-				</g:layer>
-				<g:layer left="33%" right="33%">
-					<g:Label ui:field="countLabel" styleName="globalStyle">Center</g:Label>
-				</g:layer>
-				<g:layer right="0px" width="33%">
-					<g:Button ui:field="next" styleName="buttonViewer"></g:Button>
-				</g:layer>
-			</g:LayoutPanel>
-		</g:HTMLPanel>
+		<g:FocusPanel ui:field="focusPane">
+			<g:HTMLPanel ui:field="pane">
+				<imagepreloader:FitImage ui:field="image" />
+				<g:LayoutPanel height="40px" styleName="globalStyle" addStyleNames="{style.panel}">
+					<g:layer left="0px" width="33%">
+						<g:Button ui:field="prev" styleName="buttonViewer" addStyleNames="{style.prevBtn}"></g:Button>
+					</g:layer>
+					<g:layer left="33%" right="33%">
+						<g:Label ui:field="countLabel" styleName="globalStyle labelViewer">?? / ??</g:Label>
+					</g:layer>
+					<g:layer right="0px" width="33%">
+						<g:Button ui:field="next" styleName="buttonViewer"></g:Button>
+					</g:layer>
+				</g:LayoutPanel>
+			</g:HTMLPanel>
+		</g:FocusPanel>
 	</g:PopupPanel>
 </ui:UiBinder>

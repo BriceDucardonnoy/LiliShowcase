@@ -72,6 +72,14 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 		public void onClick(ClickEvent event) {
 			addToPopupSlot(pictureViewer);
 			pictureViewer.setImage(getView().getCenterImage().getUrl());
+			// TODO BDY: give more information
+			pictureViewer.setNbPictures(pictures.size());
+			for(int i = 0 ; i < pictures.size() ; i++) {
+				if(pictures.get(i).getImageUrl().equals(getView().getCenterImage().getUrl())) {
+					pictureViewer.setCurrentPicture(i);
+					break;
+				}
+			}
 		}
 	};
 	
