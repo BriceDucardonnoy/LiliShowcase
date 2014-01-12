@@ -1,8 +1,8 @@
 package com.brice.lili.showcase.client.core.windows;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.google.gwt.event.dom.client.KeyPressEvent;
-import com.google.gwt.event.dom.client.KeyPressHandler;
+import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
@@ -34,9 +34,9 @@ public class PictureViewerPresenter extends PresenterWidget<PictureViewerPresent
 		nbPictures = -1;
 	}
 	
-	private KeyPressHandler keyHandler = new KeyPressHandler() {
+	private KeyDownHandler keyHandler = new KeyDownHandler() {
 		@Override
-		public void onKeyPress(KeyPressEvent event) {
+		public void onKeyDown(KeyDownEvent event) {
 			Log.info("Key press event: " + event.getNativeEvent().getKeyCode());
 			if(event.isMetaKeyDown()) {
 				Log.info("Escape pressed");
@@ -51,7 +51,8 @@ public class PictureViewerPresenter extends PresenterWidget<PictureViewerPresent
 //		maxHeight = Utils.getScreenHeight() - 30;
 		maxWidth = Window.getClientWidth() - 30;
 		maxHeight = Window.getClientHeight() /*- 20*/ - 40;
-		registerHandler(getView().getFocusPanel().addKeyPressHandler(keyHandler));
+		// TODO BDY: try with key down
+		registerHandler(getView().getFocusPanel().addKeyDownHandler(keyHandler));
 	}
 	
 	@Override
