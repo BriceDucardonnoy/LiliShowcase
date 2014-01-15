@@ -110,7 +110,7 @@ V Revoir la gestion sur les tactiles pour le coverflow (téléphones / pad)
 	V Gérer user agent iPad ou Android
 V Bloquer changement catégories sous IE8 ou mettre une page qui indique d'aller vers un autre navigateur (tester en le faisant pour FF par exemple)
 V link: même système que Légal
-0 Pour le clique sur image, ouvrir une fenêtre non modale qui est à la taille de l'image et qui permet d'aller à la précédente ou suivante ou un popup
+V Pour le clique sur image, ouvrir une fenêtre non modale qui est à la taille de l'image et qui permet d'aller à la précédente ou suivante ou un popup
 	comme ovh
 0 Legal anglais (voir avec Jonathan)
 ---------------------- v2.0.0 ------------------
