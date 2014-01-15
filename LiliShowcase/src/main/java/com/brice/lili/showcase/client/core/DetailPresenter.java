@@ -1,6 +1,7 @@
 package com.brice.lili.showcase.client.core;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -54,7 +55,7 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 		public void updateMainImage(String url);
 		public void updateDetailInfo(String html);
 		public void updateThumbs(ArrayList<String> thumbsArray);
-		public int getTotalDetailNumber();
+		public List<Picture> getPicturesList();
 	}
 	
 	private PicturesLoadedHandler pictureLoadedHandler = new PicturesLoadedHandler() {
@@ -72,15 +73,9 @@ public class DetailPresenter extends Presenter<DetailPresenter.MyView, DetailPre
 		@Override
 		public void onClick(ClickEvent event) {
 			addToPopupSlot(pictureViewer);
+			pictureViewer.setPictures(getView().getPicturesList());
 			pictureViewer.setImage(getView().getCenterImage().getUrl());
-			// TODO BDY: give more information
-			pictureViewer.setNbPictures(getView().getTotalDetailNumber());// FIXME BDY: pictures contains all the different pictures, not details, see thumblist in view
-			for(int i = 0 ; i < pictures.size() ; i++) {
-				if(pictures.get(i).getImageUrl().equals(getView().getCenterImage().getUrl())) {
-					pictureViewer.setCurrentPicture(i);
-					break;
-				}
-			}
+			pictureViewer.update();
 		}
 	};
 	

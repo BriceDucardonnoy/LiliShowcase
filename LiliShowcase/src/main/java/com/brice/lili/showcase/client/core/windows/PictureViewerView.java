@@ -59,5 +59,18 @@ public class PictureViewerView extends PopupViewImpl implements PictureViewerPre
 	public Label getCountLabel() {
 		return countLabel;
 	}
+	
+	@Override
+	public Button getPrevButton() {
+		return prev;
+	}
+	
+	@Override
+	public Button getNextButton() {
+		return next;
+	}
+	
+//	@UiHandler("prev")
+//	void handlePrev(ClickEvent e) { }
 
 }

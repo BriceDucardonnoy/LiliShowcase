@@ -61,6 +61,14 @@ h1 {
 	background: none repeat scroll 0 0 #222222;
 }
 
+.buttonViewer[disabled] {
+	color: #666666;
+}
+
+.buttonViewer[disabled]:HOVER {
+	background: none repeat scroll 0 0 #111111;
+}
+
 .labelViewer {
 	text-align: center;
 	color: white;

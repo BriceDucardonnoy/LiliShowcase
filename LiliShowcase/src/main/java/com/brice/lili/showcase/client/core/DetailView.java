@@ -272,10 +272,10 @@ public class DetailView extends ViewImpl implements DetailPresenter.MyView {
 		if(store.size() == 0) return;
 		Scheduler.get().scheduleDeferred(selectCenterImageCmd);
 	}
-
+	
 	@Override
-	public int getTotalDetailNumber() {
-		return thumbList.getStore().size();
+	public List<Picture> getPicturesList() {
+		return thumbList.getStore().getAll();
 	}
 	
 //	@UiHandler("centerImage")
