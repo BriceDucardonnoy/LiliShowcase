@@ -114,6 +114,7 @@ V Pour le clique sur image, ouvrir une fenêtre non modale qui est à la taille 
 	comme ovh
 0 Legal anglais (voir avec Jonathan)
 ---------------------- v2.0.0 ------------------
+0 Corriger problème de scrollbar pas affichée dans le détail
 0 Faire une vue pour les mobiles en se servant des rebind dans le gwt.xml pour tester le user agent et rediriger vers la bonne implementation
 0 Faire un nouveau projet de coverflow pur GWT ou CSS (avec img google/FitImage) et l'intégrer dans ce projet
 	0 Trouver un moyen pour que les connexions lentes puissent quand même le voir
