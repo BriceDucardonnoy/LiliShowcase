@@ -21,6 +21,9 @@
 			border: 0px solid #d0d0d0 !important;
 			border-width: 0 1px 0 0 !important;
 		}
+		.overflowAuto {
+			overflow: auto;
+		}
 	</ui:style>
 
 	<!-- MARGINS -->
@@ -93,7 +96,7 @@
 				</container:center>
 				<!-- EAST -->
 				<container:east layoutData="{thumbData}" >
-					<gxt:ListView ui:field="thumbList" borders="false" styleName="globalStyle" addStyleNames="{style.leftBorder}" />
+					<gxt:ListView ui:field="thumbList" borders="false" styleName="globalStyle" addStyleNames="{style.leftBorder} {style.overflowAuto}" />
 				</container:east>
 				<!-- SOUTH -->
 				<!-- <container:south layoutData="{southData}" /> -->
