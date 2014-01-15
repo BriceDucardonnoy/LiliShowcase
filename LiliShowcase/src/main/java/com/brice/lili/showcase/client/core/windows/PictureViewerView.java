@@ -18,6 +18,7 @@ public class PictureViewerView extends PopupViewImpl implements PictureViewerPre
 	@UiField FocusPanel focusPane;
 	@UiField HTMLPanel pane;
 	@UiField FitImage image;
+	@UiField Button close;
 	@UiField Button prev;
 	@UiField Button next;
 	@UiField Label countLabel;
@@ -68,6 +69,11 @@ public class PictureViewerView extends PopupViewImpl implements PictureViewerPre
 	@Override
 	public Button getNextButton() {
 		return next;
+	}
+
+	@Override
+	public Button getCloseButton() {
+		return close;
 	}
 	
 //	@UiHandler("prev")

@@ -30,6 +30,7 @@ public class PictureViewerPresenter extends PresenterWidget<PictureViewerPresent
 		public FitImage getImage();
 		public FocusPanel getFocusPanel();
 		public Label getCountLabel();
+		public Button getCloseButton();
 		public Button getPrevButton();
 		public Button getNextButton();
 	}
@@ -51,7 +52,7 @@ public class PictureViewerPresenter extends PresenterWidget<PictureViewerPresent
 		@Override
 		public void onKeyDown(KeyDownEvent event) {
 			if(event.getNativeKeyCode() == KeyCodes.KEY_ESCAPE) {
-				PictureViewerPresenter.this.getView().hide();
+				close();
 			}
 			else if(event.getNativeKeyCode() == KeyCodes.KEY_LEFT) {
 				previous();
@@ -59,6 +60,13 @@ public class PictureViewerPresenter extends PresenterWidget<PictureViewerPresent
 			else if(event.getNativeKeyCode() == KeyCodes.KEY_RIGHT) {
 				next();
 			}
+		}
+	};
+	
+	private ClickHandler clickClose = new ClickHandler() {
+		@Override
+		public void onClick(ClickEvent event) {
+			close();
 		}
 	};
 	
@@ -89,8 +97,9 @@ public class PictureViewerPresenter extends PresenterWidget<PictureViewerPresent
 //		maxWidth = Utils.getScreenWidth() - 30;
 //		maxHeight = Utils.getScreenHeight() - 30;
 		maxWidth = Window.getClientWidth() - 30;
-		maxHeight = Window.getClientHeight() /*- 20*/ - 40;
+		maxHeight = Window.getClientHeight() - 20 - 40;
 		registerHandler(getView().getFocusPanel().addKeyDownHandler(keyHandler));
+		registerHandler(getView().getCloseButton().addClickHandler(clickClose));
 		registerHandler(getView().getPrevButton().addClickHandler(clickPrev));
 		registerHandler(getView().getNextButton().addClickHandler(clickNext));
 		registerHandler(getView().getImage().addFitImageLoadHandler(imageLoaded));
@@ -172,5 +181,9 @@ public class PictureViewerPresenter extends PresenterWidget<PictureViewerPresent
 		setImage(URL.encode(pictures.get(currentPicture).getImageUrl()));
 		checkButtonsEnable();
 		getView().getCountLabel().setText(currentPicture+1 + " / " + nbPictures);
+	}
+	
+	private void close() {
+		getView().hide();
 	}
 }
