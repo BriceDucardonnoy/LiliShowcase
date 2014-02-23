@@ -3,14 +3,13 @@ package com.brice.lili.showcase.client.utils;
 import com.allen_sauer.gwt.log.client.Log;
 import com.brice.lili.showcase.client.lang.Translate;
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.UrlBuilder;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.Location;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -24,11 +23,13 @@ public class Utils {
 	 * Cursor
 	 */
 	public static void showWaitCursor(Element e) {
-		DOM.setStyleAttribute(e, "cursor", "wait");
+//		DOM.setStyleAttribute(e, "cursor", "wait");
+		e.getStyle().setProperty("cursor", "wait");
 	}
 
 	public static void showDefaultCursor(Element e) {
-		DOM.setStyleAttribute(e, "cursor", "default");
+//		DOM.setStyleAttribute(e, "cursor", "default");
+		e.getStyle().setProperty("cursor", "default");
 	}
 
 	public static void loadFile(final AsyncCallback<String> callback, final String filename) {

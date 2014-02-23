@@ -7,13 +7,14 @@
 	<groupId>com.brice.lili</groupId>
 	<artifactId>LiliShowcase</artifactId>
 	<packaging>war</packaging>
-	<version>1.2.0</version>
+	<version>1.3.0</version>
 	<name>GWT Maven Archetype</name>
 
 	<properties>
 		<!-- Convenience property to set the GWT version -->
+		<!-- <gwtVersion>2.6.0</gwtVersion> -->
 		<gwtVersion>2.5.1</gwtVersion>
-		<gwtp.version>1.0.1</gwtp.version>
+		<gwtp.version>1.1.1</gwtp.version>
 		<!-- GWT needs at least java 1.5 -->
 		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,20 +25,18 @@
 	</properties>
 
 	<repositories>
-		<repository>
-			<!-- <id>support-gpl-release</id>
-			<name>Sencha Support GPL Repository</name>
-			<url>https://maven.sencha.com/repo/support-gpl-release/</url> -->
+		<!-- <repository>
 			<id>support-commercial-release</id>
 			<name>Sencha Support Commercial Repository</name>
 			<url>https://maven.sencha.com/repo/support-commercial-release/</url>
-		</repository>
-		<repository>
+		</repository> -->
+		<!-- Only for snapshot versions -->
+		<!-- <repository>
 	        <id>sonatype.snapshots</id>
 	        <name>Sonatype snapshot repository</name>
 	        <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
 	        <layout>default</layout>
-	    </repository>
+	    </repository> -->
 	</repositories>
 
 	<dependencies>
@@ -62,7 +61,7 @@
 		<dependency>
 			<groupId>com.sencha.gxt</groupId>
 			<artifactId>gxt</artifactId>
-			<version>3.0.4</version>
+			<version>3.0.1</version>
 		</dependency>
 		<!-- <dependency>
 			<groupId>junit</groupId>
@@ -92,13 +91,13 @@
 		</dependency>
 		<dependency>
 			<groupId>com.gwtplatform</groupId>
-			<artifactId>gwtp-dispatch-client</artifactId>
+			<artifactId>gwtp-dispatch-rpc-client</artifactId>
 			<version>${gwtp.version}</version>
 			<!-- <scope>provided</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>com.gwtplatform</groupId>
-			<artifactId>gwtp-dispatch-server-guice</artifactId>
+			<artifactId>gwtp-dispatch-rpc-server-guice</artifactId>
 			<version>${gwtp.version}</version>
 		</dependency>
 		<dependency>
@@ -173,7 +172,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
-				<version>2.5.1</version>
+				<version>${gwtVersion}</version>
 				<executions>
 					<execution>
 						<goals>
